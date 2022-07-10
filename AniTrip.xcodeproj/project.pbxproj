@@ -18,6 +18,16 @@
 		065E478A287B58C600D32E05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4789287B58C600D32E05 /* LoginView.swift */; };
 		06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */; };
 		06BF7245287B5B63006F0839 /* ButtonWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */; };
+		06BF7247287B5C6E006F0839 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7246287B5C6E006F0839 /* UserController.swift */; };
+		06BF7249287B603A006F0839 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7248287B603A006F0839 /* AppController.swift */; };
+		06BF724B287B66D3006F0839 /* LoadingInProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */; };
+		06BF724D287B6C62006F0839 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF724C287B6C62006F0839 /* UserManager.swift */; };
+		06BF7250287B6C71006F0839 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF724F287B6C71006F0839 /* String.swift */; };
+		06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7251287B6D51006F0839 /* UserCodable.swift */; };
+		06BF7254287B6F2A006F0839 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7253287B6F2A006F0839 /* NetworkManager.swift */; };
+		06BF7256287B6F6E006F0839 /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7255287B6F6E006F0839 /* Network.swift */; };
+		06BF7258287B71FD006F0839 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7257287B71FD006F0839 /* Notification.swift */; };
+		06BF725A287B73AE006F0839 /* AddressCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7259287B73AE006F0839 /* AddressCodable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +61,16 @@
 		065E4789287B58C600D32E05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithIcon.swift; sourceTree = "<group>"; };
 		06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIcon.swift; sourceTree = "<group>"; };
+		06BF7246287B5C6E006F0839 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		06BF7248287B603A006F0839 /* AppController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingInProgressView.swift; sourceTree = "<group>"; };
+		06BF724C287B6C62006F0839 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		06BF724F287B6C71006F0839 /* String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
+		06BF7251287B6D51006F0839 /* UserCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCodable.swift; sourceTree = "<group>"; };
+		06BF7253287B6F2A006F0839 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		06BF7255287B6F6E006F0839 /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
+		06BF7257287B71FD006F0839 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		06BF7259287B73AE006F0839 /* AddressCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCodable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +122,7 @@
 		065E4752287B573600D32E05 /* AniTrip */ = {
 			isa = PBXGroup;
 			children = (
+				06BF724E287B6C69006F0839 /* Extension */,
 				065E4780287B574700D32E05 /* Supporting Files */,
 				065E477F287B574200D32E05 /* Controller */,
 				065E477E287B573E00D32E05 /* View */,
@@ -138,6 +159,11 @@
 		065E477D287B573A00D32E05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				06BF724C287B6C62006F0839 /* UserManager.swift */,
+				06BF7251287B6D51006F0839 /* UserCodable.swift */,
+				06BF7253287B6F2A006F0839 /* NetworkManager.swift */,
+				06BF7255287B6F6E006F0839 /* Network.swift */,
+				06BF7259287B73AE006F0839 /* AddressCodable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -155,6 +181,8 @@
 		065E477F287B574200D32E05 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				06BF7246287B5C6E006F0839 /* UserController.swift */,
+				06BF7248287B603A006F0839 /* AppController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -190,8 +218,18 @@
 				065E4787287B581000D32E05 /* CircularSpinnerView.swift */,
 				06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */,
 				06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */,
+				06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */,
 			);
 			path = "Global Components";
+			sourceTree = "<group>";
+		};
+		06BF724E287B6C69006F0839 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				06BF724F287B6C71006F0839 /* String.swift */,
+				06BF7257287B71FD006F0839 /* Notification.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,11 +368,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06BF7256287B6F6E006F0839 /* Network.swift in Sources */,
+				06BF7254287B6F2A006F0839 /* NetworkManager.swift in Sources */,
+				06BF724D287B6C62006F0839 /* UserManager.swift in Sources */,
+				06BF7247287B5C6E006F0839 /* UserController.swift in Sources */,
+				06BF7250287B6C71006F0839 /* String.swift in Sources */,
+				06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */,
 				06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */,
 				065E478A287B58C600D32E05 /* LoginView.swift in Sources */,
+				06BF724B287B66D3006F0839 /* LoadingInProgressView.swift in Sources */,
 				065E4754287B573600D32E05 /* AniTripApp.swift in Sources */,
+				06BF7258287B71FD006F0839 /* Notification.swift in Sources */,
 				06BF7245287B5B63006F0839 /* ButtonWithIcon.swift in Sources */,
+				06BF725A287B73AE006F0839 /* AddressCodable.swift in Sources */,
 				065E4788287B581000D32E05 /* CircularSpinnerView.swift in Sources */,
+				06BF7249287B603A006F0839 /* AppController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

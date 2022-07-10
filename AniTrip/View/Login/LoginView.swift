@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email: String = ""
-    @State private var password: String = ""
+    @EnvironmentObject private var userController: UserController
     
     var body: some View {
         VStack {
@@ -19,13 +18,18 @@ struct LoginView: View {
             
             Spacer()
             
-            TextFieldWithIcon(text: $email, icon: "person.fill", placeholder: "example@mail.com", keyboardType: .emailAddress)
-            TextFieldWithIcon(text: $password, icon: "lock.fill", placeholder: "Password", isSecure: true)
+            TextFieldWithIcon(text: $userController.loginEmailTextField, icon: "person.fill", placeholder: "example@mail.com", keyboardType: .emailAddress)
+            TextFieldWithIcon(text: $userController.loginPasswordTextField, icon: "lock.fill", placeholder: "Password", isSecure: true)
+            
+            Text(userController.loginErrorMessage)
+                .font(.title3)
+                .bold()
+                .foregroundColor(.red)
             
             Spacer()
             
             ButtonWithIcon(action: {
-                
+                userController.performLogin()
             }, icon: "chevron.right", title: "LOGIN")
         }.padding()
     }
@@ -34,5 +38,6 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
+            .environmentObject(UserController())
     }
 }

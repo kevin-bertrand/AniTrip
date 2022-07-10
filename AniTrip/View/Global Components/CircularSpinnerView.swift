@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct CircularSpinnerView: View {
-    let rotationTime: Double = 0.75
-    let animationTime: Double = 1.9
-    let fullRotation: Angle = .degrees(360)
     static let initialDegree: Angle = .degrees(270)
+    
+    private let animationTime: Double = 1.75
+    private let fullRotation: Angle = .degrees(360)
+    private let rotationTime: Double = 0.75
     
     @State private var spinnerStart: CGFloat = 0.0
     @State private var spinnerEndS1: CGFloat = 0.03
