@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
-		065E4756287B573600D32E05 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4755287B573600D32E05 /* ContentView.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
 		065E4765287B573700D32E05 /* AniTripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4764287B573700D32E05 /* AniTripTests.swift */; };
 		065E476F287B573700D32E05 /* AniTripUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E476E287B573700D32E05 /* AniTripUITests.swift */; };
 		065E4771287B573700D32E05 /* AniTripUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4770287B573700D32E05 /* AniTripUITestsLaunchTests.swift */; };
+		065E4783287B579000D32E05 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 065E4782287B579000D32E05 /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +36,6 @@
 /* Begin PBXFileReference section */
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065E4753287B573600D32E05 /* AniTripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripApp.swift; sourceTree = "<group>"; };
-		065E4755287B573600D32E05 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		065E475A287B573700D32E05 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		065E4760287B573700D32E05 /* AniTripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AniTripTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,6 +50,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				065E4783287B579000D32E05 /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -94,10 +94,10 @@
 		065E4752287B573600D32E05 /* AniTrip */ = {
 			isa = PBXGroup;
 			children = (
-				065E4753287B573600D32E05 /* AniTripApp.swift */,
-				065E4755287B573600D32E05 /* ContentView.swift */,
-				065E4757287B573700D32E05 /* Assets.xcassets */,
-				065E4759287B573700D32E05 /* Preview Content */,
+				065E4780287B574700D32E05 /* Supporting Files */,
+				065E477F287B574200D32E05 /* Controller */,
+				065E477E287B573E00D32E05 /* View */,
+				065E477D287B573A00D32E05 /* Model */,
 			);
 			path = AniTrip;
 			sourceTree = "<group>";
@@ -127,6 +127,37 @@
 			path = AniTripUITests;
 			sourceTree = "<group>";
 		};
+		065E477D287B573A00D32E05 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		065E477E287B573E00D32E05 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		065E477F287B574200D32E05 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		065E4780287B574700D32E05 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				065E4757287B573700D32E05 /* Assets.xcassets */,
+				065E4753287B573600D32E05 /* AniTripApp.swift */,
+				065E4759287B573700D32E05 /* Preview Content */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -143,6 +174,9 @@
 			dependencies = (
 			);
 			name = AniTrip;
+			packageProductDependencies = (
+				065E4782287B579000D32E05 /* Alamofire */,
+			);
 			productName = AniTrip;
 			productReference = 065E4750287B573600D32E05 /* AniTrip.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +249,9 @@
 				Base,
 			);
 			mainGroup = 065E4747287B573600D32E05;
+			packageReferences = (
+				065E4781287B579000D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */,
+			);
 			productRefGroup = 065E4751287B573600D32E05 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -257,7 +294,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				065E4756287B573600D32E05 /* ContentView.swift in Sources */,
 				065E4754287B573600D32E05 /* AniTripApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -416,7 +452,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AniTrip/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"AniTrip/Supporting Files/Preview Content\"";
 				DEVELOPMENT_TEAM = 6MAUVS763K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -445,7 +481,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"AniTrip/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"AniTrip/Supporting Files/Preview Content\"";
 				DEVELOPMENT_TEAM = 6MAUVS763K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -583,6 +619,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		065E4781287B579000D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		065E4782287B579000D32E05 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 065E4781287B579000D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 065E4748287B573600D32E05 /* Project object */;
 }
