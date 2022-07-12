@@ -10,12 +10,14 @@ import Foundation
 
 enum NetworkConfigurations {
     case login
+    case createAccount
     
     var method: HTTPMethod {
         var method: HTTPMethod
         
         switch self {
-        case .login:
+        case .login,
+                .createAccount:
             method = .post
         }
         
@@ -28,19 +30,10 @@ enum NetworkConfigurations {
         switch self {
         case .login:
             params = ["user", "login"]
+        case .createAccount:
+            params = ["user", "create"]
         }
         
         return params
-    }
-    
-    var body: Encodable? {
-        var body: Encodable?
-        
-        switch self {
-        case .login:
-            body = nil
-        }
-        
-        return body
     }
 }

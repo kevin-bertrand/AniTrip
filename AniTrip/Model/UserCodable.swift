@@ -12,6 +12,12 @@ struct UserToLogin: Codable {
     let password: String
 }
 
+struct UserToCreate: Codable {
+    var email: String
+    var password: String
+    var passwordVerification: String
+}
+
 struct ConnectedUser: Codable {
     let id: String
     let firstname: String

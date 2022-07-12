@@ -46,6 +46,18 @@ struct LoginView: View {
                 checkSaveEmail()
                 userController.performLogin()
             }, icon: "chevron.right", title: "LOGIN")
+            
+            HStack {
+                Text("No account ?")
+                    .foregroundColor(.gray)
+                
+                Button {
+                    userController.showCreateAcountView = true
+                } label: {
+                    Text("Ask one")
+                }
+            }
+            .padding(.vertical)
         }
         .padding()
         .onAppear {
@@ -54,6 +66,9 @@ struct LoginView: View {
             if savedEmail.isNotEmpty {
                 saveEmail = true
             }
+        }
+        .sheet(isPresented: $userController.showCreateAcountView) {
+            CreateAccountView()
         }
     }
     

@@ -18,6 +18,14 @@ final class UserController: ObservableObject {
     @Published var loginPasswordTextField: String = ""
     @Published var loginErrorMessage: String = ""
     
+    // Create a new account
+    @Published var createAccountEmailTextField: String = ""
+    @Published var createAccountPasswordTextField: String = ""
+    @Published var createAccountPasswordVerificationTextField: String = ""
+    @Published var createAccountErrorMessage: String = ""
+    @Published var showCreateAcountView: Bool = false
+    @Published var showSuccessAccountCreationAlert: Bool = false
+    
     // MARK: Methods
     /// Perfom login
     func performLogin() {
@@ -40,6 +48,29 @@ final class UserController: ObservableObject {
         userManager.login(user: UserToLogin(email: loginEmailTextField, password: loginPasswordTextField))
     }
     
+    /// Create an account
+    func createAccount() {
+        objectWillChange.send()
+        appController.setLoadingInProgress(withMessage: "Account creation in progress...")
+        loginErrorMessage = ""
+        
+        guard createAccountEmailTextField.isNotEmpty && createAccountPasswordTextField.isNotEmpty && createAccountPasswordVerificationTextField.isNotEmpty else {
+            createAccountErrorMessage = "An email and a password are required!"
+            appController.resetLoadingInProgress()
+            return
+        }
+        
+        guard createAccountEmailTextField.isEmail else {
+            createAccountErrorMessage = "An valid email is required!"
+            appController.resetLoadingInProgress()
+            return
+        }
+        
+        userManager.createAccount(for: UserToCreate(email: createAccountEmailTextField,
+                                                    password: createAccountPasswordTextField,
+                                                    passwordVerification: createAccountPasswordVerificationTextField))
+    }
+    
     // MARK: Initialization
     init() {
         // Configure general notifications
@@ -49,6 +80,11 @@ final class UserController: ObservableObject {
         configureNotification(for: Notification.AniTrip.loginWrongCredentials.notificationName)
         configureNotification(for: Notification.AniTrip.loginSuccess.notificationName)
         configureNotification(for: Notification.AniTrip.loginAccountNotActivate.notificationName)
+        
+        // Configure account creation notifications
+        configureNotification(for: Notification.AniTrip.accountCreationSuccess.notificationName)
+        configureNotification(for: Notification.AniTrip.accountCreationPasswordError.notificationName)
+        configureNotification(for: Notification.AniTrip.accountCreationInformationsError.notificationName)
     }
     
     // MARK: Private
@@ -70,10 +106,18 @@ final class UserController: ObservableObject {
             
             switch notificationName {
             case Notification.AniTrip.loginSuccess.notificationName:
-                self.isConnected = true
+                loginPasswordTextField = ""
+                isConnected = true
+            case Notification.AniTrip.accountCreationSuccess.notificationName:
+                createAccountEmailTextField = ""
+                createAccountPasswordTextField = ""
+                createAccountPasswordVerificationTextField = ""
+                showSuccessAccountCreationAlert = true
             case Notification.AniTrip.unknownError.notificationName,
                 Notification.AniTrip.loginAccountNotActivate.notificationName,
-                Notification.AniTrip.loginWrongCredentials.notificationName:
+                Notification.AniTrip.loginWrongCredentials.notificationName,
+                Notification.AniTrip.accountCreationPasswordError.notificationName,
+                Notification.AniTrip.accountCreationInformationsError.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage)
             default: break
             }

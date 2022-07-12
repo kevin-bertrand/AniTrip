@@ -18,7 +18,7 @@ final class UserManager {
         networkManager.request(urlParams: NetworkConfigurations.login.urlParams,
                                method: NetworkConfigurations.login.method,
                                authorization: .authorization(username: user.email, password: user.password),
-                               body: NetworkConfigurations.login.body) { [weak self] data, response, error in
+                               body: nil) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode,
                let data = data {
@@ -29,6 +29,29 @@ final class UserManager {
                     Notification.AniTrip.loginWrongCredentials.sendNotification()
                 case 460:
                     Notification.AniTrip.loginAccountNotActivate.sendNotification()
+                default:
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
+    /// Create user account
+    func createAccount(for user: UserToCreate) {
+        networkManager.request(urlParams: NetworkConfigurations.createAccount.urlParams,
+                               method: NetworkConfigurations.createAccount.method,
+                               authorization: nil,
+                               body: user) { data, response, error in
+            if let statusCode = response?.statusCode {
+                switch statusCode {
+                case 201:
+                    Notification.AniTrip.accountCreationSuccess.sendNotification()
+                case 406:
+                    Notification.AniTrip.accountCreationPasswordError.sendNotification()
+                case 500:
+                    Notification.AniTrip.accountCreationInformationsError.sendNotification()
                 default:
                     Notification.AniTrip.unknownError.sendNotification()
                 }
