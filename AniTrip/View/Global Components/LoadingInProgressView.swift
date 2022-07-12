@@ -11,13 +11,22 @@ struct LoadingInProgressView: View {
     @EnvironmentObject private var appController: AppController
 
     var body: some View {
-        VStack {
-            CircularSpinnerView()
-            Text(appController.loadingMessage)
-                .font(.title2)
-                .padding()
-                .bold()
-                .multilineTextAlignment(.center)
+        ZStack {
+            Rectangle()
+                .opacity(0.3)
+            
+            VStack {
+                CircularSpinnerView()
+                Text(appController.loadingMessage)
+                    .font(.title2)
+                    .padding()
+                    .bold()
+                    .multilineTextAlignment(.center)
+            }
+            .padding(50)
+            .background(Color.white)
+            .cornerRadius(25)
+            .shadow(radius: 10)
         }
     }
 }

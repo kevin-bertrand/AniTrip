@@ -15,17 +15,24 @@ struct AniTripApp: App {
     var body: some Scene {
         WindowGroup {
             Group {
-                if userController.isConnected {
-                    Text("Connected")
-                } else {
-                    LoginView()
+                ZStack {
+                    if userController.isConnected {
+                        Text("Connected")
+                    } else {
+                        LoginView()
+                    }
+                    
+                    if appController.loadingInProgress {
+                        LoadingInProgressView()
+                    }
                 }
             }
             .environmentObject(userController)
-            .fullScreenCover(isPresented: $appController.loadingInProgress) {
-                LoadingInProgressView()
-                    .environmentObject(appController)
-            }
+            .environmentObject(appController)
+//            .fullScreenCover(isPresented: $appController.loadingInProgress) {
+//                LoadingInProgressView()
+//                    .
+//            }
             .alert(Text(appController.alertViewMessage), isPresented: $appController.showAlertView, actions: {
                 Button {
                     appController.resetAlertView()

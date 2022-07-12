@@ -21,24 +21,29 @@ final class AppController: ObservableObject {
     // MARK: Methods
     /// Setting loading in progress
     func setLoadingInProgress(withMessage message: String) {
+        objectWillChange.send()
         loadingInProgress = true
         loadingMessage = message
     }
     
     /// Reset loading in progress
     func resetLoadingInProgress() {
+        objectWillChange.send()
         loadingMessage = ""
         loadingInProgress = false
     }
     
     /// Show an alert view
     func showAlertView(withMessage message: String) {
+        objectWillChange.send()
+        resetLoadingInProgress()
         alertViewMessage = message
         showAlertView = true
     }
     
     /// Reset alert view
     func resetAlertView() {
+        objectWillChange.send()
         alertViewMessage = ""
         showAlertView = false
     }

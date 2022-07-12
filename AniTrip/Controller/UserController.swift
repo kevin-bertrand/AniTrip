@@ -21,6 +21,7 @@ final class UserController: ObservableObject {
     // MARK: Methods
     /// Perfom login
     func performLogin() {
+        objectWillChange.send()
         appController.setLoadingInProgress(withMessage: "Log in... Please wait!")
         loginErrorMessage = ""
         

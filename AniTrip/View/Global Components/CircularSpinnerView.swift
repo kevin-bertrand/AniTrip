@@ -34,7 +34,7 @@ struct CircularSpinnerView: View {
             SpinnerCircleView(start: spinnerStart, end: spinnerEndS1, rotation: rotationDegreeS1, color: .accentColor)
             
         }
-        .frame(width: 200, height: 200)
+        .frame(width: 175, height: 175)
         .onAppear() {
             self.animateSpinner()
             Timer.scheduledTimer(withTimeInterval: animationTime, repeats: true) { (mainTimer) in
