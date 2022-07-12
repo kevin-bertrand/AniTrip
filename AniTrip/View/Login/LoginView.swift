@@ -9,6 +9,8 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject private var userController: UserController
+    @State private var saveEmail: Bool = false
+    @AppStorage("anitripSavedEmail") private var savedEmail: String = ""
     
     var body: some View {
         VStack {
@@ -19,6 +21,18 @@ struct LoginView: View {
             Spacer()
             
             TextFieldWithIcon(text: $userController.loginEmailTextField, icon: "person.fill", placeholder: "example@mail.com", keyboardType: .emailAddress)
+            
+            HStack {
+                Spacer()
+                Button {
+                    saveEmail.toggle()
+                } label: {
+                    Text("Save email? ")
+                    Image(systemName: saveEmail ? "checkmark.square" : "square")
+                }
+            }
+            .padding(.bottom, 25)
+            
             TextFieldWithIcon(text: $userController.loginPasswordTextField, icon: "lock.fill", placeholder: "Password", isSecure: true)
             
             Text(userController.loginErrorMessage)
@@ -29,9 +43,26 @@ struct LoginView: View {
             Spacer()
             
             ButtonWithIcon(action: {
+                checkSaveEmail()
                 userController.performLogin()
             }, icon: "chevron.right", title: "LOGIN")
-        }.padding()
+        }
+        .padding()
+        .onAppear {
+            userController.loginEmailTextField = savedEmail
+            
+            if savedEmail.isNotEmpty {
+                saveEmail = true
+            }
+        }
+    }
+    
+    private func checkSaveEmail() {
+        if saveEmail {
+            savedEmail = userController.loginEmailTextField
+        } else {
+            savedEmail = ""
+        }
     }
 }
 
