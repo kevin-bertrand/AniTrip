@@ -29,6 +29,7 @@
 		06BF7258287B71FD006F0839 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7257287B71FD006F0839 /* Notification.swift */; };
 		06BF725A287B73AE006F0839 /* AddressCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7259287B73AE006F0839 /* AddressCodable.swift */; };
 		06BF7264287E1117006F0839 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7263287E1117006F0839 /* CreateAccountView.swift */; };
+		06BF7266287E1484006F0839 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7265287E1484006F0839 /* AppView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		06BF7257287B71FD006F0839 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		06BF7259287B73AE006F0839 /* AddressCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCodable.swift; sourceTree = "<group>"; };
 		06BF7263287E1117006F0839 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
+		06BF7265287E1484006F0839 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,6 +213,7 @@
 		065E4785287B57CB00D32E05 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				06BF7265287E1484006F0839 /* AppView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -384,6 +387,7 @@
 				06BF7258287B71FD006F0839 /* Notification.swift in Sources */,
 				06BF7245287B5B63006F0839 /* ButtonWithIcon.swift in Sources */,
 				06BF725A287B73AE006F0839 /* AddressCodable.swift in Sources */,
+				06BF7266287E1484006F0839 /* AppView.swift in Sources */,
 				065E4788287B581000D32E05 /* CircularSpinnerView.swift in Sources */,
 				06BF7264287E1117006F0839 /* CreateAccountView.swift in Sources */,
 				06BF7249287B603A006F0839 /* AppController.swift in Sources */,

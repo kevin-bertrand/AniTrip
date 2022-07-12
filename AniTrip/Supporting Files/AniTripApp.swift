@@ -17,7 +17,7 @@ struct AniTripApp: App {
             Group {
                 ZStack {
                     if userController.isConnected {
-                        Text("Connected")
+                        AppView()
                     } else {
                         LoginView()
                     }
@@ -29,10 +29,6 @@ struct AniTripApp: App {
             }
             .environmentObject(userController)
             .environmentObject(appController)
-//            .fullScreenCover(isPresented: $appController.loadingInProgress) {
-//                LoadingInProgressView()
-//                    .
-//            }
             .alert(Text(appController.alertViewMessage), isPresented: $appController.showAlertView, actions: {
                 Button {
                     appController.resetAlertView()
