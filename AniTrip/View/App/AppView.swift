@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct AppView: View {
+    @EnvironmentObject var userController: UserController
+    
     var body: some View {
         TabView {
             NavigationView {
@@ -25,7 +27,8 @@ struct AppView: View {
             }
             
             NavigationView {
-                Text("Volunteers")
+                VolunteersView()
+                    .navigationTitle(Text("👥 Volunteers"))
             }
             .tabItem {
                 Label("Volunteers", systemImage: "person.3.fill")
@@ -39,11 +42,13 @@ struct AppView: View {
                 Label("Settings", systemImage: "gear")
             }
         }
+        .environmentObject(VolunteersController(appController: userController.appController))
     }
 }
 
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
         AppView()
+            .environmentObject(UserController())
     }
 }

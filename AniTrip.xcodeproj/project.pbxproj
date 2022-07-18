@@ -17,6 +17,12 @@
 		06158E38288561C500C3BE6E /* UpdateAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E37288561C500C3BE6E /* UpdateAddressView.swift */; };
 		06158E3A2885772E00C3BE6E /* MissionsUpdateTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E392885772E00C3BE6E /* MissionsUpdateTileView.swift */; };
 		06158E3C28857D5800C3BE6E /* PasswordFormTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */; };
+		06158E3F288582C200C3BE6E /* VolunteersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E3E288582C200C3BE6E /* VolunteersView.swift */; };
+		06158E41288582DD00C3BE6E /* VolunteersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E40288582DD00C3BE6E /* VolunteersController.swift */; };
+		06158E432885835000C3BE6E /* VolunteersCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E422885835000C3BE6E /* VolunteersCodable.swift */; };
+		06158E45288583B200C3BE6E /* VolunteersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E44288583B200C3BE6E /* VolunteersManager.swift */; };
+		06158E4D28858B7500C3BE6E /* VolunteerProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E4C28858B7500C3BE6E /* VolunteerProfileView.swift */; };
+		06158E5028858BE200C3BE6E /* VolunteerImageInformationsTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E4F28858BE200C3BE6E /* VolunteerImageInformationsTiles.swift */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
@@ -72,6 +78,12 @@
 		06158E37288561C500C3BE6E /* UpdateAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAddressView.swift; sourceTree = "<group>"; };
 		06158E392885772E00C3BE6E /* MissionsUpdateTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsUpdateTileView.swift; sourceTree = "<group>"; };
 		06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormTileView.swift; sourceTree = "<group>"; };
+		06158E3E288582C200C3BE6E /* VolunteersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteersView.swift; sourceTree = "<group>"; };
+		06158E40288582DD00C3BE6E /* VolunteersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteersController.swift; sourceTree = "<group>"; };
+		06158E422885835000C3BE6E /* VolunteersCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteersCodable.swift; sourceTree = "<group>"; };
+		06158E44288583B200C3BE6E /* VolunteersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteersManager.swift; sourceTree = "<group>"; };
+		06158E4C28858B7500C3BE6E /* VolunteerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerProfileView.swift; sourceTree = "<group>"; };
+		06158E4F28858BE200C3BE6E /* VolunteerImageInformationsTiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerImageInformationsTiles.swift; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065E4753287B573600D32E05 /* AniTripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripApp.swift; sourceTree = "<group>"; };
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -127,6 +139,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		06158E4A28858B4E00C3BE6E /* Volunteers Tab */ = {
+			isa = PBXGroup;
+			children = (
+				06158E4E28858BC400C3BE6E /* Volunteers Components */,
+				06158E4B28858B5E00C3BE6E /* Volunteers Subviews */,
+				06158E3E288582C200C3BE6E /* VolunteersView.swift */,
+			);
+			path = "Volunteers Tab";
+			sourceTree = "<group>";
+		};
+		06158E4B28858B5E00C3BE6E /* Volunteers Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				06158E4C28858B7500C3BE6E /* VolunteerProfileView.swift */,
+			);
+			path = "Volunteers Subviews";
+			sourceTree = "<group>";
+		};
+		06158E4E28858BC400C3BE6E /* Volunteers Components */ = {
+			isa = PBXGroup;
+			children = (
+				06158E4F28858BE200C3BE6E /* VolunteerImageInformationsTiles.swift */,
+			);
+			path = "Volunteers Components";
+			sourceTree = "<group>";
+		};
 		065E4747287B573600D32E05 = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +231,8 @@
 				06BF7255287B6F6E006F0839 /* Network.swift */,
 				06BF7259287B73AE006F0839 /* AddressCodable.swift */,
 				06158E2B2885500100C3BE6E /* MapPlace.swift */,
+				06158E422885835000C3BE6E /* VolunteersCodable.swift */,
+				06158E44288583B200C3BE6E /* VolunteersManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +253,7 @@
 				06BF7246287B5C6E006F0839 /* UserController.swift */,
 				06BF7248287B603A006F0839 /* AppController.swift */,
 				06158E2D2885516500C3BE6E /* MapController.swift */,
+				06158E40288582DD00C3BE6E /* VolunteersController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -239,6 +280,7 @@
 		065E4785287B57CB00D32E05 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				06158E4A28858B4E00C3BE6E /* Volunteers Tab */,
 				06BF72672885398E006F0839 /* Settings Tab */,
 				06BF7265287E1484006F0839 /* AppView.swift */,
 			);
@@ -282,9 +324,9 @@
 		06BF726C28853C9B006F0839 /* Settings components */ = {
 			isa = PBXGroup;
 			children = (
-				06BF726D28853CAE006F0839 /* UserCellView.swift */,
 				06158E2728854D1E00C3BE6E /* UserProfileView.swift */,
 				06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */,
+				06BF726D28853CAE006F0839 /* UserCellView.swift */,
 				06158E3328855DB100C3BE6E /* EditUserInfoTileView.swift */,
 			);
 			path = "Settings components";
@@ -432,7 +474,9 @@
 				06BF726B288539B4006F0839 /* SettingsView.swift in Sources */,
 				06BF7247287B5C6E006F0839 /* UserController.swift in Sources */,
 				06BF7250287B6C71006F0839 /* String.swift in Sources */,
+				06158E5028858BE200C3BE6E /* VolunteerImageInformationsTiles.swift in Sources */,
 				06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */,
+				06158E3F288582C200C3BE6E /* VolunteersView.swift in Sources */,
 				06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */,
 				06158E3A2885772E00C3BE6E /* MissionsUpdateTileView.swift in Sources */,
 				06BF726E28853CAE006F0839 /* UserCellView.swift in Sources */,
@@ -444,9 +488,13 @@
 				06BF7245287B5B63006F0839 /* ButtonWithIcon.swift in Sources */,
 				06158E36288560CF00C3BE6E /* TextFieldUnderlinedView.swift in Sources */,
 				06BF725A287B73AE006F0839 /* AddressCodable.swift in Sources */,
+				06158E432885835000C3BE6E /* VolunteersCodable.swift in Sources */,
+				06158E45288583B200C3BE6E /* VolunteersManager.swift in Sources */,
 				06158E3428855DB100C3BE6E /* EditUserInfoTileView.swift in Sources */,
+				06158E41288582DD00C3BE6E /* VolunteersController.swift in Sources */,
 				06158E2828854D1E00C3BE6E /* UserProfileView.swift in Sources */,
 				06158E3C28857D5800C3BE6E /* PasswordFormTileView.swift in Sources */,
+				06158E4D28858B7500C3BE6E /* VolunteerProfileView.swift in Sources */,
 				06158E2E2885516500C3BE6E /* MapController.swift in Sources */,
 				06158E3228855D6C00C3BE6E /* UpdateProfileView.swift in Sources */,
 				06158E2C2885500100C3BE6E /* MapPlace.swift in Sources */,

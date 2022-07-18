@@ -27,6 +27,9 @@ extension Notification {
         // Update profile notifications
         case updateProfileSuccess = "Your profile is updated!"
         
+        // Getting volunteers list
+        case gettingVolunteersListSuccess = "Volunteers list downloaded!"
+        
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
         }

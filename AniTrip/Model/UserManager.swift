@@ -80,8 +80,9 @@ final class UserManager {
         networkManager.request(urlParams: NetworkConfigurations.updateUser.urlParams,
                                method: NetworkConfigurations.updateUser.method,
                                authorization: .authorization(bearerToken: connectedUser.token),
-                               body: userToUpdate) { data, response, error in
-            if let data = data,
+                               body: userToUpdate) { [weak self] data, response, error in
+            if let self = self,
+               let data = data,
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 202:
