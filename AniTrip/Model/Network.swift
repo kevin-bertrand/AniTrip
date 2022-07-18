@@ -15,6 +15,9 @@ enum NetworkConfigurations {
     case getVolunteersList
     case getTripList
     case addTrip
+    case getThreeLatestTrip
+    case getChartPoints
+    case getNews
     
     var method: HTTPMethod {
         var method: HTTPMethod
@@ -27,7 +30,10 @@ enum NetworkConfigurations {
         case .updateUser:
             method = .patch
         case .getVolunteersList,
-                .getTripList:
+                .getTripList,
+                .getThreeLatestTrip,
+                .getChartPoints,
+                .getNews:
             method = .get
         }
         
@@ -48,6 +54,12 @@ enum NetworkConfigurations {
         case .getTripList,
                 .addTrip:
             params = ["trip"]
+        case .getThreeLatestTrip:
+            params = ["trip", "latest"]
+        case .getChartPoints:
+            params = ["trip", "chart"]
+        case .getNews:
+            params = ["trip", "thisWeek"]
         }
         
         return params

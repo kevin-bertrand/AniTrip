@@ -37,6 +37,10 @@ extension Notification {
         // Adding trip
         case addTripSuccess = "Trip added with success!"
         
+        // Downloading home informations
+        case homeInformationsDonwloaded = "All informations are downloaded"
+        case homeInformationsDonwloadedError = "An error occurs during the download of home informations!"
+        
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
         }

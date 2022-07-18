@@ -38,3 +38,13 @@ struct AddingTrip: Codable {
     let startingAddress: Address
     let endingAddress: Address
 }
+
+struct TripChartPoint: Codable, Hashable {
+    let date: String
+    let distance: Double
+}
+
+struct ThisWeekInformations: Codable {
+    let distance: Double
+    let numberOfTrip: Int
+}

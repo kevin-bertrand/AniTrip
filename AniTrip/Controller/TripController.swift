@@ -20,6 +20,12 @@ final class TripController: ObservableObject {
     // New trip properties
     @Published var newTrip: NewTrip = NewTrip(date: .now, missions: [], comment: "", totalDistance: "", startingAddress: MapController.emptyAddress, endingAddress: MapController.emptyAddress)
     
+    // Home informations
+    @Published var threeLatestTrips: [Trip] = []
+    var distanceThisWeek: Double = 0.0
+    var numberOfTripThisWeek: Int = 0
+    var chartPoints: [TripChartPoint] = []
+    
     // MARK: Methods
     /// Getting trip list
     func getList(byUser user: User?) {
@@ -33,6 +39,11 @@ final class TripController: ObservableObject {
         tripManager.add(trip: newTrip, by: user)
     }
     
+    /// Download informations when home view is loaded
+    func homeIsLoaded(byUser user: User?) {
+        tripManager.dowloadHomeInformations(byUser: user)
+    }
+    
     // MARK: Initialization
     init(appController: AppController) {
         self.appController = appController
@@ -43,6 +54,10 @@ final class TripController: ObservableObject {
         
         // Configure adding trip notification
         configureNotification(for: Notification.AniTrip.addTripSuccess.notificationName)
+        
+        // Configure home informations notifications
+        configureNotification(for: Notification.AniTrip.homeInformationsDonwloaded.notificationName)
+        configureNotification(for: Notification.AniTrip.homeInformationsDonwloadedError.notificationName)
     }
     
     // MARK: Private
@@ -66,10 +81,17 @@ final class TripController: ObservableObject {
             switch notificationName {
             case Notification.AniTrip.gettingTripListSucess.notificationName:
                 self.trips = self.tripManager.trips
-            case Notification.AniTrip.gettingTripListError.notificationName:
+            case Notification.AniTrip.gettingTripListError.notificationName,
+                 Notification.AniTrip.homeInformationsDonwloadedError.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage)
             case Notification.AniTrip.addTripSuccess.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
+            case Notification.AniTrip.homeInformationsDonwloaded.notificationName:
+                threeLatestTrips = tripManager.threeLatestTrips
+                print(threeLatestTrips)
+                distanceThisWeek = tripManager.distanceThisWeek
+                numberOfTripThisWeek = tripManager.numberOfTripsThisWeek
+                chartPoints = tripManager.tripsChartPoints
             default: break
             }
         }

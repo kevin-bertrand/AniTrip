@@ -31,6 +31,8 @@
 		06158E5F288595F100C3BE6E /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E5E288595F100C3BE6E /* Double.swift */; };
 		06158E612885982000C3BE6E /* DetailedTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E602885982000C3BE6E /* DetailedTripView.swift */; };
 		06158E6328859B5100C3BE6E /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E6228859B5100C3BE6E /* AddTripView.swift */; };
+		06158E662885A57100C3BE6E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E652885A57100C3BE6E /* HomeView.swift */; };
+		06158E692885A5FE00C3BE6E /* NewsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E682885A5FE00C3BE6E /* NewsTileView.swift */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
@@ -100,6 +102,8 @@
 		06158E5E288595F100C3BE6E /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		06158E602885982000C3BE6E /* DetailedTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTripView.swift; sourceTree = "<group>"; };
 		06158E6228859B5100C3BE6E /* AddTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripView.swift; sourceTree = "<group>"; };
+		06158E652885A57100C3BE6E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		06158E682885A5FE00C3BE6E /* NewsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTileView.swift; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065E4753287B573600D32E05 /* AniTripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripApp.swift; sourceTree = "<group>"; };
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -206,6 +210,23 @@
 			children = (
 			);
 			path = "Trip Subviews";
+			sourceTree = "<group>";
+		};
+		06158E642885A56900C3BE6E /* Home Tab */ = {
+			isa = PBXGroup;
+			children = (
+				06158E672885A5D800C3BE6E /* Home Components */,
+				06158E652885A57100C3BE6E /* HomeView.swift */,
+			);
+			path = "Home Tab";
+			sourceTree = "<group>";
+		};
+		06158E672885A5D800C3BE6E /* Home Components */ = {
+			isa = PBXGroup;
+			children = (
+				06158E682885A5FE00C3BE6E /* NewsTileView.swift */,
+			);
+			path = "Home Components";
 			sourceTree = "<group>";
 		};
 		065E4747287B573600D32E05 = {
@@ -326,6 +347,7 @@
 		065E4785287B57CB00D32E05 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				06158E642885A56900C3BE6E /* Home Tab */,
 				06158E512885901F00C3BE6E /* Trips Tab */,
 				06158E4A28858B4E00C3BE6E /* Volunteers Tab */,
 				06BF72672885398E006F0839 /* Settings Tab */,
@@ -521,6 +543,7 @@
 				06BF724D287B6C62006F0839 /* UserManager.swift in Sources */,
 				06BF726B288539B4006F0839 /* SettingsView.swift in Sources */,
 				06BF7247287B5C6E006F0839 /* UserController.swift in Sources */,
+				06158E662885A57100C3BE6E /* HomeView.swift in Sources */,
 				06BF7250287B6C71006F0839 /* String.swift in Sources */,
 				06158E5028858BE200C3BE6E /* VolunteerImageInformationsTiles.swift in Sources */,
 				06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */,
@@ -543,6 +566,7 @@
 				06158E432885835000C3BE6E /* VolunteersCodable.swift in Sources */,
 				06158E552885909D00C3BE6E /* TripController.swift in Sources */,
 				06158E45288583B200C3BE6E /* VolunteersManager.swift in Sources */,
+				06158E692885A5FE00C3BE6E /* NewsTileView.swift in Sources */,
 				06158E3428855DB100C3BE6E /* EditUserInfoTileView.swift in Sources */,
 				06158E41288582DD00C3BE6E /* VolunteersController.swift in Sources */,
 				06158E2828854D1E00C3BE6E /* UserProfileView.swift in Sources */,

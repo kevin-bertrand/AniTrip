@@ -13,7 +13,8 @@ struct AppView: View {
     var body: some View {
         TabView {
             NavigationView {
-                Text("Home")
+                HomeView()
+                    .navigationTitle(Text("🏠 Home"))
             }
             .tabItem {
                 Label("Home", systemImage: "house.fill")
