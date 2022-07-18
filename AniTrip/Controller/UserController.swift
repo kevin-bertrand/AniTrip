@@ -27,6 +27,9 @@ final class UserController: ObservableObject {
     @Published var showCreateAcountView: Bool = false
     @Published var showSuccessAccountCreationAlert: Bool = false
     
+    // Update user
+    @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: MapController.emptyAddress, password: "", passwordVerification: "")
+    
     // MARK: Methods
     /// Perfom login
     func performLogin() {
@@ -79,20 +82,40 @@ final class UserController: ObservableObject {
         userManager.disconnectUser()
     }
     
+    /// Update connected user
+    func updateUser() {
+        appController.setLoadingInProgress(withMessage: "Updating in progress...")
+        
+        if (userToUpdate.password.isNotEmpty == true) == userToUpdate.passwordVerification.isNotEmpty {
+            guard userToUpdate.password == userToUpdate.passwordVerification else {
+                appController.resetLoadingInProgress()
+                appController.showAlertView(withMessage: "Both new password must match!")
+                return
+            }
+        }
+        
+        userManager.updateUser(userToUpdate)
+    }
+    
     // MARK: Initialization
     init() {
         // Configure general notifications
         configureNotification(for: Notification.AniTrip.unknownError.notificationName)
+        configureNotification(for: Notification.AniTrip.accountNotYetActivate.notificationName)
+        configureNotification(for: Notification.AniTrip.notAuthorized.notificationName)
+        configureNotification(for: Notification.AniTrip.accountNotFound.notificationName)
         
         // Configure login notifications
         configureNotification(for: Notification.AniTrip.loginWrongCredentials.notificationName)
         configureNotification(for: Notification.AniTrip.loginSuccess.notificationName)
-        configureNotification(for: Notification.AniTrip.loginAccountNotActivate.notificationName)
         
         // Configure account creation notifications
         configureNotification(for: Notification.AniTrip.accountCreationSuccess.notificationName)
         configureNotification(for: Notification.AniTrip.accountCreationPasswordError.notificationName)
         configureNotification(for: Notification.AniTrip.accountCreationInformationsError.notificationName)
+        
+        // Configure update profile notifications
+        configureNotification(for: Notification.AniTrip.updateProfileSuccess.notificationName)
     }
     
     // MARK: Private
@@ -115,14 +138,23 @@ final class UserController: ObservableObject {
             switch notificationName {
             case Notification.AniTrip.loginSuccess.notificationName:
                 loginPasswordTextField = ""
+                if let user = connectedUser {
+                    userToUpdate = user.toUpdate()
+                }
                 isConnected = true
             case Notification.AniTrip.accountCreationSuccess.notificationName:
                 createAccountEmailTextField = ""
                 createAccountPasswordTextField = ""
                 createAccountPasswordVerificationTextField = ""
                 showSuccessAccountCreationAlert = true
+            case Notification.AniTrip.updateProfileSuccess.notificationName:
+                self.userToUpdate.password = ""
+                self.userToUpdate.passwordVerification = ""
+                self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
             case Notification.AniTrip.unknownError.notificationName,
-                Notification.AniTrip.loginAccountNotActivate.notificationName,
+                Notification.AniTrip.accountNotYetActivate.notificationName,
+                Notification.AniTrip.notAuthorized.notificationName,
+                Notification.AniTrip.accountNotFound.notificationName,
                 Notification.AniTrip.loginWrongCredentials.notificationName,
                 Notification.AniTrip.accountCreationPasswordError.notificationName,
                 Notification.AniTrip.accountCreationInformationsError.notificationName:

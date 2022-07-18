@@ -26,7 +26,8 @@ struct UserCellView: View {
                             .font(.title)
                         
                         Text(user.missions.joined(separator: ", "))
-                            .font(.title3)
+                            .font(.subheadline)
+                            .multilineTextAlignment(.center)
                     } else {
                         Text("Unknown user")
                             .bold()

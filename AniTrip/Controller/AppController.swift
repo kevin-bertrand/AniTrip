@@ -17,6 +17,7 @@ final class AppController: ObservableObject {
     // Alert view
     @Published var showAlertView: Bool = false
     var alertViewMessage: String = ""
+    var mustReturnToPreviousView: Bool = false
     
     // MARK: Methods
     /// Setting loading in progress
@@ -34,8 +35,9 @@ final class AppController: ObservableObject {
     }
     
     /// Show an alert view
-    func showAlertView(withMessage message: String) {
+    func showAlertView(withMessage message: String, mustReturnToPreviousView: Bool = false) {
         objectWillChange.send()
+        self.mustReturnToPreviousView = mustReturnToPreviousView
         resetLoadingInProgress()
         alertViewMessage = message
         showAlertView = true
@@ -44,6 +46,7 @@ final class AppController: ObservableObject {
     /// Reset alert view
     func resetAlertView() {
         objectWillChange.send()
+        mustReturnToPreviousView = false
         alertViewMessage = ""
         showAlertView = false
     }

@@ -11,6 +11,7 @@ import Foundation
 enum NetworkConfigurations {
     case login
     case createAccount
+    case updateUser
     
     var method: HTTPMethod {
         var method: HTTPMethod
@@ -19,6 +20,8 @@ enum NetworkConfigurations {
         case .login,
                 .createAccount:
             method = .post
+        case .updateUser:
+            method = .patch
         }
         
         return method
@@ -32,6 +35,8 @@ enum NetworkConfigurations {
             params = ["user", "login"]
         case .createAccount:
             params = ["user", "create"]
+        case .updateUser:
+            params = ["user"]
         }
         
         return params

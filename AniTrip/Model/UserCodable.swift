@@ -18,6 +18,19 @@ struct UserToCreate: Codable {
     var passwordVerification: String
 }
 
+struct UserToUpdate: Codable {
+    var firstname: String
+    var lastname: String
+    var email: String
+    var phoneNumber: String
+    var gender: Gender
+    var position: Position
+    var missions: [String]
+    var address: Address
+    var password: String
+    var passwordVerification: String
+}
+
 struct ConnectedUser: Codable {
     let id: String
     let firstname: String
@@ -43,6 +56,11 @@ struct User: Codable {
     var isActive: Bool
     var address: Address?
     var token: String
+    
+    /// Convert an User to a UserToUpdate structure
+    func toUpdate() -> UserToUpdate {
+        return UserToUpdate(firstname: self.firstname, lastname: self.lastname, email: self.email, phoneNumber: self.phoneNumber, gender: self.gender, position: self.position, missions: self.missions, address: self.address ?? MapController.emptyAddress, password: "", passwordVerification: "")
+    }
 }
 
 enum Gender: String, Codable {

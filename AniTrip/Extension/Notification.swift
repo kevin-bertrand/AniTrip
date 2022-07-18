@@ -11,16 +11,21 @@ extension Notification {
     enum AniTrip: String {
         // General notification
         case unknownError = "An unknown error occurs... Try laters!"
+        case accountNotYetActivate = "Your account is not activate ye!!"
+        case notAuthorized = "You are not authorized to perform this action!"
+        case accountNotFound = "An error occurs during the request! Try again!"
         
         // Login notifications
         case loginSuccess = "Successfull login!"
         case loginWrongCredentials = "Your credentials are not correct!"
-        case loginAccountNotActivate = "Your account is not activate yer!"
         
         // Account create notifications
         case accountCreationSuccess = "Your account is created!"
         case accountCreationPasswordError = "Your password don't match!"
         case accountCreationInformationsError = "Your account cannot be created! Verify your informations!"
+        
+        // Update profile notifications
+        case updateProfileSuccess = "Your profile is updated!"
         
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")

@@ -24,11 +24,15 @@ final class UserManager {
                let data = data {
                 switch statusCode {
                 case 200:
-                    self.decodeLoginData(data)
+                    if let _ = self.decodeUserInformations(data: data) {
+                        Notification.AniTrip.loginSuccess.sendNotification()
+                    } else {
+                        Notification.AniTrip.unknownError.sendNotification()
+                    }
                 case 401:
                     Notification.AniTrip.loginWrongCredentials.sendNotification()
                 case 460:
-                    Notification.AniTrip.loginAccountNotActivate.sendNotification()
+                    Notification.AniTrip.accountNotYetActivate.sendNotification()
                 default:
                     Notification.AniTrip.unknownError.sendNotification()
                 }
@@ -66,13 +70,50 @@ final class UserManager {
         connectedUser = nil
     }
     
+    /// Update connected user
+    func updateUser(_ userToUpdate: UserToUpdate) {
+        guard let connectedUser = connectedUser else {
+            Notification.AniTrip.unknownError.sendNotification()
+            return
+        }
+        
+        networkManager.request(urlParams: NetworkConfigurations.updateUser.urlParams,
+                               method: NetworkConfigurations.updateUser.method,
+                               authorization: .authorization(bearerToken: connectedUser.token),
+                               body: userToUpdate) { data, response, error in
+            if let data = data,
+               let statusCode = response?.statusCode {
+                switch statusCode {
+                case 202:
+                    if let _ = self.decodeUserInformations(data: data) {
+                        Notification.AniTrip.updateProfileSuccess.sendNotification()
+                    } else {
+                        Notification.AniTrip.unknownError.sendNotification()
+                    }
+                case 401:
+                    Notification.AniTrip.notAuthorized.sendNotification()
+                case 406:
+                    Notification.AniTrip.accountNotFound.sendNotification()
+                case 460:
+                    Notification.AniTrip.accountNotYetActivate.sendNotification()
+                default:
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
     // MARK: Private
     // MARK: Properties
     private let networkManager = NetworkManager()
     
     // MARK: Methods
-    /// Decode login data
-    private func decodeLoginData(_ data: Data) {
+    /// Decode user informations
+    private func decodeUserInformations(data: Data) -> User? {
+        var userInformations: User?
+        
         if let user = try? JSONDecoder().decode(ConnectedUser.self, from: data),
            let userId = UUID(uuidString: user.id),
            let gender = Gender(rawValue: user.gender),
@@ -88,9 +129,9 @@ final class UserManager {
                                 isActive: true,
                                 address: user.address ?? Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""),
                                 token: user.token)
-            Notification.AniTrip.loginSuccess.sendNotification()
-        } else {
-            Notification.AniTrip.unknownError.sendNotification()
+            userInformations = connectedUser
         }
+        
+        return userInformations
     }
 }

@@ -13,6 +13,7 @@ struct AniTripApp: App {
     @StateObject private var userController: UserController = UserController()
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
+    @Environment(\.presentationMode) var presentationMode
     
     var body: some Scene {
         WindowGroup {
@@ -31,13 +32,14 @@ struct AniTripApp: App {
             }
             .environmentObject(userController)
             .environmentObject(appController)
-            .alert(Text(appController.alertViewMessage), isPresented: $appController.showAlertView, actions: {
-                Button {
-                    appController.resetAlertView()
-                } label: {
-                    Text("Ok")
-                }
-            })
+            .alert(isPresented:  $appController.showAlertView) {
+                Alert(title: Text("Loading ended"), message: Text(appController.alertViewMessage), dismissButton: .default(Text("OK"), action: {
+                    if appController.mustReturnToPreviousView {
+                        self.presentationMode.wrappedValue.dismiss()
+                    }
+                    
+                }))
+            }
             .onAppear {
                 userController.appController = appController
             }

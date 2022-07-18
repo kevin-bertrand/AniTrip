@@ -52,7 +52,7 @@ struct UserProfileView: View {
         }
         .toolbar {
             NavigationLink {
-                Text("Update")
+                UpdateProfileView()
             } label: {
                 Image(systemName: "pencil.circle")
             }

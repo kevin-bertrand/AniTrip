@@ -11,6 +11,12 @@
 		06158E2A28854F4200C3BE6E /* AddressTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2928854F4200C3BE6E /* AddressTileView.swift */; };
 		06158E2C2885500100C3BE6E /* MapPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2B2885500100C3BE6E /* MapPlace.swift */; };
 		06158E2E2885516500C3BE6E /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2D2885516500C3BE6E /* MapController.swift */; };
+		06158E3228855D6C00C3BE6E /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */; };
+		06158E3428855DB100C3BE6E /* EditUserInfoTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E3328855DB100C3BE6E /* EditUserInfoTileView.swift */; };
+		06158E36288560CF00C3BE6E /* TextFieldUnderlinedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E35288560CF00C3BE6E /* TextFieldUnderlinedView.swift */; };
+		06158E38288561C500C3BE6E /* UpdateAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E37288561C500C3BE6E /* UpdateAddressView.swift */; };
+		06158E3A2885772E00C3BE6E /* MissionsUpdateTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E392885772E00C3BE6E /* MissionsUpdateTileView.swift */; };
+		06158E3C28857D5800C3BE6E /* PasswordFormTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
@@ -60,6 +66,12 @@
 		06158E2928854F4200C3BE6E /* AddressTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTileView.swift; sourceTree = "<group>"; };
 		06158E2B2885500100C3BE6E /* MapPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlace.swift; sourceTree = "<group>"; };
 		06158E2D2885516500C3BE6E /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
+		06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
+		06158E3328855DB100C3BE6E /* EditUserInfoTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoTileView.swift; sourceTree = "<group>"; };
+		06158E35288560CF00C3BE6E /* TextFieldUnderlinedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUnderlinedView.swift; sourceTree = "<group>"; };
+		06158E37288561C500C3BE6E /* UpdateAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateAddressView.swift; sourceTree = "<group>"; };
+		06158E392885772E00C3BE6E /* MissionsUpdateTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissionsUpdateTileView.swift; sourceTree = "<group>"; };
+		06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordFormTileView.swift; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065E4753287B573600D32E05 /* AniTripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripApp.swift; sourceTree = "<group>"; };
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -241,6 +253,10 @@
 				06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */,
 				06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */,
 				06158E2928854F4200C3BE6E /* AddressTileView.swift */,
+				06158E35288560CF00C3BE6E /* TextFieldUnderlinedView.swift */,
+				06158E37288561C500C3BE6E /* UpdateAddressView.swift */,
+				06158E392885772E00C3BE6E /* MissionsUpdateTileView.swift */,
+				06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */,
 			);
 			path = "Global Components";
 			sourceTree = "<group>";
@@ -268,6 +284,8 @@
 			children = (
 				06BF726D28853CAE006F0839 /* UserCellView.swift */,
 				06158E2728854D1E00C3BE6E /* UserProfileView.swift */,
+				06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */,
+				06158E3328855DB100C3BE6E /* EditUserInfoTileView.swift */,
 			);
 			path = "Settings components";
 			sourceTree = "<group>";
@@ -416,15 +434,21 @@
 				06BF7250287B6C71006F0839 /* String.swift in Sources */,
 				06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */,
 				06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */,
+				06158E3A2885772E00C3BE6E /* MissionsUpdateTileView.swift in Sources */,
 				06BF726E28853CAE006F0839 /* UserCellView.swift in Sources */,
+				06158E38288561C500C3BE6E /* UpdateAddressView.swift in Sources */,
 				065E478A287B58C600D32E05 /* LoginView.swift in Sources */,
 				06BF724B287B66D3006F0839 /* LoadingInProgressView.swift in Sources */,
 				065E4754287B573600D32E05 /* AniTripApp.swift in Sources */,
 				06BF7258287B71FD006F0839 /* Notification.swift in Sources */,
 				06BF7245287B5B63006F0839 /* ButtonWithIcon.swift in Sources */,
+				06158E36288560CF00C3BE6E /* TextFieldUnderlinedView.swift in Sources */,
 				06BF725A287B73AE006F0839 /* AddressCodable.swift in Sources */,
+				06158E3428855DB100C3BE6E /* EditUserInfoTileView.swift in Sources */,
 				06158E2828854D1E00C3BE6E /* UserProfileView.swift in Sources */,
+				06158E3C28857D5800C3BE6E /* PasswordFormTileView.swift in Sources */,
 				06158E2E2885516500C3BE6E /* MapController.swift in Sources */,
+				06158E3228855D6C00C3BE6E /* UpdateProfileView.swift in Sources */,
 				06158E2C2885500100C3BE6E /* MapPlace.swift in Sources */,
 				06BF7266287E1484006F0839 /* AppView.swift in Sources */,
 				065E4788287B581000D32E05 /* CircularSpinnerView.swift in Sources */,
