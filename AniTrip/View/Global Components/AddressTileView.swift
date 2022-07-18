@@ -14,9 +14,16 @@ struct AddressTileView: View {
     @State private var region: MKCoordinateRegion = MapController.defaultMapPoint
     @State private var places: [MapPlace] = []
     let address: Address?
+    var title: String? = nil
     
     var body: some View {
-        Group {
+        VStack {
+            if let title = title {
+                Text(title)
+                    .font(.callout)
+                    .foregroundColor(.gray)
+            }
+            
             if let address = address {
                 HStack {
                     Map(coordinateRegion: $region, annotationItems: places) { place in

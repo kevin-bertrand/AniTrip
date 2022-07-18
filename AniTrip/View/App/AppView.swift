@@ -20,7 +20,8 @@ struct AppView: View {
             }
             
             NavigationView {
-                Text("Trips")
+                TripsView()
+                    .navigationTitle(Text("📍 Trips"))
             }
             .tabItem {
                 Label("Trips", systemImage: "map.fill")
@@ -43,6 +44,7 @@ struct AppView: View {
             }
         }
         .environmentObject(VolunteersController(appController: userController.appController))
+        .environmentObject(TripController(appController: userController.appController))
     }
 }
 

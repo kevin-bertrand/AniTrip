@@ -30,6 +30,10 @@ extension Notification {
         // Getting volunteers list
         case gettingVolunteersListSuccess = "Volunteers list downloaded!"
         
+        // Getting trip list
+        case gettingTripListSucess = "Trips list downloaded!"
+        case gettingTripListError = "No trip list found!"
+        
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
         }

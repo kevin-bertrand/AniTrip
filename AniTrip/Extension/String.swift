@@ -19,4 +19,9 @@ extension String {
     var isNotEmpty: Bool {
         !self.isEmpty
     }
+    
+    /// Convert a string into a date
+    var toDate: Date? {
+        ISO8601DateFormatter().date(from: self)
+    }
 }

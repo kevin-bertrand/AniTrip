@@ -23,6 +23,13 @@
 		06158E45288583B200C3BE6E /* VolunteersManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E44288583B200C3BE6E /* VolunteersManager.swift */; };
 		06158E4D28858B7500C3BE6E /* VolunteerProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E4C28858B7500C3BE6E /* VolunteerProfileView.swift */; };
 		06158E5028858BE200C3BE6E /* VolunteerImageInformationsTiles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E4F28858BE200C3BE6E /* VolunteerImageInformationsTiles.swift */; };
+		06158E532885902D00C3BE6E /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E522885902D00C3BE6E /* TripsView.swift */; };
+		06158E552885909D00C3BE6E /* TripController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E542885909D00C3BE6E /* TripController.swift */; };
+		06158E57288590AC00C3BE6E /* TripManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E56288590AC00C3BE6E /* TripManager.swift */; };
+		06158E59288590EB00C3BE6E /* TripCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E58288590EB00C3BE6E /* TripCodable.swift */; };
+		06158E5D288595BD00C3BE6E /* TripTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E5C288595BD00C3BE6E /* TripTileView.swift */; };
+		06158E5F288595F100C3BE6E /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E5E288595F100C3BE6E /* Double.swift */; };
+		06158E612885982000C3BE6E /* DetailedTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E602885982000C3BE6E /* DetailedTripView.swift */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
@@ -84,6 +91,13 @@
 		06158E44288583B200C3BE6E /* VolunteersManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteersManager.swift; sourceTree = "<group>"; };
 		06158E4C28858B7500C3BE6E /* VolunteerProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerProfileView.swift; sourceTree = "<group>"; };
 		06158E4F28858BE200C3BE6E /* VolunteerImageInformationsTiles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerImageInformationsTiles.swift; sourceTree = "<group>"; };
+		06158E522885902D00C3BE6E /* TripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
+		06158E542885909D00C3BE6E /* TripController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripController.swift; sourceTree = "<group>"; };
+		06158E56288590AC00C3BE6E /* TripManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManager.swift; sourceTree = "<group>"; };
+		06158E58288590EB00C3BE6E /* TripCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCodable.swift; sourceTree = "<group>"; };
+		06158E5C288595BD00C3BE6E /* TripTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTileView.swift; sourceTree = "<group>"; };
+		06158E5E288595F100C3BE6E /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
+		06158E602885982000C3BE6E /* DetailedTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTripView.swift; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065E4753287B573600D32E05 /* AniTripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripApp.swift; sourceTree = "<group>"; };
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,6 +179,32 @@
 			path = "Volunteers Components";
 			sourceTree = "<group>";
 		};
+		06158E512885901F00C3BE6E /* Trips Tab */ = {
+			isa = PBXGroup;
+			children = (
+				06158E5B288595A800C3BE6E /* Trip Subviews */,
+				06158E5A288595A100C3BE6E /* Trip Components */,
+				06158E522885902D00C3BE6E /* TripsView.swift */,
+			);
+			path = "Trips Tab";
+			sourceTree = "<group>";
+		};
+		06158E5A288595A100C3BE6E /* Trip Components */ = {
+			isa = PBXGroup;
+			children = (
+				06158E5C288595BD00C3BE6E /* TripTileView.swift */,
+				06158E602885982000C3BE6E /* DetailedTripView.swift */,
+			);
+			path = "Trip Components";
+			sourceTree = "<group>";
+		};
+		06158E5B288595A800C3BE6E /* Trip Subviews */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Trip Subviews";
+			sourceTree = "<group>";
+		};
 		065E4747287B573600D32E05 = {
 			isa = PBXGroup;
 			children = (
@@ -233,6 +273,8 @@
 				06158E2B2885500100C3BE6E /* MapPlace.swift */,
 				06158E422885835000C3BE6E /* VolunteersCodable.swift */,
 				06158E44288583B200C3BE6E /* VolunteersManager.swift */,
+				06158E56288590AC00C3BE6E /* TripManager.swift */,
+				06158E58288590EB00C3BE6E /* TripCodable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,6 +296,7 @@
 				06BF7248287B603A006F0839 /* AppController.swift */,
 				06158E2D2885516500C3BE6E /* MapController.swift */,
 				06158E40288582DD00C3BE6E /* VolunteersController.swift */,
+				06158E542885909D00C3BE6E /* TripController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -280,6 +323,7 @@
 		065E4785287B57CB00D32E05 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				06158E512885901F00C3BE6E /* Trips Tab */,
 				06158E4A28858B4E00C3BE6E /* Volunteers Tab */,
 				06BF72672885398E006F0839 /* Settings Tab */,
 				06BF7265287E1484006F0839 /* AppView.swift */,
@@ -308,6 +352,7 @@
 			children = (
 				06BF724F287B6C71006F0839 /* String.swift */,
 				06BF7257287B71FD006F0839 /* Notification.swift */,
+				06158E5E288595F100C3BE6E /* Double.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -476,6 +521,7 @@
 				06BF7250287B6C71006F0839 /* String.swift in Sources */,
 				06158E5028858BE200C3BE6E /* VolunteerImageInformationsTiles.swift in Sources */,
 				06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */,
+				06158E57288590AC00C3BE6E /* TripManager.swift in Sources */,
 				06158E3F288582C200C3BE6E /* VolunteersView.swift in Sources */,
 				06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */,
 				06158E3A2885772E00C3BE6E /* MissionsUpdateTileView.swift in Sources */,
@@ -488,17 +534,23 @@
 				06BF7245287B5B63006F0839 /* ButtonWithIcon.swift in Sources */,
 				06158E36288560CF00C3BE6E /* TextFieldUnderlinedView.swift in Sources */,
 				06BF725A287B73AE006F0839 /* AddressCodable.swift in Sources */,
+				06158E5D288595BD00C3BE6E /* TripTileView.swift in Sources */,
+				06158E59288590EB00C3BE6E /* TripCodable.swift in Sources */,
 				06158E432885835000C3BE6E /* VolunteersCodable.swift in Sources */,
+				06158E552885909D00C3BE6E /* TripController.swift in Sources */,
 				06158E45288583B200C3BE6E /* VolunteersManager.swift in Sources */,
 				06158E3428855DB100C3BE6E /* EditUserInfoTileView.swift in Sources */,
 				06158E41288582DD00C3BE6E /* VolunteersController.swift in Sources */,
 				06158E2828854D1E00C3BE6E /* UserProfileView.swift in Sources */,
 				06158E3C28857D5800C3BE6E /* PasswordFormTileView.swift in Sources */,
+				06158E612885982000C3BE6E /* DetailedTripView.swift in Sources */,
 				06158E4D28858B7500C3BE6E /* VolunteerProfileView.swift in Sources */,
+				06158E532885902D00C3BE6E /* TripsView.swift in Sources */,
 				06158E2E2885516500C3BE6E /* MapController.swift in Sources */,
 				06158E3228855D6C00C3BE6E /* UpdateProfileView.swift in Sources */,
 				06158E2C2885500100C3BE6E /* MapPlace.swift in Sources */,
 				06BF7266287E1484006F0839 /* AppView.swift in Sources */,
+				06158E5F288595F100C3BE6E /* Double.swift in Sources */,
 				065E4788287B581000D32E05 /* CircularSpinnerView.swift in Sources */,
 				06BF7264287E1117006F0839 /* CreateAccountView.swift in Sources */,
 				06158E2A28854F4200C3BE6E /* AddressTileView.swift in Sources */,

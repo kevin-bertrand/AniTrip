@@ -13,6 +13,7 @@ enum NetworkConfigurations {
     case createAccount
     case updateUser
     case getVolunteersList
+    case getTripList
     
     var method: HTTPMethod {
         var method: HTTPMethod
@@ -23,7 +24,8 @@ enum NetworkConfigurations {
             method = .post
         case .updateUser:
             method = .patch
-        case .getVolunteersList:
+        case .getVolunteersList,
+                .getTripList:
             method = .get
         }
         
@@ -41,6 +43,8 @@ enum NetworkConfigurations {
         case .updateUser,
                 .getVolunteersList:
             params = ["user"]
+        case .getTripList:
+            params = ["trip"]
         }
         
         return params
