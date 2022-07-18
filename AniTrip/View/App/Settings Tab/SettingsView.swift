@@ -19,7 +19,7 @@ struct SettingsView: View {
                     UserCellView()
                     
                     NavigationLink {
-                        // Show user profile
+                        UserProfileView()
                     } label: {
                         EmptyView()
                     }
