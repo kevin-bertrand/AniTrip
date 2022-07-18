@@ -9,9 +9,16 @@ import SwiftUI
 
 struct UpdateAddressView: View {
     @Binding var address: Address
+    var title: String? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
+            if let title = title {
+                Text(title)
+                    .font(.callout)
+                    .foregroundColor(.gray)
+            }
+            
             Group {
                 HStack {
                     TextFieldUnderlinedView(text: $address.streetNumber, title: "Number")
@@ -26,6 +33,7 @@ struct UpdateAddressView: View {
                 }
                 TextFieldUnderlinedView(text: $address.country, title: "Country")
             }
+            .autocorrectionDisabled(true)
         }
     }
 }

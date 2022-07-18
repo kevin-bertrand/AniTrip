@@ -17,10 +17,20 @@ final class TripController: ObservableObject {
         }
     }
     
+    // New trip properties
+    @Published var newTrip: NewTrip = NewTrip(date: .now, missions: [], comment: "", totalDistance: "", startingAddress: MapController.emptyAddress, endingAddress: MapController.emptyAddress)
+    
     // MARK: Methods
     /// Getting trip list
     func getList(byUser user: User?) {
         tripManager.getList(byUser: user)
+    }
+    
+    /// Adding a new trip
+    func add(byUser user: User?) {
+        appController.setLoadingInProgress(withMessage: "Adding trip in progress...")
+        
+        tripManager.add(trip: newTrip, by: user)
     }
     
     // MARK: Initialization
@@ -30,6 +40,9 @@ final class TripController: ObservableObject {
         // Configure getting trip list notifications
         configureNotification(for: Notification.AniTrip.gettingTripListSucess.notificationName)
         configureNotification(for: Notification.AniTrip.gettingTripListError.notificationName)
+        
+        // Configure adding trip notification
+        configureNotification(for: Notification.AniTrip.addTripSuccess.notificationName)
     }
     
     // MARK: Private
@@ -55,6 +68,8 @@ final class TripController: ObservableObject {
                 self.trips = self.tripManager.trips
             case Notification.AniTrip.gettingTripListError.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage)
+            case Notification.AniTrip.addTripSuccess.notificationName:
+                self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
             default: break
             }
         }

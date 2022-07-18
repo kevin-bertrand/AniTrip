@@ -40,6 +40,31 @@ final class TripManager {
         }
     }
     
+    /// Adding trip
+    func add(trip: NewTrip, by user: User?) {
+        guard let user = user else {
+            Notification.AniTrip.unknownError.sendNotification()
+            return
+        }
+        
+        networkManager.request(urlParams: NetworkConfigurations.addTrip.urlParams, method: NetworkConfigurations.addTrip.method, authorization: .authorization(bearerToken: user.token), body: trip.toAddTripFormat()) { [weak self] data, response, error in
+            if let self = self,
+               let statusCode = response?.statusCode {
+                switch statusCode {
+                case 200:
+                    self.getList(byUser: user)
+                    Notification.AniTrip.addTripSuccess.sendNotification()
+                case 401:
+                    Notification.AniTrip.notAuthorized.sendNotification()
+                default:
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
     // MARK: Private
     // MARK: Properties
     private var tripList: [Trip] = []

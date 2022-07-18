@@ -34,6 +34,9 @@ extension Notification {
         case gettingTripListSucess = "Trips list downloaded!"
         case gettingTripListError = "No trip list found!"
         
+        // Adding trip
+        case addTripSuccess = "Trip added with success!"
+        
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
         }

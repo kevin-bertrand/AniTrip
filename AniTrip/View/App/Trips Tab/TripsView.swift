@@ -25,6 +25,13 @@ struct TripsView: View {
             tripController.getList(byUser: userController.connectedUser)
         }
         .searchable(text: $tripController.searchFilter)
+        .toolbar {
+            NavigationLink {
+                AddTripView()
+            } label: {
+                Image(systemName: "plus.circle")
+            }
+        }
     }
 }
 
