@@ -9,7 +9,8 @@ import SwiftUI
 
 struct LoadingInProgressView: View {
     @EnvironmentObject private var appController: AppController
-
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         ZStack {
             Rectangle()
@@ -24,7 +25,7 @@ struct LoadingInProgressView: View {
                     .multilineTextAlignment(.center)
             }
             .padding(50)
-            .background(Color.white)
+            .background(colorScheme == .light ? Color.white : Color.black)
             .cornerRadius(25)
             .shadow(radius: 10)
         }

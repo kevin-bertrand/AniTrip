@@ -40,8 +40,10 @@ struct TextFieldWithIcon: View {
                             .autocorrectionDisabled(keyboardType == .default ? false : true)
                             .autocapitalization(keyboardType == .default ? .sentences : .none)
                     }
-                }.padding()
-                    .keyboardType(keyboardType)
+                }
+                .padding()
+                .keyboardType(keyboardType)
+                .frame(height: 50)
 
                 if isSecure {
                     Button {
@@ -54,16 +56,19 @@ struct TextFieldWithIcon: View {
                         }
                     }
                     .padding()
+                    .frame(height: 50)
                 }
+                
             }
-            .background(.white)
+            .background(Color("TextFieldBackground"))
         }
         .background(Color("ButtonIconBackground"))
         .cornerRadius(25)
         .overlay {
             RoundedRectangle(cornerRadius: 25)
-                .stroke(style: .init(lineWidth: 1))
+                .strokeBorder(Color("ButtonIconBackground"), style: .init(lineWidth: 1))
         }
+        .frame(height: 50)
     }
 }
 
