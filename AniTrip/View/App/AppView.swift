@@ -32,7 +32,8 @@ struct AppView: View {
             }
             
             NavigationView {
-                Text("Settings")
+                SettingsView()
+                    .navigationTitle("⚙️ Settings")
             }
             .tabItem {
                 Label("Settings", systemImage: "gear")

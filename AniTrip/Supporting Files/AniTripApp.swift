@@ -11,6 +11,8 @@ import SwiftUI
 struct AniTripApp: App {
     @StateObject private var appController: AppController = AppController()
     @StateObject private var userController: UserController = UserController()
+    @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
+    @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
     
     var body: some Scene {
         WindowGroup {
@@ -39,6 +41,7 @@ struct AniTripApp: App {
             .onAppear {
                 userController.appController = appController
             }
+            .preferredColorScheme(useDefaultScheme ? nil : (useDarkScheme ? .dark : .light))
         }
     }
 }

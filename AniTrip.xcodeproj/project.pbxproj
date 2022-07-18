@@ -30,6 +30,8 @@
 		06BF725A287B73AE006F0839 /* AddressCodable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7259287B73AE006F0839 /* AddressCodable.swift */; };
 		06BF7264287E1117006F0839 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7263287E1117006F0839 /* CreateAccountView.swift */; };
 		06BF7266287E1484006F0839 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7265287E1484006F0839 /* AppView.swift */; };
+		06BF726B288539B4006F0839 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF726A288539B4006F0839 /* SettingsView.swift */; };
+		06BF726E28853CAE006F0839 /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF726D28853CAE006F0839 /* UserCellView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +77,8 @@
 		06BF7259287B73AE006F0839 /* AddressCodable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressCodable.swift; sourceTree = "<group>"; };
 		06BF7263287E1117006F0839 /* CreateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		06BF7265287E1484006F0839 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
+		06BF726A288539B4006F0839 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		06BF726D28853CAE006F0839 /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -213,6 +217,7 @@
 		065E4785287B57CB00D32E05 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				06BF72672885398E006F0839 /* Settings Tab */,
 				06BF7265287E1484006F0839 /* AppView.swift */,
 			);
 			path = App;
@@ -236,6 +241,23 @@
 				06BF7257287B71FD006F0839 /* Notification.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		06BF72672885398E006F0839 /* Settings Tab */ = {
+			isa = PBXGroup;
+			children = (
+				06BF726C28853C9B006F0839 /* Settings components */,
+				06BF726A288539B4006F0839 /* SettingsView.swift */,
+			);
+			path = "Settings Tab";
+			sourceTree = "<group>";
+		};
+		06BF726C28853C9B006F0839 /* Settings components */ = {
+			isa = PBXGroup;
+			children = (
+				06BF726D28853CAE006F0839 /* UserCellView.swift */,
+			);
+			path = "Settings components";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,10 +399,12 @@
 				06BF7256287B6F6E006F0839 /* Network.swift in Sources */,
 				06BF7254287B6F2A006F0839 /* NetworkManager.swift in Sources */,
 				06BF724D287B6C62006F0839 /* UserManager.swift in Sources */,
+				06BF726B288539B4006F0839 /* SettingsView.swift in Sources */,
 				06BF7247287B5C6E006F0839 /* UserController.swift in Sources */,
 				06BF7250287B6C71006F0839 /* String.swift in Sources */,
 				06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */,
 				06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */,
+				06BF726E28853CAE006F0839 /* UserCellView.swift in Sources */,
 				065E478A287B58C600D32E05 /* LoginView.swift in Sources */,
 				06BF724B287B66D3006F0839 /* LoadingInProgressView.swift in Sources */,
 				065E4754287B573600D32E05 /* AniTripApp.swift in Sources */,

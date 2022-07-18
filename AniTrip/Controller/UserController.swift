@@ -12,6 +12,7 @@ final class UserController: ObservableObject {
     // MARK: Properties
     @Published var appController: AppController = AppController()
     @Published var isConnected: Bool = false
+    var connectedUser: User? { userManager.connectedUser }
     
     // Login view properties
     @Published var loginEmailTextField: String = ""
@@ -69,6 +70,13 @@ final class UserController: ObservableObject {
         userManager.createAccount(for: UserToCreate(email: createAccountEmailTextField,
                                                     password: createAccountPasswordTextField,
                                                     passwordVerification: createAccountPasswordVerificationTextField))
+    }
+    
+    /// Disconnect the user
+    func disconnectUser() {
+        objectWillChange.send()
+        isConnected = false
+        userManager.disconnectUser()
     }
     
     // MARK: Initialization

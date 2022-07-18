@@ -61,6 +61,11 @@ final class UserManager {
         }
     }
     
+    /// Disconnect the user
+    func disconnectUser() {
+        connectedUser = nil
+    }
+    
     // MARK: Private
     // MARK: Properties
     private let networkManager = NetworkManager()
