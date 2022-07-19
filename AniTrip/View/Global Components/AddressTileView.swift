@@ -44,11 +44,12 @@ struct AddressTileView: View {
                             Link(address, destination: url)
                         }
                     }
-                    .bold()
+                    .font(.body.bold())
                     .padding(5)
                 }
             } else {
                 Text("No address")
+                    .font(.body.bold())
                     .bold()
                     .font(.title2)
             }

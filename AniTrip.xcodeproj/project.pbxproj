@@ -42,6 +42,8 @@
 		065E4783287B579000D32E05 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 065E4782287B579000D32E05 /* Alamofire */; };
 		065E4788287B581000D32E05 /* CircularSpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4787287B581000D32E05 /* CircularSpinnerView.swift */; };
 		065E478A287B58C600D32E05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4789287B58C600D32E05 /* LoginView.swift */; };
+		065FF5742886D9B7001BF623 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FF5732886D9B7001BF623 /* Date.swift */; };
+		065FF5762886DC4E001BF623 /* SearchTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */; };
 		06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */; };
 		06BF7245287B5B63006F0839 /* ButtonWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */; };
 		06BF7247287B5C6E006F0839 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7246287B5C6E006F0839 /* UserController.swift */; };
@@ -115,6 +117,8 @@
 		065E4770287B573700D32E05 /* AniTripUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		065E4787287B581000D32E05 /* CircularSpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSpinnerView.swift; sourceTree = "<group>"; };
 		065E4789287B58C600D32E05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		065FF5732886D9B7001BF623 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldView.swift; sourceTree = "<group>"; };
 		06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithIcon.swift; sourceTree = "<group>"; };
 		06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIcon.swift; sourceTree = "<group>"; };
 		06BF7246287B5C6E006F0839 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 				06158E37288561C500C3BE6E /* UpdateAddressView.swift */,
 				06158E392885772E00C3BE6E /* MissionsUpdateTileView.swift */,
 				06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */,
+				065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */,
 			);
 			path = "Global Components";
 			sourceTree = "<group>";
@@ -378,6 +383,7 @@
 				06BF724F287B6C71006F0839 /* String.swift */,
 				06BF7257287B71FD006F0839 /* Notification.swift */,
 				06158E5E288595F100C3BE6E /* Double.swift */,
+				065FF5732886D9B7001BF623 /* Date.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -561,6 +567,7 @@
 				06158E36288560CF00C3BE6E /* TextFieldUnderlinedView.swift in Sources */,
 				06BF725A287B73AE006F0839 /* AddressCodable.swift in Sources */,
 				06158E5D288595BD00C3BE6E /* TripTileView.swift in Sources */,
+				065FF5742886D9B7001BF623 /* Date.swift in Sources */,
 				06158E6328859B5100C3BE6E /* AddTripView.swift in Sources */,
 				06158E59288590EB00C3BE6E /* TripCodable.swift in Sources */,
 				06158E432885835000C3BE6E /* VolunteersCodable.swift in Sources */,
@@ -569,6 +576,7 @@
 				06158E692885A5FE00C3BE6E /* NewsTileView.swift in Sources */,
 				06158E3428855DB100C3BE6E /* EditUserInfoTileView.swift in Sources */,
 				06158E41288582DD00C3BE6E /* VolunteersController.swift in Sources */,
+				065FF5762886DC4E001BF623 /* SearchTextFieldView.swift in Sources */,
 				06158E2828854D1E00C3BE6E /* UserProfileView.swift in Sources */,
 				06158E3C28857D5800C3BE6E /* PasswordFormTileView.swift in Sources */,
 				06158E612885982000C3BE6E /* DetailedTripView.swift in Sources */,
@@ -669,7 +677,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -723,7 +731,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

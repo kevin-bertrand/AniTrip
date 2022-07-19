@@ -30,12 +30,9 @@ struct NewsTileView: View {
             }
         }
         .frame(width: 150, height: 120)
-        .overlay(content: {
-            RoundedRectangle(cornerRadius: 10)
-                .stroke(Color.white, lineWidth: 1)
-                .shadow(color: .gray, radius: 2, x: 3, y: 3)
-        })
-        
+        .overlay(RoundedRectangle(cornerRadius: 10)
+            .stroke(Color.white, lineWidth: 1)
+            .shadow(color: .gray, radius: 2, x: 3, y: 3))
     }
 }
 

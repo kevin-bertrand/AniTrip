@@ -25,21 +25,23 @@ struct HomeView: View {
                 .listRowBackground(Color.clear)
             }
             
-            Section {
-                VStack {
-                    HStack {
-                        Text("Total distance")
-                        Spacer()
-                    }
-                    
-                    Chart {
-                        ForEach(tripController.chartPoints, id: \.self) {
-                            LineMark(x: .value("Date", $0.date), y: .value("Distance", $0.distance))
-                            PointMark(x: .value("Date", $0.date), y: .value("Distance", $0.distance))
+            if #available(iOS 16.0, *) {
+                Section {
+                    VStack {
+                        HStack {
+                            Text("Total distance")
+                            Spacer()
                         }
+                        
+                        Chart {
+                            ForEach(tripController.chartPoints, id: \.self) {
+                                LineMark(x: .value("Date", $0.date), y: .value("Distance", $0.distance))
+                                PointMark(x: .value("Date", $0.date), y: .value("Distance", $0.distance))
+                            }
+                        }
+                        .frame(height: 300)
+                        .padding(.vertical)
                     }
-                    .frame(height: 300)
-                    .padding(.vertical)
                 }
             }
             

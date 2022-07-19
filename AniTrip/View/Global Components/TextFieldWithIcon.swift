@@ -44,7 +44,7 @@ struct TextFieldWithIcon: View {
                 .padding()
                 .keyboardType(keyboardType)
                 .frame(height: 50)
-
+                
                 if isSecure {
                     Button {
                         showPassword.toggle()
@@ -64,10 +64,10 @@ struct TextFieldWithIcon: View {
         }
         .background(Color("ButtonIconBackground"))
         .cornerRadius(25)
-        .overlay {
+        .overlay(
             RoundedRectangle(cornerRadius: 25)
                 .strokeBorder(Color("ButtonIconBackground"), style: .init(lineWidth: 1))
-        }
+            , alignment: .center)
         .frame(height: 50)
     }
 }

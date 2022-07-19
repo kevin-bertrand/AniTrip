@@ -20,7 +20,7 @@ struct MissionsUpdateTileView: View {
                         self.numberOfMissions.append(numberOfMissions.count)
                     }
                     .foregroundColor(.accentColor)
-                    .bold()
+                    .font(.body.bold())
             }
             List {
                 ForEach(numberOfMissions, id:\.self) { index in

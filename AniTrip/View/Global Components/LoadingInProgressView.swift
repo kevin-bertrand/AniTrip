@@ -19,9 +19,8 @@ struct LoadingInProgressView: View {
             VStack {
                 CircularSpinnerView()
                 Text(appController.loadingMessage)
-                    .font(.title2)
+                    .font(.title2.bold())
                     .padding()
-                    .bold()
                     .multilineTextAlignment(.center)
             }
             .padding(50)
