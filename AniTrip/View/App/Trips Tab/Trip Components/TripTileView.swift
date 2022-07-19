@@ -14,7 +14,8 @@ struct TripTileView: View {
         HStack {
             Image("TripIcon")
                 .resizable()
-                .frame(width: 80, height: 80)
+                .frame(width: 60, height: 60)
+                .padding(.trailing)
             VStack(alignment: .leading) {
                 Text("\(trip.startingAddress.city) → \(trip.endingAddress.city)")
                     .bold()
