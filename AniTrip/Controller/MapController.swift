@@ -13,7 +13,7 @@ final class MapController: ObservableObject {
     // MARK: Public
     // MARK: Properties
     static let defaultMapPoint: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
-    static let emptyAddress: Address = Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")
+    static let emptyAddress: Address = Address(roadName: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "")
 
     // MARK: Methods
     /// Getting coordinates of a given address
@@ -24,7 +24,7 @@ final class MapController: ObservableObject {
         }
 
         let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString("\(address.streetNumber), \(address.roadType) \(address.roadName) \(address.zipCode), \(address.city) \(address.country)") { placemarks, error in
+        geocoder.geocodeAddressString("\(address.streetNumber), \(address.roadName) \(address.zipCode), \(address.city) \(address.country)") { placemarks, error in
             let placemark = placemarks?.first
             if let lat = placemark?.location?.coordinate.latitude, let lon = placemark?.location?.coordinate.longitude {
                 completionHandler(CLLocationCoordinate2D(latitude: lat, longitude: lon), MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), latitudinalMeters: 750, longitudinalMeters: 750))
