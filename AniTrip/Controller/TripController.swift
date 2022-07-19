@@ -18,7 +18,7 @@ final class TripController: ObservableObject {
     }
     
     // New trip properties
-    @Published var newTrip: NewTrip = NewTrip(date: .now, missions: [], comment: "", totalDistance: "", startingAddress: MapController.emptyAddress, endingAddress: MapController.emptyAddress)
+    @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: MapController.emptyAddress, endingAddress: MapController.emptyAddress)
     
     // Home informations
     @Published var threeLatestTrips: [Trip] = []

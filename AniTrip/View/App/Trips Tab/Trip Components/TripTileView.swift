@@ -20,7 +20,7 @@ struct TripTileView: View {
                 Text("\(trip.startingAddress.city) → \(trip.endingAddress.city)")
                     .bold()
                     .font(.title2)
-                Text(trip.date.toDate?.formatted(date: .numeric, time: .omitted) ?? "No date")
+                Text(trip.date.toDate?.dateOnly ?? "No date")
                 Text("\(trip.totalDistance.twoDigitPrecision) km")
             }
         }

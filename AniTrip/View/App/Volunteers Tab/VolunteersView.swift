@@ -12,22 +12,30 @@ struct VolunteersView: View {
     @EnvironmentObject var userController: UserController
     
     var body: some View {
-        List {
-            ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
-                NavigationLink {
-                    VolunteerProfileView(volunteer: volunteer)
-                } label: {
-                    HStack(spacing: 15) {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 50, height: 50)
-                        VStack(alignment: .leading) {
-                            Text("\(volunteer.firstname) \(volunteer.lastname)")
-                                .bold()
-                                .font(.title2)
-                            Text(volunteer.missions.joined(separator: ", "))
-                            if let address = volunteer.address {
-                                Text("📍 \(address.city)")
+        Form {
+            Section {
+                SearchTextFieldView(searchText: $volunteersController.searchFilter)
+            }.listRowBackground(Color.clear)
+            
+            Section {
+                List {
+                    ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
+                        NavigationLink {
+                            VolunteerProfileView(volunteer: volunteer)
+                        } label: {
+                            HStack(spacing: 15) {
+                                Image(systemName: "person.circle")
+                                    .resizable()
+                                    .frame(width: 50, height: 50)
+                                VStack(alignment: .leading) {
+                                    Text("\(volunteer.firstname) \(volunteer.lastname)")
+                                        .bold()
+                                        .font(.title2)
+                                    Text(volunteer.missions.joined(separator: ", "))
+                                    if let address = volunteer.address {
+                                        Text("📍 \(address.city)")
+                                    }
+                                }
                             }
                         }
                     }
@@ -37,7 +45,6 @@ struct VolunteersView: View {
         .onAppear {
             volunteersController.getList(byUser: userController.connectedUser)
         }
-        .searchable(text: $volunteersController.searchFilter)
     }
 }
 

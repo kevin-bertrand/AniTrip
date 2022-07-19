@@ -26,7 +26,7 @@ struct NewTrip: Codable {
     var endingAddress: Address
     
     func toAddTripFormat() -> AddingTrip {
-        AddingTrip(date: self.date.ISO8601Format(), missions: self.missions, comment: self.comment, totalDistance: Double(self.totalDistance) ?? 0.0, startingAddress: self.startingAddress, endingAddress: self.endingAddress)
+        AddingTrip(date: self.date.iso8601, missions: self.missions, comment: self.comment, totalDistance: Double(self.totalDistance) ?? 0.0, startingAddress: self.startingAddress, endingAddress: self.endingAddress)
     }
 }
 

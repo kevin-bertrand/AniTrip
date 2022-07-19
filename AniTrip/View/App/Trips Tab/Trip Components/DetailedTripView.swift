@@ -23,7 +23,7 @@ struct DetailedTripView: View {
                 HStack {
                     Text("Date")
                     Spacer()
-                    Text("\(trip.date.toDate?.formatted(date: .numeric, time: .omitted) ?? "" )")
+                    Text("\(trip.date.toDate?.dateOnly ?? "" )")
                 }
                 
                 HStack {
