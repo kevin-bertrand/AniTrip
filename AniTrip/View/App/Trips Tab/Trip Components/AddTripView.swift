@@ -20,6 +20,7 @@ struct AddTripView: View {
             
             Section(header: Text("Trip informations")) {
                 DatePicker("Date", selection: $tripController.newTrip.date, displayedComponents: .date)
+                Toggle("Automatic distance calculation", isOn: $tripController.distanceAutoCalculation)
                 HStack {
                     Text("Total distance")
                     Spacer()
