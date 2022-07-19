@@ -28,6 +28,7 @@ struct LoadingInProgressView: View {
             .cornerRadius(25)
             .shadow(radius: 10)
         }
+        .ignoresSafeArea()
     }
 }
 

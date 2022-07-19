@@ -19,11 +19,14 @@ struct AniTripApp: App {
         WindowGroup {
             Group {
                 ZStack {
-                    if userController.isConnected {
-                        AppView()
-                    } else {
-                        LoginView()
+                    Group {
+                        if userController.isConnected {
+                            AppView()
+                        } else {
+                            LoginView()
+                        }
                     }
+                    .disabled(appController.loadingInProgress ? true : false)
                     
                     if appController.loadingInProgress {
                         LoadingInProgressView()
