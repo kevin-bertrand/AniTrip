@@ -32,12 +32,21 @@ struct AniTripApp: App {
             }
             .environmentObject(userController)
             .environmentObject(appController)
-            .alert(isPresented:  $appController.showAlertView) {
+            .alert(isPresented: $appController.showAlertView) {
                 Alert(title: Text("Loading ended"), message: Text(appController.alertViewMessage), dismissButton: .default(Text("OK"), action: {
                     if appController.mustReturnToPreviousView {
                         self.presentationMode.wrappedValue.dismiss()
                     }
                     
+                }))
+            }
+            .alert(isPresented: $userController.loginShowBiometricAlert) {
+                Alert(title: Text("Would you like to use FaceId for further login?"),
+                      primaryButton: .default(Text("Yes"), action: {
+                    userController.useBiometricLater()
+                }),
+                      secondaryButton: .cancel(Text("No"), action: {
+                    userController.dontUseBiometric()
                 }))
             }
             .onAppear {

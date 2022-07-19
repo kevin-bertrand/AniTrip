@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import LocalAuthentication
+import SwiftUI
 
 final class UserController: ObservableObject {
     // MARK: Public
@@ -15,6 +17,11 @@ final class UserController: ObservableObject {
     var connectedUser: User? { userManager.connectedUser }
     
     // Login view properties
+    @AppStorage("anitripSavedEmail") var savedEmail: String = ""
+    @AppStorage("anitripSavedPassword") var savedPassword: String = ""
+    @AppStorage("anitripCanUseBiometric") var canUseBiometric: Bool = true
+    @Published var loginShowBiometricAlert: Bool = false
+    @Published var loginSaveEmail: Bool = false
     @Published var loginEmailTextField: String = ""
     @Published var loginPasswordTextField: String = ""
     @Published var loginErrorMessage: String = ""
@@ -31,6 +38,40 @@ final class UserController: ObservableObject {
     @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: MapController.emptyAddress, password: "", passwordVerification: "")
     
     // MARK: Methods
+    /// Check if the email must be saved
+    func checkSaveEmail() {
+        if loginSaveEmail {
+            savedEmail = loginEmailTextField
+        } else {
+            savedEmail = ""
+        }
+    }
+    
+    /// Getting biometrics status to know if it is active
+    func getBiometricStatus() -> Bool {
+        let laContext = LAContext()
+        
+        if savedEmail == loginEmailTextField && savedPassword.isNotEmpty && laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: .none) {
+            return true
+        }
+        
+        return false
+    }
+    
+    /// Save data to use biometrics for further login
+    func useBiometricLater() {
+        savedPassword = loginPasswordTextField
+        canUseBiometric = true
+        loginPasswordTextField = ""
+    }
+    
+    /// Delete data to not use biometrics for further login
+    func dontUseBiometric() {
+        canUseBiometric = false
+        savedPassword = ""
+        loginPasswordTextField = ""
+    }
+    
     /// Perfom login
     func performLogin() {
         objectWillChange.send()
@@ -50,6 +91,27 @@ final class UserController: ObservableObject {
         }
         
         userManager.login(user: UserToLogin(email: loginEmailTextField, password: loginPasswordTextField))
+    }
+    
+    /// Login with biometrics
+    func loginWithBiometrics() {
+        var error: NSError?
+        let laContext = LAContext()
+        
+        if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Need access to \(laContext.biometryType == .faceID ? "FaceId" : "TouchId") to authenticate to the app."
+            
+            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
+                DispatchQueue.main.async {
+                    if success {
+                        self.loginPasswordTextField = self.savedPassword
+                        self.performLogin()
+                    } else {
+                        print(error?.localizedDescription ?? "error")
+                    }
+                }
+            }
+        }
     }
     
     /// Create an account
@@ -135,7 +197,12 @@ final class UserController: ObservableObject {
             
             switch notificationName {
             case Notification.AniTrip.loginSuccess.notificationName:
-                loginPasswordTextField = ""
+                if savedPassword.isEmpty && canUseBiometric {
+                    loginShowBiometricAlert = true
+                } else {
+                    loginPasswordTextField = ""
+                }
+                
                 if let user = connectedUser {
                     userToUpdate = user.toUpdate()
                 }

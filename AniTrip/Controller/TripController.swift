@@ -88,7 +88,6 @@ final class TripController: ObservableObject {
                 self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
             case Notification.AniTrip.homeInformationsDonwloaded.notificationName:
                 threeLatestTrips = tripManager.threeLatestTrips
-                print(threeLatestTrips)
                 distanceThisWeek = tripManager.distanceThisWeek
                 numberOfTripThisWeek = tripManager.numberOfTripsThisWeek
                 chartPoints = tripManager.tripsChartPoints
