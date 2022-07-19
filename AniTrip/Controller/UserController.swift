@@ -103,12 +103,6 @@ final class UserController: ObservableObject {
     
     // MARK: Initialization
     init() {
-        // Configure general notifications
-        configureNotification(for: Notification.AniTrip.unknownError.notificationName)
-        configureNotification(for: Notification.AniTrip.accountNotYetActivate.notificationName)
-        configureNotification(for: Notification.AniTrip.notAuthorized.notificationName)
-        configureNotification(for: Notification.AniTrip.accountNotFound.notificationName)
-        
         // Configure login notifications
         configureNotification(for: Notification.AniTrip.loginWrongCredentials.notificationName)
         configureNotification(for: Notification.AniTrip.loginSuccess.notificationName)
@@ -155,11 +149,7 @@ final class UserController: ObservableObject {
                 self.userToUpdate.password = ""
                 self.userToUpdate.passwordVerification = ""
                 self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
-            case Notification.AniTrip.unknownError.notificationName,
-                Notification.AniTrip.accountNotYetActivate.notificationName,
-                Notification.AniTrip.notAuthorized.notificationName,
-                Notification.AniTrip.accountNotFound.notificationName,
-                Notification.AniTrip.loginWrongCredentials.notificationName,
+            case Notification.AniTrip.loginWrongCredentials.notificationName,
                 Notification.AniTrip.accountCreationPasswordError.notificationName,
                 Notification.AniTrip.accountCreationInformationsError.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage)

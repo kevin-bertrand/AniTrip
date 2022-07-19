@@ -29,6 +29,7 @@ final class VolunteersController: ObservableObject {
     init(appController: AppController) {
         self.appController = appController
         
+        // Configure volunteers notifications
         configureNotification(for: Notification.AniTrip.gettingVolunteersListSuccess.notificationName)
     }
     
