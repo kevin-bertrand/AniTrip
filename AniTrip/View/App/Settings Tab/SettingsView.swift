@@ -5,12 +5,14 @@
 //  Created by Kevin Bertrand on 18/07/2022.
 //
 
+import LocalAuthentication
 import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var userController: UserController
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
+    let laContext = LAContext()
     
     var body: some View {
         Form {
@@ -33,6 +35,10 @@ struct SettingsView: View {
                 
                 if !useDefaultScheme {
                     Toggle("Use dark mode", isOn: $useDarkScheme)
+                }
+                
+                if userController.appController.isBiometricAvailable {
+                    Toggle("Use \(laContext.biometryType == .faceID ? "Face ID" : "Touch ID" )", isOn: $userController.canUseBiometric)
                 }
             }
             

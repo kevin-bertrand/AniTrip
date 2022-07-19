@@ -45,23 +45,21 @@ struct LoginView: View {
             
             Spacer()
             
-            withAnimation {
-                HStack {
-                    ButtonWithIcon(action: {
-                        userController.checkSaveEmail()
-                        userController.performLogin()
-                    }, icon: "chevron.right", title: "LOGIN")
-                    
-                    if userController.getBiometricStatus() {
-                        Button {
-                            userController.loginWithBiometrics()
-                        } label: {
-                            Image(systemName: (laContext.biometryType == .faceID) ? "faceid" : "touchid")
-                                .resizable()
-                                .frame(width: 50, height: 50)
-                        }
-                        .frame(width: 50, height: 50)
+            HStack {
+                ButtonWithIcon(action: {
+                    userController.checkSaveEmail()
+                    userController.performLogin()
+                }, icon: "chevron.right", title: "LOGIN")
+                
+                if userController.getBiometricStatus() {
+                    Button {
+                        userController.loginWithBiometrics()
+                    } label: {
+                        Image(systemName: (laContext.biometryType == .faceID) ? "faceid" : "touchid")
+                            .resizable()
+                            .frame(width: 50, height: 50)
                     }
+                    .padding(.horizontal)
                 }
             }
             
@@ -88,7 +86,6 @@ struct LoginView: View {
         .sheet(isPresented: $userController.showCreateAcountView) {
             CreateAccountView()
         }
-        .animation(.easeInOut, value: 1)
     }
 }
 

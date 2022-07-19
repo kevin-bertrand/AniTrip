@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import LocalAuthentication
 
 final class AppController: ObservableObject {
     // MARK: Public
@@ -18,6 +19,12 @@ final class AppController: ObservableObject {
     @Published var showAlertView: Bool = false
     var alertViewMessage: String = ""
     var mustReturnToPreviousView: Bool = false
+    
+    // Biometric is
+    var isBiometricAvailable: Bool {
+        let laContext = LAContext()
+        return laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: .none)
+    }
     
     // MARK: Methods
     /// Setting loading in progress

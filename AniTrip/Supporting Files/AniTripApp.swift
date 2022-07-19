@@ -40,13 +40,16 @@ struct AniTripApp: App {
                     
                 }))
             }
+            .alert(isPresented: $userController.successBiometricActivationAlert) {
+                Alert(title: Text("FaceId is activate!"), dismissButton: .default(Text("OK")))
+            }
             .alert(isPresented: $userController.loginShowBiometricAlert) {
                 Alert(title: Text("Would you like to use FaceId for further login?"),
                       primaryButton: .default(Text("Yes"), action: {
-                    userController.useBiometricLater()
+                    userController.canUseBiometric = true
                 }),
                       secondaryButton: .cancel(Text("No"), action: {
-                    userController.dontUseBiometric()
+                    userController.canUseBiometric = false
                 }))
             }
             .onAppear {

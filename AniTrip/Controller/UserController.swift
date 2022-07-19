@@ -19,7 +19,15 @@ final class UserController: ObservableObject {
     // Login view properties
     @AppStorage("anitripSavedEmail") var savedEmail: String = ""
     @AppStorage("anitripSavedPassword") var savedPassword: String = ""
-    @AppStorage("anitripCanUseBiometric") var canUseBiometric: Bool = true
+    @AppStorage("anitripCanUseBiometric") var canUseBiometric: Bool = true {
+        didSet {
+            if canUseBiometric {
+                activateBiometric()
+            } else {
+                savedPassword = ""
+            }
+        }
+    }
     @Published var loginShowBiometricAlert: Bool = false
     @Published var loginSaveEmail: Bool = false
     @Published var loginEmailTextField: String = ""
@@ -37,6 +45,9 @@ final class UserController: ObservableObject {
     // Update user
     @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: MapController.emptyAddress, password: "", passwordVerification: "")
     
+    // Settings
+    @Published var successBiometricActivationAlert: Bool = false
+    
     // MARK: Methods
     /// Check if the email must be saved
     func checkSaveEmail() {
@@ -48,28 +59,12 @@ final class UserController: ObservableObject {
     }
     
     /// Getting biometrics status to know if it is active
-    func getBiometricStatus() -> Bool {
-        let laContext = LAContext()
-        
-        if savedEmail == loginEmailTextField && savedPassword.isNotEmpty && laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: .none) {
+    func getBiometricStatus() -> Bool {        
+        if savedEmail == loginEmailTextField && savedPassword.isNotEmpty && appController.isBiometricAvailable {
             return true
         }
         
         return false
-    }
-    
-    /// Save data to use biometrics for further login
-    func useBiometricLater() {
-        savedPassword = loginPasswordTextField
-        canUseBiometric = true
-        loginPasswordTextField = ""
-    }
-    
-    /// Delete data to not use biometrics for further login
-    func dontUseBiometric() {
-        canUseBiometric = false
-        savedPassword = ""
-        loginPasswordTextField = ""
     }
     
     /// Perfom login
@@ -140,6 +135,7 @@ final class UserController: ObservableObject {
     /// Disconnect the user
     func disconnectUser() {
         objectWillChange.send()
+        loginPasswordTextField = ""
         isConnected = false
         userManager.disconnectUser()
     }
@@ -199,8 +195,6 @@ final class UserController: ObservableObject {
             case Notification.AniTrip.loginSuccess.notificationName:
                 if savedPassword.isEmpty && canUseBiometric {
                     loginShowBiometricAlert = true
-                } else {
-                    loginPasswordTextField = ""
                 }
                 
                 if let user = connectedUser {
@@ -221,6 +215,27 @@ final class UserController: ObservableObject {
                 Notification.AniTrip.accountCreationInformationsError.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage)
             default: break
+            }
+        }
+    }
+    
+    /// Getting biometric authentication to active it
+    private func activateBiometric() {
+        var error: NSError?
+        let laContext = LAContext()
+        
+        if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
+            let reason = "Need access to \(laContext.biometryType == .faceID ? "FaceId" : "TouchId") to authenticate to the app."
+            
+            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
+                DispatchQueue.main.async {
+                    if success {
+                        self.savedPassword = self.loginPasswordTextField
+                        self.successBiometricActivationAlert = true
+                    } else {
+                        print(error?.localizedDescription ?? "error")
+                    }
+                }
             }
         }
     }
