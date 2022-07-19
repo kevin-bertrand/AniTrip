@@ -96,6 +96,7 @@ final class TripController: ObservableObject {
             }
         }
     }
+    
     /// Filter trip list
     private func filterList() {
         if searchFilter.isEmpty {
