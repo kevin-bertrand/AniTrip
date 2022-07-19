@@ -35,7 +35,7 @@ struct AddressTileView: View {
                         if let url = URL(string: "maps://?.saddr=&daddr=\(region.center.latitude),\(region.center.longitude)") {
                             
                             let address = """
-                            \(address.streetNumber), \(address.roadType) \(address.roadName)
+                            \(address.streetNumber), \(address.roadName)
                             \(address.complement)
                             \(address.zipCode), \(address.city)
                             \(address.country)
@@ -70,6 +70,6 @@ struct AddressTileView: View {
 
 struct AddressTileView_Previews: PreviewProvider {
     static var previews: some View {
-        AddressTileView(address: Address(roadName: "Des developpers", roadType: "Place", streetNumber: "7a", complement: "3rd floor", zipCode: "7500", city: "Paris", country: "France"))
+        AddressTileView(address: Address(roadName: "Des developpers", streetNumber: "7a", complement: "3rd floor", zipCode: "7500", city: "Paris", country: "France"))
     }
 }

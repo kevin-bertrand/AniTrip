@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 final class TripController: ObservableObject {
     // MARK: Public
@@ -18,7 +19,16 @@ final class TripController: ObservableObject {
     }
     
     // New trip properties
-    @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: MapController.emptyAddress, endingAddress: MapController.emptyAddress)
+    @Published var distanceAutoCalculation: Bool = true {
+        didSet {
+                calculteDrivingDistance()
+        }
+    }
+    @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: MapController.emptyAddress, endingAddress: MapController.emptyAddress) {
+        didSet {
+            calculteDrivingDistance()
+        }
+    }
     
     // Home informations
     @Published var threeLatestTrips: [Trip] = []
@@ -64,6 +74,7 @@ final class TripController: ObservableObject {
     // MARK: Properties
     private let tripManager: TripManager = TripManager()
     private var appController: AppController
+    private let mapController: MapController = MapController()
     
     // MARK: Methods
     /// Configure notification
@@ -102,6 +113,38 @@ final class TripController: ObservableObject {
             trips = tripManager.trips
         } else {
             trips = tripManager.trips.filter { !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty || $0.comment?.localizedCaseInsensitiveContains(searchFilter) ?? false || $0.startingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.startingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) }
+        }
+    }
+    
+    /// Calculate the distance between 2 points
+    private func calculteDrivingDistance() {
+        if distanceAutoCalculation {
+            mapController.getCoordinatesForAddress(newTrip.startingAddress) { startingLocation, _ in
+                if let startingLocation = startingLocation {
+                    self.mapController.getCoordinatesForAddress(self.newTrip.endingAddress) { endingLocation, _ in
+                        if let endingLocation = endingLocation {
+                            let request = MKDirections.Request()
+                            let source = MKPlacemark(coordinate: startingLocation)
+                            let destination = MKPlacemark(coordinate: endingLocation)
+                            request.source = MKMapItem(placemark: source)
+                            request.destination = MKMapItem(placemark: destination)
+                            
+                            request.transportType = .automobile
+                            
+                            request.requestsAlternateRoutes = true
+                            
+                            let directions = MKDirections(request: request)
+                            
+                            directions.calculate { response, error in
+                                if let response = response,
+                                   let route = response.routes.first {
+                                    self.newTrip.totalDistance = "\((route.distance/1000.0).twoDigitPrecision)"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

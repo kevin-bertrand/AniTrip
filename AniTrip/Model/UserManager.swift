@@ -128,7 +128,7 @@ final class UserManager {
                                 position: position,
                                 missions: user.missions,
                                 isActive: true,
-                                address: user.address ?? Address(roadName: "", roadType: "", streetNumber: "", complement: "", zipCode: "", city: "", country: ""),
+                                 address: user.address ?? MapController.emptyAddress,
                                 token: user.token)
             userInformations = connectedUser
         }

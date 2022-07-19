@@ -9,7 +9,6 @@ import Foundation
 
 struct Address: Codable {
     var roadName: String
-    var roadType: String
     var streetNumber: String
     var complement: String
     var zipCode: String

@@ -8,23 +8,35 @@
 import SwiftUI
 
 struct UpdateAddressView: View {
+    @StateObject private var mapController: MapController = MapController()
+    @State private var showMapSheet: Bool = false
     @Binding var address: Address
     var title: String? = nil
     
     var body: some View {
         VStack(alignment: .leading) {
-            if let title = title {
-                Text(title)
-                    .font(.callout)
-                    .foregroundColor(.gray)
+            HStack {
+                if let title = title {
+                    Text(title)
+                        .font(.callout)
+                        .foregroundColor(.gray)
+                }
+                
+                Spacer()
+                
+                Button {
+                    showMapSheet = true
+                } label: {
+                    Text("Select on map")
+                }
             }
-            
             Group {
                 HStack {
                     TextFieldUnderlinedView(text: $address.streetNumber, title: "Number")
-                    TextFieldUnderlinedView(text: $address.roadType, title: "Type")
+                        .frame(width: 75)
+                    TextFieldUnderlinedView(text: $address.roadName, title: "Street name")
                 }
-                TextFieldUnderlinedView(text: $address.roadName, title: "Street name")
+                
                 TextFieldUnderlinedView(text: $address.complement, title: "Complement")
                 HStack {
                     TextFieldUnderlinedView(text: $address.zipCode, title: "Zip code")
@@ -35,6 +47,9 @@ struct UpdateAddressView: View {
             }
             .autocorrectionDisabled(true)
         }
+        .sheet(isPresented: $showMapSheet, content: {
+            DetectAddressView(address: $address, showSheet: $showMapSheet)
+        })
     }
 }
 
