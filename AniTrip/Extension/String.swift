@@ -15,6 +15,13 @@ extension String {
         return emailPredicate.evaluate(with: self)
     }
     
+    /// Determine if the string is a valid phone number
+    var isPhone: Bool {
+        let phoneRegEx = "^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\\s\\./0-9]*$"
+        let phonePredicate = NSPredicate(format: "SELF MATCHES %@", phoneRegEx)
+        return phonePredicate.evaluate(with: self)
+    }
+    
     /// Check if the string is not empty
     var isNotEmpty: Bool {
         !self.isEmpty

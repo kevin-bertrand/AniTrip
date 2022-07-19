@@ -86,12 +86,16 @@ final class UserController: ObservableObject {
     func updateUser() {
         appController.setLoadingInProgress(withMessage: "Updating in progress...")
         
-        if (userToUpdate.password.isNotEmpty == true) == userToUpdate.passwordVerification.isNotEmpty {
-            guard userToUpdate.password == userToUpdate.passwordVerification else {
-                appController.resetLoadingInProgress()
-                appController.showAlertView(withMessage: "Both new password must match!")
-                return
-            }
+        guard userToUpdate.password == userToUpdate.passwordVerification else {
+            appController.resetLoadingInProgress()
+            appController.showAlertView(withMessage: "Both new password must match!")
+            return
+        }
+        
+        if userToUpdate.phoneNumber.isNotEmpty && !userToUpdate.phoneNumber.isPhone {
+            appController.resetLoadingInProgress()
+            appController.showAlertView(withMessage: "You must enter a valid phone number!")
+            return
         }
         
         userManager.updateUser(userToUpdate)
