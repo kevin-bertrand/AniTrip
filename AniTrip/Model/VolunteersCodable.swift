@@ -17,4 +17,5 @@ struct Volunteer: Codable {
     let position: String
     let missions: [String]
     let address: Address?
+    let isActive: Bool
 }

@@ -36,6 +36,6 @@ struct VolunteerImageInformationsTiles: View {
 
 struct VolunteerImageInformationsTiles_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerImageInformationsTiles(volunteer: Volunteer(id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: MapController.emptyAddress))
+        VolunteerImageInformationsTiles(volunteer: Volunteer(id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: MapController.emptyAddress, isActive: true))
     }
 }

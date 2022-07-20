@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct VolunteerProfileView: View {
+    @EnvironmentObject var userController: UserController
+    @EnvironmentObject var volunteersController: VolunteersController
     var volunteer: Volunteer
     
     var body: some View {
@@ -52,12 +54,34 @@ struct VolunteerProfileView: View {
                     }
                 }
             }
+            
+            if userController.connectedUser?.position == .admin {
+                Section(header: Text("Administration")) {
+                    Button {
+                        if volunteer.isActive {
+                            volunteersController.desactivateAccount(of: volunteer, by: userController.connectedUser)
+                        } else {
+                            volunteersController.activateAccount(of: volunteer, by: userController.connectedUser)
+                        }
+                    } label: {
+                        if volunteer.isActive {
+                            Text("Desactivate account")
+                                .foregroundColor(.red)
+                        } else {
+                            Text("Activate account")
+                                .foregroundColor(.accentColor)
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
 struct VolunteerProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerProfileView(volunteer: Volunteer(id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: MapController.emptyAddress))
+        VolunteerProfileView(volunteer: Volunteer(id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: MapController.emptyAddress, isActive: true))
+            .environmentObject(UserController())
+            .environmentObject(VolunteersController(appController: AppController()))
     }
 }

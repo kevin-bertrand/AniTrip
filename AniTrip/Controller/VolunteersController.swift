@@ -25,12 +25,40 @@ final class VolunteersController: ObservableObject {
         volunteersManager.getList(byUser: user)
     }
     
+    /// Activate account
+    func activateAccount(of volunteer: Volunteer, by user: User?) {
+        appController.setLoadingInProgress(withMessage: "Activation in progress...")
+        
+        guard let user = user, user.position == .admin else {
+            appController.resetLoadingInProgress()
+            appController.showAlertView(withMessage: "You are not authorized!")
+            return
+        }
+        
+        volunteersManager.activate(account: volunteer, byUser: user)
+    }
+    
+    /// Desactivate account
+    func desactivateAccount(of volunteer: Volunteer, by user: User?) {
+        appController.setLoadingInProgress(withMessage: "Desactivation in progress...")
+        
+        guard let user = user, user.position == .admin else {
+            appController.resetLoadingInProgress()
+            appController.showAlertView(withMessage: "You are not authorized!")
+            return
+        }
+        
+        volunteersManager.desactivate(account: volunteer, byUser: user)
+    }
+    
     // MARK: Initialization
     init(appController: AppController) {
         self.appController = appController
         
         // Configure volunteers notifications
         configureNotification(for: Notification.AniTrip.gettingVolunteersListSuccess.notificationName)
+        configureNotification(for: Notification.AniTrip.activationSuccess.notificationName)
+        configureNotification(for: Notification.AniTrip.desactivationSuccess.notificationName)
     }
     
     // MARK: Private
@@ -45,13 +73,17 @@ final class VolunteersController: ObservableObject {
     
     /// Initialise all notification for this controller
     @objc private func processNotification(_ notification: Notification) {
-        if let notificationName = notification.userInfo?["name"] as? Notification.Name {
+        if let notificationName = notification.userInfo?["name"] as? Notification.Name,
+           let notificationMessage = notification.userInfo?["message"] as? String {
             appController.resetLoadingInProgress()
             objectWillChange.send()
             
             switch notificationName {
             case Notification.AniTrip.gettingVolunteersListSuccess.notificationName:
                 volunteersList = volunteersManager.volunteersList
+            case Notification.AniTrip.activationSuccess.notificationName,
+                Notification.AniTrip.desactivationSuccess.notificationName:
+                self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
             default: break
             }
         }

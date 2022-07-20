@@ -70,7 +70,7 @@ enum Gender: String, Codable {
 }
 
 enum Position: String, Codable, CaseIterable {
-    case admin = "admin"
+    case admin = "administrator"
     case user = "user"
     
     var name: String { rawValue }

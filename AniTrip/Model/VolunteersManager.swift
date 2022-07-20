@@ -34,6 +34,36 @@ final class VolunteersManager {
         }
     }
     
+    /// Desactivate account
+    func desactivate(account: Volunteer, byUser user: User) {
+        var params = NetworkConfigurations.desactivateAccount.urlParams
+        params.append(account.email)
+        
+        networkManager.request(urlParams: params, method: NetworkConfigurations.desactivateAccount.method, authorization: .authorization(bearerToken: user.token), body: nil) { data, response, error in
+            if let statusCode = response?.statusCode,
+               statusCode == 202 {
+                Notification.AniTrip.desactivationSuccess.sendNotification()
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
+    /// Activate account
+    func activate(account: Volunteer, byUser user: User) {
+        var params = NetworkConfigurations.activateAccount.urlParams
+        params.append(account.email)
+        
+        networkManager.request(urlParams: params, method: NetworkConfigurations.activateAccount.method, authorization: .authorization(bearerToken: user.token), body: nil) { data, response, error in
+            if let statusCode = response?.statusCode,
+               statusCode == 202 {
+                Notification.AniTrip.activationSuccess.sendNotification()
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
     // MARK: Private
     // MARK: Properties
     private let networkManager = NetworkManager()

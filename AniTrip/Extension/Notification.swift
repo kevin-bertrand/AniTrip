@@ -30,6 +30,10 @@ extension Notification {
         // Getting volunteers list
         case gettingVolunteersListSuccess = "Volunteers list downloaded!"
         
+        // (Des)activate volunteer account
+        case activationSuccess = "The account is activate"
+        case desactivationSuccess = "The account is desactivate"
+        
         // Getting trip list
         case gettingTripListSucess = "Trips list downloaded!"
         case gettingTripListError = "No trip list found!"
