@@ -11,6 +11,7 @@ final class TripManager {
     // MARK: Public
     // MARK: Properties
     var trips: [Trip] { tripList.sorted { $0.date > $1.date }}
+    var volunteerTrips: [Trip] { volunteerTripsList.sorted {$0.date > $1.date} }
     var threeLatestTrips: [Trip] { threeLatestTripsList.sorted { $0.date > $1.date }}
     var tripsChartPoints: [TripChartPoint] { tripsChartPointsList.sorted { $0.date < $1.date }}
     var distanceThisWeek: Double = 0.0
@@ -18,21 +19,26 @@ final class TripManager {
     
     // MARK: Methods
     /// Getting trip list
-    func getList(byUser user: User?) {
+    func getList(byUser user: User?, of volunteer: Volunteer? = nil) {
         guard let user = user, let userId = user.id else {
             Notification.AniTrip.unknownError.sendNotification()
             return
         }
         
         var params = NetworkConfigurations.getTripList.urlParams
-        params.append("\(userId)")
+        
+        if let volunteer = volunteer {
+            params.append("\(volunteer.id)")
+        } else {
+            params.append("\(userId)")
+        }
         
         networkManager.request(urlParams: params, method: NetworkConfigurations.getTripList.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
-                    self.decodeTripList(data: data)
+                    self.decodeTripList(data: data, ofVolunteer: ((volunteer == nil) ? false : true))
                 case 404:
                     Notification.AniTrip.gettingTripListError.sendNotification()
                 default:
@@ -100,17 +106,23 @@ final class TripManager {
     // MARK: Private
     // MARK: Properties
     private var tripList: [Trip] = []
+    private var volunteerTripsList: [Trip] = []
     private var threeLatestTripsList: [Trip] = []
     private let networkManager: NetworkManager = NetworkManager()
     private var tripsChartPointsList: [TripChartPoint] = []
     
     // MARK: Methods
     /// Decode trip list data
-    private func decodeTripList(data: Data?) {
+    private func decodeTripList(data: Data?, ofVolunteer: Bool) {
         if let data = data,
            let trips = try? JSONDecoder().decode([Trip].self, from: data) {
-            tripList = trips
-            Notification.AniTrip.gettingTripListSucess.sendNotification()
+            if ofVolunteer {
+                volunteerTripsList = trips
+                Notification.AniTrip.gettingVolunteerTripListSucess.sendNotification()
+            } else {
+                tripList = trips
+                Notification.AniTrip.gettingTripListSucess.sendNotification()
+            }
         } else {
             Notification.AniTrip.unknownError.sendNotification()
         }

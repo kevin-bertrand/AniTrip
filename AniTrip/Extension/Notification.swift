@@ -36,6 +36,7 @@ extension Notification {
         
         // Getting trip list
         case gettingTripListSucess = "Trips list downloaded!"
+        case gettingVolunteerTripListSucess = "Volunteer trip list downloaded!"
         case gettingTripListError = "No trip list found!"
         
         // Adding trip

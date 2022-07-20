@@ -10,6 +10,7 @@ import SwiftUI
 struct VolunteerProfileView: View {
     @EnvironmentObject var userController: UserController
     @EnvironmentObject var volunteersController: VolunteersController
+    @EnvironmentObject var tripController: TripController
     var volunteer: Volunteer
     
     var body: some View {
@@ -57,6 +58,15 @@ struct VolunteerProfileView: View {
             
             if userController.connectedUser?.position == .admin {
                 Section(header: Text("Administration")) {
+                    NavigationLink {
+                        TripListView(searchFilter: $tripController.volunteerSearchFilter, trips: $tripController.volunteerTripList)
+                            .onAppear {
+                                tripController.getList(byUser: userController.connectedUser, for: volunteer)
+                            }
+                    } label: {
+                        Text("Get trips")
+                    }
+                    
                     Button {
                         if volunteer.isActive {
                             volunteersController.desactivateAccount(of: volunteer, by: userController.connectedUser)

@@ -20,6 +20,14 @@ final class TripController: ObservableObject {
         }
     }
     
+    /// Volunteer trip list
+    @Published var volunteerTripList: [Trip] = []
+    @Published var volunteerSearchFilter: String = "" {
+        didSet {
+            filterVolunteerList()
+        }
+    }
+    
     // New trip properties
     @Published var showAddNewTripView: Bool = false
     @Published var newMission: String = ""
@@ -39,6 +47,11 @@ final class TripController: ObservableObject {
     /// Getting trip list
     func getList(byUser user: User?) {
         tripManager.getList(byUser: user)
+    }
+    
+    /// Getting volunteer trip list
+    func getList(byUser user: User?, for volunteer: Volunteer) {
+        tripManager.getList(byUser: user, of: volunteer)
     }
     
     /// Adding a new trip
@@ -66,6 +79,7 @@ final class TripController: ObservableObject {
         // Configure getting trip list notifications
         configureNotification(for: Notification.AniTrip.gettingTripListSucess.notificationName)
         configureNotification(for: Notification.AniTrip.gettingTripListError.notificationName)
+        configureNotification(for: Notification.AniTrip.gettingVolunteerTripListSucess.notificationName)
         
         // Configure adding trip notification
         configureNotification(for: Notification.AniTrip.addTripSuccess.notificationName)
@@ -97,6 +111,8 @@ final class TripController: ObservableObject {
             switch notificationName {
             case Notification.AniTrip.gettingTripListSucess.notificationName:
                 self.trips = self.tripManager.trips
+            case Notification.AniTrip.gettingVolunteerTripListSucess.notificationName:
+                self.volunteerTripList = self.tripManager.volunteerTrips
             case Notification.AniTrip.gettingTripListError.notificationName,
                 Notification.AniTrip.homeInformationsDonwloadedError.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage)
@@ -118,6 +134,15 @@ final class TripController: ObservableObject {
             trips = tripManager.trips
         } else {
             trips = tripManager.trips.filter { !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty || $0.comment?.localizedCaseInsensitiveContains(searchFilter) ?? false || $0.startingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.startingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) }
+        }
+    }
+    
+    /// Filter vounteer trip list
+    private func filterVolunteerList() {
+        if volunteerSearchFilter.isEmpty {
+            volunteerTripList = tripManager.trips
+        } else {
+            volunteerTripList = tripManager.trips.filter { !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty || $0.comment?.localizedCaseInsensitiveContains(searchFilter) ?? false || $0.startingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.startingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) }
         }
     }
     
