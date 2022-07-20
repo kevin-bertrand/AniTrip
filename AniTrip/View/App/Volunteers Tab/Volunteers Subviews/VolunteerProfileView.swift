@@ -45,8 +45,12 @@ struct VolunteerProfileView: View {
                 }
             }
             
-            Section(header: Text("Missions")) {
-                Text(volunteer.missions.joined(separator: ", "))
+            if let missions = volunteer.missions {
+                Section(header: Text("Missions")) {
+                    ForEach(missions, id: \.self) { mission in
+                        Text(mission)
+                    }
+                }
             }
         }
     }

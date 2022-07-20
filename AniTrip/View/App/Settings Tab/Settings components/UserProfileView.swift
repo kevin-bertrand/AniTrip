@@ -46,8 +46,12 @@ struct UserProfileView: View {
                 }
             }
             
-            Section(header: Text("Missions")) {
-                Text(userController.connectedUser?.missions.joined(separator: ", ") ?? "")
+            if let missions = userController.connectedUser?.missions {
+                Section(header: Text("Missions")) {
+                    ForEach(missions, id: \.self) { mission in
+                        Text(mission)
+                    }
+                }
             }
         }
         .toolbar {
