@@ -19,6 +19,8 @@ final class TripController: ObservableObject {
     }
     
     // New trip properties
+    @Published var showAddNewTripView: Bool = false
+    @Published var newMission: String = ""
     @Published var distanceAutoCalculation: Bool = true {
         didSet {
                 calculteDrivingDistance()
@@ -44,6 +46,7 @@ final class TripController: ObservableObject {
     
     /// Adding a new trip
     func add(byUser user: User?) {
+        showAddNewTripView = false
         appController.setLoadingInProgress(withMessage: "Adding trip in progress...")
         
         tripManager.add(trip: newTrip, by: user)
@@ -52,6 +55,11 @@ final class TripController: ObservableObject {
     /// Download informations when home view is loaded
     func homeIsLoaded(byUser user: User?) {
         tripManager.dowloadHomeInformations(byUser: user)
+    }
+    
+    /// Adding a mission to a new trip
+    func addMission() {
+        newTrip.missions.append(newMission)
     }
     
     // MARK: Initialization

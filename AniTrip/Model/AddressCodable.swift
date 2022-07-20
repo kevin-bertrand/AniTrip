@@ -14,4 +14,6 @@ struct Address: Codable {
     var zipCode: String
     var city: String
     var country: String
+    var latitude: Double
+    var longitude: Double
 }

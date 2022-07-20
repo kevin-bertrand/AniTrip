@@ -24,11 +24,11 @@ struct UpdateAddressView: View {
                 
                 Spacer()
                 
-                Button {
-                    showMapSheet = true
-                } label: {
-                    Text("Select on map")
-                }
+//                Button {
+//                    showMapSheet = true
+//                } label: {
+//                    Text("Select on map")
+//                }
             }
             Group {
                 HStack {
@@ -47,9 +47,9 @@ struct UpdateAddressView: View {
             }
             .autocorrectionDisabled(true)
         }
-        .sheet(isPresented: $showMapSheet, content: {
-            DetectAddressView(address: $address, showSheet: $showMapSheet)
-        })
+//        .sheet(isPresented: $showMapSheet, content: {
+//            DetectAddressView(address: $address, showSheet: $showMapSheet)
+//        })
     }
 }
 

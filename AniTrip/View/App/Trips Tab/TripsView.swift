@@ -32,9 +32,12 @@ struct TripsView: View {
         .onAppear {
             tripController.getList(byUser: userController.connectedUser)
         }
+        .sheet(isPresented: $tripController.showAddNewTripView, content: {
+            AddTripView()
+        })
         .toolbar {
-            NavigationLink {
-                AddTripView()
+            Button {
+                tripController.showAddNewTripView = true
             } label: {
                 Image(systemName: "plus.circle")
             }

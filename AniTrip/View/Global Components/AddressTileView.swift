@@ -17,7 +17,7 @@ struct AddressTileView: View {
     var title: String? = nil
     
     var body: some View {
-        VStack {
+        VStack(alignment: .leading) {
             if let title = title {
                 Text(title)
                     .font(.callout)
@@ -25,8 +25,8 @@ struct AddressTileView: View {
             }
             
             if let address = address {
-                HStack {
-                    Map(coordinateRegion: $region, annotationItems: places) { place in
+                HStack(alignment: .center) {
+                    Map(coordinateRegion: $region, userTrackingMode: .none, annotationItems: places) { place in
                         MapMarker(coordinate: place.location, tint: .accentColor)
                     }
                     .frame(width: 100, height: 100)
@@ -34,14 +34,7 @@ struct AddressTileView: View {
                     VStack(alignment: .leading) {
                         if let url = URL(string: "maps://?.saddr=&daddr=\(region.center.latitude),\(region.center.longitude)") {
                             
-                            let address = """
-                            \(address.streetNumber), \(address.roadName)
-                            \(address.complement)
-                            \(address.zipCode), \(address.city)
-                            \(address.country)
-                            """
-                            
-                            Link(address, destination: url)
+                            Link(formatAddress(givenAddress: address), destination: url)
                         }
                     }
                     .font(.body.bold())
@@ -66,10 +59,23 @@ struct AddressTileView: View {
             }
         }
     }
+    
+    private func formatAddress(givenAddress: Address) -> String {
+        var address = "\(givenAddress.streetNumber), \(givenAddress.roadName)\n"
+        
+        if givenAddress.complement.isNotEmpty {
+            address += "\(givenAddress.complement)\n"
+        }
+
+        address += "\(givenAddress.zipCode), \(givenAddress.city)\n"
+        address += "\(givenAddress.country)\n"
+        
+        return address
+    }
 }
 
 struct AddressTileView_Previews: PreviewProvider {
     static var previews: some View {
-        AddressTileView(address: Address(roadName: "Des developpers", streetNumber: "7a", complement: "3rd floor", zipCode: "7500", city: "Paris", country: "France"))
+        AddressTileView(address: Address(roadName: "Des developpers", streetNumber: "7a", complement: "3rd floor", zipCode: "7500", city: "Paris", country: "France", latitude: 0.0, longitude: 0.0))
     }
 }
