@@ -12,35 +12,46 @@ struct VolunteersView: View {
     @EnvironmentObject var userController: UserController
     
     var body: some View {
-        Form {
-            Section {
-                SearchTextFieldView(searchText: $volunteersController.searchFilter)
-            }.listRowBackground(Color.clear)
+        VStack {
+            SearchTextFieldView(searchText: $volunteersController.searchFilter)
+                .padding()
             
-            Section {
-                List {
-                    ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
-                        NavigationLink {
-                            VolunteerProfileView(volunteer: volunteer)
-                        } label: {
-                            HStack(spacing: 15) {
-                                Image(systemName: "person.circle")
-                                    .resizable()
-                                    .frame(width: 50, height: 50)
-                                VStack(alignment: .leading) {
-                                    Text("\(volunteer.firstname) \(volunteer.lastname)")
-                                        .bold()
-                                        .font(.title2)
-                                    Text(volunteer.missions.joined(separator: ", "))
-                                    if let address = volunteer.address {
-                                        Text("📍 \(address.city)")
-                                    }
+            List {
+                if userController.connectedUser?.position == .admin {
+                    Section(header: Text("Account to active")) {
+                        ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
+                            if volunteer.isActive {
+                                NavigationLink {
+                                    VolunteerProfileView(volunteer: volunteer)
+                                } label: {
+                                    VolunteerTileView(volunteer: volunteer)
                                 }
                             }
                         }
                     }
+                    
+                    Section(header: Text("Desactivate accounts")) {
+                        ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
+                            if !volunteer.isActive {
+                                NavigationLink {
+                                    VolunteerProfileView(volunteer: volunteer)
+                                } label: {
+                                    VolunteerTileView(volunteer: volunteer)
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
+                        NavigationLink {
+                            VolunteerProfileView(volunteer: volunteer)
+                        } label: {
+                            VolunteerTileView(volunteer: volunteer)
+                        }
+                    }
                 }
             }
+            .listStyle(SidebarListStyle())
         }
         .onAppear {
             volunteersController.getList(byUser: userController.connectedUser)
