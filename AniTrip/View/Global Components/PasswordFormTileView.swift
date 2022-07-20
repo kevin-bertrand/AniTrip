@@ -25,7 +25,7 @@ struct PasswordFormTileView: View {
                 }
             }
             .padding()
-            .frame(height: 50)
+            .frame(height: 20)
             
             Button {
                 showPassword.toggle()
@@ -37,7 +37,7 @@ struct PasswordFormTileView: View {
                 }
             }
             .padding()
-            .frame(height: 50)
+            .frame(width: 20)
         }
     }
 }

@@ -71,6 +71,7 @@
 		06BF7266287E1484006F0839 /* AppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7265287E1484006F0839 /* AppView.swift */; };
 		06BF726B288539B4006F0839 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF726A288539B4006F0839 /* SettingsView.swift */; };
 		06BF726E28853CAE006F0839 /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF726D28853CAE006F0839 /* UserCellView.swift */; };
+		06D632D328885B73004193A0 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 06D632D228885B73004193A0 /* SwiftUICharts */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -165,6 +166,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				065E4783287B579000D32E05 /* Alamofire in Frameworks */,
+				06D632D328885B73004193A0 /* SwiftUICharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +342,7 @@
 		065E477E287B573E00D32E05 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				06D632C428884CF3004193A0 /* Global Views */,
 				068FDBEA2887460700ACA72D /* Modifiers */,
 				065E4786287B57D100D32E05 /* Global Components */,
 				065E4785287B57CB00D32E05 /* App */,
@@ -398,7 +401,6 @@
 				065E4787287B581000D32E05 /* CircularSpinnerView.swift */,
 				06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */,
 				06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */,
-				06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */,
 				06158E2928854F4200C3BE6E /* AddressTileView.swift */,
 				06158E35288560CF00C3BE6E /* TextFieldUnderlinedView.swift */,
 				06158E37288561C500C3BE6E /* UpdateAddressView.swift */,
@@ -449,6 +451,14 @@
 			path = "Settings components";
 			sourceTree = "<group>";
 		};
+		06D632C428884CF3004193A0 /* Global Views */ = {
+			isa = PBXGroup;
+			children = (
+				06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */,
+			);
+			path = "Global Views";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -467,6 +477,7 @@
 			name = AniTrip;
 			packageProductDependencies = (
 				065E4782287B579000D32E05 /* Alamofire */,
+				06D632D228885B73004193A0 /* SwiftUICharts */,
 			);
 			productName = AniTrip;
 			productReference = 065E4750287B573600D32E05 /* AniTrip.app */;
@@ -542,6 +553,7 @@
 			mainGroup = 065E4747287B573600D32E05;
 			packageReferences = (
 				065E4781287B579000D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				06D632D128885B73004193A0 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 			);
 			productRefGroup = 065E4751287B573600D32E05 /* Products */;
 			projectDirPath = "";
@@ -981,6 +993,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		06D632D128885B73004193A0 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/willdale/SwiftUICharts.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -988,6 +1008,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 065E4781287B579000D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		06D632D228885B73004193A0 /* SwiftUICharts */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 06D632D128885B73004193A0 /* XCRemoteSwiftPackageReference "SwiftUICharts" */;
+			productName = SwiftUICharts;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

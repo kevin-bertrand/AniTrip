@@ -7,6 +7,8 @@
 
 import Foundation
 import MapKit
+import SwiftUI
+import SwiftUICharts
 
 final class TripController: ObservableObject {
     // MARK: Public
@@ -21,11 +23,6 @@ final class TripController: ObservableObject {
     // New trip properties
     @Published var showAddNewTripView: Bool = false
     @Published var newMission: String = ""
-    @Published var distanceAutoCalculation: Bool = true {
-        didSet {
-                calculteDrivingDistance()
-        }
-    }
     @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: MapController.emptyAddress, endingAddress: MapController.emptyAddress) {
         didSet {
             calculteDrivingDistance()
@@ -36,7 +33,7 @@ final class TripController: ObservableObject {
     @Published var threeLatestTrips: [Trip] = []
     var distanceThisWeek: Double = 0.0
     var numberOfTripThisWeek: Int = 0
-    var chartPoints: [TripChartPoint] = []
+    var chartPoints: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
     
     // MARK: Methods
     /// Getting trip list
@@ -101,7 +98,7 @@ final class TripController: ObservableObject {
             case Notification.AniTrip.gettingTripListSucess.notificationName:
                 self.trips = self.tripManager.trips
             case Notification.AniTrip.gettingTripListError.notificationName,
-                 Notification.AniTrip.homeInformationsDonwloadedError.notificationName:
+                Notification.AniTrip.homeInformationsDonwloadedError.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage)
             case Notification.AniTrip.addTripSuccess.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
@@ -109,7 +106,7 @@ final class TripController: ObservableObject {
                 threeLatestTrips = tripManager.threeLatestTrips
                 distanceThisWeek = tripManager.distanceThisWeek
                 numberOfTripThisWeek = tripManager.numberOfTripsThisWeek
-                chartPoints = tripManager.tripsChartPoints
+                chartPoints = getChartData(from: tripManager.tripsChartPoints)
             default: break
             }
         }
@@ -126,33 +123,65 @@ final class TripController: ObservableObject {
     
     /// Calculate the distance between 2 points
     private func calculteDrivingDistance() {
-        if distanceAutoCalculation {
-            mapController.getCoordinatesForAddress(newTrip.startingAddress) { startingLocation, _ in
-                if let startingLocation = startingLocation {
-                    self.mapController.getCoordinatesForAddress(self.newTrip.endingAddress) { endingLocation, _ in
-                        if let endingLocation = endingLocation {
-                            let request = MKDirections.Request()
-                            let source = MKPlacemark(coordinate: startingLocation)
-                            let destination = MKPlacemark(coordinate: endingLocation)
-                            request.source = MKMapItem(placemark: source)
-                            request.destination = MKMapItem(placemark: destination)
-                            
-                            request.transportType = .automobile
-                            
-                            request.requestsAlternateRoutes = true
-                            
-                            let directions = MKDirections(request: request)
-                            
-                            directions.calculate { response, error in
-                                if let response = response,
-                                   let route = response.routes.first {
-                                    self.newTrip.totalDistance = "\((route.distance/1000.0).twoDigitPrecision)"
-                                }
-                            }
-                        }
-                    }
-                }
+        let request = MKDirections.Request()
+        let source = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.startingAddress.latitude, longitude: newTrip.startingAddress.longitude))
+        let destination = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.endingAddress.latitude, longitude: newTrip.endingAddress.longitude))
+        
+        request.source = MKMapItem(placemark: source)
+        request.destination = MKMapItem(placemark: destination)
+        
+        request.transportType = .automobile
+        
+        request.requestsAlternateRoutes = true
+        
+        let directions = MKDirections(request: request)
+        
+        directions.calculate { response, error in
+            if let response = response,
+               let route = response.routes.first {
+                self.newTrip.totalDistance = "\((route.distance/1000.0).twoDigitPrecision)"
             }
         }
+    }
+    
+    private func getChartData(from data: [TripChartPoint]) -> LineChartData {
+        var chartData: [LineChartDataPoint] = []
+        
+        for point in data {
+            chartData.append(LineChartDataPoint(value: point.distance, xAxisLabel: point.date.toDate?.dayName, description: point.date.toDate?.dateOnly))
+        }
+        
+        let data = LineDataSet(dataPoints: chartData,
+                               legendTitle: "Distance",
+                               pointStyle: PointStyle(),
+                               style: LineStyle(lineColour: ColourStyle(colour: .accentColor), lineType: .curvedLine))
+        
+        let metadata   = ChartMetadata(title: "Distance", subtitle: "For last 7 days")
+        
+        let gridStyle  = GridStyle(numberOfLines: 7,
+                                   lineColour   : Color(.lightGray).opacity(0.5),
+                                   lineWidth    : 1,
+                                   dash         : [8],
+                                   dashPhase    : 0)
+        
+        let chartStyle = LineChartStyle(infoBoxPlacement    : .floating,
+                                        infoBoxBorderColour : Color.primary,
+                                        infoBoxBorderStyle  : StrokeStyle(lineWidth: 1),
+                                        markerType          : .vertical(attachment: .line(dot: .style(DotStyle()))),
+                                        xAxisGridStyle      : gridStyle,
+                                        xAxisLabelPosition  : .bottom,
+                                        xAxisLabelColour    : Color.primary,
+                                        xAxisLabelsFrom     : .chartData(),
+                                        yAxisGridStyle      : gridStyle,
+                                        yAxisLabelPosition  : .leading,
+                                        yAxisLabelColour    : Color.primary,
+                                        yAxisNumberOfLabels : 7,
+                                        baseline            : .minimumWithMaximum(of: 0),
+                                        globalAnimation     : .easeOut(duration: 1))
+        
+        objectWillChange.send()
+        return LineChartData(dataSets       : data,
+                             metadata       : metadata,
+                             chartStyle     : chartStyle)
     }
 }

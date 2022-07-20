@@ -29,15 +29,16 @@ struct NewsTileView: View {
                     .foregroundColor(.accentColor)
             }
         }
-        .frame(width: 150, height: 120)
+        .frame(width: 200, height: 120)
         .overlay(RoundedRectangle(cornerRadius: 10)
             .stroke(Color.white, lineWidth: 1)
-            .shadow(color: .gray, radius: 2, x: 3, y: 3))
+            .shadow(color: .gray, radius: 1, x: 3, y: 3))
+        .padding(.horizontal, 5)
     }
 }
 
 struct NewsTileView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsTileView(title: "", icon: nil, information: "")
+        NewsTileView(title: "Test", icon: Image(systemName: "car"), information: "12345 km")
     }
 }

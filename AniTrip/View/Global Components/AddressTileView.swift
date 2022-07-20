@@ -48,14 +48,9 @@ struct AddressTileView: View {
             }
         }
         .onAppear {
-            mapController.getCoordinatesForAddress(address) { place, region in
-                if let place = place {
-                    self.places.append(MapPlace(location: place))
-                }
-                
-                if let region = region {
-                    self.region = region
-                }
+            if let address = address {
+                self.places.append(MapPlace(lat: address.latitude, lon: address.longitude))
+                self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: address.latitude, longitude: address.longitude), latitudinalMeters: 750, longitudinalMeters: 750)
             }
         }
     }

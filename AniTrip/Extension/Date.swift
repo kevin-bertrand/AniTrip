@@ -19,4 +19,10 @@ extension Date {
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return formatter.string(from: self)
     }
+    
+    var dayName: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "EEEE"
+        return String(dateFormatter.string(from: self).prefix(3))
+    }
 }

@@ -7,6 +7,7 @@
 
 import Charts
 import SwiftUI
+import SwiftUICharts
 
 struct HomeView: View {
     @EnvironmentObject var tripController: TripController
@@ -25,24 +26,22 @@ struct HomeView: View {
                 .listRowBackground(Color.clear)
             }
             
-            if #available(iOS 16.0, *) {
-                Section {
-                    VStack {
-                        HStack {
-                            Text("Total distance")
-                            Spacer()
-                        }
-                        
-                        Chart {
-                            ForEach(tripController.chartPoints, id: \.self) {
-                                LineMark(x: .value("Date", $0.date), y: .value("Distance", $0.distance))
-                                PointMark(x: .value("Date", $0.date), y: .value("Distance", $0.distance))
-                            }
-                        }
-                        .frame(height: 300)
-                        .padding(.vertical)
-                    }
-                }
+            Section {
+                VStack(alignment: .leading) {
+                    Text("Distance")
+                        .font(.title2.bold())
+                    Text("For last 7 days")
+                    LineChart(chartData: tripController.chartPoints)
+                        .pointMarkers(chartData: tripController.chartPoints)
+                        .touchOverlay(chartData: tripController.chartPoints, specifier: "%.0f km")
+                        .xAxisGrid(chartData: tripController.chartPoints)
+                        .yAxisGrid(chartData: tripController.chartPoints)
+                        .xAxisLabels(chartData: tripController.chartPoints)
+                        .yAxisLabels(chartData: tripController.chartPoints)
+                        .floatingInfoBox(chartData: tripController.chartPoints)
+                        .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 250, maxHeight: 500, alignment: .center)
+                        .padding(.top, 25)
+                }.padding(5)
             }
             
             Section {
