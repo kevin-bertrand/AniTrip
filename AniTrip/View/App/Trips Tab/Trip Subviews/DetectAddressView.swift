@@ -13,59 +13,46 @@ import SwiftUI
 struct DetectAddressView: View {
     @StateObject var locationManager = LocationManager()
     @Binding var address: Address
-    @Binding var showSheet: Bool
+    let name: String
     
     var body: some View {
         VStack {
-            HStack {
-                Button {
-                    address = MapController.emptyAddress
-                    showSheet = false
-                } label: {
-                    Label("Cancel", systemImage: "x.circle")
-                }
-
-                Spacer()
-                
-                Button {
-                    showSheet = false
-                } label: {
-                    Label("Validate", systemImage: "v.circle")
-                }
-            }.padding()
-            
-            Text("Address: \(locationManager.addressLocated)")
+            Text("\(name): \(locationManager.addressLocated)")
             
             ZStack(alignment: .bottom) {
                 ZStack {
-                    ZStack(alignment: .topTrailing) {
-                        Map(coordinateRegion: $locationManager.region, interactionModes: .all, showsUserLocation: true)
-                        
-                        Button {
-                            locationManager.requestLocation()
-                        } label: {
-                            Image(systemName: "location")
-                                .frame(width: 40, height: 40)
-                                .background(Color("ButtonIconBackground"))
-                                .cornerRadius(8)
-                        }
-                        .padding()
-                    }
+                    Map(coordinateRegion: $locationManager.region)
                     Image(systemName: "mappin")
                         .resizable()
-                        .frame(width: 20, height: 50)
+                        .frame(width: 19, height: 50)
                         .foregroundColor(.accentColor)
                         .padding(.bottom, 58)
                         .padding(.leading, 6)
                 }
-                ButtonWithIcon(action: {
-                    locationManager.getAddress { address in
-                        if let address = address {
-                            self.address = address
-                        }
+                Rectangle()
+                    .foregroundColor(Color("TextFieldBackground"))
+                    .frame(height: 170)
+                    .cornerRadius(20, corners: [.topLeft, .topRight])
+                    .shadow(radius: 2)
+                VStack {
+                    Text("Enter an address bellow or drag on the map.")
+                        .foregroundColor(.gray)
+                    TextField("Search", text: $locationManager.enteredAddress)
+                        .textFieldStyle(.roundedBorder)
+                        .padding(.horizontal)
+                    
+                    HStack {
+                        ButtonWithIcon(action: {
+                            locationManager.searchAddress { address in
+                                if let address = address {
+                                    self.address = address
+                                }
+                            }
+                        }, icon: "magnifyingglass", title: "Search", height: 40)
+                        .padding()
+                        .frame(width: 300)
                     }
-                }, title: "Get address of point")
-                .padding()
+                }
             }
         }
     }
@@ -73,7 +60,7 @@ struct DetectAddressView: View {
 
 struct DetectAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        DetectAddressView(address: .constant(MapController.emptyAddress), showSheet: .constant(true))
+        DetectAddressView(address: .constant(MapController.emptyAddress), name: "Starting address")
     }
 }
 

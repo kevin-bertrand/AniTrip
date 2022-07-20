@@ -11,6 +11,7 @@ struct ButtonWithIcon: View {
     var action: () -> Void
     var icon: String?
     var title: String
+    var height: CGFloat = 60
     
     var body: some View {
         Button(action: action) {
@@ -33,6 +34,7 @@ struct ButtonWithIcon: View {
                 }
             }.padding()
         }
+        .frame(height: height)
         .foregroundColor(.white)
         .background(Color.accentColor)
         .cornerRadius(25)
