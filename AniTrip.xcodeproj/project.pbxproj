@@ -51,6 +51,7 @@
 		068FDBEC2887461700ACA72D /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FDBEB2887461700ACA72D /* RoundedCorner.swift */; };
 		0690C41D28887CB900B57B92 /* VolunteerTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690C41C28887CB900B57B92 /* VolunteerTileView.swift */; };
 		0690C41F28887EB200B57B92 /* TripListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690C41E28887EB200B57B92 /* TripListView.swift */; };
+		0690C4232888CE2600B57B92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690C4222888CE2600B57B92 /* AppDelegate.swift */; };
 		06955E972887F49D006B502B /* AddingEndAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955E962887F49D006B502B /* AddingEndAddressView.swift */; };
 		06955E992887F5E6006B502B /* NewTripDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955E982887F5E6006B502B /* NewTripDistanceView.swift */; };
 		06955E9B2887FB26006B502B /* NewTripDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955E9A2887FB26006B502B /* NewTripDateView.swift */; };
@@ -140,6 +141,9 @@
 		068FDBEB2887461700ACA72D /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 		0690C41C28887CB900B57B92 /* VolunteerTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteerTileView.swift; sourceTree = "<group>"; };
 		0690C41E28887EB200B57B92 /* TripListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripListView.swift; sourceTree = "<group>"; };
+		0690C4202888CDB900B57B92 /* AniTrip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AniTrip.entitlements; sourceTree = "<group>"; };
+		0690C4212888CDC900B57B92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		0690C4222888CE2600B57B92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		06955E962887F49D006B502B /* AddingEndAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingEndAddressView.swift; sourceTree = "<group>"; };
 		06955E982887F5E6006B502B /* NewTripDistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripDistanceView.swift; sourceTree = "<group>"; };
 		06955E9A2887FB26006B502B /* NewTripDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripDateView.swift; sourceTree = "<group>"; };
@@ -294,6 +298,8 @@
 		065E4752287B573600D32E05 /* AniTrip */ = {
 			isa = PBXGroup;
 			children = (
+				0690C4212888CDC900B57B92 /* Info.plist */,
+				0690C4202888CDB900B57B92 /* AniTrip.entitlements */,
 				06BF724E287B6C69006F0839 /* Extension */,
 				065E4780287B574700D32E05 /* Supporting Files */,
 				065E477F287B574200D32E05 /* Controller */,
@@ -376,6 +382,7 @@
 				065E4757287B573700D32E05 /* Assets.xcassets */,
 				065E4753287B573600D32E05 /* AniTripApp.swift */,
 				065E4759287B573700D32E05 /* Preview Content */,
+				0690C4222888CE2600B57B92 /* AppDelegate.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -615,6 +622,7 @@
 				06BF7250287B6C71006F0839 /* String.swift in Sources */,
 				06158E5028858BE200C3BE6E /* VolunteerImageInformationsTiles.swift in Sources */,
 				06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */,
+				0690C4232888CE2600B57B92 /* AppDelegate.swift in Sources */,
 				06158E57288590AC00C3BE6E /* TripManager.swift in Sources */,
 				06158E3F288582C200C3BE6E /* VolunteersView.swift in Sources */,
 				06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */,
@@ -818,12 +826,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AniTrip/AniTrip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AniTrip/Supporting Files/Preview Content\"";
 				DEVELOPMENT_TEAM = 6MAUVS763K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AniTrip/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Authenticate to the app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app use your location to increase the app experience";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -849,12 +859,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = AniTrip/AniTrip.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"AniTrip/Supporting Files/Preview Content\"";
 				DEVELOPMENT_TEAM = 6MAUVS763K;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AniTrip/Info.plist;
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Authenticate to the app";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "This app use your location to increase the app experience";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

@@ -10,6 +10,11 @@ import Foundation
 struct UserToLogin: Codable {
     let email: String
     let password: String
+    let deviceToken: String
+}
+
+struct SendDeviceToken: Codable {
+    let deviceId: String
 }
 
 struct UserToCreate: Codable {

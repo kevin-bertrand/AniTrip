@@ -17,6 +17,7 @@ final class UserController: ObservableObject {
     var connectedUser: User? { userManager.connectedUser }
     
     // Login view properties
+    @AppStorage("aniTripDeviceToken") var deviceToken: String = ""
     @AppStorage("anitripSavedEmail") var savedEmail: String = ""
     @AppStorage("anitripSavedPassword") var savedPassword: String = ""
     @AppStorage("anitripCanUseBiometric") var canUseBiometric: Bool = true {
@@ -85,7 +86,7 @@ final class UserController: ObservableObject {
             return
         }
         
-        userManager.login(user: UserToLogin(email: loginEmailTextField, password: loginPasswordTextField))
+        userManager.login(user: UserToLogin(email: loginEmailTextField, password: loginPasswordTextField, deviceToken: deviceToken))
     }
     
     /// Login with biometrics

@@ -15,10 +15,12 @@ final class UserManager {
     // MARK: Methods
     /// Perform the login
     func login(user: UserToLogin) {
+        let deviceId = SendDeviceToken(deviceId: user.deviceToken)
+        
         networkManager.request(urlParams: NetworkConfigurations.login.urlParams,
                                method: NetworkConfigurations.login.method,
                                authorization: .authorization(username: user.email, password: user.password),
-                               body: nil) { [weak self] data, response, error in
+                               body: deviceId) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode,
                let data = data {

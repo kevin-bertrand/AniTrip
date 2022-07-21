@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct AniTripApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
     @StateObject private var appController: AppController = AppController()
     @StateObject private var userController: UserController = UserController()
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
