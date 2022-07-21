@@ -10,7 +10,6 @@
 		06158E2828854D1E00C3BE6E /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2728854D1E00C3BE6E /* UserProfileView.swift */; };
 		06158E2A28854F4200C3BE6E /* AddressTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2928854F4200C3BE6E /* AddressTileView.swift */; };
 		06158E2C2885500100C3BE6E /* MapPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2B2885500100C3BE6E /* MapPlace.swift */; };
-		06158E2E2885516500C3BE6E /* MapController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2D2885516500C3BE6E /* MapController.swift */; };
 		06158E3228855D6C00C3BE6E /* UpdateProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */; };
 		06158E3428855DB100C3BE6E /* EditUserInfoTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E3328855DB100C3BE6E /* EditUserInfoTileView.swift */; };
 		06158E36288560CF00C3BE6E /* TextFieldUnderlinedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E35288560CF00C3BE6E /* TextFieldUnderlinedView.swift */; };
@@ -76,6 +75,7 @@
 		06BF726B288539B4006F0839 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF726A288539B4006F0839 /* SettingsView.swift */; };
 		06BF726E28853CAE006F0839 /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF726D28853CAE006F0839 /* UserCellView.swift */; };
 		06D632D328885B73004193A0 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 06D632D228885B73004193A0 /* SwiftUICharts */; };
+		06E3494F28898EDC0056470E /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E3494E28898EDC0056470E /* SearchAddressView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,7 +99,6 @@
 		06158E2728854D1E00C3BE6E /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		06158E2928854F4200C3BE6E /* AddressTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTileView.swift; sourceTree = "<group>"; };
 		06158E2B2885500100C3BE6E /* MapPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlace.swift; sourceTree = "<group>"; };
-		06158E2D2885516500C3BE6E /* MapController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapController.swift; sourceTree = "<group>"; };
 		06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileView.swift; sourceTree = "<group>"; };
 		06158E3328855DB100C3BE6E /* EditUserInfoTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditUserInfoTileView.swift; sourceTree = "<group>"; };
 		06158E35288560CF00C3BE6E /* TextFieldUnderlinedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldUnderlinedView.swift; sourceTree = "<group>"; };
@@ -168,6 +167,7 @@
 		06BF7265287E1484006F0839 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		06BF726A288539B4006F0839 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		06BF726D28853CAE006F0839 /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
+		06E3494E28898EDC0056470E /* SearchAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchAddressView.swift; path = "../../../../../../../../../../../../CloudStorage/OneDrive-Personnel/SearchAddressView.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -247,7 +247,6 @@
 		06158E5B288595A800C3BE6E /* Trip Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				068FDB9D2886F2E000ACA72D /* DetectAddressView.swift */,
 				068FDBE62887301E00ACA72D /* AddingStartAddressView.swift */,
 				06955E962887F49D006B502B /* AddingEndAddressView.swift */,
 				06955E982887F5E6006B502B /* NewTripDistanceView.swift */,
@@ -371,7 +370,6 @@
 				068FDB9F2886FE1800ACA72D /* LocationManager.swift */,
 				06BF7246287B5C6E006F0839 /* UserController.swift */,
 				06BF7248287B603A006F0839 /* AppController.swift */,
-				06158E2D2885516500C3BE6E /* MapController.swift */,
 				06158E40288582DD00C3BE6E /* VolunteersController.swift */,
 				06158E542885909D00C3BE6E /* TripController.swift */,
 			);
@@ -406,7 +404,6 @@
 				06158E4A28858B4E00C3BE6E /* Volunteers Tab */,
 				06BF72672885398E006F0839 /* Settings Tab */,
 				06BF7265287E1484006F0839 /* AppView.swift */,
-				0690C4242889737900B57B92 /* ActivateAccountView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -419,10 +416,11 @@
 				06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */,
 				06158E2928854F4200C3BE6E /* AddressTileView.swift */,
 				06158E35288560CF00C3BE6E /* TextFieldUnderlinedView.swift */,
-				06158E37288561C500C3BE6E /* UpdateAddressView.swift */,
 				06158E392885772E00C3BE6E /* MissionsUpdateTileView.swift */,
 				06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */,
 				065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */,
+				068FDB9D2886F2E000ACA72D /* DetectAddressView.swift */,
+				0690C4242889737900B57B92 /* ActivateAccountView.swift */,
 			);
 			path = "Global Components";
 			sourceTree = "<group>";
@@ -450,6 +448,7 @@
 		06BF72672885398E006F0839 /* Settings Tab */ = {
 			isa = PBXGroup;
 			children = (
+				06E3494D28898DE40056470E /* Settings Subviews */,
 				06BF726C28853C9B006F0839 /* Settings components */,
 				06BF726A288539B4006F0839 /* SettingsView.swift */,
 			);
@@ -459,10 +458,10 @@
 		06BF726C28853C9B006F0839 /* Settings components */ = {
 			isa = PBXGroup;
 			children = (
-				06158E2728854D1E00C3BE6E /* UserProfileView.swift */,
-				06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */,
+				06158E37288561C500C3BE6E /* UpdateAddressView.swift */,
 				06BF726D28853CAE006F0839 /* UserCellView.swift */,
 				06158E3328855DB100C3BE6E /* EditUserInfoTileView.swift */,
+				06E3494E28898EDC0056470E /* SearchAddressView.swift */,
 			);
 			path = "Settings components";
 			sourceTree = "<group>";
@@ -473,6 +472,15 @@
 				06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */,
 			);
 			path = "Global Views";
+			sourceTree = "<group>";
+		};
+		06E3494D28898DE40056470E /* Settings Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				06158E2728854D1E00C3BE6E /* UserProfileView.swift */,
+				06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */,
+			);
+			path = "Settings Subviews";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -626,6 +634,7 @@
 				06158E5028858BE200C3BE6E /* VolunteerImageInformationsTiles.swift in Sources */,
 				06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */,
 				0690C4232888CE2600B57B92 /* AppDelegate.swift in Sources */,
+				06E3494F28898EDC0056470E /* SearchAddressView.swift in Sources */,
 				06158E57288590AC00C3BE6E /* TripManager.swift in Sources */,
 				06158E3F288582C200C3BE6E /* VolunteersView.swift in Sources */,
 				06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */,
@@ -666,7 +675,6 @@
 				0690C41D28887CB900B57B92 /* VolunteerTileView.swift in Sources */,
 				06955E9D2887FD1C006B502B /* NewTripMissionsView.swift in Sources */,
 				06158E532885902D00C3BE6E /* TripsView.swift in Sources */,
-				06158E2E2885516500C3BE6E /* MapController.swift in Sources */,
 				06158E3228855D6C00C3BE6E /* UpdateProfileView.swift in Sources */,
 				06158E2C2885500100C3BE6E /* MapPlace.swift in Sources */,
 				06BF7266287E1484006F0839 /* AppView.swift in Sources */,

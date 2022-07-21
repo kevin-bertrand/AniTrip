@@ -8,27 +8,21 @@
 import SwiftUI
 
 struct UpdateAddressView: View {
-    @StateObject private var mapController: MapController = MapController()
-    @State private var showMapSheet: Bool = false
+    @State private var showMapView: Bool = false
     @Binding var address: Address
-    var title: String? = nil
+    @State private var addressToModify: Address = LocationManager.emptyAddress
     
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                if let title = title {
-                    Text(title)
-                        .font(.callout)
-                        .foregroundColor(.gray)
-                }
-                
                 Spacer()
                 
-//                Button {
-//                    showMapSheet = true
-//                } label: {
-//                    Text("Select on map")
-//                }
+                Button {
+                    showMapView = true
+                } label: {
+                    Text("Select on map")
+                }
+                .padding(.vertical, 10)
             }
             Group {
                 HStack {
@@ -47,14 +41,21 @@ struct UpdateAddressView: View {
             }
             .autocorrectionDisabled(true)
         }
-//        .sheet(isPresented: $showMapSheet, content: {
-//            DetectAddressView(address: $address, showSheet: $showMapSheet)
-//        })
+        .onAppear {
+            addressToModify = address
+        }
+        .sheet(isPresented: $showMapView, onDismiss: {
+            if addressToModify != LocationManager.emptyAddress {
+                address = addressToModify
+            }
+        }, content: {
+            SearchAddressView(address: $addressToModify, showMapSheet: $showMapView)
+        })
     }
 }
 
 struct UpdateAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateAddressView(address: .constant(MapController.emptyAddress))
+        UpdateAddressView(address: .constant(LocationManager.emptyAddress))
     }
 }

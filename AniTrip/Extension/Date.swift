@@ -8,18 +8,21 @@
 import Foundation
 
 extension Date {
+    /// Get the date at the format dd/MM/yyyy
     var dateOnly: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "dd/MM/yyyy"
         return formatter.string(from: self)
     }
     
+    /// Transform the date to the ISO8601 format
     var iso8601: String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         return formatter.string(from: self)
     }
     
+    /// Get the 3 first charachters of the day name
     var dayName: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"

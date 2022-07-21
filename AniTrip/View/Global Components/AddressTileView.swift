@@ -8,10 +8,8 @@
 import MapKit
 import SwiftUI
 
-struct AddressTileView: View {
-    @StateObject private var mapController: MapController = MapController()
-    
-    @State private var region: MKCoordinateRegion = MapController.defaultMapPoint
+struct AddressTileView: View {    
+    @State private var region: MKCoordinateRegion = LocationManager.defaultMapPoint
     @State private var places: [MapPlace] = []
     let address: Address?
     var title: String? = nil

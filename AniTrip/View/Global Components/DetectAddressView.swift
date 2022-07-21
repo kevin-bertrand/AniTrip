@@ -55,12 +55,17 @@ struct DetectAddressView: View {
                 }
             }
         }
+        .onAppear {
+            print(address.longitude)
+            print(address.latitude)
+            locationManager.centerMap(with: address)
+        }
     }
 }
 
 struct DetectAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        DetectAddressView(address: .constant(MapController.emptyAddress), name: "Starting address")
+        DetectAddressView(address: .constant(LocationManager.emptyAddress), name: "Starting address")
     }
 }
 

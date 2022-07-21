@@ -64,7 +64,7 @@ struct User: Codable {
     
     /// Convert an User to a UserToUpdate structure
     func toUpdate() -> UserToUpdate {
-        return UserToUpdate(firstname: self.firstname, lastname: self.lastname, email: self.email, phoneNumber: self.phoneNumber, gender: self.gender, position: self.position, missions: self.missions, address: self.address ?? MapController.emptyAddress, password: "", passwordVerification: "")
+        return UserToUpdate(firstname: self.firstname, lastname: self.lastname, email: self.email, phoneNumber: self.phoneNumber, gender: self.gender, position: self.position, missions: self.missions, address: self.address ?? LocationManager.emptyAddress, password: "", passwordVerification: "")
     }
 }
 

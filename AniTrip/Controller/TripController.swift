@@ -31,7 +31,7 @@ final class TripController: ObservableObject {
     // New trip properties
     @Published var showAddNewTripView: Bool = false
     @Published var newMission: String = ""
-    @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: MapController.emptyAddress, endingAddress: MapController.emptyAddress) {
+    @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationManager.emptyAddress, endingAddress: LocationManager.emptyAddress) {
         didSet {
             calculteDrivingDistance()
         }
@@ -93,7 +93,6 @@ final class TripController: ObservableObject {
     // MARK: Properties
     private let tripManager: TripManager = TripManager()
     private var appController: AppController
-    private let mapController: MapController = MapController()
     
     // MARK: Methods
     /// Configure notification
@@ -154,11 +153,8 @@ final class TripController: ObservableObject {
         
         request.source = MKMapItem(placemark: source)
         request.destination = MKMapItem(placemark: destination)
-        
         request.transportType = .automobile
-        
         request.requestsAlternateRoutes = true
-        
         let directions = MKDirections(request: request)
         
         directions.calculate { response, error in
@@ -169,6 +165,7 @@ final class TripController: ObservableObject {
         }
     }
     
+    /// Configure data char
     private func getChartData(from data: [TripChartPoint]) -> LineChartData {
         var chartData: [LineChartDataPoint] = []
         
@@ -180,15 +177,12 @@ final class TripController: ObservableObject {
                                legendTitle: "Distance",
                                pointStyle: PointStyle(),
                                style: LineStyle(lineColour: ColourStyle(colour: .accentColor), lineType: .curvedLine))
-        
         let metadata   = ChartMetadata(title: "Distance", subtitle: "For last 7 days")
-        
         let gridStyle  = GridStyle(numberOfLines: 7,
                                    lineColour   : Color(.lightGray).opacity(0.5),
                                    lineWidth    : 1,
                                    dash         : [8],
                                    dashPhase    : 0)
-        
         let chartStyle = LineChartStyle(infoBoxPlacement    : .floating,
                                         infoBoxBorderColour : Color.primary,
                                         infoBoxBorderStyle  : StrokeStyle(lineWidth: 1),

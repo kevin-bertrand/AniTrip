@@ -5,42 +5,20 @@
 //  Created by Kevin Bertrand on 19/07/2022.
 //
 
-import CoreLocation
-import CoreLocationUI
-import Foundation
 import MapKit
-import SwiftUI
 
 final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
-    let manager = CLLocationManager()
+    // MARK: Public
+    // MARK: Properties
+    static let defaultMapPoint: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0, longitude: 0), latitudinalMeters: 0, longitudinalMeters: 0)
+    static let emptyAddress: Address = Address(roadName: "", streetNumber: "", complement: "", zipCode: "", city: "", country: "", latitude: 0.0, longitude: 0.0)
     
-    @Published var location: CLLocationCoordinate2D?
-    @Published var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 48.837062, longitude: 2.711611), latitudinalMeters: 250, longitudinalMeters: 250)
+    @Published var region: MKCoordinateRegion = LocationManager.defaultMapPoint
     @Published var addressLocated: String = ""
     @Published var enteredAddress: String = ""
     
-    override init() {
-        super.init()
-        manager.requestWhenInUseAuthorization()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
-    }
-    
-    func requestLocation() {
-        manager.startUpdatingLocation()
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        guard let loc = locations.first?.coordinate else { return }
-        
-        location = loc
-        region.center = loc
-    }
-    
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
-    
+    // MARK: Methods
+    /// Getting address from the location
     func getAddress(completionHandler: @escaping ((Address?)->Void)) {
         let geocoder = CLGeocoder()
         let addressLocation = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
@@ -52,7 +30,7 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
                 let pm = placemarks[0]
                 let address = Address(roadName: "\(pm.thoroughfare ?? "")", streetNumber: "\(pm.subThoroughfare ?? "")", complement: "", zipCode: "\(pm.postalCode ?? "")", city: "\(pm.locality ?? "")", country: "\(pm.country ?? "")", latitude: self.region.center.latitude, longitude: self.region.center.longitude)
                 self.addressLocated = "\(address.streetNumber), \(address.roadName) - \(address.zipCode), \(address.city) - \(address.country)"
-                
+                self.enteredAddress = ""
                 completionHandler(address)
             } else {
                 self.addressLocated = "No address found!"
@@ -61,9 +39,10 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
         }
     }
     
+    /// Searching address
     func searchAddress(completionHandler: @escaping ((Address?)->Void)) {
         if enteredAddress.isNotEmpty {
-            getAddressFromAddress { address in
+            findAddress { address in
                 completionHandler(address)
             }
         } else {
@@ -73,7 +52,15 @@ final class LocationManager: NSObject, ObservableObject, CLLocationManagerDelega
         }
     }
     
-    func getAddressFromAddress(completionHandler: @escaping ((Address?)->Void)) {
+    /// Centering map
+    func centerMap(with address: Address) {
+        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: address.latitude, longitude: address.longitude), latitudinalMeters: 750, longitudinalMeters: 750)
+    }
+    
+    // MARK: Private
+    // MARK: Method
+    /// Finding address from the entered address
+    private func findAddress(completionHandler: @escaping ((Address?)->Void)) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(enteredAddress) { placemarks, error in
             let placemark = placemarks?.first

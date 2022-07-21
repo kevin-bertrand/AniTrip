@@ -68,8 +68,6 @@ final class AppController: ObservableObject {
     }
     
     // MARK: Private
-    // MARK: Properties
-    
     // MARK: Methods
     /// Configure notification
     private func configureNotification(for name: Notification.Name) {

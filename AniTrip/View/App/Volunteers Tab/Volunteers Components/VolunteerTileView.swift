@@ -16,10 +16,14 @@ struct VolunteerTileView: View {
                 .resizable()
                 .frame(width: 50, height: 50)
             VStack(alignment: .leading) {
-                Text("\(volunteer.firstname) \(volunteer.lastname)")
-                    .bold()
-                    .font(.title2)
-                Text(volunteer.missions.joined(separator: ", "))
+                if volunteer.lastname.isEmpty && volunteer.firstname.isEmpty {
+                    Text("\(volunteer.email)")
+                        .font(.title2.bold())
+                } else {
+                    Text("\(volunteer.firstname) \(volunteer.lastname)")
+                        .font(.title2.bold())
+                    Text(volunteer.missions.joined(separator: ", "))
+                }
                 if let address = volunteer.address {
                     Text("📍 \(address.city)")
                 }

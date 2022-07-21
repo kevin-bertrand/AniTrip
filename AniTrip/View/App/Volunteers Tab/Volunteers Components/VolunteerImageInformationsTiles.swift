@@ -21,8 +21,7 @@ struct VolunteerImageInformationsTiles: View {
                     .padding(5)
                 
                 Text("\(volunteer.firstname) \(volunteer.lastname)")
-                    .bold()
-                    .font(.title)
+                    .font(.title.bold())
 
                 Text(volunteer.missions.joined(separator: ", "))
                     .font(.subheadline)
@@ -36,6 +35,6 @@ struct VolunteerImageInformationsTiles: View {
 
 struct VolunteerImageInformationsTiles_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerImageInformationsTiles(volunteer: Volunteer(id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: MapController.emptyAddress, isActive: true))
+        VolunteerImageInformationsTiles(volunteer: Volunteer(id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: LocationManager.emptyAddress, isActive: true))
     }
 }

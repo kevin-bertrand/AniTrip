@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Address: Codable {
+struct Address: Codable, Equatable {
     var roadName: String
     var streetNumber: String
     var complement: String

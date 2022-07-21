@@ -130,7 +130,7 @@ final class UserManager {
                                 position: position,
                                 missions: user.missions,
                                 isActive: true,
-                                 address: user.address ?? MapController.emptyAddress,
+                                 address: user.address ?? LocationManager.emptyAddress,
                                 token: user.token)
             userInformations = connectedUser
         }

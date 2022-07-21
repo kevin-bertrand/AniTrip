@@ -48,7 +48,7 @@ final class UserController: ObservableObject {
     @Published var showSuccessAccountCreationAlert: Bool = false
     
     // Update user
-    @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: MapController.emptyAddress, password: "", passwordVerification: "")
+    @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: LocationManager.emptyAddress, password: "", passwordVerification: "")
     
     // Settings
     @Published var successBiometricActivationAlert: Bool = false
@@ -201,19 +201,7 @@ final class UserController: ObservableObject {
             
             switch notificationName {
             case Notification.AniTrip.loginSuccess.notificationName:
-                if savedPassword.isEmpty && canUseBiometric {
-                    loginShowBiometricAlert = true
-                }
-                
-                if let user = connectedUser {
-                    userToUpdate = user.toUpdate()
-                    
-                    if user.position == .user {
-                        self.accountToActivateEmail = ""
-                        self.displayActivateAccount = false
-                    }
-                }
-                isConnected = true
+                self.actionWhenLoginSuccess()
             case Notification.AniTrip.accountCreationSuccess.notificationName:
                 createAccountEmailTextField = ""
                 createAccountPasswordTextField = ""
@@ -254,5 +242,23 @@ final class UserController: ObservableObject {
                 }
             }
         }
+    }
+    
+    /// Perfom action when login success
+    private func actionWhenLoginSuccess() {
+        if savedPassword.isEmpty && canUseBiometric {
+            loginShowBiometricAlert = true
+        }
+        
+        if let user = connectedUser {
+            userToUpdate = user.toUpdate()
+            
+            if user.position == .user {
+                self.accountToActivateEmail = ""
+                self.displayActivateAccount = false
+            }
+        }
+        
+        isConnected = true
     }
 }
