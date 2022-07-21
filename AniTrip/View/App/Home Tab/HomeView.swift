@@ -62,6 +62,9 @@ struct HomeView: View {
         .onAppear {
             tripController.homeIsLoaded(byUser: userController.connectedUser)
         }
+        .sheet(isPresented: $userController.displayActivateAccount) {
+            ActivateAccountView()
+        }
     }
 }
 

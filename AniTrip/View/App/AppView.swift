@@ -9,7 +9,6 @@ import SwiftUI
 
 struct AppView: View {
     @EnvironmentObject var userController: UserController
-    
     var body: some View {
         TabView {
             NavigationView {
@@ -43,8 +42,7 @@ struct AppView: View {
             .tabItem {
                 Label("Settings", systemImage: "gear")
             }
-        }
-        .environmentObject(VolunteersController(appController: userController.appController))
+        }.environmentObject(VolunteersController(appController: userController.appController))
         .environmentObject(TripController(appController: userController.appController))
     }
 }

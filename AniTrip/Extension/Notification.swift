@@ -46,6 +46,9 @@ extension Notification {
         case homeInformationsDonwloaded = "All informations are downloaded"
         case homeInformationsDonwloadedError = "An error occurs during the download of home informations!"
         
+        // Activate account notification
+        case showActivateAccount = "A new account must be activate"
+        
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
         }

@@ -52,6 +52,7 @@
 		0690C41D28887CB900B57B92 /* VolunteerTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690C41C28887CB900B57B92 /* VolunteerTileView.swift */; };
 		0690C41F28887EB200B57B92 /* TripListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690C41E28887EB200B57B92 /* TripListView.swift */; };
 		0690C4232888CE2600B57B92 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690C4222888CE2600B57B92 /* AppDelegate.swift */; };
+		0690C4252889737900B57B92 /* ActivateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0690C4242889737900B57B92 /* ActivateAccountView.swift */; };
 		06955E972887F49D006B502B /* AddingEndAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955E962887F49D006B502B /* AddingEndAddressView.swift */; };
 		06955E992887F5E6006B502B /* NewTripDistanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955E982887F5E6006B502B /* NewTripDistanceView.swift */; };
 		06955E9B2887FB26006B502B /* NewTripDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955E9A2887FB26006B502B /* NewTripDateView.swift */; };
@@ -144,6 +145,7 @@
 		0690C4202888CDB900B57B92 /* AniTrip.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = AniTrip.entitlements; sourceTree = "<group>"; };
 		0690C4212888CDC900B57B92 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		0690C4222888CE2600B57B92 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0690C4242889737900B57B92 /* ActivateAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivateAccountView.swift; sourceTree = "<group>"; };
 		06955E962887F49D006B502B /* AddingEndAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingEndAddressView.swift; sourceTree = "<group>"; };
 		06955E982887F5E6006B502B /* NewTripDistanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripDistanceView.swift; sourceTree = "<group>"; };
 		06955E9A2887FB26006B502B /* NewTripDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripDateView.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				06158E4A28858B4E00C3BE6E /* Volunteers Tab */,
 				06BF72672885398E006F0839 /* Settings Tab */,
 				06BF7265287E1484006F0839 /* AppView.swift */,
+				0690C4242889737900B57B92 /* ActivateAccountView.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				068FDBA02886FE1800ACA72D /* LocationManager.swift in Sources */,
 				06158E3428855DB100C3BE6E /* EditUserInfoTileView.swift in Sources */,
 				06158E41288582DD00C3BE6E /* VolunteersController.swift in Sources */,
+				0690C4252889737900B57B92 /* ActivateAccountView.swift in Sources */,
 				06955E972887F49D006B502B /* AddingEndAddressView.swift in Sources */,
 				065FF5762886DC4E001BF623 /* SearchTextFieldView.swift in Sources */,
 				06158E2828854D1E00C3BE6E /* UserProfileView.swift in Sources */,

@@ -50,7 +50,7 @@ final class VolunteersManager {
     }
     
     /// Activate account
-    func activate(account: Volunteer, byUser user: User) {
+    func activate(account: VolunteerToActivate, byUser user: User) {
         var params = NetworkConfigurations.activateAccount.urlParams
         params.append(account.email)
         

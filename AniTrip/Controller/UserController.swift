@@ -16,6 +16,10 @@ final class UserController: ObservableObject {
     @Published var isConnected: Bool = false
     var connectedUser: User? { userManager.connectedUser }
     
+    // Activate account notification
+    @Published var displayActivateAccount: Bool = false
+    @Published var accountToActivateEmail: String = ""
+    
     // Login view properties
     @AppStorage("aniTripDeviceToken") var deviceToken: String = ""
     @AppStorage("anitripSavedEmail") var savedEmail: String = ""
@@ -173,6 +177,9 @@ final class UserController: ObservableObject {
         
         // Configure update profile notifications
         configureNotification(for: Notification.AniTrip.updateProfileSuccess.notificationName)
+        
+        // Configure activate account notification
+        configureNotification(for: Notification.AniTrip.showActivateAccount.notificationName)
     }
     
     // MARK: Private
@@ -200,6 +207,11 @@ final class UserController: ObservableObject {
                 
                 if let user = connectedUser {
                     userToUpdate = user.toUpdate()
+                    
+                    if user.position == .user {
+                        self.accountToActivateEmail = ""
+                        self.displayActivateAccount = false
+                    }
                 }
                 isConnected = true
             case Notification.AniTrip.accountCreationSuccess.notificationName:
@@ -215,6 +227,9 @@ final class UserController: ObservableObject {
                 Notification.AniTrip.accountCreationPasswordError.notificationName,
                 Notification.AniTrip.accountCreationInformationsError.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage)
+            case Notification.AniTrip.showActivateAccount.notificationName:
+                self.accountToActivateEmail = notificationMessage
+                self.displayActivateAccount = true
             default: break
             }
         }

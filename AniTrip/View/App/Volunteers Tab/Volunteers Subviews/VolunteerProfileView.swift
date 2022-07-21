@@ -71,7 +71,7 @@ struct VolunteerProfileView: View {
                         if volunteer.isActive {
                             volunteersController.desactivateAccount(of: volunteer, by: userController.connectedUser)
                         } else {
-                            volunteersController.activateAccount(of: volunteer, by: userController.connectedUser)
+                            volunteersController.activateAccount(of: .init(email: volunteer.email), by: userController.connectedUser)
                         }
                     } label: {
                         if volunteer.isActive {

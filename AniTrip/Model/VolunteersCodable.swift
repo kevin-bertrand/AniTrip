@@ -19,3 +19,7 @@ struct Volunteer: Codable {
     let address: Address?
     let isActive: Bool
 }
+
+struct VolunteerToActivate: Codable {
+    let email: String
+}

@@ -43,6 +43,13 @@ struct LoginView: View {
                     .foregroundColor(.red)
             }
             
+            if userController.displayActivateAccount {
+                Text("Connect to activate the new account of \(userController.accountToActivateEmail)")
+                    .font(.body.bold())
+                    .foregroundColor(.accentColor)
+                    .multilineTextAlignment(.center)
+            }
+            
             Spacer()
             
             HStack {

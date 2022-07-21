@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct AniTripApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     
     @StateObject private var appController: AppController = AppController()
     @StateObject private var userController: UserController = UserController()

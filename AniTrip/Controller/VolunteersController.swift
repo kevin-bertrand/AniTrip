@@ -26,7 +26,7 @@ final class VolunteersController: ObservableObject {
     }
     
     /// Activate account
-    func activateAccount(of volunteer: Volunteer, by user: User?) {
+    func activateAccount(of volunteer: VolunteerToActivate, by user: User?) {
         appController.setLoadingInProgress(withMessage: "Activation in progress...")
         
         guard let user = user, user.position == .admin else {
