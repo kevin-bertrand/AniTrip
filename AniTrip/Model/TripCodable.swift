@@ -48,3 +48,9 @@ struct ThisWeekInformations: Codable {
     let distance: Double
     let numberOfTrip: Int
 }
+
+enum ChartFilter: String, Equatable {
+    case week = "7 days"
+    case month = "1 month"
+    case year = "1 year"
+}

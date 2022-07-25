@@ -40,4 +40,21 @@ extension String {
         }
         return date
     }
+    
+    /// Convert chart date point to Date
+    var chartPointDate: Date {
+        if let date = ISO8601DateFormatter().date(from: self) {
+            return date
+        } else {
+            let format = DateFormatter()
+            format.dateFormat = "MM/yyyy"
+            let date = format.date(from: self)
+            
+            if let date = date {
+                return date
+            } else {
+                return Date()
+            }
+        }
+    }
 }

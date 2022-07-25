@@ -39,6 +39,7 @@ final class TripController: ObservableObject {
     
     // Home informations
     @Published var threeLatestTrips: [Trip] = []
+    @Published var chartFilter: ChartFilter = .week
     var distanceThisWeek: Double = 0.0
     var numberOfTripThisWeek: Int = 0
     var chartPoints: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
@@ -64,12 +65,18 @@ final class TripController: ObservableObject {
     
     /// Download informations when home view is loaded
     func homeIsLoaded(byUser user: User?) {
-        tripManager.dowloadHomeInformations(byUser: user)
+        tripManager.dowloadHomeInformations(byUser: user, filter: chartFilter)
     }
     
     /// Adding a mission to a new trip
     func addMission() {
         newTrip.missions.append(newMission)
+    }
+    
+    /// Downlaod chart point
+    func downlaodChartPoint(byUser user: User?) {
+        guard let user = user else { return }
+        tripManager.downloadChartPoint(forUser: user, filter: chartFilter)
     }
     
     // MARK: Initialization
@@ -170,7 +177,7 @@ final class TripController: ObservableObject {
         var chartData: [LineChartDataPoint] = []
         
         for point in data {
-            chartData.append(LineChartDataPoint(value: point.distance, xAxisLabel: point.date.toDate?.dayName, description: point.date.toDate?.dateOnly))
+            chartData.append(LineChartDataPoint(value: point.distance, xAxisLabel: point.date, description: point.date))
         }
         
         let data = LineDataSet(dataPoints: chartData,

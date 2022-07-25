@@ -13,7 +13,7 @@ final class TripManager {
     var trips: [Trip] { tripList.sorted { $0.date > $1.date }}
     var volunteerTrips: [Trip] { volunteerTripsList.sorted {$0.date > $1.date} }
     var threeLatestTrips: [Trip] { threeLatestTripsList.sorted { $0.date > $1.date }}
-    var tripsChartPoints: [TripChartPoint] { tripsChartPointsList.sorted { $0.date < $1.date }}
+    var tripsChartPoints: [TripChartPoint] { tripsChartPointsList.sorted { $0.date.chartPointDate < $1.date.chartPointDate }}
     var distanceThisWeek: Double = 0.0
     var numberOfTripsThisWeek: Int = 0
     
@@ -76,7 +76,7 @@ final class TripManager {
     }
     
     /// Downloading informations when home view is loaded
-    func dowloadHomeInformations(byUser user: User?) {
+    func dowloadHomeInformations(byUser user: User?, filter: ChartFilter) {
         guard let user = user,
               let userId = user.id else {
             Notification.AniTrip.unknownError.sendNotification()
@@ -91,9 +91,37 @@ final class TripManager {
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
-                    self.decodeThreeLatestTrips(data: data, for: user)
+                    self.decodeThreeLatestTrips(data: data, for: user, filter: filter)
                 case 404:
                     Notification.AniTrip.gettingTripListError.sendNotification()
+                default:
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
+    /// Download  trips chart point
+    func downloadChartPoint(forUser user: User, filter: ChartFilter = .week) {
+        guard let userId = user.id else {
+            Notification.AniTrip.unknownError.sendNotification()
+            return
+        }
+        
+        var params = NetworkConfigurations.getChartPoints.urlParams
+        params.append("\(filter.self)")
+        params.append("\(userId)")
+        
+        networkManager.request(urlParams: params, method: NetworkConfigurations.getChartPoints.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+            if let self = self,
+               let statusCode = response?.statusCode {
+                switch statusCode {
+                case 200:
+                    self.decodeChartPoint(data: data, for: user)
+                case 404:
+                    Notification.AniTrip.homeInformationsDonwloadedError.sendNotification()
                 default:
                     Notification.AniTrip.unknownError.sendNotification()
                 }
@@ -112,6 +140,17 @@ final class TripManager {
     private var tripsChartPointsList: [TripChartPoint] = []
     
     // MARK: Methods
+    /// Decode three latest trips data
+    private func decodeThreeLatestTrips(data: Data?, for user: User, filter: ChartFilter) {
+        if let data = data,
+           let trips = try? JSONDecoder().decode([Trip].self, from: data) {
+            threeLatestTripsList = trips
+            downloadChartPoint(forUser: user, filter: filter)
+        } else {
+            Notification.AniTrip.unknownError.sendNotification()
+        }
+    }
+    
     /// Decode trip list data
     private func decodeTripList(data: Data?, ofVolunteer: Bool) {
         if let data = data,
@@ -125,44 +164,6 @@ final class TripManager {
             }
         } else {
             Notification.AniTrip.unknownError.sendNotification()
-        }
-    }
-    
-    /// Decode three latest trips data
-    private func decodeThreeLatestTrips(data: Data?, for user: User) {
-        if let data = data,
-           let trips = try? JSONDecoder().decode([Trip].self, from: data) {
-            threeLatestTripsList = trips
-            downloadChartPoint(forUser: user)
-        } else {
-            Notification.AniTrip.unknownError.sendNotification()
-        }
-    }
-    
-    /// Download last 7 days trips chart point
-    private func downloadChartPoint(forUser user: User) {
-        guard let userId = user.id else {
-            Notification.AniTrip.unknownError.sendNotification()
-            return
-        }
-        
-        var params = NetworkConfigurations.getChartPoints.urlParams
-        params.append("\(userId)")
-        
-        networkManager.request(urlParams: params, method: NetworkConfigurations.getChartPoints.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
-            if let self = self,
-               let statusCode = response?.statusCode {
-                switch statusCode {
-                case 200:
-                    self.decodeChartPoint(data: data, for: user)
-                case 404:
-                    Notification.AniTrip.homeInformationsDonwloadedError.sendNotification()
-                default:
-                    Notification.AniTrip.unknownError.sendNotification()
-                }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
-            }
         }
     }
     

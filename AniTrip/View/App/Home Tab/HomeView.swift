@@ -28,9 +28,20 @@ struct HomeView: View {
             
             Section {
                 VStack(alignment: .leading) {
-                    Text("Distance")
-                        .font(.title2.bold())
-                    Text("For last 7 days")
+                    HStack {
+                        VStack(alignment: .leading) {
+                            Text("Distance")
+                                .font(.title2.bold())
+                            Text("For last \(tripController.chartFilter == .week ? "7 days" : tripController.chartFilter == .month ? "1 month" : "1 year")")
+                        }
+                        Spacer()
+                        Picker("", selection: $tripController.chartFilter) {
+                            Text(ChartFilter.week.rawValue).tag(ChartFilter.week)
+                            Text(ChartFilter.month.rawValue).tag(ChartFilter.month)
+                            Text(ChartFilter.year.rawValue).tag(ChartFilter.year)
+                        }.pickerStyle(.menu)
+                    }
+                    
                     LineChart(chartData: tripController.chartPoints)
                         .pointMarkers(chartData: tripController.chartPoints)
                         .touchOverlay(chartData: tripController.chartPoints, specifier: "%.0f km")
@@ -59,6 +70,9 @@ struct HomeView: View {
                 }
             }
         }
+        .onChange(of: tripController.chartFilter, perform: { _ in
+            tripController.downlaodChartPoint(byUser: userController.connectedUser)
+        })
         .onAppear {
             tripController.homeIsLoaded(byUser: userController.connectedUser)
         }
