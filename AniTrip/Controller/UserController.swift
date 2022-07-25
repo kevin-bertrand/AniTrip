@@ -44,7 +44,6 @@ final class UserController: ObservableObject {
     @Published var createAccountPasswordTextField: String = ""
     @Published var createAccountPasswordVerificationTextField: String = ""
     @Published var createAccountErrorMessage: String = ""
-    @Published var showCreateAcountView: Bool = false
     @Published var showSuccessAccountCreationAlert: Bool = false
     
     // Update user

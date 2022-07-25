@@ -12,17 +12,6 @@ struct CreateAccountView: View {
     
     var body: some View {
         VStack {
-            Image("Logo")
-                .resizable()
-                .frame(width: 150, height: 150)
-                .padding(.vertical)
-            
-            Text("Enter your email and a password. Then click on the button bellow. When the account will be validaded by the administrator, you will receive an email.")
-                .font(.callout)
-                .foregroundColor(.gray)
-                .padding()
-                .multilineTextAlignment(.center)
-            
             Spacer()
             
             Group {
@@ -35,19 +24,16 @@ struct CreateAccountView: View {
                 Text(userController.createAccountErrorMessage)
                     .bold()
                     .foregroundColor(.red)
-            }.padding()
-            
+            }.padding(.vertical)
+        
             Spacer()
             
             ButtonWithIcon(action: {
                 userController.createAccount()
             }, icon: nil, title: "Ask new account")
         }
-        .padding()
         .alert(isPresented: $userController.showSuccessAccountCreationAlert) {
-            Alert(title: Text("Success"), message: Text(Notification.AniTrip.accountCreationSuccess.notificationMessage), dismissButton: .default(Text("OK"), action: {
-                userController.showCreateAcountView = false
-            }))
+            Alert(title: Text("Success"), message: Text(Notification.AniTrip.accountCreationSuccess.notificationMessage), dismissButton: .default(Text("OK")))
         }
     }
 }
@@ -55,5 +41,6 @@ struct CreateAccountView: View {
 struct CreateAccountView_Previews: PreviewProvider {
     static var previews: some View {
         CreateAccountView()
+            .environmentObject(UserController())
     }
 }
