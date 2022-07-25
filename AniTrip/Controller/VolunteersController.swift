@@ -17,6 +17,10 @@ final class VolunteersController: ObservableObject {
         }
     }
     
+    @Published var activationRefused: Bool = false
+    @Published var activationSuccessAlert: Bool = false
+    @Published var desactivationSuccessAlert: Bool = false
+    
     var appController: AppController
     
     // MARK: Methods
@@ -51,6 +55,11 @@ final class VolunteersController: ObservableObject {
         volunteersManager.desactivate(account: volunteer, byUser: user)
     }
     
+    /// Refuse the activation
+    func refuseActivation() {
+        activationRefused = true
+    }
+    
     // MARK: Initialization
     init(appController: AppController) {
         self.appController = appController
@@ -73,17 +82,17 @@ final class VolunteersController: ObservableObject {
     
     /// Initialise all notification for this controller
     @objc private func processNotification(_ notification: Notification) {
-        if let notificationName = notification.userInfo?["name"] as? Notification.Name,
-           let notificationMessage = notification.userInfo?["message"] as? String {
+        if let notificationName = notification.userInfo?["name"] as? Notification.Name {
             appController.resetLoadingInProgress()
             objectWillChange.send()
             
             switch notificationName {
             case Notification.AniTrip.gettingVolunteersListSuccess.notificationName:
                 volunteersList = volunteersManager.volunteersList
-            case Notification.AniTrip.activationSuccess.notificationName,
-                Notification.AniTrip.desactivationSuccess.notificationName:
-                self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
+            case Notification.AniTrip.activationSuccess.notificationName:
+                activationSuccessAlert = true
+            case Notification.AniTrip.desactivationSuccess.notificationName:
+                desactivationSuccessAlert = true
             default: break
             }
         }

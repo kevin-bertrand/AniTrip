@@ -27,14 +27,13 @@ struct ActivateAccountView: View {
             
             HStack {
                 ButtonWithIcon(action: {
-                    userController.accountToActivateEmail = ""
                     userController.displayActivateAccount = false
+                    volunteersController.refuseActivation()
                 }, title: userController.accountToActivateEmail.isNotEmpty ? "Refuse" : "Back", color: .red)
                 
                 if userController.accountToActivateEmail.isNotEmpty {
                     ButtonWithIcon(action: {
                         volunteersController.activateAccount(of: VolunteerToActivate(email: userController.accountToActivateEmail), by: userController.connectedUser)
-                        userController.accountToActivateEmail = ""
                         userController.displayActivateAccount = false
                     }, title: "Accept")
                 }

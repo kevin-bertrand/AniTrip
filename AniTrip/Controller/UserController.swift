@@ -49,6 +49,7 @@ final class UserController: ObservableObject {
     
     // Update user
     @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: LocationManager.emptyAddress, password: "", passwordVerification: "")
+    @Published var successUpdate: Bool = false
     
     // Settings
     @Published var successBiometricActivationAlert: Bool = false
@@ -210,7 +211,7 @@ final class UserController: ObservableObject {
             case Notification.AniTrip.updateProfileSuccess.notificationName:
                 self.userToUpdate.password = ""
                 self.userToUpdate.passwordVerification = ""
-                self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
+                self.successUpdate = true
             case Notification.AniTrip.loginWrongCredentials.notificationName,
                 Notification.AniTrip.accountCreationPasswordError.notificationName,
                 Notification.AniTrip.accountCreationInformationsError.notificationName:

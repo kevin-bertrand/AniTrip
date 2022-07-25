@@ -11,11 +11,21 @@ import SwiftUI
 struct AniTripApp: App {
     @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
     
-    @StateObject private var appController: AppController = AppController()
-    @StateObject private var userController: UserController = UserController()
+    @StateObject private var appController: AppController
+    @StateObject private var userController: UserController
+    @StateObject private var volunteerController: VolunteersController
+    @StateObject private var tripController: TripController
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
     @Environment(\.presentationMode) var presentationMode
+    
+    init() {
+        let appController = AppController()
+        _appController = StateObject(wrappedValue: appController)
+        _userController = StateObject(wrappedValue: UserController())
+        _volunteerController = StateObject(wrappedValue: VolunteersController(appController: appController))
+        _tripController = StateObject(wrappedValue: TripController(appController: appController))
+    }
     
     var body: some Scene {
         WindowGroup {
@@ -37,6 +47,8 @@ struct AniTripApp: App {
             }
             .environmentObject(userController)
             .environmentObject(appController)
+            .environmentObject(volunteerController)
+            .environmentObject(tripController)
             .alert(isPresented: $appController.showAlertView) {
                 Alert(title: Text("Loading ended"), message: Text(appController.alertViewMessage), dismissButton: .default(Text("OK"), action: {
                     if appController.mustReturnToPreviousView {

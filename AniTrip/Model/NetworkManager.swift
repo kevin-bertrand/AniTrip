@@ -42,5 +42,5 @@ final class NetworkManager {
     
     // MARK: Private
     // MARK: Properties
-    private let url = "http://192.168.1.164:80"
+    private let url = "http://192.168.1.165:80"
 }

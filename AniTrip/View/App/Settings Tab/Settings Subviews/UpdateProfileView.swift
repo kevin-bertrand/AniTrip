@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct UpdateProfileView: View {
+    @Environment(\.presentationMode) var presentationMode
+
     @EnvironmentObject var userController: UserController
     
     var body: some View {
@@ -66,6 +68,11 @@ struct UpdateProfileView: View {
             } label: {
                 Image(systemName: "v.circle")
             }
+        }
+        .alert(isPresented: $userController.successUpdate) {
+            Alert(title: Text("Success"), message: Text(Notification.AniTrip.updateProfileSuccess.notificationMessage), dismissButton: .default(Text("OK"), action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }))
         }
     }
 }
