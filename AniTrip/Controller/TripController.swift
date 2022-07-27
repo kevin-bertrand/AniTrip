@@ -31,7 +31,7 @@ final class TripController: ObservableObject {
     // New trip properties
     @Published var showAddNewTripView: Bool = false
     @Published var newMission: String = ""
-    @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationManager.emptyAddress, endingAddress: LocationManager.emptyAddress) {
+    @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress) {
         didSet {
             calculteDrivingDistance()
         }
@@ -65,7 +65,7 @@ final class TripController: ObservableObject {
     
     /// Download informations when home view is loaded
     func homeIsLoaded(byUser user: User?) {
-        tripManager.dowloadHomeInformations(byUser: user, filter: chartFilter)
+        tripManager.threeLatestTrips(byUser: user, filter: chartFilter)
     }
     
     /// Adding a mission to a new trip

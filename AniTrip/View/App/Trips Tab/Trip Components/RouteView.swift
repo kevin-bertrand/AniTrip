@@ -42,7 +42,7 @@ struct MapView: UIViewRepresentable {
         let mapView = MKMapView()
         mapView.delegate = context.coordinator
         
-        let region = LocationManager.defaultMapPoint
+        let region = LocationController.defaultMapPoint
         mapView.setRegion(region, animated: true)
         
         let p1 = MKPlacemark(coordinate: startPoint)

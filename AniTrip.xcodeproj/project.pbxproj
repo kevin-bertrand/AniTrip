@@ -35,16 +35,18 @@
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
-		065E4765287B573700D32E05 /* AniTripTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4764287B573700D32E05 /* AniTripTests.swift */; };
-		065E476F287B573700D32E05 /* AniTripUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E476E287B573700D32E05 /* AniTripUITests.swift */; };
-		065E4771287B573700D32E05 /* AniTripUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4770287B573700D32E05 /* AniTripUITestsLaunchTests.swift */; };
 		065E4783287B579000D32E05 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 065E4782287B579000D32E05 /* Alamofire */; };
 		065E4788287B581000D32E05 /* CircularSpinnerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4787287B581000D32E05 /* CircularSpinnerView.swift */; };
 		065E478A287B58C600D32E05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4789287B58C600D32E05 /* LoginView.swift */; };
 		065FF5742886D9B7001BF623 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FF5732886D9B7001BF623 /* Date.swift */; };
 		065FF5762886DC4E001BF623 /* SearchTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */; };
+		067DF8822891641200323F2A /* TripManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067DF8812891641200323F2A /* TripManagerTests.swift */; };
+		067DF8842891651B00323F2A /* trips.json in Resources */ = {isa = PBXBuildFile; fileRef = 067DF8832891651B00323F2A /* trips.json */; };
+		067DF88628916C8600323F2A /* threeLatestsTrips.json in Resources */ = {isa = PBXBuildFile; fileRef = 067DF88528916C8600323F2A /* threeLatestsTrips.json */; };
+		067DF88828916FEA00323F2A /* news.json in Resources */ = {isa = PBXBuildFile; fileRef = 067DF88728916FEA00323F2A /* news.json */; };
+		067DF88A28916FF700323F2A /* chartPoints.json in Resources */ = {isa = PBXBuildFile; fileRef = 067DF88928916FF700323F2A /* chartPoints.json */; };
 		068FDB9E2886F2E000ACA72D /* DetectAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FDB9D2886F2E000ACA72D /* DetectAddressView.swift */; };
-		068FDBA02886FE1800ACA72D /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FDB9F2886FE1800ACA72D /* LocationManager.swift */; };
+		068FDBA02886FE1800ACA72D /* LocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FDB9F2886FE1800ACA72D /* LocationController.swift */; };
 		068FDBE72887301E00ACA72D /* AddingStartAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FDBE62887301E00ACA72D /* AddingStartAddressView.swift */; };
 		068FDBE9288745EC00ACA72D /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FDBE8288745EC00ACA72D /* View.swift */; };
 		068FDBEC2887461700ACA72D /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 068FDBEB2887461700ACA72D /* RoundedCorner.swift */; };
@@ -78,17 +80,21 @@
 		06E3494F28898EDC0056470E /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E3494E28898EDC0056470E /* SearchAddressView.swift */; };
 		06FBF141288EF67500222480 /* LoginToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF140288EF67500222480 /* LoginToolbar.swift */; };
 		06FBF144288EF78200222480 /* LoginSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF143288EF78200222480 /* LoginSubview.swift */; };
+		06FBF148289009F900222480 /* UpdateProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF147289009F900222480 /* UpdateProfileImageView.swift */; };
+		06FBF14A28900C3600222480 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF14928900C3600222480 /* ImagePicker.swift */; };
+		06FBF14C28903D6E00222480 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF14B28903D6E00222480 /* UIImage.swift */; };
+		06FBF15028912AEE00222480 /* FakeResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF14F28912AEE00222480 /* FakeResponseData.swift */; };
+		06FBF15228912C8500222480 /* MultiPartFormData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF15128912C8500222480 /* MultiPartFormData.swift */; };
+		06FBF15428912CDA00222480 /* FakeNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF15328912CDA00222480 /* FakeNetworkManager.swift */; };
+		06FBF157289135BB00222480 /* login.json in Resources */ = {isa = PBXBuildFile; fileRef = 06FBF156289135BB00222480 /* login.json */; };
+		06FBF1592891371B00222480 /* UserManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF1582891371B00222480 /* UserManagerTests.swift */; };
+		06FBF15C289148FB00222480 /* UpdateProfile.json in Resources */ = {isa = PBXBuildFile; fileRef = 06FBF15B289148FB00222480 /* UpdateProfile.json */; };
+		06FBF15E28915BB600222480 /* VolunteersManagerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF15D28915BB600222480 /* VolunteersManagerTest.swift */; };
+		06FBF16028915D7800222480 /* volunteerList.json in Resources */ = {isa = PBXBuildFile; fileRef = 06FBF15F28915D7800222480 /* volunteerList.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
 		065E4761287B573700D32E05 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 065E4748287B573600D32E05 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 065E474F287B573600D32E05;
-			remoteInfo = AniTrip;
-		};
-		065E476B287B573700D32E05 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 065E4748287B573600D32E05 /* Project object */;
 			proxyType = 1;
@@ -128,16 +134,17 @@
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		065E475A287B573700D32E05 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		065E4760287B573700D32E05 /* AniTripTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AniTripTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		065E4764287B573700D32E05 /* AniTripTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripTests.swift; sourceTree = "<group>"; };
-		065E476A287B573700D32E05 /* AniTripUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AniTripUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		065E476E287B573700D32E05 /* AniTripUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripUITests.swift; sourceTree = "<group>"; };
-		065E4770287B573700D32E05 /* AniTripUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		065E4787287B581000D32E05 /* CircularSpinnerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularSpinnerView.swift; sourceTree = "<group>"; };
 		065E4789287B58C600D32E05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		065FF5732886D9B7001BF623 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldView.swift; sourceTree = "<group>"; };
+		067DF8812891641200323F2A /* TripManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManagerTests.swift; sourceTree = "<group>"; };
+		067DF8832891651B00323F2A /* trips.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = trips.json; sourceTree = "<group>"; };
+		067DF88528916C8600323F2A /* threeLatestsTrips.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = threeLatestsTrips.json; sourceTree = "<group>"; };
+		067DF88728916FEA00323F2A /* news.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = news.json; sourceTree = "<group>"; };
+		067DF88928916FF700323F2A /* chartPoints.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = chartPoints.json; sourceTree = "<group>"; };
 		068FDB9D2886F2E000ACA72D /* DetectAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetectAddressView.swift; sourceTree = "<group>"; };
-		068FDB9F2886FE1800ACA72D /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		068FDB9F2886FE1800ACA72D /* LocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationController.swift; sourceTree = "<group>"; };
 		068FDBE62887301E00ACA72D /* AddingStartAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddingStartAddressView.swift; sourceTree = "<group>"; };
 		068FDBE8288745EC00ACA72D /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		068FDBEB2887461700ACA72D /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
@@ -172,6 +179,17 @@
 		06E3494E28898EDC0056470E /* SearchAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchAddressView.swift; path = "../../../../../../../../../../../../CloudStorage/OneDrive-Personnel/SearchAddressView.swift"; sourceTree = "<group>"; };
 		06FBF140288EF67500222480 /* LoginToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToolbar.swift; sourceTree = "<group>"; };
 		06FBF143288EF78200222480 /* LoginSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSubview.swift; sourceTree = "<group>"; };
+		06FBF147289009F900222480 /* UpdateProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileImageView.swift; sourceTree = "<group>"; };
+		06FBF14928900C3600222480 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		06FBF14B28903D6E00222480 /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		06FBF14F28912AEE00222480 /* FakeResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeResponseData.swift; sourceTree = "<group>"; };
+		06FBF15128912C8500222480 /* MultiPartFormData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultiPartFormData.swift; sourceTree = "<group>"; };
+		06FBF15328912CDA00222480 /* FakeNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FakeNetworkManager.swift; sourceTree = "<group>"; };
+		06FBF156289135BB00222480 /* login.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = login.json; sourceTree = "<group>"; };
+		06FBF1582891371B00222480 /* UserManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManagerTests.swift; sourceTree = "<group>"; };
+		06FBF15B289148FB00222480 /* UpdateProfile.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UpdateProfile.json; sourceTree = "<group>"; };
+		06FBF15D28915BB600222480 /* VolunteersManagerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolunteersManagerTest.swift; sourceTree = "<group>"; };
+		06FBF15F28915D7800222480 /* volunteerList.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = volunteerList.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,13 +203,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		065E475D287B573700D32E05 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		065E4767287B573700D32E05 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -285,7 +296,6 @@
 			children = (
 				065E4752287B573600D32E05 /* AniTrip */,
 				065E4763287B573700D32E05 /* AniTripTests */,
-				065E476D287B573700D32E05 /* AniTripUITests */,
 				065E4751287B573600D32E05 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -295,7 +305,6 @@
 			children = (
 				065E4750287B573600D32E05 /* AniTrip.app */,
 				065E4760287B573700D32E05 /* AniTripTests.xctest */,
-				065E476A287B573700D32E05 /* AniTripUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -325,33 +334,23 @@
 		065E4763287B573700D32E05 /* AniTripTests */ = {
 			isa = PBXGroup;
 			children = (
-				065E4764287B573700D32E05 /* AniTripTests.swift */,
+				06FBF1632891634700222480 /* Fake Network */,
+				06FBF15A28913B4C00222480 /* FakeResponses */,
+				06FBF1582891371B00222480 /* UserManagerTests.swift */,
+				06FBF15D28915BB600222480 /* VolunteersManagerTest.swift */,
+				067DF8812891641200323F2A /* TripManagerTests.swift */,
 			);
 			path = AniTripTests;
-			sourceTree = "<group>";
-		};
-		065E476D287B573700D32E05 /* AniTripUITests */ = {
-			isa = PBXGroup;
-			children = (
-				065E476E287B573700D32E05 /* AniTripUITests.swift */,
-				065E4770287B573700D32E05 /* AniTripUITestsLaunchTests.swift */,
-			);
-			path = AniTripUITests;
 			sourceTree = "<group>";
 		};
 		065E477D287B573A00D32E05 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				06FBF162289162E800222480 /* Network */,
+				06FBF161289162CC00222480 /* Codables */,
 				06BF724C287B6C62006F0839 /* UserManager.swift */,
-				06BF7251287B6D51006F0839 /* UserCodable.swift */,
-				06BF7253287B6F2A006F0839 /* NetworkManager.swift */,
-				06BF7255287B6F6E006F0839 /* Network.swift */,
-				06BF7259287B73AE006F0839 /* AddressCodable.swift */,
-				06158E2B2885500100C3BE6E /* MapPlace.swift */,
-				06158E422885835000C3BE6E /* VolunteersCodable.swift */,
 				06158E44288583B200C3BE6E /* VolunteersManager.swift */,
 				06158E56288590AC00C3BE6E /* TripManager.swift */,
-				06158E58288590EB00C3BE6E /* TripCodable.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -371,7 +370,7 @@
 		065E477F287B574200D32E05 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				068FDB9F2886FE1800ACA72D /* LocationManager.swift */,
+				068FDB9F2886FE1800ACA72D /* LocationController.swift */,
 				06BF7246287B5C6E006F0839 /* UserController.swift */,
 				06BF7248287B603A006F0839 /* AppController.swift */,
 				06158E40288582DD00C3BE6E /* VolunteersController.swift */,
@@ -425,6 +424,7 @@
 				06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */,
 				065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */,
 				068FDB9D2886F2E000ACA72D /* DetectAddressView.swift */,
+				06FBF14928900C3600222480 /* ImagePicker.swift */,
 			);
 			path = "Global Components";
 			sourceTree = "<group>";
@@ -445,6 +445,8 @@
 				06158E5E288595F100C3BE6E /* Double.swift */,
 				065FF5732886D9B7001BF623 /* Date.swift */,
 				068FDBE8288745EC00ACA72D /* View.swift */,
+				06FBF14B28903D6E00222480 /* UIImage.swift */,
+				06FBF15128912C8500222480 /* MultiPartFormData.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -484,6 +486,7 @@
 			children = (
 				06158E2728854D1E00C3BE6E /* UserProfileView.swift */,
 				06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */,
+				06FBF147289009F900222480 /* UpdateProfileImageView.swift */,
 			);
 			path = "Settings Subviews";
 			sourceTree = "<group>";
@@ -503,6 +506,50 @@
 				06FBF143288EF78200222480 /* LoginSubview.swift */,
 			);
 			path = "Login Subview";
+			sourceTree = "<group>";
+		};
+		06FBF15A28913B4C00222480 /* FakeResponses */ = {
+			isa = PBXGroup;
+			children = (
+				06FBF156289135BB00222480 /* login.json */,
+				06FBF15F28915D7800222480 /* volunteerList.json */,
+				06FBF15B289148FB00222480 /* UpdateProfile.json */,
+				067DF8832891651B00323F2A /* trips.json */,
+				067DF88528916C8600323F2A /* threeLatestsTrips.json */,
+				067DF88728916FEA00323F2A /* news.json */,
+				067DF88928916FF700323F2A /* chartPoints.json */,
+			);
+			path = FakeResponses;
+			sourceTree = "<group>";
+		};
+		06FBF161289162CC00222480 /* Codables */ = {
+			isa = PBXGroup;
+			children = (
+				06BF7251287B6D51006F0839 /* UserCodable.swift */,
+				06158E58288590EB00C3BE6E /* TripCodable.swift */,
+				06158E422885835000C3BE6E /* VolunteersCodable.swift */,
+				06BF7259287B73AE006F0839 /* AddressCodable.swift */,
+				06158E2B2885500100C3BE6E /* MapPlace.swift */,
+			);
+			path = Codables;
+			sourceTree = "<group>";
+		};
+		06FBF162289162E800222480 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				06BF7253287B6F2A006F0839 /* NetworkManager.swift */,
+				06BF7255287B6F6E006F0839 /* Network.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		06FBF1632891634700222480 /* Fake Network */ = {
+			isa = PBXGroup;
+			children = (
+				06FBF14F28912AEE00222480 /* FakeResponseData.swift */,
+				06FBF15328912CDA00222480 /* FakeNetworkManager.swift */,
+			);
+			path = "Fake Network";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -547,24 +594,6 @@
 			productReference = 065E4760287B573700D32E05 /* AniTripTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		065E4769287B573700D32E05 /* AniTripUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 065E477A287B573700D32E05 /* Build configuration list for PBXNativeTarget "AniTripUITests" */;
-			buildPhases = (
-				065E4766287B573700D32E05 /* Sources */,
-				065E4767287B573700D32E05 /* Frameworks */,
-				065E4768287B573700D32E05 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				065E476C287B573700D32E05 /* PBXTargetDependency */,
-			);
-			name = AniTripUITests;
-			productName = AniTripUITests;
-			productReference = 065E476A287B573700D32E05 /* AniTripUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -579,10 +608,6 @@
 						CreatedOnToolsVersion = 14.0;
 					};
 					065E475F287B573700D32E05 = {
-						CreatedOnToolsVersion = 14.0;
-						TestTargetID = 065E474F287B573600D32E05;
-					};
-					065E4769287B573700D32E05 = {
 						CreatedOnToolsVersion = 14.0;
 						TestTargetID = 065E474F287B573600D32E05;
 					};
@@ -607,7 +632,6 @@
 			targets = (
 				065E474F287B573600D32E05 /* AniTrip */,
 				065E475F287B573700D32E05 /* AniTripTests */,
-				065E4769287B573700D32E05 /* AniTripUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -626,13 +650,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		065E4768287B573700D32E05 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				067DF88828916FEA00323F2A /* news.json in Resources */,
+				06FBF157289135BB00222480 /* login.json in Resources */,
+				06FBF16028915D7800222480 /* volunteerList.json in Resources */,
+				06FBF15C289148FB00222480 /* UpdateProfile.json in Resources */,
+				067DF88628916C8600323F2A /* threeLatestsTrips.json in Resources */,
+				067DF88A28916FF700323F2A /* chartPoints.json in Resources */,
+				067DF8842891651B00323F2A /* trips.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +688,7 @@
 				0690C41F28887EB200B57B92 /* TripListView.swift in Sources */,
 				068FDB9E2886F2E000ACA72D /* DetectAddressView.swift in Sources */,
 				068FDBE72887301E00ACA72D /* AddingStartAddressView.swift in Sources */,
+				06FBF148289009F900222480 /* UpdateProfileImageView.swift in Sources */,
 				06158E3A2885772E00C3BE6E /* MissionsUpdateTileView.swift in Sources */,
 				06BF726E28853CAE006F0839 /* UserCellView.swift in Sources */,
 				06158E38288561C500C3BE6E /* UpdateAddressView.swift in Sources */,
@@ -683,16 +708,18 @@
 				06158E552885909D00C3BE6E /* TripController.swift in Sources */,
 				06158E45288583B200C3BE6E /* VolunteersManager.swift in Sources */,
 				06158E692885A5FE00C3BE6E /* NewsTileView.swift in Sources */,
-				068FDBA02886FE1800ACA72D /* LocationManager.swift in Sources */,
+				068FDBA02886FE1800ACA72D /* LocationController.swift in Sources */,
 				06158E3428855DB100C3BE6E /* EditUserInfoTileView.swift in Sources */,
 				06158E41288582DD00C3BE6E /* VolunteersController.swift in Sources */,
 				0690C4252889737900B57B92 /* ActivateAccountView.swift in Sources */,
 				06955E972887F49D006B502B /* AddingEndAddressView.swift in Sources */,
+				06FBF15228912C8500222480 /* MultiPartFormData.swift in Sources */,
 				065FF5762886DC4E001BF623 /* SearchTextFieldView.swift in Sources */,
 				06158E2828854D1E00C3BE6E /* UserProfileView.swift in Sources */,
 				06955E992887F5E6006B502B /* NewTripDistanceView.swift in Sources */,
 				06FBF141288EF67500222480 /* LoginToolbar.swift in Sources */,
 				06158E3C28857D5800C3BE6E /* PasswordFormTileView.swift in Sources */,
+				06FBF14A28900C3600222480 /* ImagePicker.swift in Sources */,
 				068FDBE9288745EC00ACA72D /* View.swift in Sources */,
 				06158E612885982000C3BE6E /* DetailedTripView.swift in Sources */,
 				06158E4D28858B7500C3BE6E /* VolunteerProfileView.swift in Sources */,
@@ -700,6 +727,7 @@
 				06955E9D2887FD1C006B502B /* NewTripMissionsView.swift in Sources */,
 				06158E532885902D00C3BE6E /* TripsView.swift in Sources */,
 				06158E3228855D6C00C3BE6E /* UpdateProfileView.swift in Sources */,
+				06FBF14C28903D6E00222480 /* UIImage.swift in Sources */,
 				06158E2C2885500100C3BE6E /* MapPlace.swift in Sources */,
 				06BF7266287E1484006F0839 /* AppView.swift in Sources */,
 				06158E5F288595F100C3BE6E /* Double.swift in Sources */,
@@ -714,16 +742,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				065E4765287B573700D32E05 /* AniTripTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		065E4766287B573700D32E05 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				065E4771287B573700D32E05 /* AniTripUITestsLaunchTests.swift in Sources */,
-				065E476F287B573700D32E05 /* AniTripUITests.swift in Sources */,
+				06FBF15E28915BB600222480 /* VolunteersManagerTest.swift in Sources */,
+				067DF8822891641200323F2A /* TripManagerTests.swift in Sources */,
+				06FBF1592891371B00222480 /* UserManagerTests.swift in Sources */,
+				06FBF15028912AEE00222480 /* FakeResponseData.swift in Sources */,
+				06FBF15428912CDA00222480 /* FakeNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -734,11 +757,6 @@
 			isa = PBXTargetDependency;
 			target = 065E474F287B573600D32E05 /* AniTrip */;
 			targetProxy = 065E4761287B573700D32E05 /* PBXContainerItemProxy */;
-		};
-		065E476C287B573700D32E05 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 065E474F287B573600D32E05 /* AniTrip */;
-			targetProxy = 065E476B287B573700D32E05 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -927,6 +945,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -947,6 +966,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -960,42 +980,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AniTrip.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AniTrip";
-			};
-			name = Release;
-		};
-		065E477B287B573700D32E05 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6MAUVS763K;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.desyntic.AniTripUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = AniTrip;
-			};
-			name = Debug;
-		};
-		065E477C287B573700D32E05 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 6MAUVS763K;
-				GENERATE_INFOPLIST_FILE = YES;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.desyntic.AniTripUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = AniTrip;
 			};
 			name = Release;
 		};
@@ -1025,15 +1009,6 @@
 			buildConfigurations = (
 				065E4778287B573700D32E05 /* Debug */,
 				065E4779287B573700D32E05 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		065E477A287B573700D32E05 /* Build configuration list for PBXNativeTarget "AniTripUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				065E477B287B573700D32E05 /* Debug */,
-				065E477C287B573700D32E05 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -32,9 +32,6 @@ struct CreateAccountView: View {
                 userController.createAccount()
             }, icon: nil, title: "Ask new account")
         }
-        .alert(isPresented: $userController.showSuccessAccountCreationAlert) {
-            Alert(title: Text("Success"), message: Text(Notification.AniTrip.accountCreationSuccess.notificationMessage), dismissButton: .default(Text("OK")))
-        }
     }
 }
 

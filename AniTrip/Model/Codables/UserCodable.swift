@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct UserToLogin: Codable {
     let email: String
@@ -37,6 +38,7 @@ struct UserToUpdate: Codable {
 }
 
 struct ConnectedUser: Codable {
+    let imagePath: String?
     let id: String
     let firstname: String
     let lastname: String
@@ -49,7 +51,8 @@ struct ConnectedUser: Codable {
     let address: Address?
 }
 
-struct User: Codable {
+struct User {
+    let image: UIImage?
     let id: UUID?
     var firstname: String
     var lastname: String
@@ -64,7 +67,7 @@ struct User: Codable {
     
     /// Convert an User to a UserToUpdate structure
     func toUpdate() -> UserToUpdate {
-        return UserToUpdate(firstname: self.firstname, lastname: self.lastname, email: self.email, phoneNumber: self.phoneNumber, gender: self.gender, position: self.position, missions: self.missions, address: self.address ?? LocationManager.emptyAddress, password: "", passwordVerification: "")
+        return UserToUpdate(firstname: self.firstname, lastname: self.lastname, email: self.email, phoneNumber: self.phoneNumber, gender: self.gender, position: self.position, missions: self.missions, address: self.address ?? LocationController.emptyAddress, password: "", passwordVerification: "")
     }
 }
 

@@ -10,7 +10,7 @@ import SwiftUI
 struct UpdateAddressView: View {
     @State private var showMapView: Bool = false
     @Binding var address: Address
-    @State private var addressToModify: Address = LocationManager.emptyAddress
+    @State private var addressToModify: Address = LocationController.emptyAddress
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -45,7 +45,7 @@ struct UpdateAddressView: View {
             addressToModify = address
         }
         .sheet(isPresented: $showMapView, onDismiss: {
-            if addressToModify != LocationManager.emptyAddress {
+            if addressToModify != LocationController.emptyAddress {
                 address = addressToModify
             }
         }, content: {
@@ -56,6 +56,6 @@ struct UpdateAddressView: View {
 
 struct UpdateAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateAddressView(address: .constant(LocationManager.emptyAddress))
+        UpdateAddressView(address: .constant(LocationController.emptyAddress))
     }
 }

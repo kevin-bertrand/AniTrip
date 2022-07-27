@@ -11,7 +11,7 @@ import MapKit
 import SwiftUI
 
 struct DetectAddressView: View {
-    @StateObject var locationManager = LocationManager()
+    @StateObject var locationManager = LocationController()
     @Binding var address: Address
     let name: String
     
@@ -65,7 +65,7 @@ struct DetectAddressView: View {
 
 struct DetectAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        DetectAddressView(address: .constant(LocationManager.emptyAddress), name: "Starting address")
+        DetectAddressView(address: .constant(LocationController.emptyAddress), name: "Starting address")
     }
 }
 

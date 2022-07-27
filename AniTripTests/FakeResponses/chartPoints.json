@@ -1,0 +1,37 @@
+[
+    {
+        "distance":0,
+        "numberOfTrip":0,
+        "date":"2022-07-27"
+    },
+    {
+        "distance":0,
+        "numberOfTrip":0,
+        "date":"2022-07-26"
+    },
+    {
+        "distance":0,
+        "date":"2022-07-25",
+        "numberOfTrip":0
+    },
+    {
+        "distance":53.78,
+        "date":"2022-07-24",
+        "numberOfTrip":3
+    },
+    {
+        "distance":0,
+        "date":"2022-07-23",
+        "numberOfTrip":0
+    },
+    {
+        "distance":0,
+        "date":"2022-07-22",
+        "numberOfTrip":0
+    },
+    {
+        "distance":0,
+        "date":"2022-07-21",
+        "numberOfTrip":0
+    }
+]

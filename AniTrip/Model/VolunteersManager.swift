@@ -19,15 +19,14 @@ final class VolunteersManager {
             Notification.AniTrip.unknownError.sendNotification()
             return
         }
-
-        networkManager.request(urlParams: NetworkConfigurations.getVolunteersList.urlParams, method: NetworkConfigurations.getVolunteersList.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+        
+        networkManager.request(urlParams: NetworkConfigurations.getVolunteersList.urlParams, method: NetworkConfigurations.getVolunteersList.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] (data, response, error) in
             if let self = self,
-               let statusCode = response?.statusCode,
-               statusCode == 200,
+               let status = response?.statusCode,
+               status == 200,
                let data = data,
-               let volunteers = try? JSONDecoder().decode([Volunteer].self, from: data) {
-                self.volunteersList = volunteers
-                Notification.AniTrip.gettingVolunteersListSuccess.sendNotification()
+               let volunteers = try? JSONDecoder().decode([DownloadedVolunteer].self, from: data) {
+                self.downloadVolunteerProfilePicture(volunteers: volunteers)
             } else {
                 Notification.AniTrip.unknownError.sendNotification()
             }
@@ -64,7 +63,31 @@ final class VolunteersManager {
         }
     }
     
+    // MARK: Initialization
+    init(networkManager: NetworkManager = NetworkManager()) {
+        self.networkManager = networkManager
+    }
+    
     // MARK: Private
     // MARK: Properties
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkManager
+    
+    //
+    private func downloadVolunteerProfilePicture(volunteers: [DownloadedVolunteer]) {
+        self.volunteersList = []
+        
+        for (index, volunteer) in volunteers.enumerated() {
+            networkManager.downloadProfilePicture(from: volunteer.imagePath, completionHandler: { image in
+                self.volunteersList.append(Volunteer(image: image,
+                                                     id: volunteer.id,
+                                                     firstname: volunteer.firstname,
+                                                     lastname: volunteer.lastname,
+                                                     email: volunteer.email,
+                                                     phoneNumber: volunteer.phoneNumber, gender: volunteer.gender, position: volunteer.position, missions: volunteer.missions, address: volunteer.address, isActive: volunteer.isActive))
+                if volunteers.count-1 == index {
+                    Notification.AniTrip.gettingVolunteersListSuccess.sendNotification()
+                }
+            })
+        }
+    }
 }

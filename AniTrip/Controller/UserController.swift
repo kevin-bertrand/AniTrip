@@ -47,8 +47,9 @@ final class UserController: ObservableObject {
     @Published var showSuccessAccountCreationAlert: Bool = false
     
     // Update user
-    @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: LocationManager.emptyAddress, password: "", passwordVerification: "")
+    @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: LocationController.emptyAddress, password: "", passwordVerification: "")
     @Published var successUpdate: Bool = false
+    @Published var showUpdateProfileImage: Bool = false
     
     // Settings
     @Published var successBiometricActivationAlert: Bool = false
@@ -162,6 +163,13 @@ final class UserController: ObservableObject {
         }
         
         userManager.updateUser(userToUpdate)
+    }
+    
+    /// Update user profile image
+    func updateImage(_ image: UIImage?) {
+        guard let image = image else { return }
+        
+        userManager.updateUserProfileImage(image)
     }
     
     // MARK: Initialization

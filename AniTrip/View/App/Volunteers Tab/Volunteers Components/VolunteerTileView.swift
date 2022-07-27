@@ -12,9 +12,22 @@ struct VolunteerTileView: View {
     
     var body: some View {
         HStack(spacing: 15) {
-            Image(systemName: "person.circle")
-                .resizable()
-                .frame(width: 50, height: 50)
+            Group {
+                if let image = volunteer.image {
+                    Image(uiImage: image)
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                        .clipShape(Circle())
+                        .scaledToFill()
+                        .overlay(Circle().stroke(style: .init(lineWidth: 1)))
+                } else {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                        .frame(width: 50, height: 50)
+                }
+            }
+            .padding(5)
+
             VStack(alignment: .leading) {
                 if volunteer.lastname.isEmpty && volunteer.firstname.isEmpty {
                     Text("\(volunteer.email)")
@@ -34,6 +47,6 @@ struct VolunteerTileView: View {
 
 struct VolunteerTileView_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerTileView(volunteer: Volunteer(id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: nil, isActive: false))
+        VolunteerTileView(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: nil, isActive: false))
     }
 }

@@ -1,0 +1,24 @@
+{
+    "lastname":"Lastname",
+    "isActive":true,
+    "imagePath":"\/var\/www\/html\/AniTrip\/Public\/48694F7F-66F4-4048-8312-BECDA525FA45.jpeg",
+    "firstname":"Firstname",
+    "phoneNumber":"",
+    "address":{
+        "latitude":1.83718369999998,
+        "zipCode":"75000",
+        "streetNumber":"1",
+        "id":"87D7BF60-7D8A-4C57-AF78-2B12792CBBAA",
+        "roadName":"Place des développeurs",
+        "city":"Paris",
+        "country":"France",
+        "longitude":1.711804599999979,
+        "complement":""
+    },
+    "gender":"not_determined",
+    "missions":[],
+    "id":"48694F7F-66F4-4048-8312-BECDA525FA45",
+    "position":"user",
+    "email":"email@example.com",
+    "token":"B6K3DnOPbcdJnjhEjwOGsQ=="
+}

@@ -5,7 +5,9 @@
 //  Created by Kevin Bertrand on 10/07/2022.
 //
 
+import Alamofire
 import Foundation
+import SwiftUI
 
 final class UserManager {
     // MARK: Public
@@ -26,10 +28,13 @@ final class UserManager {
                let data = data {
                 switch statusCode {
                 case 200:
-                    if let _ = self.decodeUserInformations(data: data) {
-                        Notification.AniTrip.loginSuccess.sendNotification()
-                    } else {
-                        Notification.AniTrip.unknownError.sendNotification()
+                    self.decodeUserInformations(data: data) { user in
+                        self.connectedUser = user
+                        if user == nil {
+                            Notification.AniTrip.unknownError.sendNotification()
+                        } else {
+                            Notification.AniTrip.loginSuccess.sendNotification()
+                        }
                     }
                 case 401:
                     Notification.AniTrip.loginWrongCredentials.sendNotification()
@@ -88,10 +93,13 @@ final class UserManager {
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 202:
-                    if let _ = self.decodeUserInformations(data: data) {
-                        Notification.AniTrip.updateProfileSuccess.sendNotification()
-                    } else {
-                        Notification.AniTrip.unknownError.sendNotification()
+                    self.decodeUserInformations(data: data) { user in
+                        if user == nil {
+                            Notification.AniTrip.unknownError.sendNotification()
+                        } else {
+                            self.connectedUser = user
+                            Notification.AniTrip.updateProfileSuccess.sendNotification()
+                        }
                     }
                 case 401:
                     Notification.AniTrip.notAuthorized.sendNotification()
@@ -108,33 +116,50 @@ final class UserManager {
         }
     }
     
+    /// Update user profile image
+    func updateUserProfileImage(_ image: UIImage) {
+        guard let connectedUser = connectedUser, let imageData = image.jpegData(compressionQuality: 0.9) else {
+            Notification.AniTrip.unknownError.sendNotification()
+            return
+        }
+
+        networkManager.uploadFiles(urlParams: NetworkConfigurations.updatePicture.urlParams, method: NetworkConfigurations.updatePicture.method, user: connectedUser, file: imageData) { data, response, error in
+            
+        }
+    }
+    
+    // MARK: Initialization
+    init(networkManager: NetworkManager = NetworkManager()) {
+        self.networkManager = networkManager
+    }
+    
     // MARK: Private
     // MARK: Properties
-    private let networkManager = NetworkManager()
+    private let networkManager: NetworkManager
     
     // MARK: Methods
     /// Decode user informations
-    private func decodeUserInformations(data: Data) -> User? {
-        var userInformations: User?
-        
+    private func decodeUserInformations(data: Data, completionHandler: @escaping ((User?)->Void)) {
         if let user = try? JSONDecoder().decode(ConnectedUser.self, from: data),
            let userId = UUID(uuidString: user.id),
            let gender = Gender(rawValue: user.gender),
            let position = Position(rawValue: user.position) {
-            connectedUser = User(id: userId,
-                                firstname: user.firstname,
-                                lastname: user.lastname,
-                                email: user.email,
-                                phoneNumber: user.phoneNumber,
-                                gender: gender,
-                                position: position,
-                                missions: user.missions,
-                                isActive: true,
-                                 address: user.address ?? LocationManager.emptyAddress,
-                                token: user.token)
-            userInformations = connectedUser
+            networkManager.downloadProfilePicture(from: user.imagePath) { image in
+                    completionHandler(User(image: image,
+                                           id: userId,
+                                           firstname: user.firstname,
+                                           lastname: user.lastname,
+                                           email: user.email,
+                                           phoneNumber: user.phoneNumber,
+                                           gender: gender,
+                                           position: position,
+                                           missions: user.missions,
+                                           isActive: true,
+                                           address: user.address ?? LocationController.emptyAddress,
+                                           token: user.token))
+                }
+        } else {
+            completionHandler(nil)
         }
-        
-        return userInformations
     }
 }

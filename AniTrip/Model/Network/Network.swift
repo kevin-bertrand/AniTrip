@@ -12,6 +12,7 @@ enum NetworkConfigurations {
     case login
     case createAccount
     case updateUser
+    case updatePicture
     case getVolunteersList
     case getTripList
     case addTrip
@@ -31,7 +32,8 @@ enum NetworkConfigurations {
             method = .post
         case .updateUser,
                 .activateAccount,
-                .desactivateAccount:
+                .desactivateAccount,
+                .updatePicture:
             method = .patch
         case .getVolunteersList,
                 .getTripList,
@@ -68,6 +70,8 @@ enum NetworkConfigurations {
             params = ["user", "desactivate"]
         case .activateAccount:
             params = ["user", "activate"]
+        case .updatePicture:
+            params = ["user", "picture"]
         }
         
         return params

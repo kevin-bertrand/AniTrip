@@ -14,6 +14,26 @@ struct UpdateProfileView: View {
     
     var body: some View {
         Form {
+            Section {
+                HStack {
+                    Spacer()
+                    VStack {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .frame(width: 80, height: 80)
+                            .padding(5)
+                        Button {
+                            userController.showUpdateProfileImage = true
+                        } label: {
+                            Text("Update image")
+                        }
+                        .padding(.top)
+                    }
+                    Spacer()
+                }
+                .listRowBackground(Color.clear)
+            }
+            
             Section(header: Text("User Informations")) {
                 EditUserInfoTileView(text: $userController.userToUpdate.firstname, title: "Firstname")
                 EditUserInfoTileView(text: $userController.userToUpdate.lastname, title: "Lastname")
@@ -73,6 +93,9 @@ struct UpdateProfileView: View {
             Alert(title: Text("Success"), message: Text(Notification.AniTrip.updateProfileSuccess.notificationMessage), dismissButton: .default(Text("OK"), action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
+        }
+        .sheet(isPresented: $userController.showUpdateProfileImage) {
+            UpdateProfileImageView()
         }
     }
 }

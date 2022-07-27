@@ -41,7 +41,7 @@ struct AddTripView: View {
             }
         }
         .onAppear {
-            tripController.newTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationManager.emptyAddress, endingAddress: LocationManager.emptyAddress)
+            tripController.newTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)
         }
         .onChange(of: step) { newValue in
             previousScreen = newValue

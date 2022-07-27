@@ -76,7 +76,7 @@ final class TripManager {
     }
     
     /// Downloading informations when home view is loaded
-    func dowloadHomeInformations(byUser user: User?, filter: ChartFilter) {
+    func threeLatestTrips(byUser user: User?, filter: ChartFilter) {
         guard let user = user,
               let userId = user.id else {
             Notification.AniTrip.unknownError.sendNotification()
@@ -131,12 +131,44 @@ final class TripManager {
         }
     }
     
+    /// Downlaod home news informations
+    func downloadNews(for user: User) {
+        guard let userId = user.id else {
+            Notification.AniTrip.unknownError.sendNotification()
+            return
+        }
+        
+        var params = NetworkConfigurations.getNews.urlParams
+        params.append("\(userId)")
+        
+        networkManager.request(urlParams: params, method: NetworkConfigurations.getNews.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+            if let self = self,
+               let statusCode = response?.statusCode {
+                switch statusCode {
+                case 200:
+                    self.decodeThisWeek(data: data)
+                case 404:
+                    Notification.AniTrip.homeInformationsDonwloadedError.sendNotification()
+                default:
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
+    // MARK: Initialization
+    init(networkManager: NetworkManager = NetworkManager()) {
+        self.networkManager = networkManager
+    }
+    
     // MARK: Private
     // MARK: Properties
     private var tripList: [Trip] = []
     private var volunteerTripsList: [Trip] = []
     private var threeLatestTripsList: [Trip] = []
-    private let networkManager: NetworkManager = NetworkManager()
+    private let networkManager: NetworkManager
     private var tripsChartPointsList: [TripChartPoint] = []
     
     // MARK: Methods
@@ -175,34 +207,6 @@ final class TripManager {
             downloadNews(for: user)
         } else {
             Notification.AniTrip.unknownError.sendNotification()
-        }
-    }
-    
-    /// Downlaod home news informations
-    private func downloadNews(for user: User) {
-        guard let userId = user.id else {
-            Notification.AniTrip.unknownError.sendNotification()
-            return
-        }
-        
-        var params = NetworkConfigurations.getNews.urlParams
-        params.append("\(userId)")
-        
-        networkManager.request(urlParams: params, method: NetworkConfigurations.getNews.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
-            
-            if let self = self,
-               let statusCode = response?.statusCode {
-                switch statusCode {
-                case 200:
-                    self.decodeThisWeek(data: data)
-                case 404:
-                    Notification.AniTrip.homeInformationsDonwloadedError.sendNotification()
-                default:
-                    Notification.AniTrip.unknownError.sendNotification()
-                }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
-            }
         }
     }
     

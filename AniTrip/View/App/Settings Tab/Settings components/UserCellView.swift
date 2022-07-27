@@ -9,18 +9,30 @@ import SwiftUI
 
 struct UserCellView: View {
     @EnvironmentObject var userController: UserController
-    
     var body: some View {
         HStack {
             Spacer()
             
             VStack {
-                Image(systemName: "person.circle")
-                    .resizable()
-                    .frame(width: 80, height: 80)
-                    .padding(5)
+                
                 Group {
-                    if let user = userController.connectedUser {
+                    if let image = userController.connectedUser?.image {
+                        Image(uiImage: image)
+                            .resizable()
+                            .frame(width: 150, height: 150)
+                            .clipShape(Circle())
+                            .scaledToFill()
+                            .overlay(Circle().stroke(style: .init(lineWidth: 1)))
+                    } else {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                            .frame(width: 150, height: 150)
+                    }
+                }
+                .padding(5)
+                    
+                Group {
+                    if let user = userController.connectedUser, user.firstname.isNotEmpty || user.lastname.isNotEmpty {
                         Text("\(user.firstname) \(user.lastname)")
                             .bold()
                             .font(.title)
@@ -35,7 +47,6 @@ struct UserCellView: View {
                     }
                 }
             }
-            
             Spacer()
         }
     }

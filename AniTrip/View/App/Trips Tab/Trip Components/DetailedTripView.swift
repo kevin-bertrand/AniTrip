@@ -64,7 +64,7 @@ struct DetailedTripView: View {
 
 struct DetailedTripView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedTripView(trip: Trip(id: UUID(), date: Date().iso8601, missions: ["1", "2", "3"], comment: "Test comment", totalDistance: 25, startingAddress: LocationManager.emptyAddress, endingAddress: LocationManager.emptyAddress))
+        DetailedTripView(trip: Trip(id: UUID(), date: Date().iso8601, missions: ["1", "2", "3"], comment: "Test comment", totalDistance: 25, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress))
             .environmentObject(TripController(appController: AppController()))
     }
 }

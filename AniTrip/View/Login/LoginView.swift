@@ -30,6 +30,9 @@ struct LoginView: View {
             }
         }
         .padding()
+        .alert(isPresented: $userController.showSuccessAccountCreationAlert) {
+            Alert(title: Text("Success"), message: Text(Notification.AniTrip.accountCreationSuccess.notificationMessage), dismissButton: .default(Text("OK")))
+        }
     }
 }
 
