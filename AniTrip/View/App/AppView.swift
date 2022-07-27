@@ -46,18 +46,8 @@ struct AppView: View {
                     Label("Settings", systemImage: "gear")
                 }
             }
-            .sheet(isPresented: $userController.displayActivateAccount) {
+            .sheet(isPresented: $volunteersController.displayActivateAccount) {
                 ActivateAccountView()
-            }
-            .alert(isPresented: $volunteersController.activationSuccessAlert) {
-                Alert(title: Text("Account activate"), message: Text("You preceed to the activation"), dismissButton: .default(Text("OK"), action: {
-                    userController.accountToActivateEmail = ""
-                }))
-            }
-            .alert(isPresented: $volunteersController.activationRefused) {
-                Alert(title: Text("Activation refused"), message: Text("You refused the activate"), dismissButton: .default(Text("OK"), action: {
-                    userController.accountToActivateEmail = ""
-                }))
             }
         }
     }

@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LoginSubview: View {
     @EnvironmentObject private var userController: UserController
+    @EnvironmentObject private var volunteersController: VolunteersController
     let laContext = LAContext()
     
     var body: some View {
@@ -37,8 +38,8 @@ struct LoginSubview: View {
                     .foregroundColor(.red)
             }
             
-            if userController.displayActivateAccount {
-                Text("Connect to activate the new account of \(userController.accountToActivateEmail)")
+            if volunteersController.displayActivateAccount {
+                Text("Connect to activate the new account of \(volunteersController.accountToActivateEmail)")
                     .font(.body.bold())
                     .foregroundColor(.accentColor)
                     .multilineTextAlignment(.center)
@@ -78,5 +79,6 @@ struct LoginSubview_Previews: PreviewProvider {
     static var previews: some View {
         LoginSubview()
             .environmentObject(UserController())
+            .environmentObject(VolunteersController(appController: AppController()))
     }
 }

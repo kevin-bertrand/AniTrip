@@ -20,24 +20,39 @@ struct ActivateAccountView: View {
             
             Spacer()
             
-            Text("Activate the account \(userController.accountToActivateEmail) ?")
-                .font(.title2.bold())
-            
-            Spacer()
-            
-            HStack {
-                ButtonWithIcon(action: {
-                    userController.displayActivateAccount = false
-                    volunteersController.refuseActivation()
-                }, title: userController.accountToActivateEmail.isNotEmpty ? "Refuse" : "Back", color: .red)
+            if volunteersController.showActivationAlert {
+                Text(volunteersController.activationTitle)
+                    .font(.title2.bold())
+                    .padding()
                 
-                if userController.accountToActivateEmail.isNotEmpty {
+                Text(volunteersController.activationMessage)
+                    .font(.body)
+                
+                Spacer()
+                
+                ButtonWithIcon(action: {
+                    volunteersController.resetActivationView()
+                }, title: "OK")
+                .padding()
+            } else {
+                Text("Activate the account \(volunteersController.accountToActivateEmail) ?")
+                    .font(.title2.bold())
+                
+                Spacer()
+                
+                HStack {
                     ButtonWithIcon(action: {
-                        volunteersController.activateAccount(of: VolunteerToActivate(email: userController.accountToActivateEmail), by: userController.connectedUser)
-                        userController.displayActivateAccount = false
-                    }, title: "Accept")
-                }
-            }.padding()
+                        volunteersController.displayActivateAccount = false
+                        volunteersController.refuseActivation()
+                    }, title: volunteersController.accountToActivateEmail.isNotEmpty ? "Refuse" : "Back", color: .red)
+                    
+                    if volunteersController.accountToActivateEmail.isNotEmpty {
+                        ButtonWithIcon(action: {
+                            volunteersController.activateAccount(of: VolunteerToActivate(email: volunteersController.accountToActivateEmail), by: userController.connectedUser)
+                        }, title: "Accept")
+                    }
+                }.padding()
+            }
         }
     }
 }

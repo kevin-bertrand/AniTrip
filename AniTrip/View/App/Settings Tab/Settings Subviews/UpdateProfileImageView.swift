@@ -28,7 +28,7 @@ struct UpdateProfileImageView: View {
                     Image(uiImage: image)
                         .resizable()
                         .clipShape(Circle())
-                        .scaledToFill()
+                        .scaledToFit()
                         .overlay(Circle().stroke(style: .init(lineWidth: 1)))
                 }
             }

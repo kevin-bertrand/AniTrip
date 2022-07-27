@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct VolunteerProfileView: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var userController: UserController
     @EnvironmentObject var volunteersController: VolunteersController
     @EnvironmentObject var tripController: TripController
@@ -84,6 +85,11 @@ struct VolunteerProfileView: View {
                     }
                 }
             }
+        }
+        .alert(isPresented: $volunteersController.changeActivationStatusAlert) {
+            Alert(title: Text(volunteersController.changeActivationStatusTitle), message: Text(volunteersController.changeActivationStatusMessage), dismissButton: .default(Text("OK"), action: {
+                self.presentationMode.wrappedValue.dismiss()
+            }))
         }
     }
 }

@@ -12,6 +12,7 @@ import SwiftUICharts
 struct HomeView: View {
     @EnvironmentObject var tripController: TripController
     @EnvironmentObject var userController: UserController
+    @EnvironmentObject var volunteersController: VolunteersController
     
     var body: some View {
         List {
@@ -76,7 +77,7 @@ struct HomeView: View {
         .onAppear {
             tripController.homeIsLoaded(byUser: userController.connectedUser)
         }
-        .sheet(isPresented: $userController.displayActivateAccount) {
+        .sheet(isPresented: $volunteersController.displayActivateAccount) {
             ActivateAccountView()
         }
     }
@@ -87,5 +88,6 @@ struct HomeView_Previews: PreviewProvider {
         HomeView()
             .environmentObject(TripController(appController: AppController()))
             .environmentObject(UserController())
+            .environmentObject(VolunteersController(appController: AppController()))
     }
 }

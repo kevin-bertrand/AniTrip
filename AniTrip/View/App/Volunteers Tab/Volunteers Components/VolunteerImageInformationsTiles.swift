@@ -15,21 +15,7 @@ struct VolunteerImageInformationsTiles: View {
             Spacer()
             
             VStack {
-                Group {
-                    if let image = volunteer.image {
-                        Image(uiImage: image)
-                            .resizable()
-                            .frame(width: 150, height: 150)
-                            .clipShape(Circle())
-                            .scaledToFill()
-                            .overlay(Circle().stroke(style: .init(lineWidth: 1)))
-                    } else {
-                        Image(systemName: "person.circle")
-                            .resizable()
-                            .frame(width: 150, height: 150)
-                    }
-                }
-                .padding(5)
+                ProfilePictureView(image: volunteer.image)
 
                 Text("\(volunteer.firstname) \(volunteer.lastname)")
                     .font(.title.bold())

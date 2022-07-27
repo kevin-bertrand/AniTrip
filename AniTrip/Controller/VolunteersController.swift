@@ -17,9 +17,17 @@ final class VolunteersController: ObservableObject {
         }
     }
     
-    @Published var activationRefused: Bool = false
-    @Published var activationSuccessAlert: Bool = false
-    @Published var desactivationSuccessAlert: Bool = false
+    // Volunteer profile view
+    @Published var changeActivationStatusAlert: Bool = false
+    var changeActivationStatusTitle: String = ""
+    var changeActivationStatusMessage: String = ""
+    
+    // Activate account view
+    @Published var displayActivateAccount: Bool = false
+    @Published var accountToActivateEmail: String = ""
+    @Published var showActivationAlert: Bool = false
+    var activationMessage = ""
+    var activationTitle = ""
     
     var appController: AppController
     
@@ -57,7 +65,19 @@ final class VolunteersController: ObservableObject {
     
     /// Refuse the activation
     func refuseActivation() {
-        activationRefused = true
+        accountToActivateEmail = ""
+        activationMessage = "Account not activate"
+        activationTitle = "You refused the activation"
+        showActivationAlert = true
+    }
+    
+    /// Reset the activation view
+    func resetActivationView() {
+        accountToActivateEmail = ""
+        activationMessage = "Account not activate"
+        activationTitle = "You refused the activation"
+        displayActivateAccount = false
+        showActivationAlert = false
     }
     
     // MARK: Initialization
@@ -68,6 +88,9 @@ final class VolunteersController: ObservableObject {
         configureNotification(for: Notification.AniTrip.gettingVolunteersListSuccess.notificationName)
         configureNotification(for: Notification.AniTrip.activationSuccess.notificationName)
         configureNotification(for: Notification.AniTrip.desactivationSuccess.notificationName)
+        
+        // Configure activate account notification
+        configureNotification(for: Notification.AniTrip.showActivateAccount.notificationName)
     }
     
     // MARK: Private
@@ -82,18 +105,35 @@ final class VolunteersController: ObservableObject {
     
     /// Initialise all notification for this controller
     @objc private func processNotification(_ notification: Notification) {
-        if let notificationName = notification.userInfo?["name"] as? Notification.Name {
-            appController.resetLoadingInProgress()
-            objectWillChange.send()
-            
-            switch notificationName {
-            case Notification.AniTrip.gettingVolunteersListSuccess.notificationName:
-                volunteersList = volunteersManager.volunteersList
-            case Notification.AniTrip.activationSuccess.notificationName:
-                activationSuccessAlert = true
-            case Notification.AniTrip.desactivationSuccess.notificationName:
-                desactivationSuccessAlert = true
-            default: break
+        if let notificationName = notification.userInfo?["name"] as? Notification.Name,
+           let notificationMessage = notification.userInfo?["message"] as? String {
+            DispatchQueue.main.async {
+                self.appController.resetLoadingInProgress()
+                self.objectWillChange.send()
+                
+                switch notificationName {
+                case Notification.AniTrip.gettingVolunteersListSuccess.notificationName:
+                    self.volunteersList = self.volunteersManager.volunteersList
+                case Notification.AniTrip.activationSuccess.notificationName:
+                    if self.displayActivateAccount {
+                        self.accountToActivateEmail = ""
+                        self.activationMessage = "Activation success"
+                        self.activationTitle = "You accept the activation!"
+                        self.showActivationAlert = true
+                    } else {
+                        self.changeActivationStatusTitle = "Activation success!"
+                        self.changeActivationStatusMessage = "The account is now active!"
+                        self.changeActivationStatusAlert = true
+                    }
+                case Notification.AniTrip.desactivationSuccess.notificationName:
+                    self.changeActivationStatusTitle = "Desctivation success!"
+                    self.changeActivationStatusMessage = "The account is no longer active!"
+                    self.changeActivationStatusAlert = true
+                case Notification.AniTrip.showActivateAccount.notificationName:
+                    self.accountToActivateEmail = notificationMessage
+                    self.displayActivateAccount = true
+                default: break
+                }
             }
         }
     }

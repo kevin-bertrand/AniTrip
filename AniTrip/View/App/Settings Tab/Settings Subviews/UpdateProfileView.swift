@@ -18,21 +18,7 @@ struct UpdateProfileView: View {
                 HStack {
                     Spacer()
                     VStack {
-                        Group {
-                            if let image = userController.connectedUser?.image {
-                                Image(uiImage: image)
-                                    .resizable()
-                                    .clipShape(Circle())
-                                    .scaledToFill()
-                                    .overlay(Circle().stroke(style: .init(lineWidth: 1)))
-                                
-                            } else {
-                                Image(systemName: "person.circle")
-                                    .resizable()
-                            }
-                        }
-                        .frame(width: 150, height: 150)
-                        .padding(5)
+                        ProfilePictureView(image: userController.connectedUser?.image)
                         
                         Button {
                             userController.showUpdateProfileImage = true

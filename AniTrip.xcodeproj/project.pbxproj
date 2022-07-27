@@ -32,6 +32,7 @@
 		06158E6328859B5100C3BE6E /* AddTripView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E6228859B5100C3BE6E /* AddTripView.swift */; };
 		06158E662885A57100C3BE6E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E652885A57100C3BE6E /* HomeView.swift */; };
 		06158E692885A5FE00C3BE6E /* NewsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E682885A5FE00C3BE6E /* NewsTileView.swift */; };
+		061949DF28918D52002D95A1 /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061949DE28918D52002D95A1 /* ProfilePictureView.swift */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
@@ -129,6 +130,7 @@
 		06158E6228859B5100C3BE6E /* AddTripView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTripView.swift; sourceTree = "<group>"; };
 		06158E652885A57100C3BE6E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		06158E682885A5FE00C3BE6E /* NewsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTileView.swift; sourceTree = "<group>"; };
+		061949DE28918D52002D95A1 /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065E4753287B573600D32E05 /* AniTripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripApp.swift; sourceTree = "<group>"; };
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */,
 				068FDB9D2886F2E000ACA72D /* DetectAddressView.swift */,
 				06FBF14928900C3600222480 /* ImagePicker.swift */,
+				061949DE28918D52002D95A1 /* ProfilePictureView.swift */,
 			);
 			path = "Global Components";
 			sourceTree = "<group>";
@@ -683,6 +686,7 @@
 				0690C4232888CE2600B57B92 /* AppDelegate.swift in Sources */,
 				06E3494F28898EDC0056470E /* SearchAddressView.swift in Sources */,
 				06158E57288590AC00C3BE6E /* TripManager.swift in Sources */,
+				061949DF28918D52002D95A1 /* ProfilePictureView.swift in Sources */,
 				06158E3F288582C200C3BE6E /* VolunteersView.swift in Sources */,
 				06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */,
 				0690C41F28887EB200B57B92 /* TripListView.swift in Sources */,

@@ -12,21 +12,7 @@ struct VolunteerTileView: View {
     
     var body: some View {
         HStack(spacing: 15) {
-            Group {
-                if let image = volunteer.image {
-                    Image(uiImage: image)
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                        .clipShape(Circle())
-                        .scaledToFill()
-                        .overlay(Circle().stroke(style: .init(lineWidth: 1)))
-                } else {
-                    Image(systemName: "person.circle")
-                        .resizable()
-                        .frame(width: 50, height: 50)
-                }
-            }
-            .padding(5)
+            ProfilePictureView(image: volunteer.image, size: 50)
 
             VStack(alignment: .leading) {
                 if volunteer.lastname.isEmpty && volunteer.firstname.isEmpty {
