@@ -52,7 +52,7 @@ struct ConnectedUser: Codable {
 }
 
 struct User {
-    let image: UIImage?
+    var image: UIImage?
     let id: UUID?
     var firstname: String
     var lastname: String

@@ -123,8 +123,15 @@ final class UserManager {
             return
         }
 
-        networkManager.uploadFiles(urlParams: NetworkConfigurations.updatePicture.urlParams, method: NetworkConfigurations.updatePicture.method, user: connectedUser, file: imageData) { data, response, error in
-            
+        networkManager.uploadFiles(urlParams: NetworkConfigurations.updatePicture.urlParams, method: NetworkConfigurations.updatePicture.method, user: connectedUser, file: imageData) { [weak self] data, response, error in
+            if let self = self,
+               let statusCode = response?.statusCode,
+               statusCode == 202 {
+                self.connectedUser?.image = image
+                Notification.AniTrip.updatePictureSuccess.sendNotification()
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
         }
     }
     

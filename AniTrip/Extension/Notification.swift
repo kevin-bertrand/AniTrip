@@ -26,6 +26,7 @@ extension Notification {
         
         // Update profile notifications
         case updateProfileSuccess = "Your profile is updated!"
+        case updatePictureSuccess = "Your picture is updated!"
         
         // Getting volunteers list
         case gettingVolunteersListSuccess = "Volunteers list downloaded!"

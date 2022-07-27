@@ -185,6 +185,7 @@ final class UserController: ObservableObject {
         
         // Configure update profile notifications
         configureNotification(for: Notification.AniTrip.updateProfileSuccess.notificationName)
+        configureNotification(for: Notification.AniTrip.updatePictureSuccess.notificationName)
         
         // Configure activate account notification
         configureNotification(for: Notification.AniTrip.showActivateAccount.notificationName)
@@ -204,29 +205,33 @@ final class UserController: ObservableObject {
     @objc private func processNotification(_ notification: Notification) {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name,
            let notificationMessage = notification.userInfo?["message"] as? String {
-            appController.resetLoadingInProgress()
-            objectWillChange.send()
-            
-            switch notificationName {
-            case Notification.AniTrip.loginSuccess.notificationName:
-                self.actionWhenLoginSuccess()
-            case Notification.AniTrip.accountCreationSuccess.notificationName:
-                createAccountEmailTextField = ""
-                createAccountPasswordTextField = ""
-                createAccountPasswordVerificationTextField = ""
-                showSuccessAccountCreationAlert = true
-            case Notification.AniTrip.updateProfileSuccess.notificationName:
-                self.userToUpdate.password = ""
-                self.userToUpdate.passwordVerification = ""
-                self.successUpdate = true
-            case Notification.AniTrip.loginWrongCredentials.notificationName,
-                Notification.AniTrip.accountCreationPasswordError.notificationName,
-                Notification.AniTrip.accountCreationInformationsError.notificationName:
-                self.appController.showAlertView(withMessage: notificationMessage)
-            case Notification.AniTrip.showActivateAccount.notificationName:
-                self.accountToActivateEmail = notificationMessage
-                self.displayActivateAccount = true
-            default: break
+            DispatchQueue.main.async {
+                self.appController.resetLoadingInProgress()
+                self.objectWillChange.send()
+                
+                switch notificationName {
+                case Notification.AniTrip.loginSuccess.notificationName:
+                    self.actionWhenLoginSuccess()
+                case Notification.AniTrip.accountCreationSuccess.notificationName:
+                    self.createAccountEmailTextField = ""
+                    self.createAccountPasswordTextField = ""
+                    self.createAccountPasswordVerificationTextField = ""
+                    self.showSuccessAccountCreationAlert = true
+                case Notification.AniTrip.updateProfileSuccess.notificationName:
+                    self.userToUpdate.password = ""
+                    self.userToUpdate.passwordVerification = ""
+                    self.successUpdate = true
+                case Notification.AniTrip.loginWrongCredentials.notificationName,
+                    Notification.AniTrip.accountCreationPasswordError.notificationName,
+                    Notification.AniTrip.accountCreationInformationsError.notificationName:
+                    self.appController.showAlertView(withMessage: notificationMessage)
+                case Notification.AniTrip.showActivateAccount.notificationName:
+                    self.accountToActivateEmail = notificationMessage
+                    self.displayActivateAccount = true
+                case Notification.AniTrip.updatePictureSuccess.notificationName:
+                    self.showUpdateProfileImage = false
+                default: break
+                }
             }
         }
     }
@@ -254,19 +259,21 @@ final class UserController: ObservableObject {
     
     /// Perfom action when login success
     private func actionWhenLoginSuccess() {
-        if savedPassword.isEmpty && canUseBiometric {
-            loginShowBiometricAlert = true
-        }
-        
-        if let user = connectedUser {
-            userToUpdate = user.toUpdate()
-            
-            if user.position == .user {
-                self.accountToActivateEmail = ""
-                self.displayActivateAccount = false
+        DispatchQueue.main.async {
+            if self.savedPassword.isEmpty && self.canUseBiometric {
+                self.loginShowBiometricAlert = true
             }
+            
+            if let user = self.connectedUser {
+                self.userToUpdate = user.toUpdate()
+                
+                if user.position == .user {
+                    self.accountToActivateEmail = ""
+                    self.displayActivateAccount = false
+                }
+            }
+            
+            self.isConnected = true
         }
-        
-        isConnected = true
     }
 }

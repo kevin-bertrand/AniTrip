@@ -56,8 +56,9 @@ class NetworkManager: NetworkProtocol {
         if let filename = "userPicture.jpeg".data(using: .utf8) {
             multiPart.append(filename, withName: "filename")
         }
-        AF.upload(multipartFormData: multiPart, to: formattedUrl, method: .patch, headers: headers).response { data in
-            print(data)
+        AF.upload(multipartFormData: multiPart, to: formattedUrl, method: .patch, headers: headers)
+            .response { data in
+                completionHandler((data.data, data.response, data.error))
         }.resume()
     }
     

@@ -293,6 +293,45 @@ final class UserManagerTests: XCTestCase {
         XCTAssertEqual(connectedUser?.firstname, userManager.connectedUser?.firstname)
     }
     
+    // MARK: Update picture tests
+    /// User not connected
+    func testGivenUserNotConnected_WhenUpdateProfilePicutre_ThenGettingNoPicture() {
+        // Given
+        configureManager(correctData: nil, response: .status200, status: .correctData)
+        
+        // When
+        userManager.updateUserProfileImage(UIImage())
+        
+        // Then
+        XCTAssertNil(userManager.connectedUser?.image)
+    }
+    
+    /// Success updtate
+    func testGivenUserUpdatePicture_WhenIsSucceeded_ThenGettingNoPicture() {
+        // Given
+        connectUser()
+        configureManager(correctData: nil, response: .status202, status: .correctData)
+        
+        // When
+        userManager.updateUserProfileImage(UIImage(systemName: "gear")!)
+        
+        // Then
+        XCTAssertNotNil(userManager.connectedUser?.image)
+    }
+    
+    /// User not connected
+    func testGivenUserUpdatePicture_WhenGettingError_ThenGettingNoPicture() {
+        // Given
+        connectUser()
+        configureManager(correctData: nil, response: .status0, status: .error)
+        
+        // When
+        userManager.updateUserProfileImage(UIImage(systemName: "gear")!)
+        
+        // Then
+        XCTAssertNil(userManager.connectedUser?.image)
+    }
+    
     // MARK: Private
     /// Configure the fake network manager
     private func configureManager(correctData: FakeResponseData.DataFiles?, response: FakeResponseData.Response, status: FakeResponseData.SessionStatus) {
