@@ -15,7 +15,7 @@ struct VolunteersView: View {
         VStack {
             SearchTextFieldView(searchText: $volunteersController.searchFilter)
                 .padding()
-                    
+            
             List {
                 if userController.connectedUser?.position == .admin {
                     Section(header: Text("Active accounts")) {

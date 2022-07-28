@@ -12,7 +12,8 @@ struct VolunteerProfileView: View {
     @EnvironmentObject var userController: UserController
     @EnvironmentObject var volunteersController: VolunteersController
     @EnvironmentObject var tripController: TripController
-    var volunteer: Volunteer
+    @State private var showUpdatePositionAlert: Bool = false
+    @State var volunteer: Volunteer
     
     var body: some View {
         Form {
@@ -45,6 +46,23 @@ struct VolunteerProfileView: View {
                        let url = URL(string: "tel:\(phone)") {
                         Link(phone, destination: url)
                             .foregroundColor(.accentColor)
+                    }
+                }
+            }
+            
+            Section(header: Text("Association")) {
+                HStack {
+                    Text("Position")
+                    Spacer()
+                    
+                    if userController.connectedUser?.position == .admin && volunteer.email != userController.connectedUser?.email {
+                        Picker("Position", selection: $volunteer.position) {
+                            Text("User").tag(Position.user)
+                            Text("Administrator").tag(Position.admin)
+                        }.pickerStyle(.menu)
+                    } else {
+                        Text(volunteer.position.name)
+                            .foregroundColor(.gray)
                     }
                 }
             }
@@ -93,12 +111,28 @@ struct VolunteerProfileView: View {
                 self.presentationMode.wrappedValue.dismiss()
             }))
         }
+        .onChange(of: volunteer.position) { newValue in
+            showUpdatePositionAlert = true
+        }
+        .actionSheet(isPresented: $showUpdatePositionAlert) {
+            ActionSheet(title: Text("Confirm status change"), message: Text("Do you confirm the change of status of \(volunteer.email) to \(volunteer.position.name)?"), buttons: [.default(Text("Yes"), action: {
+                volunteersController.changePosition(of: volunteer, by: userController.connectedUser)
+            }), .default(Text("No"), action: {
+                showUpdatePositionAlert = false
+                switch volunteer.position {
+                case .user:
+                    volunteer.position = .admin
+                case .admin:
+                    volunteer.position = .user
+                }
+            })])
+        }
     }
 }
 
 struct VolunteerProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerProfileView(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: LocationController.emptyAddress, isActive: true))
+        VolunteerProfileView(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: LocationController.emptyAddress, isActive: true))
             .environmentObject(UserController(appController: AppController()))
             .environmentObject(VolunteersController(appController: AppController()))
     }

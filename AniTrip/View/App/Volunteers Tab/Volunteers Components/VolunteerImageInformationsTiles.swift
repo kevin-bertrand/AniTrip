@@ -17,12 +17,17 @@ struct VolunteerImageInformationsTiles: View {
             VStack {
                 ProfilePictureView(image: volunteer.image)
 
-                Text("\(volunteer.firstname) \(volunteer.lastname)")
-                    .font(.title.bold())
-
-                Text(volunteer.missions.joined(separator: ", "))
-                    .font(.subheadline)
-                    .multilineTextAlignment(.center)
+                if volunteer.firstname.isEmpty {
+                    Text("\(volunteer.email)")
+                        .font(.title.bold())
+                } else {
+                    Text("\(volunteer.firstname) \(volunteer.lastname)")
+                        .font(.title.bold())
+                    
+                    Text(volunteer.missions.joined(separator: ", "))
+                        .font(.subheadline)
+                        .multilineTextAlignment(.center)
+                }
             }
             
             Spacer()
@@ -32,6 +37,6 @@ struct VolunteerImageInformationsTiles: View {
 
 struct VolunteerImageInformationsTiles_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerImageInformationsTiles(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: LocationController.emptyAddress, isActive: true))
+        VolunteerImageInformationsTiles(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: LocationController.emptyAddress, isActive: true))
     }
 }

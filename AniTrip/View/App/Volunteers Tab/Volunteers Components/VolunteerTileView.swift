@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct VolunteerTileView: View {
+    @EnvironmentObject var volunteersController: VolunteersController
     let volunteer: Volunteer
     
     var body: some View {
@@ -33,6 +34,7 @@ struct VolunteerTileView: View {
 
 struct VolunteerTileView_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerTileView(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: nil, isActive: false))
+        VolunteerTileView(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: false))
+            .environmentObject(VolunteersController(appController: AppController()))
     }
 }

@@ -68,7 +68,6 @@ final class UserController: ObservableObject {
     
     /// Perfom login
     func performLogin() {
-        objectWillChange.send()
         appController.setLoadingInProgress(withMessage: "Log in... Please wait!")
         loginErrorMessage = ""
         
@@ -110,7 +109,6 @@ final class UserController: ObservableObject {
     
     /// Create an account
     func createAccount() {
-        objectWillChange.send()
         appController.setLoadingInProgress(withMessage: "Account creation in progress...")
         loginErrorMessage = ""
         
@@ -133,7 +131,6 @@ final class UserController: ObservableObject {
     
     /// Disconnect the user
     func disconnectUser() {
-        objectWillChange.send()
         loginPasswordTextField = ""
         isConnected = false
         userManager.disconnectUser()
@@ -199,7 +196,6 @@ final class UserController: ObservableObject {
            let notificationMessage = notification.userInfo?["message"] as? String {
             DispatchQueue.main.async {
                 self.appController.resetLoadingInProgress()
-                self.objectWillChange.send()
                 
                 switch notificationName {
                 case Notification.AniTrip.loginSuccess.notificationName:

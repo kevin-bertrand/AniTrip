@@ -29,28 +29,24 @@ final class AppController: ObservableObject {
     // MARK: Methods
     /// Setting loading in progress
     func setLoadingInProgress(withMessage message: String) {
-        objectWillChange.send()
         loadingInProgress = true
         loadingMessage = message
     }
     
     /// Reset loading in progress
     func resetLoadingInProgress() {
-        objectWillChange.send()
         loadingMessage = ""
         loadingInProgress = false
     }
     
     /// Show an alert view
     func showAlertView(withMessage message: String, andTitle title: String) {
-        objectWillChange.send()
         alertViewMessage = message
         alertViewTitle = title
     }
     
     /// Reset alert view
     func resetAlertView() {
-        objectWillChange.send()
         alertViewMessage = ""
         alertViewTitle = ""
     }
@@ -75,7 +71,6 @@ final class AppController: ObservableObject {
     @objc private func processNotification(_ notification: Notification) {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name,
            let notificationMessage = notification.userInfo?["message"] as? String {
-            objectWillChange.send()
             self.resetLoadingInProgress()
             
             switch notificationName {

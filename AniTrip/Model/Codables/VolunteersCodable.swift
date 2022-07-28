@@ -30,7 +30,7 @@ struct Volunteer {
     let email: String
     let phoneNumber: String
     let gender: String
-    let position: String
+    var position: Position
     let missions: [String]
     let address: Address?
     let isActive: Bool
@@ -38,4 +38,9 @@ struct Volunteer {
 
 struct VolunteerToActivate: Codable {
     let email: String
+}
+
+struct VolunteerToUpdatePosition: Codable {
+    let email: String
+    let position: Position
 }

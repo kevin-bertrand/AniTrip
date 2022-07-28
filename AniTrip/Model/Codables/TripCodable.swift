@@ -44,9 +44,15 @@ struct TripChartPoint: Codable, Hashable {
     let distance: Double
 }
 
-struct ThisWeekInformations: Codable {
-    let distance: Double
-    let numberOfTrip: Int
+struct News: Codable {
+    let distanceThisWeek: Double
+    let numberOfTripThisWeek: Int
+    let distanceThisYear: Double
+    let numberOfTripThisYear: Int
+    let distancePercentSinceLastYear: Double
+    let distancePercentSinceLastWeek: Double
+    let numberTripPercentSinceLastYear: Double
+    let numberTripPercentSinceLastWeek: Double
 }
 
 enum ChartFilter: String, Equatable {

@@ -63,6 +63,29 @@ final class VolunteersManager {
         }
     }
     
+    /// Changin volunteer position
+    func changePosition(of volunteer: VolunteerToUpdatePosition, by user: User?) {
+        guard let user = user else {
+            Notification.AniTrip.unknownError.sendNotification()
+            return
+        }
+        
+        networkManager.request(urlParams: NetworkConfigurations.updatePosition.urlParams, method: NetworkConfigurations.updatePosition.method, authorization: .authorization(bearerToken: user.token), body: volunteer) { data, response, error in
+            if let statusCode = response?.statusCode {
+                switch statusCode {
+                case 202:
+                    Notification.AniTrip.positionUpdated.sendNotification()
+                case 404:
+                    Notification.AniTrip.positionNotUpdated.sendNotification()
+                default:
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
     // MARK: Initialization
     init(networkManager: NetworkManager = NetworkManager()) {
         self.networkManager = networkManager
@@ -83,7 +106,12 @@ final class VolunteersManager {
                                                      firstname: volunteer.firstname,
                                                      lastname: volunteer.lastname,
                                                      email: volunteer.email,
-                                                     phoneNumber: volunteer.phoneNumber, gender: volunteer.gender, position: volunteer.position, missions: volunteer.missions, address: volunteer.address, isActive: volunteer.isActive))
+                                                     phoneNumber: volunteer.phoneNumber,
+                                                     gender: volunteer.gender,
+                                                     position: volunteer.position == "administrator" ? .admin : .user,
+                                                     missions: volunteer.missions,
+                                                     address: volunteer.address,
+                                                     isActive: volunteer.isActive))
                 if volunteers.count-1 == index {
                     Notification.AniTrip.gettingVolunteersListSuccess.sendNotification()
                 }

@@ -78,6 +78,11 @@ final class VolunteersController: ObservableObject {
         showActivationAlert = false
     }
     
+    /// Change volunteer position
+    func changePosition(of volunteer: Volunteer, by user: User?) {
+        volunteersManager.changePosition(of: VolunteerToUpdatePosition(email: volunteer.email, position: volunteer.position), by: user)
+    }
+    
     // MARK: Initialization
     init(appController: AppController) {
         self.appController = appController
@@ -89,6 +94,10 @@ final class VolunteersController: ObservableObject {
         
         // Configure activate account notification
         configureNotification(for: Notification.AniTrip.showActivateAccount.notificationName)
+        
+        // Configure update position notification
+        configureNotification(for: Notification.AniTrip.positionUpdated.notificationName)
+        configureNotification(for: Notification.AniTrip.positionNotUpdated.notificationName)
     }
     
     // MARK: Private
@@ -108,7 +117,6 @@ final class VolunteersController: ObservableObject {
            let notificationMessage = notification.userInfo?["message"] as? String {
             DispatchQueue.main.async {
                 self.appController.resetLoadingInProgress()
-                self.objectWillChange.send()
                 
                 switch notificationName {
                 case Notification.AniTrip.gettingVolunteersListSuccess.notificationName:
@@ -131,6 +139,14 @@ final class VolunteersController: ObservableObject {
                 case Notification.AniTrip.showActivateAccount.notificationName:
                     self.accountToActivateEmail = notificationMessage
                     self.displayActivateAccount = true
+                case Notification.AniTrip.positionUpdated.notificationName:
+                    self.changeActivationStatusTitle = "Success!"
+                    self.changeActivationStatusMessage = notificationMessage
+                    self.changeActivationStatusAlert = true
+                case Notification.AniTrip.positionNotUpdated.notificationName:
+                    self.changeActivationStatusTitle = "Error!"
+                    self.changeActivationStatusMessage = notificationMessage
+                    self.changeActivationStatusAlert = true
                 default: break
                 }
             }
@@ -142,7 +158,13 @@ final class VolunteersController: ObservableObject {
         if searchFilter.isEmpty {
             volunteersList = volunteersManager.volunteersList
         } else {
-            volunteersList = volunteersManager.volunteersList.filter { $0.firstname.localizedCaseInsensitiveContains(searchFilter) || $0.lastname.localizedCaseInsensitiveContains(searchFilter) || !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty }
+            volunteersList = volunteersManager.volunteersList.filter {
+                $0.firstname.localizedCaseInsensitiveContains(searchFilter) ||
+                $0.lastname.localizedCaseInsensitiveContains(searchFilter) ||
+                !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty ||
+                $0.email.localizedCaseInsensitiveContains(searchFilter) ||
+                ($0.address != nil && $0.address?.city.localizedCaseInsensitiveContains(searchFilter) == true)
+            }
         }
     }
 }

@@ -17,15 +17,28 @@ struct HomeView: View {
     var body: some View {
         List {
             Section {
-                ScrollView(.horizontal) {
-                    HStack(spacing: 15) {
-                        NewsTileView(title: "This week:", icon: Image(systemName: "car"), information: "\(tripController.numberOfTripThisWeek) trips")
-                        NewsTileView(title: "This week", icon: Image("TripIcon"), information: "\(tripController.distanceThisWeek) km")
+                VStack(alignment: .leading) {
+                    Text("News")
+                        .font(.title2.bold())
+                        .padding(.horizontal, 30)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 0) {
+                            Group {
+                                NewsTileView(title: "This week", icon: Image(systemName: "car"), information: "\(tripController.news.numberOfTripThisWeek) trips", percent: tripController.news.distancePercentSinceLastWeek, comparaison: "week")
+                                NewsTileView(title: "This week", icon: Image("TripIcon"), information: "\(tripController.news.distanceThisWeek) km", percent: tripController.news.numberTripPercentSinceLastWeek, comparaison: "week")
+                                NewsTileView(title: "This year", icon: Image(systemName: "car"), information: "\(tripController.news.numberOfTripThisYear) trips", percent: tripController.news.distancePercentSinceLastYear, comparaison: "year")
+                            }.padding(.leading, 10)
+                            
+                            NewsTileView(title: "This year", icon: Image("TripIcon"), information: "\(tripController.news.distanceThisYear) km", percent: tripController.news.numberTripPercentSinceLastYear, comparaison: "year")
+                                .padding(.horizontal, 10)
+                        }
+                        .padding(.vertical)
                     }
-                    .padding(.vertical)
+                    
                 }
-                .listRowBackground(Color.clear)
             }
+            .listRowBackground(Color.clear)
+            .padding(.horizontal, -25)
             
             Section {
                 VStack(alignment: .leading) {
@@ -70,7 +83,7 @@ struct HomeView: View {
                     }
                 }
             }
-        }
+        }.listStyle(.grouped)
         .onChange(of: tripController.chartFilter, perform: { _ in
             tripController.downlaodChartPoint(byUser: userController.connectedUser)
         })

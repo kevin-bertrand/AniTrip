@@ -14,8 +14,7 @@ final class TripManager {
     var volunteerTrips: [Trip] { volunteerTripsList.sorted {$0.date > $1.date} }
     var threeLatestTrips: [Trip] { threeLatestTripsList.sorted { $0.date > $1.date }}
     var tripsChartPoints: [TripChartPoint] { tripsChartPointsList.sorted { $0.date.chartPointToDate < $1.date.chartPointToDate }}
-    var distanceThisWeek: Double = 0.0
-    var numberOfTripsThisWeek: Int = 0
+    var news: News = News(distanceThisWeek: 0.0, numberOfTripThisWeek: 0, distanceThisYear: 0.0, numberOfTripThisYear: 0, distancePercentSinceLastYear: 0.0, distancePercentSinceLastWeek: 0.0, numberTripPercentSinceLastYear: 0.0, numberTripPercentSinceLastWeek: 0.0)
     
     // MARK: Methods
     /// Getting trip list
@@ -142,11 +141,12 @@ final class TripManager {
         params.append("\(userId)")
         
         networkManager.request(urlParams: params, method: NetworkConfigurations.getNews.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+            
             if let self = self,
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
-                    self.decodeThisWeek(data: data)
+                    self.decodeNews(data: data)
                 case 404:
                     Notification.AniTrip.homeInformationsDonwloadedError.sendNotification()
                 default:
@@ -211,11 +211,10 @@ final class TripManager {
     }
     
     /// Decode this week news data
-    private func decodeThisWeek(data: Data?) {
+    private func decodeNews(data: Data?) {
         if let data = data,
-           let news = try? JSONDecoder().decode(ThisWeekInformations.self, from: data) {
-            distanceThisWeek = news.distance
-            numberOfTripsThisWeek = news.numberOfTrip
+           let news = try? JSONDecoder().decode(News.self, from: data) {
+            self.news = news
             Notification.AniTrip.homeInformationsDonwloaded.sendNotification()
         } else {
             Notification.AniTrip.unknownError.sendNotification()

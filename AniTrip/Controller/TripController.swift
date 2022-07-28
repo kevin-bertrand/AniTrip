@@ -40,9 +40,8 @@ final class TripController: ObservableObject {
     // Home informations
     @Published var threeLatestTrips: [Trip] = []
     @Published var chartFilter: ChartFilter = .week
-    var distanceThisWeek: Double = 0.0
-    var numberOfTripThisWeek: Int = 0
-    var chartPoints: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
+    @Published var news: News = News(distanceThisWeek: 0.0, numberOfTripThisWeek: 0, distanceThisYear: 0.0, numberOfTripThisYear: 0, distancePercentSinceLastYear: 0.0, distancePercentSinceLastWeek: 0.0, numberTripPercentSinceLastYear: 0.0, numberTripPercentSinceLastWeek: 0.0)
+    @Published var chartPoints: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
     
     // MARK: Methods
     /// Getting trip list
@@ -112,7 +111,6 @@ final class TripController: ObservableObject {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name,
            let notificationMessage = notification.userInfo?["message"] as? String {
             appController.resetLoadingInProgress()
-            objectWillChange.send()
             
             switch notificationName {
             case Notification.AniTrip.gettingTripListSucess.notificationName:
@@ -126,8 +124,7 @@ final class TripController: ObservableObject {
                 self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Success")
             case Notification.AniTrip.homeInformationsDonwloaded.notificationName:
                 threeLatestTrips = tripManager.threeLatestTrips
-                distanceThisWeek = tripManager.distanceThisWeek
-                numberOfTripThisWeek = tripManager.numberOfTripsThisWeek
+                self.news = tripManager.news
                 chartPoints = getChartData(from: tripManager.tripsChartPoints)
             default: break
             }
@@ -205,7 +202,6 @@ final class TripController: ObservableObject {
                                         baseline            : .minimumWithMaximum(of: 0),
                                         globalAnimation     : .easeOut(duration: 1))
         
-        objectWillChange.send()
         return LineChartData(dataSets       : data,
                              metadata       : metadata,
                              chartStyle     : chartStyle)

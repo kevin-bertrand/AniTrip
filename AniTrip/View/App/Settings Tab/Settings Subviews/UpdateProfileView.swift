@@ -9,7 +9,7 @@ import SwiftUI
 
 struct UpdateProfileView: View {
     @Environment(\.presentationMode) var presentationMode
-
+    
     @EnvironmentObject var userController: UserController
     
     var body: some View {
@@ -56,20 +56,11 @@ struct UpdateProfileView: View {
             .autocorrectionDisabled(true)
             
             Section(header: Text("Association")) {
-                if userController.connectedUser?.position == .admin {
-                    Picker("Position", selection: $userController.userToUpdate.position) {
-                        ForEach(Position.allCases, id: \.self) { position in
-                            Text(position.name)
-                                .tag(position)
-                        }
-                    }
-                } else {
-                    HStack {
-                        Text("Position")
-                        Spacer()
-                        Text(userController.userToUpdate.position.name)
-                            .foregroundColor(.gray)
-                    }
+                HStack {
+                    Text("Position")
+                    Spacer()
+                    Text(userController.userToUpdate.position.name)
+                        .foregroundColor(.gray)
                 }
             }
             
