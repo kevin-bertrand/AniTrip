@@ -56,16 +56,22 @@ struct HomeView: View {
                         }.pickerStyle(.menu)
                     }
                     
-                    LineChart(chartData: tripController.chartPoints)
-                        .pointMarkers(chartData: tripController.chartPoints)
-                        .touchOverlay(chartData: tripController.chartPoints, specifier: "%.0f km")
-                        .xAxisGrid(chartData: tripController.chartPoints)
-                        .yAxisGrid(chartData: tripController.chartPoints)
-                        .xAxisLabels(chartData: tripController.chartPoints)
-                        .yAxisLabels(chartData: tripController.chartPoints)
-                        .floatingInfoBox(chartData: tripController.chartPoints)
-                        .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 250, maxHeight: 500, alignment: .center)
-                        .padding(.top, 25)
+                    if tripController.chartPoints.dataSets.dataPoints.isEmpty || tripController.chartPoints.dataSets.dataPoints.allSatisfy { $0.value == 0.0 } {
+                        Text("No data. Add a new trip to see this chart!")
+                            .font(.body.bold())
+                            .foregroundColor(.red)
+                    } else {
+                        LineChart(chartData: tripController.chartPoints)
+                            .pointMarkers(chartData: tripController.chartPoints)
+                            .touchOverlay(chartData: tripController.chartPoints, specifier: "%.0f km")
+                            .xAxisGrid(chartData: tripController.chartPoints)
+                            .yAxisGrid(chartData: tripController.chartPoints)
+                            .xAxisLabels(chartData: tripController.chartPoints)
+                            .yAxisLabels(chartData: tripController.chartPoints)
+                            .floatingInfoBox(chartData: tripController.chartPoints)
+                            .frame(minWidth: 150, maxWidth: 900, minHeight: 150, idealHeight: 250, maxHeight: 500, alignment: .center)
+                            .padding(.top, 25)
+                    }
                 }.padding(5)
             }
             

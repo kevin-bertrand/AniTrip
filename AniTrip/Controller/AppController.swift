@@ -43,6 +43,7 @@ final class AppController: ObservableObject {
     func showAlertView(withMessage message: String, andTitle title: String) {
         alertViewMessage = message
         alertViewTitle = title
+        showAlertView = true
     }
     
     /// Reset alert view
