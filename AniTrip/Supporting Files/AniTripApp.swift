@@ -62,14 +62,7 @@ struct AniTripApp: App {
             }
             .preferredColorScheme(useDefaultScheme ? nil : (useDarkScheme ? .dark : .light))
             .onAppear {
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (allowed, error) in
-                     //This callback does not trigger on main loop be careful
-                    if allowed {
-                      os_log(.debug, "Allowed") //import os
-                    } else {
-                      os_log(.debug, "Error")
-                    }
-                }
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {_,_ in}
             }
         }
     }
