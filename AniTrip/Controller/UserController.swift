@@ -12,14 +12,13 @@ import SwiftUI
 final class UserController: ObservableObject {
     // MARK: Public
     // MARK: Properties
-    @Published var appController: AppController = AppController()
+    // General properties
+    @AppStorage("aniTripDeviceToken") var deviceToken: String = ""
     @Published var isConnected: Bool = false
+    var appController: AppController
     var connectedUser: User? { userManager.connectedUser }
     
-   
-    
     // Login view properties
-    @AppStorage("aniTripDeviceToken") var deviceToken: String = ""
     @AppStorage("anitripSavedEmail") var savedEmail: String = ""
     @AppStorage("anitripSavedPassword") var savedPassword: String = ""
     @AppStorage("anitripCanUseBiometric") var canUseBiometric: Bool = true {
@@ -42,16 +41,12 @@ final class UserController: ObservableObject {
     @Published var createAccountPasswordTextField: String = ""
     @Published var createAccountPasswordVerificationTextField: String = ""
     @Published var createAccountErrorMessage: String = ""
-    @Published var showSuccessAccountCreationAlert: Bool = false
     
     // Update user
     @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: LocationController.emptyAddress, password: "", passwordVerification: "")
     @Published var successUpdate: Bool = false
     @Published var showUpdateProfileImage: Bool = false
-    
-    // Settings
-    @Published var successBiometricActivationAlert: Bool = false
-    
+        
     // MARK: Methods
     /// Check if the email must be saved
     func checkSaveEmail() {
@@ -150,13 +145,13 @@ final class UserController: ObservableObject {
         
         guard userToUpdate.password == userToUpdate.passwordVerification else {
             appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: "Both new password must match!")
+            appController.showAlertView(withMessage: "Both new password must match!", andTitle: "Password error!")
             return
         }
         
         if userToUpdate.phoneNumber.isNotEmpty && !userToUpdate.phoneNumber.isPhone {
             appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: "You must enter a valid phone number!")
+            appController.showAlertView(withMessage: "You must enter a valid phone number!", andTitle: "Phone number error")
             return
         }
         
@@ -171,7 +166,9 @@ final class UserController: ObservableObject {
     }
     
     // MARK: Initialization
-    init() {
+    init(appController: AppController) {
+        self.appController = appController
+        
         // Configure login notifications
         configureNotification(for: Notification.AniTrip.loginWrongCredentials.notificationName)
         configureNotification(for: Notification.AniTrip.loginSuccess.notificationName)
@@ -211,7 +208,7 @@ final class UserController: ObservableObject {
                     self.createAccountEmailTextField = ""
                     self.createAccountPasswordTextField = ""
                     self.createAccountPasswordVerificationTextField = ""
-                    self.showSuccessAccountCreationAlert = true
+                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Success!")
                 case Notification.AniTrip.updateProfileSuccess.notificationName:
                     self.userToUpdate.password = ""
                     self.userToUpdate.passwordVerification = ""
@@ -219,7 +216,7 @@ final class UserController: ObservableObject {
                 case Notification.AniTrip.loginWrongCredentials.notificationName,
                     Notification.AniTrip.accountCreationPasswordError.notificationName,
                     Notification.AniTrip.accountCreationInformationsError.notificationName:
-                    self.appController.showAlertView(withMessage: notificationMessage)
+                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Error")
                 case Notification.AniTrip.updatePictureSuccess.notificationName:
                     self.showUpdateProfileImage = false
                 default: break
@@ -239,8 +236,9 @@ final class UserController: ObservableObject {
             laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
                 DispatchQueue.main.async {
                     if success {
+                        self.savedEmail = self.loginEmailTextField
                         self.savedPassword = self.loginPasswordTextField
-                        self.successBiometricActivationAlert = true
+                        self.appController.showAlertView(withMessage: "Biometrics is now active!", andTitle: "Success")
                     } else {
                         print(error?.localizedDescription ?? "error")
                     }

@@ -42,7 +42,7 @@ extension String {
     }
     
     /// Convert chart date point to Date
-    var chartPointDate: Date {
+    var chartPointToDate: Date {
         if let date = ISO8601DateFormatter().date(from: self) {
             return date
         } else {

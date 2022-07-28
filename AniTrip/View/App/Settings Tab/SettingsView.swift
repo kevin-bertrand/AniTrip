@@ -6,12 +6,15 @@
 //
 
 import LocalAuthentication
+import os
 import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var userController: UserController
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
+    @State private var allowNotifications: Bool = false
+    @State private var showAlert: Bool = false
     let laContext = LAContext()
     
     var body: some View {
@@ -40,6 +43,12 @@ struct SettingsView: View {
                 if userController.appController.isBiometricAvailable {
                     Toggle("Use \(laContext.biometryType == .faceID ? "Face ID" : "Touch ID" )", isOn: $userController.canUseBiometric)
                 }
+                
+                Toggle("Allow notifications", isOn: $allowNotifications)
+                    .disabled(true)
+                    .onTapGesture {
+                        showAlert.toggle()
+                    }
             }
             
             Section {
@@ -56,12 +65,27 @@ struct SettingsView: View {
                 }
             }
         }
+        .onAppear {
+            UNUserNotificationCenter.current().getNotificationSettings { settings in
+                switch settings.authorizationStatus {
+                case .authorized, .ephemeral, .provisional:
+                    self.allowNotifications = true
+                default:
+                    self.allowNotifications = false
+                }
+            }
+        }
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Settings"), message: Text("Go to the iPhone settings' to change notifications!"), primaryButton: .default(Text("Cancel")), secondaryButton: .default(Text("Go to settings"), action: {
+                UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+            }))
+        }
     }
 }
 
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
     }
 }

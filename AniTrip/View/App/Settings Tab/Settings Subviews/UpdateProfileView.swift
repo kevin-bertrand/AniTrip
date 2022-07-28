@@ -101,6 +101,6 @@ struct UpdateProfileView: View {
 struct UpdateProfileView_Previews: PreviewProvider {
     static var previews: some View {
         UpdateProfileView()
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
     }
 }

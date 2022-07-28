@@ -121,9 +121,9 @@ final class TripController: ObservableObject {
                 self.volunteerTripList = self.tripManager.volunteerTrips
             case Notification.AniTrip.gettingTripListError.notificationName,
                 Notification.AniTrip.homeInformationsDonwloadedError.notificationName:
-                self.appController.showAlertView(withMessage: notificationMessage)
+                self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Error")
             case Notification.AniTrip.addTripSuccess.notificationName:
-                self.appController.showAlertView(withMessage: notificationMessage, mustReturnToPreviousView: true)
+                self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Success")
             case Notification.AniTrip.homeInformationsDonwloaded.notificationName:
                 threeLatestTrips = tripManager.threeLatestTrips
                 distanceThisWeek = tripManager.distanceThisWeek

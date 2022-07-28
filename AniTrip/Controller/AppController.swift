@@ -18,7 +18,7 @@ final class AppController: ObservableObject {
     // Alert view
     @Published var showAlertView: Bool = false
     var alertViewMessage: String = ""
-    var mustReturnToPreviousView: Bool = false
+    var alertViewTitle: String = ""
     
     // Biometric is
     var isBiometricAvailable: Bool {
@@ -42,20 +42,17 @@ final class AppController: ObservableObject {
     }
     
     /// Show an alert view
-    func showAlertView(withMessage message: String, mustReturnToPreviousView: Bool = false) {
+    func showAlertView(withMessage message: String, andTitle title: String) {
         objectWillChange.send()
-        self.mustReturnToPreviousView = mustReturnToPreviousView
-        resetLoadingInProgress()
         alertViewMessage = message
-        showAlertView = true
+        alertViewTitle = title
     }
     
     /// Reset alert view
     func resetAlertView() {
         objectWillChange.send()
-        mustReturnToPreviousView = false
         alertViewMessage = ""
-        showAlertView = false
+        alertViewTitle = ""
     }
     
     // MARK: Initialization
@@ -86,7 +83,7 @@ final class AppController: ObservableObject {
                 Notification.AniTrip.accountNotYetActivate.notificationName,
                 Notification.AniTrip.notAuthorized.notificationName,
                 Notification.AniTrip.accountNotFound.notificationName:
-                self.showAlertView(withMessage: notificationMessage)
+                self.showAlertView(withMessage: notificationMessage, andTitle: "Error")
             default: break
             }
         }

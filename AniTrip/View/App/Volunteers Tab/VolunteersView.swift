@@ -15,10 +15,10 @@ struct VolunteersView: View {
         VStack {
             SearchTextFieldView(searchText: $volunteersController.searchFilter)
                 .padding()
-            
+                    
             List {
                 if userController.connectedUser?.position == .admin {
-                    Section(header: Text("Account to active")) {
+                    Section(header: Text("Active accounts")) {
                         ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
                             if volunteer.isActive {
                                 NavigationLink {
@@ -63,6 +63,6 @@ struct VolunteersView_Previews: PreviewProvider {
     static var previews: some View {
         VolunteersView()
             .environmentObject(VolunteersController(appController: AppController()))
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
     }
 }

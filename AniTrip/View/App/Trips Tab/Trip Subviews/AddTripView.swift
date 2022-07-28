@@ -53,6 +53,6 @@ struct AddTripView_Previews: PreviewProvider {
     static var previews: some View {
         AddTripView()
             .environmentObject(TripController(appController: AppController()))
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
     }
 }

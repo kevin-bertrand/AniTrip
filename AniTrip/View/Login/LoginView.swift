@@ -30,15 +30,12 @@ struct LoginView: View {
             }
         }
         .padding()
-        .alert(isPresented: $userController.showSuccessAccountCreationAlert) {
-            Alert(title: Text("Success"), message: Text(Notification.AniTrip.accountCreationSuccess.notificationMessage), dismissButton: .default(Text("OK")))
-        }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
     }
 }

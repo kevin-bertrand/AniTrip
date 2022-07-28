@@ -60,7 +60,7 @@ struct ActivateAccountView: View {
 struct ActivateAccountView_Previews: PreviewProvider {
     static var previews: some View {
         ActivateAccountView()
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
             .environmentObject(VolunteersController(appController: AppController()))
     }
 }

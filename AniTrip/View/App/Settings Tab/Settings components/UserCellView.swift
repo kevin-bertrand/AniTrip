@@ -40,6 +40,6 @@ struct UserCellView: View {
 struct UserCellView_Previews: PreviewProvider {
     static var previews: some View {
         UserCellView()
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
     }
 }

@@ -67,6 +67,6 @@ struct NewTripCommentView_Previews: PreviewProvider {
     static var previews: some View {
         NewTripCommentView(step: .constant(6))
             .environmentObject(TripController(appController: AppController()))
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
     }
 }

@@ -23,7 +23,7 @@ extension Date {
     }
     
     /// Get the 3 first charachters of the day name
-    var dayName: String {
+    var dayNameInitials: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
         return String(dateFormatter.string(from: self).prefix(3))

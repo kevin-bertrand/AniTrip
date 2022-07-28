@@ -50,14 +50,17 @@ extension Notification {
         // Activate account notification
         case showActivateAccount = "A new account must be activate"
         
+        /// Getting the name of the notification
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
         }
         
+        /// Getting the message of the notification
         var notificationMessage: String {
             return self.rawValue
         }
         
+        /// Send the notification throw the NotificationCenter
         func sendNotification() {
             let notificationBuilder = Notification(name: notificationName, object: self, userInfo: ["name": self.notificationName, "message": self.notificationMessage])
             NotificationCenter.default.post(notificationBuilder)

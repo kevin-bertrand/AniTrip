@@ -78,7 +78,7 @@ struct LoginSubview: View {
 struct LoginSubview_Previews: PreviewProvider {
     static var previews: some View {
         LoginSubview()
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
             .environmentObject(VolunteersController(appController: AppController()))
     }
 }

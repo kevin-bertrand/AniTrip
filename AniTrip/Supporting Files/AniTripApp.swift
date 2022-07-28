@@ -6,23 +6,31 @@
 //
 
 import SwiftUI
+import os
 
 @main
 struct AniTripApp: App {
-    @UIApplicationDelegateAdaptor private var appDelegate: AppDelegate
+    // Setting App Delegate
+    @UIApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
+    // Declaration of state objects
     @StateObject private var appController: AppController
     @StateObject private var userController: UserController
     @StateObject private var volunteerController: VolunteersController
     @StateObject private var tripController: TripController
+    
+    // Getting color scheme settings store in memory
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
+    
+    // Getting the presentation mode environment variable
     @Environment(\.presentationMode) var presentationMode
     
+    // Initialization
     init() {
         let appController = AppController()
         _appController = StateObject(wrappedValue: appController)
-        _userController = StateObject(wrappedValue: UserController())
+        _userController = StateObject(wrappedValue: UserController(appController: appController))
         _volunteerController = StateObject(wrappedValue: VolunteersController(appController: appController))
         _tripController = StateObject(wrappedValue: TripController(appController: appController))
     }
@@ -50,29 +58,19 @@ struct AniTripApp: App {
             .environmentObject(volunteerController)
             .environmentObject(tripController)
             .alert(isPresented: $appController.showAlertView) {
-                Alert(title: Text("Loading ended"), message: Text(appController.alertViewMessage), dismissButton: .default(Text("OK"), action: {
-                    if appController.mustReturnToPreviousView {
-                        self.presentationMode.wrappedValue.dismiss()
-                    }
-                    
-                }))
-            }
-            .alert(isPresented: $userController.successBiometricActivationAlert) {
-                Alert(title: Text("FaceId is activate!"), dismissButton: .default(Text("OK")))
-            }
-            .alert(isPresented: $userController.loginShowBiometricAlert) {
-                Alert(title: Text("Would you like to use FaceId for further login?"),
-                      primaryButton: .default(Text("Yes"), action: {
-                    userController.canUseBiometric = true
-                }),
-                      secondaryButton: .cancel(Text("No"), action: {
-                    userController.canUseBiometric = false
-                }))
-            }
-            .onAppear {
-                userController.appController = appController
+                Alert(title: Text(appController.alertViewTitle), message: Text(appController.alertViewMessage), dismissButton: .default(Text("OK")))
             }
             .preferredColorScheme(useDefaultScheme ? nil : (useDarkScheme ? .dark : .light))
+            .onAppear {
+                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (allowed, error) in
+                     //This callback does not trigger on main loop be careful
+                    if allowed {
+                      os_log(.debug, "Allowed") //import os
+                    } else {
+                      os_log(.debug, "Error")
+                    }
+                }
+            }
         }
     }
 }

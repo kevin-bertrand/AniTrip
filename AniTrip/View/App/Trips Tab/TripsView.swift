@@ -33,6 +33,6 @@ struct TripsView_Previews: PreviewProvider {
     static var previews: some View {
         TripsView()
             .environmentObject(TripController(appController: AppController()))
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
     }
 }

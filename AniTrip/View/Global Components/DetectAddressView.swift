@@ -56,8 +56,6 @@ struct DetectAddressView: View {
             }
         }
         .onAppear {
-            print(address.longitude)
-            print(address.latitude)
             locationManager.centerMap(with: address)
         }
     }

@@ -13,7 +13,7 @@ final class TripManager {
     var trips: [Trip] { tripList.sorted { $0.date > $1.date }}
     var volunteerTrips: [Trip] { volunteerTripsList.sorted {$0.date > $1.date} }
     var threeLatestTrips: [Trip] { threeLatestTripsList.sorted { $0.date > $1.date }}
-    var tripsChartPoints: [TripChartPoint] { tripsChartPointsList.sorted { $0.date.chartPointDate < $1.date.chartPointDate }}
+    var tripsChartPoints: [TripChartPoint] { tripsChartPointsList.sorted { $0.date.chartPointToDate < $1.date.chartPointToDate }}
     var distanceThisWeek: Double = 0.0
     var numberOfTripsThisWeek: Int = 0
     

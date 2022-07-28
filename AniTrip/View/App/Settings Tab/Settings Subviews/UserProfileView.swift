@@ -70,8 +70,7 @@ struct UserProfileView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
             UserProfileView()
-                .environmentObject(UserController())
-                .environmentObject(AppController())
+                .environmentObject(UserController(appController: AppController()))
         }
     }
 }

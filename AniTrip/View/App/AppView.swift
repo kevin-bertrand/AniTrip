@@ -46,6 +46,15 @@ struct AppView: View {
                     Label("Settings", systemImage: "gear")
                 }
             }
+            .alert(isPresented: $userController.loginShowBiometricAlert) {
+                Alert(title: Text("Would you like to use FaceId for further login?"),
+                      primaryButton: .default(Text("Yes"), action: {
+                    userController.canUseBiometric = true
+                }),
+                      secondaryButton: .cancel(Text("No"), action: {
+                    userController.canUseBiometric = false
+                }))
+            }
             .sheet(isPresented: $volunteersController.displayActivateAccount) {
                 ActivateAccountView()
             }
@@ -56,7 +65,7 @@ struct AppView: View {
 struct AppView_Previews: PreviewProvider {
     static var previews: some View {
         AppView()
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
             .environmentObject(VolunteersController(appController: AppController()))
     }
 }

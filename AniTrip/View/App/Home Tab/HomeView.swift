@@ -87,7 +87,7 @@ struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
             .environmentObject(TripController(appController: AppController()))
-            .environmentObject(UserController())
+            .environmentObject(UserController(appController: AppController()))
             .environmentObject(VolunteersController(appController: AppController()))
     }
 }

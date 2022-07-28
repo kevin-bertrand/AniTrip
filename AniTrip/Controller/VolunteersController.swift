@@ -29,8 +29,6 @@ final class VolunteersController: ObservableObject {
     var activationMessage = ""
     var activationTitle = ""
     
-    var appController: AppController
-    
     // MARK: Methods
     /// Getting volunteers list
     func getList(byUser user: User?) {
@@ -43,7 +41,7 @@ final class VolunteersController: ObservableObject {
         
         guard let user = user, user.position == .admin else {
             appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: "You are not authorized!")
+            appController.showAlertView(withMessage: "You are not authorized!", andTitle: "Error")
             return
         }
         
@@ -56,7 +54,7 @@ final class VolunteersController: ObservableObject {
         
         guard let user = user, user.position == .admin else {
             appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: "You are not authorized!")
+            appController.showAlertView(withMessage: "You are not authorized!", andTitle: "Error")
             return
         }
         
@@ -96,6 +94,7 @@ final class VolunteersController: ObservableObject {
     // MARK: Private
     // MARK: Properties
     private let volunteersManager: VolunteersManager = VolunteersManager()
+    private var appController: AppController
     
     // MARK: Methods
     /// Configure notification
