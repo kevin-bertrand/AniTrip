@@ -38,6 +38,7 @@
 		062DC6A82893C39E004C401D /* desactivateAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 062DC6A72893C39E004C401D /* desactivateAccount.json */; };
 		062DC6AA2893C721004C401D /* updatePosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 062DC6A92893C721004C401D /* updatePosition.json */; };
 		062DC6AD2893E990004C401D /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 062DC6AC2893E990004C401D /* Mixpanel */; };
+		062DC6AF2893F24E004C401D /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DC6AE2893F24E004C401D /* SearchAddressView.swift */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
@@ -84,7 +85,6 @@
 		06BF726B288539B4006F0839 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF726A288539B4006F0839 /* SettingsView.swift */; };
 		06BF726E28853CAE006F0839 /* UserCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF726D28853CAE006F0839 /* UserCellView.swift */; };
 		06D632D328885B73004193A0 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 06D632D228885B73004193A0 /* SwiftUICharts */; };
-		06E3494F28898EDC0056470E /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E3494E28898EDC0056470E /* SearchAddressView.swift */; };
 		06FBF141288EF67500222480 /* LoginToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF140288EF67500222480 /* LoginToolbar.swift */; };
 		06FBF144288EF78200222480 /* LoginSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF143288EF78200222480 /* LoginSubview.swift */; };
 		06FBF148289009F900222480 /* UpdateProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF147289009F900222480 /* UpdateProfileImageView.swift */; };
@@ -140,6 +140,7 @@
 		062DC6A52893C37F004C401D /* activateAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = activateAccount.json; sourceTree = "<group>"; };
 		062DC6A72893C39E004C401D /* desactivateAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = desactivateAccount.json; sourceTree = "<group>"; };
 		062DC6A92893C721004C401D /* updatePosition.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = updatePosition.json; sourceTree = "<group>"; };
+		062DC6AE2893F24E004C401D /* SearchAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAddressView.swift; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065E4753287B573600D32E05 /* AniTripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripApp.swift; sourceTree = "<group>"; };
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -188,7 +189,6 @@
 		06BF7265287E1484006F0839 /* AppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppView.swift; sourceTree = "<group>"; };
 		06BF726A288539B4006F0839 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		06BF726D28853CAE006F0839 /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
-		06E3494E28898EDC0056470E /* SearchAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SearchAddressView.swift; path = "../../../../../../../../../../../../CloudStorage/OneDrive-Personnel/SearchAddressView.swift"; sourceTree = "<group>"; };
 		06FBF140288EF67500222480 /* LoginToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToolbar.swift; sourceTree = "<group>"; };
 		06FBF143288EF78200222480 /* LoginSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSubview.swift; sourceTree = "<group>"; };
 		06FBF147289009F900222480 /* UpdateProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileImageView.swift; sourceTree = "<group>"; };
@@ -480,7 +480,6 @@
 				06158E37288561C500C3BE6E /* UpdateAddressView.swift */,
 				06BF726D28853CAE006F0839 /* UserCellView.swift */,
 				06158E3328855DB100C3BE6E /* EditUserInfoTileView.swift */,
-				06E3494E28898EDC0056470E /* SearchAddressView.swift */,
 			);
 			path = "Settings components";
 			sourceTree = "<group>";
@@ -497,6 +496,7 @@
 		06E3494D28898DE40056470E /* Settings Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				062DC6AE2893F24E004C401D /* SearchAddressView.swift */,
 				06158E2728854D1E00C3BE6E /* UserProfileView.swift */,
 				06158E3128855D6C00C3BE6E /* UpdateProfileView.swift */,
 				06FBF147289009F900222480 /* UpdateProfileImageView.swift */,
@@ -703,7 +703,6 @@
 				06FBF144288EF78200222480 /* LoginSubview.swift in Sources */,
 				06BF7252287B6D51006F0839 /* UserCodable.swift in Sources */,
 				0690C4232888CE2600B57B92 /* AppDelegate.swift in Sources */,
-				06E3494F28898EDC0056470E /* SearchAddressView.swift in Sources */,
 				06158E57288590AC00C3BE6E /* TripManager.swift in Sources */,
 				061949DF28918D52002D95A1 /* ProfilePictureView.swift in Sources */,
 				06158E3F288582C200C3BE6E /* VolunteersView.swift in Sources */,
@@ -745,6 +744,7 @@
 				06158E3C28857D5800C3BE6E /* PasswordFormTileView.swift in Sources */,
 				06FBF14A28900C3600222480 /* ImagePicker.swift in Sources */,
 				068FDBE9288745EC00ACA72D /* View.swift in Sources */,
+				062DC6AF2893F24E004C401D /* SearchAddressView.swift in Sources */,
 				06158E612885982000C3BE6E /* DetailedTripView.swift in Sources */,
 				06158E4D28858B7500C3BE6E /* VolunteerProfileView.swift in Sources */,
 				062DC6A42892A350004C401D /* ToolbarTabItemView.swift in Sources */,
