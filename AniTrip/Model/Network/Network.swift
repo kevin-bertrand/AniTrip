@@ -52,15 +52,14 @@ enum NetworkConfigurations {
         var params: [String]
         
         switch self {
+        case .updateUser:
+            params = ["user"]
         case .login:
             params = ["user", "login"]
         case .createAccount:
             params = ["user", "create"]
-        case .updatePosition:
-            params = ["user", "position"]
-        case .updateUser,
-                .getVolunteersList:
-            params = ["user"]
+        case .updatePicture:
+            params = ["user", "picture"]
         case .getTripList,
                 .addTrip:
             params = ["trip"]
@@ -70,12 +69,14 @@ enum NetworkConfigurations {
             params = ["trip", "chart"]
         case .getNews:
             params = ["trip", "news"]
+        case .getVolunteersList:
+            params = ["volunteers"]
         case .desactivateAccount:
-            params = ["user", "desactivate"]
+            params = ["volunteers", "desactivate"]
         case .activateAccount:
-            params = ["user", "activate"]
-        case .updatePicture:
-            params = ["user", "picture"]
+            params = ["volunteers", "activate"]
+        case .updatePosition:
+            params = ["volunteers", "position"]
         }
         
         return params
