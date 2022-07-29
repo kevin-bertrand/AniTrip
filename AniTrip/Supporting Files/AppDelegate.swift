@@ -5,6 +5,7 @@
 //  Created by Kevin Bertrand on 21/07/2022.
 //
 
+import Mixpanel
 import SwiftUI
 import UserNotifications
 
@@ -13,6 +14,7 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     @AppStorage("aniTripDeviceToken") var deviceToken: String = ""
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+        Mixpanel.initialize(token: "8cc183fc131e7d26ee53f2858454f307")
         UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
         return true

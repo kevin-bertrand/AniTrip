@@ -7,6 +7,7 @@
 
 import Foundation
 import LocalAuthentication
+import Mixpanel
 import SwiftUI
 
 final class UserController: ObservableObject {
@@ -252,6 +253,7 @@ final class UserController: ObservableObject {
             
             if let user = self.connectedUser {
                 self.userToUpdate = user.toUpdate()
+                Mixpanel.mainInstance().track(event: "Sign upp")
                 
 //                if user.position == .user {
 //                    self.accountToActivateEmail = ""

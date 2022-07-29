@@ -91,7 +91,7 @@ class NetworkManager: NetworkProtocol {
     
     // MARK: Private
     // MARK: Properties
-    private let url = "http://192.168.1.164"
+    private let url = "http://anitrip.desyntic.com"
     private let apiPort = 2564
     private let imagePort = 80
 }
