@@ -64,7 +64,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .tripList, response: .status200, status: .correctData)
         
         // When
-        tripManager.getList(byUser: getConnectedUser(), of: .init(image: nil, id: "\(UUID())", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: nil, isActive: true))
+        tripManager.getList(byUser: getConnectedUser(), of: .init(image: nil, id: "\(UUID())", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: true))
         
         // Then
         XCTAssertFalse(tripManager.volunteerTrips.isEmpty)
@@ -316,8 +316,14 @@ final class TripManagerTests: XCTestCase {
         tripManager.downloadNews(for: User(image: nil, id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: true, token: ""))
         
         // Then
-        XCTAssertTrue(tripManager.distanceThisWeek == 0.0)
-        XCTAssertTrue(tripManager.numberOfTripsThisWeek == 0)
+        XCTAssertTrue(tripManager.news.distanceThisWeek == 0.0)
+        XCTAssertTrue(tripManager.news.numberOfTripThisWeek == 0)
+        XCTAssertTrue(tripManager.news.distanceThisYear == 0.0)
+        XCTAssertTrue(tripManager.news.numberOfTripThisYear == 0)
+        XCTAssertTrue(tripManager.news.distancePercentSinceLastYear == 0.0)
+        XCTAssertTrue(tripManager.news.distancePercentSinceLastWeek == 0.0)
+        XCTAssertTrue(tripManager.news.numberTripPercentSinceLastYear == 0.0)
+        XCTAssertTrue(tripManager.news.numberTripPercentSinceLastWeek == 0.0)
     }
     
     /// Success
@@ -329,8 +335,14 @@ final class TripManagerTests: XCTestCase {
         tripManager.downloadNews(for: getConnectedUser())
         
         // Then
-        XCTAssertFalse(tripManager.distanceThisWeek == 0.0)
-        XCTAssertFalse(tripManager.numberOfTripsThisWeek == 0)
+        XCTAssertFalse(tripManager.news.distanceThisWeek == 0.0)
+        XCTAssertFalse(tripManager.news.numberOfTripThisWeek == 0)
+        XCTAssertFalse(tripManager.news.distanceThisYear == 0.0)
+        XCTAssertFalse(tripManager.news.numberOfTripThisYear == 0)
+        XCTAssertFalse(tripManager.news.distancePercentSinceLastYear == 0.0)
+        XCTAssertFalse(tripManager.news.distancePercentSinceLastWeek == 0.0)
+        XCTAssertFalse(tripManager.news.numberTripPercentSinceLastYear == 0.0)
+        XCTAssertFalse(tripManager.news.numberTripPercentSinceLastWeek == 0.0)
     }
     
     /// Getting error
@@ -342,8 +354,14 @@ final class TripManagerTests: XCTestCase {
         tripManager.downloadNews(for: getConnectedUser())
         
         // Then
-        XCTAssertTrue(tripManager.distanceThisWeek == 0.0)
-        XCTAssertTrue(tripManager.numberOfTripsThisWeek == 0)
+        XCTAssertTrue(tripManager.news.distanceThisWeek == 0.0)
+        XCTAssertTrue(tripManager.news.numberOfTripThisWeek == 0)
+        XCTAssertTrue(tripManager.news.distanceThisYear == 0.0)
+        XCTAssertTrue(tripManager.news.numberOfTripThisYear == 0)
+        XCTAssertTrue(tripManager.news.distancePercentSinceLastYear == 0.0)
+        XCTAssertTrue(tripManager.news.distancePercentSinceLastWeek == 0.0)
+        XCTAssertTrue(tripManager.news.numberTripPercentSinceLastYear == 0.0)
+        XCTAssertTrue(tripManager.news.numberTripPercentSinceLastWeek == 0.0)
     }
     
     /// Unknown status
@@ -355,8 +373,14 @@ final class TripManagerTests: XCTestCase {
         tripManager.downloadNews(for: getConnectedUser())
         
         // Then
-        XCTAssertTrue(tripManager.distanceThisWeek == 0.0)
-        XCTAssertTrue(tripManager.numberOfTripsThisWeek == 0)
+        XCTAssertTrue(tripManager.news.distanceThisWeek == 0.0)
+        XCTAssertTrue(tripManager.news.numberOfTripThisWeek == 0)
+        XCTAssertTrue(tripManager.news.distanceThisYear == 0.0)
+        XCTAssertTrue(tripManager.news.numberOfTripThisYear == 0)
+        XCTAssertTrue(tripManager.news.distancePercentSinceLastYear == 0.0)
+        XCTAssertTrue(tripManager.news.distancePercentSinceLastWeek == 0.0)
+        XCTAssertTrue(tripManager.news.numberTripPercentSinceLastYear == 0.0)
+        XCTAssertTrue(tripManager.news.numberTripPercentSinceLastWeek == 0.0)
     }
     
     /// Process error
@@ -368,8 +392,14 @@ final class TripManagerTests: XCTestCase {
         tripManager.downloadNews(for: getConnectedUser())
         
         // Then
-        XCTAssertTrue(tripManager.distanceThisWeek == 0.0)
-        XCTAssertTrue(tripManager.numberOfTripsThisWeek == 0)
+        XCTAssertTrue(tripManager.news.distanceThisWeek == 0.0)
+        XCTAssertTrue(tripManager.news.numberOfTripThisWeek == 0)
+        XCTAssertTrue(tripManager.news.distanceThisYear == 0.0)
+        XCTAssertTrue(tripManager.news.numberOfTripThisYear == 0)
+        XCTAssertTrue(tripManager.news.distancePercentSinceLastYear == 0.0)
+        XCTAssertTrue(tripManager.news.distancePercentSinceLastWeek == 0.0)
+        XCTAssertTrue(tripManager.news.numberTripPercentSinceLastYear == 0.0)
+        XCTAssertTrue(tripManager.news.numberTripPercentSinceLastWeek == 0.0)
     }
     
     

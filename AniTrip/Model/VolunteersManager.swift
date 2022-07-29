@@ -38,9 +38,11 @@ final class VolunteersManager {
         var params = NetworkConfigurations.desactivateAccount.urlParams
         params.append(account.email)
         
-        networkManager.request(urlParams: params, method: NetworkConfigurations.desactivateAccount.method, authorization: .authorization(bearerToken: user.token), body: nil) { data, response, error in
-            if let statusCode = response?.statusCode,
-               statusCode == 202 {
+        networkManager.request(urlParams: params, method: NetworkConfigurations.desactivateAccount.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+            if let self = self,
+               let statusCode = response?.statusCode,
+               statusCode == 200 {
+                self.getList(byUser: user)
                 Notification.AniTrip.desactivationSuccess.sendNotification()
             } else {
                 Notification.AniTrip.unknownError.sendNotification()
@@ -53,9 +55,11 @@ final class VolunteersManager {
         var params = NetworkConfigurations.activateAccount.urlParams
         params.append(account.email)
         
-        networkManager.request(urlParams: params, method: NetworkConfigurations.activateAccount.method, authorization: .authorization(bearerToken: user.token), body: nil) { data, response, error in
-            if let statusCode = response?.statusCode,
-               statusCode == 202 {
+        networkManager.request(urlParams: params, method: NetworkConfigurations.activateAccount.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+            if let self = self,
+               let statusCode = response?.statusCode,
+               statusCode == 200 {
+                self.getList(byUser: user)
                 Notification.AniTrip.activationSuccess.sendNotification()
             } else {
                 Notification.AniTrip.unknownError.sendNotification()
@@ -70,10 +74,12 @@ final class VolunteersManager {
             return
         }
         
-        networkManager.request(urlParams: NetworkConfigurations.updatePosition.urlParams, method: NetworkConfigurations.updatePosition.method, authorization: .authorization(bearerToken: user.token), body: volunteer) { data, response, error in
-            if let statusCode = response?.statusCode {
+        networkManager.request(urlParams: NetworkConfigurations.updatePosition.urlParams, method: NetworkConfigurations.updatePosition.method, authorization: .authorization(bearerToken: user.token), body: volunteer) { [weak self] data, response, error in
+            if let self = self,
+               let statusCode = response?.statusCode {
                 switch statusCode {
-                case 202:
+                case 200:
+                    self.getList(byUser: user)
                     Notification.AniTrip.positionUpdated.sendNotification()
                 case 404:
                     Notification.AniTrip.positionNotUpdated.sendNotification()

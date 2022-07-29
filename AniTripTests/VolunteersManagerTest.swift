@@ -37,7 +37,7 @@ final class VolunteersManagerTest: XCTestCase {
         configureManager(correctData: .volunteerList, response: .status200, status: .correctData)
         
         // When
-        volunteersManager.getList(byUser: User(image: nil, id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: true, token: ""))
+        volunteersManager.getList(byUser: getDefaultUser())
         
         // Then
         XCTAssertFalse(volunteersManager.volunteersList.isEmpty)
@@ -49,7 +49,7 @@ final class VolunteersManagerTest: XCTestCase {
         configureManager(correctData: .volunteerList, response: .status200, status: .error)
         
         // When
-        volunteersManager.getList(byUser: User(image: nil, id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: true, token: ""))
+        volunteersManager.getList(byUser: getDefaultUser())
         
         // Then
         XCTAssertTrue(volunteersManager.volunteersList.isEmpty)
@@ -58,63 +58,130 @@ final class VolunteersManagerTest: XCTestCase {
     // MARK: Desactivate volunteer account
     /// Get success
     func testGivenDesactivateAccount_WhenGettingSuccess_ThenSuccessNotificationShouldPop() {
-        // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.desactivationSuccess.notificationName, object: volunteersManager, handler: nil)
-        
         // Given
-        configureManager(correctData: .volunteerList, response: .status202, status: .correctData)
+        let volunteers = getVolunteerList()
+        configureManager(correctData: .desactivateAccount, response: .status200, status: .correctData)
         
         // When
-        volunteersManager.desactivate(account: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: nil, isActive: false), byUser: User(image: nil, id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: true, token: ""))
+        volunteersManager.desactivate(account: getDefaultVolunteer(), byUser: getDefaultUser())
+        let volunteersUpdated = volunteersManager.volunteersList
         
         // Then
-        waitForExpectations(timeout: 2, handler: nil)
+        XCTAssertNotEqual(volunteers[1].isActive, volunteersUpdated[1].isActive)
     }
     
     /// Get failed
     func testGivenDesactivateAccount_WhenGettingFailed_ThenErrorNotificationShouldPop() {
-        // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.unknownError.notificationName, object: volunteersManager, handler: nil)
-        
         // Given
-        configureManager(correctData: .volunteerList, response: .status202, status: .error)
+        let volunteers = getVolunteerList()
+        configureManager(correctData: .desactivateAccount, response: .status200, status: .error)
         
         // When
-        volunteersManager.desactivate(account: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: "", missions: [], address: nil, isActive: false), byUser: User(image: nil, id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: true, token: ""))
+        volunteersManager.desactivate(account: getDefaultVolunteer(), byUser: getDefaultUser())
+        let volunteersUpdated = volunteersManager.volunteersList
         
         // Then
-        waitForExpectations(timeout: 2, handler: nil)
+        XCTAssertEqual(volunteers[1].isActive, volunteersUpdated[1].isActive)
     }
     
     // MARK: Activate volunteer account
     /// Get success
     func testGivenActivateAccount_WhenGettingSuccess_ThenSuccessNotificationShouldPop() {
-        // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.activationSuccess.notificationName, object: volunteersManager, handler: nil)
-        
         // Given
-        configureManager(correctData: .volunteerList, response: .status202, status: .correctData)
+        let volunteers = getVolunteerList()
+        configureManager(correctData: .activationAccount, response: .status200, status: .correctData)
         
         // When
-        volunteersManager.activate(account: .init(email: ""), byUser: User(image: nil, id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: true, token: ""))
+        volunteersManager.activate(account: VolunteerToActivate(email: ""), byUser: getDefaultUser())
+        let volunteersUpdated = volunteersManager.volunteersList
         
         // Then
-        waitForExpectations(timeout: 2, handler: nil)
+        XCTAssertNotEqual(volunteers[0].isActive, volunteersUpdated[0].isActive)
     }
     
     /// Get failed
     func testGivenActivateAccount_WhenGettingFailed_ThenErrorNotificationShouldPop() {
-        // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.unknownError.notificationName, object: volunteersManager, handler: nil)
-        
         // Given
-        configureManager(correctData: .volunteerList, response: .status202, status: .error)
+        let volunteers = getVolunteerList()
+        configureManager(correctData: .activationAccount, response: .status200, status: .error)
         
         // When
-        volunteersManager.activate(account: .init(email: ""), byUser: User(image: nil, id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], isActive: true, token: ""))
+        volunteersManager.activate(account: VolunteerToActivate(email: ""), byUser: getDefaultUser())
+        let volunteersUpdated = volunteersManager.volunteersList
         
         // Then
-        waitForExpectations(timeout: 2, handler: nil)
+        XCTAssertEqual(volunteers[0].isActive, volunteersUpdated[0].isActive)
+    }
+    
+    // MARK: Update position tests
+    /// Get success
+    func testGivenUserNotConnected_WhenTryingToChangeStatus_ThenGetError() {
+        // Given
+        let volunteers = getVolunteerList()
+        configureManager(correctData: .updatePosition, response: .status200, status: .correctData)
+        
+        // When
+        volunteersManager.changePosition(of: VolunteerToUpdatePosition(email: "", position: .user), by: nil)
+        let volunteersUpdated = volunteersManager.volunteersList
+        
+        // Then
+        XCTAssertEqual(volunteers[0].position, volunteersUpdated[0].position)
+    }
+    
+    /// Get success
+    func testGivenUserIsAdmin_WhenChangingStatus_ThenGetSuccess() {
+        // Given
+        let volunteers = getVolunteerList()
+        configureManager(correctData: .updatePosition, response: .status200, status: .correctData)
+        
+        // When
+        volunteersManager.changePosition(of: VolunteerToUpdatePosition(email: "", position: .user), by: getDefaultUser())
+        let volunteersUpdated = volunteersManager.volunteersList
+        
+        // Then
+        XCTAssertNotEqual(volunteers[0].position, volunteersUpdated[0].position)
+    }
+    
+    /// Get failed
+    func testGivenUpdateStatus_WhenGetting404_ThenSendUnknownErrorNotification() {
+        // Given
+        let volunteers = getVolunteerList()
+        configureManager(correctData: .updatePosition, response: .status404, status: .correctData)
+        
+        // When
+        volunteersManager.changePosition(of: VolunteerToUpdatePosition(email: "", position: .user), by: getDefaultUser())
+        let volunteersUpdated = volunteersManager.volunteersList
+        
+        // Then
+        XCTAssertEqual(volunteers[0].position, volunteersUpdated[0].position)
+    }
+    
+    /// Get unknown status
+    func testGivenUpdateStatus_WhenGettingUnknownStatus_ThenSendUnknownErrorNotification() {
+        // Given
+        let volunteers = getVolunteerList()
+        configureManager(correctData: .updatePosition, response: .status0, status: .correctData)
+        
+        // When
+        volunteersManager.changePosition(of: VolunteerToUpdatePosition(email: "", position: .user), by: getDefaultUser())
+        let volunteersUpdated = volunteersManager.volunteersList
+        
+        // Then
+        XCTAssertEqual(volunteers[0].position, volunteersUpdated[0].position)
+    }
+    
+    /// Get incorrect response
+    func testGivenUpdateStatus_WhenGettingError_ThenSendUnknownErrorNotification() {
+        // Given
+        let volunteers = getVolunteerList()
+        configureManager(correctData: .updatePosition, response: .status200, status: .error)
+        
+        // When
+        volunteersManager.changePosition(of: VolunteerToUpdatePosition(email: "", position: .user), by: getDefaultUser())
+        let volunteersUpdated = volunteersManager.volunteersList
+        
+        // Then
+        XCTAssertEqual(volunteers[0].position, volunteersUpdated[0].position)
     }
     
     // MARK: Private
@@ -123,5 +190,22 @@ final class VolunteersManagerTest: XCTestCase {
         fakeNetworkManager.correctData = correctData
         fakeNetworkManager.status = status
         fakeNetworkManager.response = response
+    }
+    
+    /// Getting default user
+    private func getDefaultUser() -> User {
+        return User(image: nil, id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .admin, missions: [], isActive: true, token: "")
+    }
+    
+    /// Getting default volunteer
+    private func getDefaultVolunteer() -> Volunteer {
+        return Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: false)
+    }
+    
+    /// Donwload volunteer list
+    private func getVolunteerList(with correctData: FakeResponseData.DataFiles = .volunteerList) -> [Volunteer] {
+        configureManager(correctData: correctData, response: .status200, status: .correctData)
+        volunteersManager.getList(byUser: getDefaultUser())
+        return volunteersManager.volunteersList
     }
 }

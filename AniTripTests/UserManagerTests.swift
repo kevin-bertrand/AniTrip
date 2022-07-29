@@ -107,7 +107,7 @@ final class UserManagerTests: XCTestCase {
     /// Success creation
     func testGivenCreateAnAccount_WhenGettingSuccess_ThenSuccessShouldPop() {
         // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.accountCreationSuccess.notificationName, object: userManager, handler: nil)
+        _ = expectation(forNotification: Notification.AniTrip.accountCreationSuccess.notificationName, object: nil, handler: nil)
         
         // Given
         configureManager(correctData: nil, response: .status201, status: .correctData)
@@ -122,7 +122,7 @@ final class UserManagerTests: XCTestCase {
     /// Password error
     func testGivenCreateAnAccount_WhenGettingPasswordError_ThenErrorShouldPop() {
         // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.accountCreationPasswordError.notificationName, object: userManager, handler: nil)
+        _ = expectation(forNotification: Notification.AniTrip.accountCreationPasswordError.notificationName, object: nil, handler: nil)
         
         // Given
         configureManager(correctData: nil, response: .status406, status: .correctData)
@@ -137,7 +137,7 @@ final class UserManagerTests: XCTestCase {
     /// Informations error
     func testGivenCreateAnAccount_WhenGettingInformationsError_ThenErrorShouldPop() {
         // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.accountCreationInformationsError.notificationName, object: userManager, handler: nil)
+        _ = expectation(forNotification: Notification.AniTrip.accountCreationInformationsError.notificationName, object: nil, handler: nil)
         
         // Given
         configureManager(correctData: nil, response: .status500, status: .correctData)
@@ -152,7 +152,7 @@ final class UserManagerTests: XCTestCase {
     /// Unknown status
     func testGivenCreateAnAccount_WhenGettingUnknownStatus_ThenErrorShouldPop() {
         // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.unknownError.notificationName, object: userManager, handler: nil)
+        _ = expectation(forNotification: Notification.AniTrip.unknownError.notificationName, object: nil, handler: nil)
         
         // Given
         configureManager(correctData: nil, response: .status0, status: .correctData)
@@ -167,7 +167,7 @@ final class UserManagerTests: XCTestCase {
     /// Getting error
     func testGivenCreateAnAccount_WhenGettingError_ThenErrorShouldPop() {
         // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.unknownError.notificationName, object: userManager, handler: nil)
+        _ = expectation(forNotification: Notification.AniTrip.unknownError.notificationName, object: nil, handler: nil)
         
         // Given
         configureManager(correctData: nil, response: .status0, status: .error)
@@ -183,7 +183,7 @@ final class UserManagerTests: XCTestCase {
     /// User is not connected
     func testGivenUserIsNotConnected_WhenTryingToUpdateProfile_ThenGettingError() {
         // Prepare expectation
-        _ = expectation(forNotification: Notification.AniTrip.unknownError.notificationName, object: userManager, handler: nil)
+        _ = expectation(forNotification: Notification.AniTrip.unknownError.notificationName, object: nil, handler: nil)
         
         // Given
         configureManager(correctData: nil, response: .status0, status: .error)

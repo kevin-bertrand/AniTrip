@@ -81,6 +81,9 @@ class FakeResponseData {
         case threeLatestTrip = "threeLatestsTrips"
         case chartPoints = "chartPoints"
         case news = "news"
+        case activationAccount = "activateAccount"
+        case desactivateAccount = "desactivateAccount"
+        case updatePosition = "updatePosition"
     }
     
     enum SessionStatus {

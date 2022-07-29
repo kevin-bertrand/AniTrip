@@ -1,0 +1,38 @@
+[
+    {
+        "lastname":"Two"
+        ,"gender":"not_determined",
+        "missions":[],
+        "email":"mail1@exemple.com",
+        "firstname":"User 2",
+        "token":"",
+        "isActive":false,
+        "phoneNumber":"",
+        "id":"541A2B9E-B97D-4A2E-ABC8-2888193D1BD1",
+        "position":"user"
+    },
+    {
+        "lastname":"One",
+        "gender":"not_determined",
+        "missions":[],
+        "email":"mail2@example.com",
+        "firstname":"User 1",
+        "imagePath":"\/var\/www\/html\/AniTrip\/Public\/48694F7F-66F4-4048-8312-BECDA525FA45.jpeg",
+        "token":"",
+        "isActive":false,
+        "phoneNumber":"",
+        "id":"48694F7F-66F4-4048-8312-BECDA525FA45",
+        "position":"user",
+        "address":{
+            "country":"France",
+            "zipCode":"75000",
+            "roadName":"Place des développeurs",
+            "longitude":1.711804599999979,
+            "id":"87D7BF60-7D8A-4C57-AF78-2B12792CBBAA",
+            "streetNumber":"3",
+            "complement":"",
+            "city":"Paris",
+            "latitude":1}
+    }
+]
+

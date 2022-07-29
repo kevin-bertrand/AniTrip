@@ -1,4 +1,10 @@
 {
-    "numberOfTrip":3,
-    "distance":53.78
+    "distancePercentSinceLastWeek":-0.7667504550576405,
+    "distancePercentSinceLastYear":1,
+    "numberTripPercentSinceLastWeek":1,
+    "distanceThisWeek":80.73,
+    "numberOfTripThisYear":6,
+    "distanceThisYear":426.84,
+    "numberTripPercentSinceLastYear":1,
+    "numberOfTripThisWeek":4
 }
