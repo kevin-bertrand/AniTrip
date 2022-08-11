@@ -19,34 +19,34 @@ struct VolunteersView: View {
             List {
                 if userController.connectedUser?.position == .admin {
                     Section(header: Text("Active accounts")) {
-                        ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
-                            if volunteer.isActive {
+                        ForEach($volunteersController.volunteersList, id: \.id) { $volunteer in
+                            if $volunteer.wrappedValue.isActive {
                                 NavigationLink {
-                                    VolunteerProfileView(volunteer: volunteer)
+                                    VolunteerProfileView(volunteer: $volunteer.wrappedValue)
                                 } label: {
-                                    VolunteerTileView(volunteer: volunteer)
+                                    VolunteerTileView(volunteer: $volunteer)
                                 }
                             }
                         }
                     }
                     
                     Section(header: Text("Desactivate accounts")) {
-                        ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
-                            if !volunteer.isActive {
+                        ForEach($volunteersController.volunteersList, id: \.id) { $volunteer in
+                            if !$volunteer.wrappedValue.isActive {
                                 NavigationLink {
-                                    VolunteerProfileView(volunteer: volunteer)
+                                    VolunteerProfileView(volunteer: $volunteer.wrappedValue)
                                 } label: {
-                                    VolunteerTileView(volunteer: volunteer)
+                                    VolunteerTileView(volunteer: $volunteer)
                                 }
                             }
                         }
                     }
                 } else {
-                    ForEach(volunteersController.volunteersList, id: \.id) { volunteer in
+                    ForEach($volunteersController.volunteersList, id: \.id) { $volunteer in
                         NavigationLink {
-                            VolunteerProfileView(volunteer: volunteer)
+                            VolunteerProfileView(volunteer: $volunteer.wrappedValue)
                         } label: {
-                            VolunteerTileView(volunteer: volunteer)
+                            VolunteerTileView(volunteer: $volunteer)
                         }
                     }
                 }

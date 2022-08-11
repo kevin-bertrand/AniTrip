@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct ProfilePictureView: View {
-    var image: UIImage?
+    @EnvironmentObject var volunteersController: VolunteersController
+    @Binding var image: UIImage?
     var size: CGFloat = 150
     
     var body: some View {
@@ -32,6 +33,7 @@ struct ProfilePictureView: View {
 
 struct ProfilePictureView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfilePictureView()
+        ProfilePictureView(image: .constant(nil))
+            .environmentObject(VolunteersController(appController: AppController()))
     }
 }

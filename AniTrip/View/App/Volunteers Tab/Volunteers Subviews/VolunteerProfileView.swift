@@ -18,7 +18,7 @@ struct VolunteerProfileView: View {
     var body: some View {
         Form {
             Section {
-                VolunteerImageInformationsTiles(volunteer: volunteer)
+                VolunteerImageInformationsTiles(volunteer: $volunteer)
             }
             .listRowBackground(Color.clear)
             
@@ -132,7 +132,7 @@ struct VolunteerProfileView: View {
 
 struct VolunteerProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerProfileView(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: LocationController.emptyAddress, isActive: true))
+        VolunteerProfileView(volunteer: Volunteer(imagePath: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: LocationController.emptyAddress, isActive: true))
             .environmentObject(UserController(appController: AppController()))
             .environmentObject(VolunteersController(appController: AppController()))
     }

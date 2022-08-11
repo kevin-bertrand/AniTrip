@@ -22,8 +22,9 @@ struct DownloadedVolunteer: Codable {
     let isActive: Bool
 }
 
-struct Volunteer {
-    let image: UIImage?
+struct Volunteer: Equatable {
+    let imagePath: String?
+    var image: UIImage? = nil
     let id: String
     let firstname: String
     let lastname: String

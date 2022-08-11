@@ -9,12 +9,13 @@ import SwiftUI
 
 struct UserCellView: View {
     @EnvironmentObject var userController: UserController
+    
     var body: some View {
         HStack {
             Spacer()
             
             VStack {
-                ProfilePictureView(image: userController.connectedUser?.image)
+                ProfilePictureView(image: .constant(userController.connectedUser?.image))
                     
                 Group {
                     if let user = userController.connectedUser, user.firstname.isNotEmpty || user.lastname.isNotEmpty {

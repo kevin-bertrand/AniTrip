@@ -9,11 +9,11 @@ import SwiftUI
 
 struct VolunteerTileView: View {
     @EnvironmentObject var volunteersController: VolunteersController
-    let volunteer: Volunteer
+    @Binding var volunteer: Volunteer
     
     var body: some View {
         HStack(spacing: 15) {
-            ProfilePictureView(image: volunteer.image, size: 50)
+            ProfilePictureView(image: $volunteer.image, size: 50)
 
             VStack(alignment: .leading) {
                 if volunteer.lastname.isEmpty && volunteer.firstname.isEmpty {
@@ -34,7 +34,7 @@ struct VolunteerTileView: View {
 
 struct VolunteerTileView_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerTileView(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: false))
+        VolunteerTileView(volunteer: .constant(Volunteer(imagePath: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: false)))
             .environmentObject(VolunteersController(appController: AppController()))
     }
 }

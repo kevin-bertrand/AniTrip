@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class VolunteersController: ObservableObject {
     // MARK: Public
@@ -83,6 +84,13 @@ final class VolunteersController: ObservableObject {
         volunteersManager.changePosition(of: VolunteerToUpdatePosition(email: volunteer.email, position: volunteer.position), by: user)
     }
     
+    /// Download volunteer profile image
+    func downloadProfileImage(of volunteer: Volunteer, completionHandler: @escaping ((UIImage?)->Void)) {
+        volunteersManager.downlaodProfilePicture(of: volunteer) { image in
+            completionHandler(image)
+        }
+    }
+    
     // MARK: Initialization
     init(appController: AppController) {
         self.appController = appController
@@ -121,6 +129,7 @@ final class VolunteersController: ObservableObject {
                 switch notificationName {
                 case Notification.AniTrip.gettingVolunteersListSuccess.notificationName:
                     self.volunteersList = self.volunteersManager.volunteersList
+                    self.downloadAsyncProfileView()
                 case Notification.AniTrip.activationSuccess.notificationName:
                     if self.displayActivateAccount {
                         self.accountToActivateEmail = ""
@@ -164,6 +173,17 @@ final class VolunteersController: ObservableObject {
                 !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty ||
                 $0.email.localizedCaseInsensitiveContains(searchFilter) ||
                 ($0.address != nil && $0.address?.city.localizedCaseInsensitiveContains(searchFilter) == true)
+            }
+        }
+    }
+    
+    /// Async download of volunteer profile image
+    private func downloadAsyncProfileView() {
+        DispatchQueue.main.async {
+            for index in 0..<self.volunteersList.count {
+                self.downloadProfileImage(of: self.volunteersList[index]) { image in
+                    self.volunteersList[index].image = image
+                }
             }
         }
     }

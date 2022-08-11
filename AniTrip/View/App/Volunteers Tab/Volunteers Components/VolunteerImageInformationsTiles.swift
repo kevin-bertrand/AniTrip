@@ -8,14 +8,14 @@
 import SwiftUI
 
 struct VolunteerImageInformationsTiles: View {
-    var volunteer: Volunteer
+    @Binding var volunteer: Volunteer
     
     var body: some View {
         HStack {
             Spacer()
             
             VStack {
-                ProfilePictureView(image: volunteer.image)
+                ProfilePictureView(image: $volunteer.image)
 
                 if volunteer.firstname.isEmpty {
                     Text("\(volunteer.email)")
@@ -37,6 +37,6 @@ struct VolunteerImageInformationsTiles: View {
 
 struct VolunteerImageInformationsTiles_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerImageInformationsTiles(volunteer: Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: LocationController.emptyAddress, isActive: true))
+        VolunteerImageInformationsTiles(volunteer: .constant(Volunteer(imagePath: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: LocationController.emptyAddress, isActive: true)))
     }
 }

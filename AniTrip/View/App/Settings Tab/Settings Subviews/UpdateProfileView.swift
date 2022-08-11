@@ -18,7 +18,7 @@ struct UpdateProfileView: View {
                 HStack {
                     Spacer()
                     VStack {
-                        ProfilePictureView(image: userController.connectedUser?.image)
+                        ProfilePictureView(image: .constant(userController.connectedUser?.image))
                         
                         Button {
                             userController.showUpdateProfileImage = true

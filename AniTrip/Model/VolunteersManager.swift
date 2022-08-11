@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 final class VolunteersManager {
     // MARK: Public
@@ -26,7 +27,14 @@ final class VolunteersManager {
                status == 200,
                let data = data,
                let volunteers = try? JSONDecoder().decode([DownloadedVolunteer].self, from: data) {
-                self.downloadVolunteerProfilePicture(volunteers: volunteers)
+                let downloadedVolunteersList = volunteers.map({
+                    return Volunteer(imagePath: $0.imagePath, id: $0.id, firstname: $0.firstname, lastname: $0.lastname, email: $0.email, phoneNumber: $0.phoneNumber, gender: $0.gender, position: $0.position == "administrator" ? .admin : .user, missions: $0.missions, address: $0.address, isActive: $0.isActive)
+                })
+
+                if self.volunteersList != downloadedVolunteersList {
+                    self.volunteersList = downloadedVolunteersList
+                    Notification.AniTrip.gettingVolunteersListSuccess.sendNotification()
+                }
             } else {
                 Notification.AniTrip.unknownError.sendNotification()
             }
@@ -92,6 +100,13 @@ final class VolunteersManager {
         }
     }
     
+    /// Download volunteer profile picture
+    func downlaodProfilePicture(of volunteer: Volunteer, completionHandler: @escaping ((UIImage?)->Void)) {
+        networkManager.downloadProfilePicture(from: volunteer.imagePath) { image in
+            completionHandler(image)
+        }
+    }
+    
     // MARK: Initialization
     init(networkManager: NetworkManager = NetworkManager()) {
         self.networkManager = networkManager
@@ -100,28 +115,4 @@ final class VolunteersManager {
     // MARK: Private
     // MARK: Properties
     private let networkManager: NetworkManager
-    
-    //
-    private func downloadVolunteerProfilePicture(volunteers: [DownloadedVolunteer]) {
-        self.volunteersList = []
-        
-        for (index, volunteer) in volunteers.enumerated() {
-            networkManager.downloadProfilePicture(from: volunteer.imagePath, completionHandler: { image in
-                self.volunteersList.append(Volunteer(image: image,
-                                                     id: volunteer.id,
-                                                     firstname: volunteer.firstname,
-                                                     lastname: volunteer.lastname,
-                                                     email: volunteer.email,
-                                                     phoneNumber: volunteer.phoneNumber,
-                                                     gender: volunteer.gender,
-                                                     position: volunteer.position == "administrator" ? .admin : .user,
-                                                     missions: volunteer.missions,
-                                                     address: volunteer.address,
-                                                     isActive: volunteer.isActive))
-                if volunteers.count-1 == index {
-                    Notification.AniTrip.gettingVolunteersListSuccess.sendNotification()
-                }
-            })
-        }
-    }
 }
