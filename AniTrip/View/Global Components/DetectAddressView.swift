@@ -20,14 +20,26 @@ struct DetectAddressView: View {
             Text("\(name): \(locationManager.addressLocated)")
             
             ZStack(alignment: .bottom) {
-                ZStack {
-                    Map(coordinateRegion: $locationManager.region)
-                    Image(systemName: "mappin")
-                        .resizable()
-                        .frame(width: 19, height: 50)
-                        .foregroundColor(.accentColor)
-                        .padding(.bottom, 58)
-                        .padding(.leading, 6)
+                ZStack(alignment: .topTrailing) {
+                    ZStack {
+                        Map(coordinateRegion: $locationManager.region)
+                        Image(systemName: "mappin")
+                            .resizable()
+                            .frame(width: 19, height: 50)
+                            .foregroundColor(.accentColor)
+                            .padding(.bottom, 58)
+                            .padding(.leading, 6)
+                    }
+                    
+                    Button {
+                        locationManager.requestLocation()
+                    } label: {
+                         Image(systemName: "location")
+                            .padding()
+                            .background(Color("LocationButton"))
+                            .cornerRadius(10)
+                    }
+                    .padding()
                 }
                 Rectangle()
                     .foregroundColor(Color("TextFieldBackground"))
@@ -43,11 +55,12 @@ struct DetectAddressView: View {
                     
                     HStack {
                         ButtonWithIcon(action: {
-                            locationManager.searchAddress { address in
-                                if let address = address {
-                                    self.address = address
-                                }
-                            }
+                            locationManager.searchAddress()
+//                            locationManager.searchAddress { address in
+//                                if let address = address {
+//                                    self.address = address
+//                                }
+//                            }
                         }, icon: "magnifyingglass", title: "Search", height: 40)
                         .padding()
                         .frame(width: 300)
@@ -57,6 +70,9 @@ struct DetectAddressView: View {
         }
         .onAppear {
             locationManager.centerMap(with: address)
+        }
+        .onDisappear {
+            address = locationManager.address
         }
     }
 }
