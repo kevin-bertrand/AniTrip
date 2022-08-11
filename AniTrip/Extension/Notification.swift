@@ -47,6 +47,9 @@ extension Notification {
         // Adding trip
         case addTripSuccess = "Trip added with success!"
         
+        // Update trip
+        case updateTripSuccess = "Trip update succeeded!"
+        
         // Downloading home informations
         case homeInformationsDonwloaded = "All informations are downloaded"
         case homeInformationsDonwloadedError = "An error occurs during the download of home informations!"

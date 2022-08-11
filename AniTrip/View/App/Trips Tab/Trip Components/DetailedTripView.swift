@@ -12,7 +12,8 @@ import UIKit
 struct DetailedTripView: View {
     @EnvironmentObject var tripController: TripController
     
-    let trip: Trip
+    @Binding var trip: Trip
+    @State private var updateTrip: UpdateTrip = UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)
     
     var body: some View {
         Form {
@@ -59,12 +60,25 @@ struct DetailedTripView: View {
         }
         .navigationTitle(Text("\(trip.startingAddress.city) → \(trip.endingAddress.city)"))
         .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $tripController.showUpdateTripView, content: {
+            UpdateTripView(trip: $updateTrip, isAnUpdate: true)
+        })
+        .onAppear {
+            updateTrip = trip.toUpdateTripFormat()
+        }
+        .toolbar {
+            Button {
+                tripController.showUpdateTripView = true
+            } label: {
+                Image(systemName: "pencil.circle")
+            }
+        }
     }
 }
 
 struct DetailedTripView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedTripView(trip: Trip(id: UUID(), date: Date().iso8601, missions: ["1", "2", "3"], comment: "Test comment", totalDistance: 25, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress))
+        DetailedTripView(trip: .constant(Trip(id: UUID(), date: Date().iso8601, missions: ["1", "2", "3"], comment: "Test comment", totalDistance: 25, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
             .environmentObject(TripController(appController: AppController()))
     }
 }

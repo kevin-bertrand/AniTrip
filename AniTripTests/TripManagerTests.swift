@@ -117,7 +117,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: nil, response: .status0, status: .error)
         
         // When
-        tripManager.add(trip: NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: nil)
+        tripManager.add(trip: UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: nil)
         
         // Then
         XCTAssertTrue(tripManager.volunteerTrips.isEmpty)
@@ -130,7 +130,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .tripList, response: .status200, status: .correctData)
         
         // When
-        tripManager.add(trip: NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
+        tripManager.add(trip: UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
         
         // Then
         XCTAssertFalse(tripManager.trips.isEmpty)
@@ -142,7 +142,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .tripList, response: .status401, status: .correctData)
         
         // When
-        tripManager.add(trip: NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
+        tripManager.add(trip: UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
         
         // Then
         XCTAssertTrue(tripManager.trips.isEmpty)
@@ -154,7 +154,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .tripList, response: .status0, status: .correctData)
         
         // When
-        tripManager.add(trip: NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
+        tripManager.add(trip: UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
         
         // Then
         XCTAssertTrue(tripManager.trips.isEmpty)
@@ -166,7 +166,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .tripList, response: .status0, status: .error)
         
         // When
-        tripManager.add(trip: NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
+        tripManager.add(trip: UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
         
         // Then
         XCTAssertTrue(tripManager.trips.isEmpty)

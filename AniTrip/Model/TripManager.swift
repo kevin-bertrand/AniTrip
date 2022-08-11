@@ -50,7 +50,7 @@ final class TripManager {
     }
     
     /// Adding trip
-    func add(trip: NewTrip, by user: User?) {
+    func add(trip: UpdateTrip, by user: User?) {
         guard let user = user else {
             Notification.AniTrip.unknownError.sendNotification()
             return
@@ -63,6 +63,31 @@ final class TripManager {
                 case 200:
                     self.getList(byUser: user)
                     Notification.AniTrip.addTripSuccess.sendNotification()
+                case 401:
+                    Notification.AniTrip.notAuthorized.sendNotification()
+                default:
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
+    /// Updating an existing trip
+    func update(trip: UpdateTrip, by user: User?) {
+        guard let user = user else {
+            Notification.AniTrip.unknownError.sendNotification()
+            return
+        }
+        
+        networkManager.request(urlParams: NetworkConfigurations.updateTrip.urlParams, method: NetworkConfigurations.updateTrip.method, authorization: .authorization(bearerToken: user.token), body: trip.toAddTripFormat()) { [weak self] data, response, error in
+            if let self = self,
+               let statusCode = response?.statusCode {
+                switch statusCode {
+                case 200:
+                    self.getList(byUser: user)
+                    Notification.AniTrip.updateTripSuccess.sendNotification()
                 case 401:
                     Notification.AniTrip.notAuthorized.sendNotification()
                 default:

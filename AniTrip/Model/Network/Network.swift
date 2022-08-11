@@ -17,6 +17,7 @@ enum NetworkConfigurations {
     case getVolunteersList
     case getTripList
     case addTrip
+    case updateTrip
     case getThreeLatestTrip
     case getChartPoints
     case getNews
@@ -35,7 +36,8 @@ enum NetworkConfigurations {
                 .updatePosition,
                 .activateAccount,
                 .desactivateAccount,
-                .updatePicture:
+                .updatePicture,
+                .updateTrip:
             method = .patch
         case .getVolunteersList,
                 .getTripList,
@@ -61,7 +63,8 @@ enum NetworkConfigurations {
         case .updatePicture:
             params = ["user", "picture"]
         case .getTripList,
-                .addTrip:
+                .addTrip,
+                .updateTrip:
             params = ["trip"]
         case .getThreeLatestTrip:
             params = ["trip", "latest"]

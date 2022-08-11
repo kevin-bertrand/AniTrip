@@ -1,5 +1,5 @@
 //
-//  AddingEndAddressView.swift
+//  TripDateView.swift
 //  AniTrip
 //
 //  Created by Kevin Bertrand on 20/07/2022.
@@ -7,10 +7,10 @@
 
 import SwiftUI
 
-struct AddingEndAddressView: View {
+struct TripDateView: View {
     @EnvironmentObject var tripController: TripController
     @Binding var step: Int
-    @State private var canValidateStep: Bool = false
+    @Binding var trip: UpdateTrip
     
     var body: some View {
         VStack {
@@ -25,10 +25,10 @@ struct AddingEndAddressView: View {
                 }
                 Spacer()
                 
-                Image(systemName: "2.circle")
+                Image(systemName: "4.circle")
                     .resizable()
                     .frame(width: 30, height: 30)
-                                
+                
                 Spacer()
                 
                 Button {
@@ -39,18 +39,26 @@ struct AddingEndAddressView: View {
                     Text("Next")
                     Image(systemName: "arrow.right.circle")
                 }
-                .disabled(!canValidateStep)
             }
             .padding()
             
-            DetectAddressView(address: $tripController.newTrip.endingAddress, addressFound: $canValidateStep, name: "Ending address")
+            Spacer()
+            
+            Text("Which day was the trip?")
+                .multilineTextAlignment(.center)
+                .font(.largeTitle.bold())
+            DatePicker("", selection: $trip.date, displayedComponents: .date)
+                .datePickerStyle(.wheel)
+                .padding()
+            Spacer()
         }
     }
 }
 
-struct AddingEndAddressView_Previews: PreviewProvider {
+struct NewTripDateView_Previews: PreviewProvider {
     static var previews: some View {
-        AddingEndAddressView(step: .constant(2))
+        TripDateView(step: .constant(4),
+                     trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
             .environmentObject(TripController(appController: AppController()))
     }
 }

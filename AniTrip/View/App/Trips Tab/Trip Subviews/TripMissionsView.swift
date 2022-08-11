@@ -1,5 +1,5 @@
 //
-//  NewTripMissionsView.swift
+//  TripMissionsView.swift
 //  AniTrip
 //
 //  Created by Kevin Bertrand on 20/07/2022.
@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct NewTripMissionsView: View {
+struct TripMissionsView: View {
     @EnvironmentObject var tripController: TripController
     @Binding var step: Int
+    @Binding var trip: UpdateTrip
     
     var body: some View {
         VStack {
@@ -54,11 +55,11 @@ struct NewTripMissionsView: View {
             }
             
             List {
-                ForEach(tripController.newTrip.missions, id: \.self) { mission in
+                ForEach(trip.missions, id: \.self) { mission in
                     Text(mission)
                 }
                 .onDelete { index in
-                    tripController.newTrip.missions.remove(atOffsets: index)
+                    trip.missions.remove(atOffsets: index)
                 }
 
             }
@@ -70,7 +71,8 @@ struct NewTripMissionsView: View {
 
 struct NewTripMissionsView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTripMissionsView(step: .constant(5))
+        TripMissionsView(step: .constant(5),
+                         trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
             .environmentObject(TripController(appController: AppController()))
     }
 }

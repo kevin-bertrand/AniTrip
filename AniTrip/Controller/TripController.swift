@@ -29,16 +29,26 @@ final class TripController: ObservableObject {
     }
     
     // New trip properties
-    @Published var showAddNewTripView: Bool = false
+    @Published var showUpdateTripView: Bool = false
     @Published var newMission: String = ""
-    @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress) {
+    @Published var newTrip: UpdateTrip = UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress) {
+        willSet {
+            if newValue.startingAddress != newTrip.startingAddress || newValue.endingAddress != newTrip.endingAddress {
+                print("ok")
+                newTripIsUpdated = true
+            } else {
+                print("not")
+                newTripIsUpdated = false
+            }
+        }
         didSet {
-            if newTrip.totalDistance.isEmpty {
+            if newTripIsUpdated {
                 calculteDrivingDistance()
             }
         }
     }
     @Published var loadingDistance: Bool = false
+    private var newTripIsUpdated = false
     
     // Home informations
     @Published var threeLatestTrips: [Trip] = []
@@ -59,10 +69,18 @@ final class TripController: ObservableObject {
     
     /// Adding a new trip
     func add(byUser user: User?) {
-        showAddNewTripView = false
+        showUpdateTripView = false
         appController.setLoadingInProgress(withMessage: "Adding trip in progress...")
         
         tripManager.add(trip: newTrip, by: user)
+    }
+    
+    /// Update a trip
+    func update(trip: UpdateTrip, byUser user: User?) {
+        showUpdateTripView = false
+        appController.setLoadingInProgress(withMessage: "Updating trip in progress...")
+        
+        tripManager.update(trip: trip, by: user)
     }
     
     /// Download informations when home view is loaded
@@ -92,6 +110,9 @@ final class TripController: ObservableObject {
         
         // Configure adding trip notification
         configureNotification(for: Notification.AniTrip.addTripSuccess.notificationName)
+        
+        // Configure updating trip notification
+        configureNotification(for: Notification.AniTrip.updateTripSuccess.notificationName)
         
         // Configure home informations notifications
         configureNotification(for: Notification.AniTrip.homeInformationsDonwloaded.notificationName)
@@ -123,7 +144,8 @@ final class TripController: ObservableObject {
             case Notification.AniTrip.gettingTripListError.notificationName,
                 Notification.AniTrip.homeInformationsDonwloadedError.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Error")
-            case Notification.AniTrip.addTripSuccess.notificationName:
+            case Notification.AniTrip.addTripSuccess.notificationName,
+                Notification.AniTrip.updateTripSuccess.notificationName:
                 self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Success")
             case Notification.AniTrip.homeInformationsDonwloaded.notificationName:
                 threeLatestTrips = tripManager.threeLatestTrips

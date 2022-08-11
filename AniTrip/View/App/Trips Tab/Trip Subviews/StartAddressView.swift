@@ -1,33 +1,33 @@
 //
-//  NewTripDateView.swift
+//  StartAddressView.swift
 //  AniTrip
 //
-//  Created by Kevin Bertrand on 20/07/2022.
+//  Created by Kevin Bertrand on 19/07/2022.
 //
 
 import SwiftUI
 
-struct NewTripDateView: View {
+struct StartAddressView: View {
     @EnvironmentObject var tripController: TripController
     @Binding var step: Int
+    @Binding var trip: UpdateTrip
+    @State private var canValidateStep: Bool = false
     
     var body: some View {
         VStack {
             HStack {
                 Button {
-                    withAnimation {
-                        step -= 1
-                    }
+                    tripController.showUpdateTripView = false
                 } label: {
-                    Label("Previous", systemImage: "arrow.left.circle")
+                    Label("Cancel", systemImage: "x.circle")
                         .foregroundColor(.red)
                 }
                 Spacer()
                 
-                Image(systemName: "4.circle")
+                Image(systemName: "1.circle")
                     .resizable()
                     .frame(width: 30, height: 30)
-                
+                                
                 Spacer()
                 
                 Button {
@@ -37,26 +37,19 @@ struct NewTripDateView: View {
                 } label: {
                     Text("Next")
                     Image(systemName: "arrow.right.circle")
-                }
+                }.disabled(!canValidateStep)
             }
             .padding()
             
-            Spacer()
-            
-            Text("Which day was the trip?")
-                .multilineTextAlignment(.center)
-                .font(.largeTitle.bold())
-            DatePicker("", selection: $tripController.newTrip.date, displayedComponents: .date)
-                .datePickerStyle(.wheel)
-                .padding()
-            Spacer()
+            DetectAddressView(address: $trip.startingAddress, addressFound: $canValidateStep, name: "Starting address")
         }
     }
 }
 
-struct NewTripDateView_Previews: PreviewProvider {
+struct AddingStartAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTripDateView(step: .constant(4))
+        StartAddressView(step: .constant(1),
+                         trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
             .environmentObject(TripController(appController: AppController()))
     }
 }

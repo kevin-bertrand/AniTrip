@@ -1,5 +1,5 @@
 //
-//  AddTripView.swift
+//  UpdateTripView.swift
 //  AniTrip
 //
 //  Created by Kevin Bertrand on 18/07/2022.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct AddTripView: View {
-    @EnvironmentObject var tripController: TripController
-    @EnvironmentObject var userController: UserController
+struct UpdateTripView: View {
+    @Binding var trip: UpdateTrip
+    @State var isAnUpdate: Bool = false
     @State private var step = 1
     @State private var previousScreen = 1
     
@@ -18,30 +18,27 @@ struct AddTripView: View {
             Group {
                 switch step {
                 case 1:
-                    AddingStartAddressView(step: $step)
+                    StartAddressView(step: $step, trip: $trip)
                         .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 case 2:
-                    AddingEndAddressView(step: $step)
+                    EndAddressView(step: $step, trip: $trip)
                         .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 case 3:
-                    NewTripDistanceView(step: $step)
+                    TripDistanceView(step: $step, trip: $trip)
                         .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 case 4:
-                    NewTripDateView(step: $step)
+                    TripDateView(step: $step, trip: $trip)
                         .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 case 5:
-                    NewTripMissionsView(step: $step)
+                    TripMissionsView(step: $step, trip: $trip)
                         .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 case 6:
-                    NewTripCommentView(step: $step)
+                    TripCommentView(step: $step, trip: $trip, isAnUpdate: $isAnUpdate)
                         .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
                 default:
                     Text("Error")
                 }
             }
-        }
-        .onAppear {
-            tripController.newTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)
         }
         .onChange(of: step) { newValue in
             previousScreen = newValue
@@ -51,8 +48,6 @@ struct AddTripView: View {
 
 struct AddTripView_Previews: PreviewProvider {
     static var previews: some View {
-        AddTripView()
-            .environmentObject(TripController(appController: AppController()))
-            .environmentObject(UserController(appController: AppController()))
+        UpdateTripView(trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
     }
 }

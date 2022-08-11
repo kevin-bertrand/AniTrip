@@ -1,5 +1,5 @@
 //
-//  NewTripDistanceView.swift
+//  TripDistanceView.swift
 //  AniTrip
 //
 //  Created by Kevin Bertrand on 20/07/2022.
@@ -7,9 +7,10 @@
 
 import SwiftUI
 
-struct NewTripDistanceView: View {
+struct TripDistanceView: View {
     @EnvironmentObject var tripController: TripController
     @Binding var step: Int
+    @Binding var trip: UpdateTrip
     
     var body: some View {
         VStack {
@@ -38,7 +39,7 @@ struct NewTripDistanceView: View {
                     Text("Next")
                     Image(systemName: "arrow.right.circle")
                 }
-                .disabled(Double(tripController.newTrip.totalDistance) ?? 0.0 <= 0.0 ? true : false)
+                .disabled(Double(trip.totalDistance) ?? 0.0 <= 0.0 ? true : false)
             }
             .padding()
             
@@ -57,7 +58,7 @@ struct NewTripDistanceView: View {
                 }
             } else {
                 HStack {
-                    TextField("0.0", text: $tripController.newTrip.totalDistance)
+                    TextField("0.0", text: $trip.totalDistance)
                         .multilineTextAlignment(.trailing)
                         .keyboardType(.decimalPad)
                     Text("km")
@@ -73,7 +74,8 @@ struct NewTripDistanceView: View {
 
 struct NewTripDistanceView_Previews: PreviewProvider {
     static var previews: some View {
-        NewTripDistanceView(step: .constant(3))
+        TripDistanceView(step: .constant(3),
+                         trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
             .environmentObject(TripController(appController: AppController()))
     }
 }

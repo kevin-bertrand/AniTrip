@@ -16,12 +16,12 @@ struct TripsView: View {
         .onAppear {
             tripController.getList(byUser: userController.connectedUser)
         }
-        .sheet(isPresented: $tripController.showAddNewTripView, content: {
-            AddTripView()
+        .sheet(isPresented: $tripController.showUpdateTripView, content: {
+            UpdateTripView(trip: $tripController.newTrip)
         })
         .toolbar {
             Button {
-                tripController.showAddNewTripView = true
+                tripController.showUpdateTripView = true
             } label: {
                 Image(systemName: "plus.circle")
             }

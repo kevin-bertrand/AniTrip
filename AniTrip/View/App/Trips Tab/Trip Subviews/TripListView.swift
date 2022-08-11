@@ -19,11 +19,11 @@ struct TripListView: View {
             
             Section {
                 List {
-                    ForEach(trips, id: \.id) { trip in
+                    ForEach($trips, id: \.id) { $trip in
                         NavigationLink {
-                            DetailedTripView(trip: trip)
+                            DetailedTripView(trip: $trip)
                         } label: {
-                            TripTileView(trip: trip)
+                            TripTileView(trip: $trip.wrappedValue)
                         }
                     }
                 }
