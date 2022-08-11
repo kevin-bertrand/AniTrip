@@ -32,7 +32,7 @@ struct ActivateAccountView: View {
                 
                 ButtonWithIcon(action: {
                     volunteersController.resetActivationView()
-                }, title: "OK")
+                }, title: "OK", isLoading: .constant(false))
                 .padding()
             } else {
                 Text("Activate the account \(volunteersController.accountToActivateEmail) ?")
@@ -44,12 +44,12 @@ struct ActivateAccountView: View {
                     ButtonWithIcon(action: {
                         volunteersController.displayActivateAccount = false
                         volunteersController.refuseActivation()
-                    }, title: volunteersController.accountToActivateEmail.isNotEmpty ? "Refuse" : "Back", color: .red)
+                    }, title: volunteersController.accountToActivateEmail.isNotEmpty ? "Refuse" : "Back", color: .red, isLoading: .constant(false))
                     
                     if volunteersController.accountToActivateEmail.isNotEmpty {
                         ButtonWithIcon(action: {
                             volunteersController.activateAccount(of: VolunteerToActivate(email: volunteersController.accountToActivateEmail), by: userController.connectedUser)
-                        }, title: "Accept")
+                        }, title: "Accept", isLoading: .constant(false))
                     }
                 }.padding()
             }

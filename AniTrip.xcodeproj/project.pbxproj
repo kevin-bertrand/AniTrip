@@ -39,7 +39,6 @@
 		062DC6AA2893C721004C401D /* updatePosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 062DC6A92893C721004C401D /* updatePosition.json */; };
 		062DC6AD2893E990004C401D /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 062DC6AC2893E990004C401D /* Mixpanel */; };
 		062DC6AF2893F24E004C401D /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DC6AE2893F24E004C401D /* SearchAddressView.swift */; };
-		064BADF228A3C07A008FB90F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064BADF128A3C07A008FB90F /* LocationManager.swift */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
@@ -142,7 +141,6 @@
 		062DC6A72893C39E004C401D /* desactivateAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = desactivateAccount.json; sourceTree = "<group>"; };
 		062DC6A92893C721004C401D /* updatePosition.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = updatePosition.json; sourceTree = "<group>"; };
 		062DC6AE2893F24E004C401D /* SearchAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAddressView.swift; sourceTree = "<group>"; };
-		064BADF128A3C07A008FB90F /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065E4753287B573600D32E05 /* AniTripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripApp.swift; sourceTree = "<group>"; };
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -389,7 +387,6 @@
 				06BF7248287B603A006F0839 /* AppController.swift */,
 				06158E40288582DD00C3BE6E /* VolunteersController.swift */,
 				06158E542885909D00C3BE6E /* TripController.swift */,
-				064BADF128A3C07A008FB90F /* LocationManager.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -749,7 +746,6 @@
 				068FDBE9288745EC00ACA72D /* View.swift in Sources */,
 				062DC6AF2893F24E004C401D /* SearchAddressView.swift in Sources */,
 				06158E612885982000C3BE6E /* DetailedTripView.swift in Sources */,
-				064BADF228A3C07A008FB90F /* LocationManager.swift in Sources */,
 				06158E4D28858B7500C3BE6E /* VolunteerProfileView.swift in Sources */,
 				062DC6A42892A350004C401D /* ToolbarTabItemView.swift in Sources */,
 				0690C41D28887CB900B57B92 /* VolunteerTileView.swift in Sources */,

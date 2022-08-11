@@ -38,6 +38,7 @@ struct NewTripDistanceView: View {
                     Text("Next")
                     Image(systemName: "arrow.right.circle")
                 }
+                .disabled(Double(tripController.newTrip.totalDistance) ?? 0.0 <= 0.0 ? true : false)
             }
             .padding()
             
@@ -45,15 +46,26 @@ struct NewTripDistanceView: View {
             
             Text("Trip distance:")
                 .font(.largeTitle.bold())
-            HStack {
-                TextField("0.0", text: $tripController.newTrip.totalDistance)
-                    .multilineTextAlignment(.trailing)
-                    .keyboardType(.decimalPad)
-                Text("km")
-            }
-            .frame(width: 150)
-            .font(.title)
             
+            if tripController.loadingDistance {
+                VStack {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .padding()
+                    Text("Calculating trip distance")
+                        .font(.title3)
+                }
+            } else {
+                HStack {
+                    TextField("0.0", text: $tripController.newTrip.totalDistance)
+                        .multilineTextAlignment(.trailing)
+                        .keyboardType(.decimalPad)
+                    Text("km")
+                }
+                .frame(width: 150)
+                .font(.title)
+            }
+
             Spacer()
         }
     }

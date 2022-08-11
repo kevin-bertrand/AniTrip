@@ -13,27 +13,34 @@ struct ButtonWithIcon: View {
     var title: String
     var height: CGFloat = 60
     var color: Color = Color.accentColor
+    @Binding var isLoading: Bool
     
     var body: some View {
         Button(action: action) {
-            ZStack {
-                HStack {
-                    Spacer()
-                    Text(title)
-                        .font(.title2)
-                        .bold()
-                    Spacer()
-                }
-                
-                if let icon = icon {
+            if isLoading {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .padding()
+            } else {
+                ZStack {
                     HStack {
                         Spacer()
-                        Image(systemName: icon)
-                            .padding(.horizontal)
+                        Text(title)
                             .font(.title2)
+                            .bold()
+                        Spacer()
                     }
-                }
-            }.padding()
+                    
+                    if let icon = icon {
+                        HStack {
+                            Spacer()
+                            Image(systemName: icon)
+                                .padding(.horizontal)
+                                .font(.title2)
+                        }
+                    }
+                }.padding()
+            }
         }
         .frame(height: height)
         .foregroundColor(.white)
@@ -44,6 +51,6 @@ struct ButtonWithIcon: View {
 
 struct ButtonWithIcon_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonWithIcon(action: {}, title: "Perform action")
+        ButtonWithIcon(action: {}, title: "Perform action", isLoading: .constant(false))
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct AddingStartAddressView: View {
     @EnvironmentObject var tripController: TripController
     @Binding var step: Int
+    @State private var canValidateStep: Bool = false
     
     var body: some View {
         VStack {
@@ -35,11 +36,11 @@ struct AddingStartAddressView: View {
                 } label: {
                     Text("Next")
                     Image(systemName: "arrow.right.circle")
-                }
+                }.disabled(!canValidateStep)
             }
             .padding()
             
-            DetectAddressView(address: $tripController.newTrip.startingAddress, name: "Starting address")
+            DetectAddressView(address: $tripController.newTrip.startingAddress, addressFound: $canValidateStep, name: "Starting address")
         }
     }
 }

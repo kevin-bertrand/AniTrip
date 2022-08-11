@@ -51,7 +51,7 @@ struct LoginSubview: View {
                 ButtonWithIcon(action: {
                     userController.checkSaveEmail()
                     userController.performLogin()
-                }, icon: "chevron.right", title: "LOGIN")
+                }, icon: "chevron.right", title: "LOGIN", isLoading: .constant(false))
                 
                 if userController.getBiometricStatus() {
                     Button {

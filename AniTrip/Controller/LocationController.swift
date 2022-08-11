@@ -19,29 +19,13 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
     @Published var addressLocated: String = ""
     @Published var address: Address = emptyAddress
     @Published var enteredAddress: String = ""
+    @Published var searchingAddress: Bool = false
     
     // MARK: Methods
-    /// Getting address from the location
-    func getAddress() {
-        let geocoder = CLGeocoder()
-        let addressLocation = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
-        
-        geocoder.reverseGeocodeLocation(addressLocation) { location, error in
-            if error == nil,
-               let placemarks = location,
-               placemarks.count >= 1  {
-                let pm = placemarks[0]
-                self.address = Address(roadName: "\(pm.thoroughfare ?? "")", streetNumber: "\(pm.subThoroughfare ?? "")", complement: "", zipCode: "\(pm.postalCode ?? "")", city: "\(pm.locality ?? "")", country: "\(pm.country ?? "")", latitude: self.region.center.latitude, longitude: self.region.center.longitude)
-                self.addressLocated = "\(self.address.streetNumber), \(self.address.roadName) - \(self.address.zipCode), \(self.address.city) - \(self.address.country)"
-                self.enteredAddress = ""
-            } else {
-                self.addressLocated = "No address found!"
-            }
-        }
-    }
-    
     /// Searching address
     func searchAddress() {
+        searchingAddress = true
+        
         if enteredAddress.isNotEmpty {
             findAddress()
         } else {
@@ -70,6 +54,7 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
     
     /// Requesting location
     func requestLocation() {
+        searchingAddress = true
         locationManager.requestLocation()
     }
     
@@ -94,6 +79,30 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
             if let lat = placemark?.location?.coordinate.latitude, let lon = placemark?.location?.coordinate.longitude {
                 self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), latitudinalMeters: 750, longitudinalMeters: 750)
                 self.getAddress()
+            } else {
+                self.searchingAddress = false
+                self.addressLocated = "No address found!"
+            }
+        }
+    }
+    
+    /// Getting address from the location
+    private func getAddress() {
+        let geocoder = CLGeocoder()
+        let addressLocation = CLLocation(latitude: region.center.latitude, longitude: region.center.longitude)
+        
+        geocoder.reverseGeocodeLocation(addressLocation) { location, error in
+            self.searchingAddress = false
+            if error == nil,
+               let placemarks = location,
+               placemarks.count >= 1  {
+                let pm = placemarks[0]
+                self.address = Address(roadName: "\(pm.thoroughfare ?? "")", streetNumber: "\(pm.subThoroughfare ?? "")", complement: "", zipCode: "\(pm.postalCode ?? "")", city: "\(pm.locality ?? "")", country: "\(pm.country ?? "")", latitude: self.region.center.latitude, longitude: self.region.center.longitude)
+                self.addressLocated = "\(self.address.streetNumber), \(self.address.roadName) - \(self.address.zipCode), \(self.address.city) - \(self.address.country)"
+                if self.addressLocated == ",  - ,  - " {
+                    self.addressLocated = "No address found!"
+                }
+                self.enteredAddress = ""
             } else {
                 self.addressLocated = "No address found!"
             }

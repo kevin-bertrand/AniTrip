@@ -10,6 +10,7 @@ import SwiftUI
 struct SearchAddressView: View {
     @Binding var address: Address
     @Binding var showMapSheet: Bool
+    @State private var canValidateAddress: Bool = false
     
     var body: some View {
         VStack {
@@ -30,9 +31,10 @@ struct SearchAddressView: View {
                     Text("Validate")
                         .foregroundColor(.accentColor)
                 }
+                .disabled(!canValidateAddress)
             }.padding()
             
-            DetectAddressView(address: $address, name: "Address")
+            DetectAddressView(address: $address, addressFound: $canValidateAddress, name: "Address")
         }
     }
 }

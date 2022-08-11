@@ -13,6 +13,7 @@ import SwiftUI
 struct DetectAddressView: View {
     @StateObject var locationManager = LocationController()
     @Binding var address: Address
+    @Binding var addressFound: Bool
     let name: String
     private let location = CLLocationManager()
     
@@ -36,12 +37,20 @@ struct DetectAddressView: View {
                         Button {
                             locationManager.requestLocation()
                         } label: {
-                            Image(systemName: "location")
-                                .padding()
-                                .background(Color("LocationButton"))
-                                .cornerRadius(10)
+                            Group {
+                                if locationManager.searchingAddress {
+                                    ProgressView()
+                                        .progressViewStyle(.circular)
+                                } else {
+                                    Image(systemName: "location")
+                                }
+                            }
+                            .padding()
+                            .background(Color("LocationButton"))
+                            .cornerRadius(10)
                         }
                         .padding()
+                        .disabled(locationManager.searchingAddress ? true : false)
                     }
                 }
                 Rectangle()
@@ -59,18 +68,22 @@ struct DetectAddressView: View {
                     HStack {
                         ButtonWithIcon(action: {
                             locationManager.searchAddress()
-//                            locationManager.searchAddress { address in
-//                                if let address = address {
-//                                    self.address = address
-//                                }
-//                            }
-                        }, icon: "magnifyingglass", title: "Search", height: 40)
+                        }, icon: "magnifyingglass", title: "Search", height: 40, isLoading: $locationManager.searchingAddress)
                         .padding()
                         .frame(width: 300)
+                        .disabled(locationManager.searchingAddress ? true : false)
                     }
                 }
             }
         }
+        .onChange(of: locationManager.addressLocated, perform: { newValue in
+            print(newValue)
+            if newValue.isEmpty || newValue == "No address found!" {
+                addressFound = false
+            } else {
+                addressFound = true
+            }
+        })
         .onAppear {
             locationManager.centerMap(with: address)
         }
@@ -82,7 +95,7 @@ struct DetectAddressView: View {
 
 struct DetectAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        DetectAddressView(address: .constant(LocationController.emptyAddress), name: "Starting address")
+        DetectAddressView(address: .constant(LocationController.emptyAddress), addressFound: .constant(false), name: "Starting address")
     }
 }
 

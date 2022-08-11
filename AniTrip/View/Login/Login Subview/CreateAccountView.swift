@@ -30,7 +30,7 @@ struct CreateAccountView: View {
             
             ButtonWithIcon(action: {
                 userController.createAccount()
-            }, icon: nil, title: "Ask new account")
+            }, icon: nil, title: "Ask new account", isLoading: .constant(false))
         }
     }
 }

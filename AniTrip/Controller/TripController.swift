@@ -33,9 +33,12 @@ final class TripController: ObservableObject {
     @Published var newMission: String = ""
     @Published var newTrip: NewTrip = NewTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress) {
         didSet {
-            calculteDrivingDistance()
+            if newTrip.totalDistance.isEmpty {
+                calculteDrivingDistance()
+            }
         }
     }
+    @Published var loadingDistance: Bool = false
     
     // Home informations
     @Published var threeLatestTrips: [Trip] = []
@@ -151,6 +154,7 @@ final class TripController: ObservableObject {
     
     /// Calculate the distance between 2 points
     private func calculteDrivingDistance() {
+        loadingDistance = true
         let request = MKDirections.Request()
         let source = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.startingAddress.latitude, longitude: newTrip.startingAddress.longitude))
         let destination = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.endingAddress.latitude, longitude: newTrip.endingAddress.longitude))
@@ -162,6 +166,9 @@ final class TripController: ObservableObject {
         let directions = MKDirections(request: request)
         
         directions.calculate { response, error in
+            DispatchQueue.main.async {
+                self.loadingDistance = false
+            }
             if let response = response,
                let route = response.routes.first {
                 self.newTrip.totalDistance = "\((route.distance/1000.0).twoDigitPrecision)"

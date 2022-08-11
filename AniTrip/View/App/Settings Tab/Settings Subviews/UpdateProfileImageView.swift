@@ -47,11 +47,11 @@ struct UpdateProfileImageView: View {
             HStack {
                 ButtonWithIcon(action: {
                     userController.showUpdateProfileImage = false
-                }, title: "Back", color: .red)
+                }, title: "Back", color: .red, isLoading: .constant(false))
                 
                 ButtonWithIcon(action: {
                     userController.updateImage(selectedImage)
-                }, title: "Confirm")
+                }, title: "Confirm", isLoading: .constant(false))
                 .disabled(selectedImage == nil ? true : false)
             }.padding()
         }
