@@ -14,6 +14,7 @@ struct DetectAddressView: View {
     @StateObject var locationManager = LocationController()
     @Binding var address: Address
     let name: String
+    private let location = CLLocationManager()
     
     var body: some View {
         VStack {
@@ -31,15 +32,17 @@ struct DetectAddressView: View {
                             .padding(.leading, 6)
                     }
                     
-                    Button {
-                        locationManager.requestLocation()
-                    } label: {
-                         Image(systemName: "location")
-                            .padding()
-                            .background(Color("LocationButton"))
-                            .cornerRadius(10)
+                    if location.authorizationStatus != .denied {
+                        Button {
+                            locationManager.requestLocation()
+                        } label: {
+                            Image(systemName: "location")
+                                .padding()
+                                .background(Color("LocationButton"))
+                                .cornerRadius(10)
+                        }
+                        .padding()
                     }
-                    .padding()
                 }
                 Rectangle()
                     .foregroundColor(Color("TextFieldBackground"))

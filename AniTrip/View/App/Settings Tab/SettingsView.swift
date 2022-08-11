@@ -5,6 +5,7 @@
 //  Created by Kevin Bertrand on 18/07/2022.
 //
 
+import CoreLocation
 import LocalAuthentication
 import os
 import SwiftUI
@@ -15,7 +16,9 @@ struct SettingsView: View {
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
     @State private var allowNotifications: Bool = false
     @State private var showAlert: Bool = false
+    @State private var allowCurrentLocation: Bool = false
     let laContext = LAContext()
+    private let locationManager = CLLocationManager()
     
     var body: some View {
         Form {
@@ -49,6 +52,12 @@ struct SettingsView: View {
                     .onTapGesture {
                         showAlert.toggle()
                     }
+                
+                Toggle("Allow get current location", isOn: $allowCurrentLocation)
+                    .disabled(true)
+                    .onTapGesture {
+                        showAlert.toggle()
+                    }
             }
             
             Section {
@@ -74,9 +83,18 @@ struct SettingsView: View {
                     self.allowNotifications = false
                 }
             }
+            
+            switch locationManager.authorizationStatus {
+            case .denied, .notDetermined:
+                allowCurrentLocation = false
+            case .authorized, .authorizedAlways, .authorizedWhenInUse, .restricted:
+                allowCurrentLocation = true
+            @unknown default:
+                allowCurrentLocation = false
+            }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Settings"), message: Text("Go to the iPhone settings' to change notifications!"), primaryButton: .default(Text("Cancel")), secondaryButton: .default(Text("Go to settings"), action: {
+            Alert(title: Text("Settings"), message: Text("Go to the iPhone settings' to change notifications and location authorization!"), primaryButton: .default(Text("Cancel")), secondaryButton: .default(Text("Go to settings"), action: {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         }
