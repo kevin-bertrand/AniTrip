@@ -77,7 +77,6 @@ struct DetectAddressView: View {
             }
         }
         .onChange(of: locationManager.addressLocated, perform: { newValue in
-            print(newValue)
             if newValue.isEmpty || newValue == "No address found!" {
                 addressFound = false
             } else {
