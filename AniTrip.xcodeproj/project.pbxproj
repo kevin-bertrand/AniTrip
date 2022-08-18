@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		060A8B5528AE18C50015BA4D /* TripsExportFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 060A8B5428AE18C50015BA4D /* TripsExportFilterView.swift */; };
 		06158E2828854D1E00C3BE6E /* UserProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2728854D1E00C3BE6E /* UserProfileView.swift */; };
 		06158E2A28854F4200C3BE6E /* AddressTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2928854F4200C3BE6E /* AddressTileView.swift */; };
 		06158E2C2885500100C3BE6E /* MapPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E2B2885500100C3BE6E /* MapPlace.swift */; };
@@ -39,6 +40,8 @@
 		062DC6AA2893C721004C401D /* updatePosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 062DC6A92893C721004C401D /* updatePosition.json */; };
 		062DC6AD2893E990004C401D /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 062DC6AC2893E990004C401D /* Mixpanel */; };
 		062DC6AF2893F24E004C401D /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DC6AE2893F24E004C401D /* SearchAddressView.swift */; };
+		064EC28A28AE2B7900EDBB06 /* TripsExportView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EC28928AE2B7900EDBB06 /* TripsExportView.swift */; };
+		064EC28C28AE2F0F00EDBB06 /* UserInformationTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EC28B28AE2F0F00EDBB06 /* UserInformationTextView.swift */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
 		065E4758287B573700D32E05 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E4757287B573700D32E05 /* Assets.xcassets */; };
 		065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 065E475A287B573700D32E05 /* Preview Assets.xcassets */; };
@@ -110,6 +113,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		060A8B5428AE18C50015BA4D /* TripsExportFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsExportFilterView.swift; sourceTree = "<group>"; };
 		06158E2728854D1E00C3BE6E /* UserProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileView.swift; sourceTree = "<group>"; };
 		06158E2928854F4200C3BE6E /* AddressTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressTileView.swift; sourceTree = "<group>"; };
 		06158E2B2885500100C3BE6E /* MapPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPlace.swift; sourceTree = "<group>"; };
@@ -141,6 +145,8 @@
 		062DC6A72893C39E004C401D /* desactivateAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = desactivateAccount.json; sourceTree = "<group>"; };
 		062DC6A92893C721004C401D /* updatePosition.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = updatePosition.json; sourceTree = "<group>"; };
 		062DC6AE2893F24E004C401D /* SearchAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAddressView.swift; sourceTree = "<group>"; };
+		064EC28928AE2B7900EDBB06 /* TripsExportView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsExportView.swift; sourceTree = "<group>"; };
+		064EC28B28AE2F0F00EDBB06 /* UserInformationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationTextView.swift; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		065E4753287B573600D32E05 /* AniTripApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniTripApp.swift; sourceTree = "<group>"; };
 		065E4757287B573700D32E05 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -282,6 +288,8 @@
 				06955E9E2887FFD4006B502B /* TripCommentView.swift */,
 				06158E6228859B5100C3BE6E /* UpdateTripView.swift */,
 				0690C41E28887EB200B57B92 /* TripListView.swift */,
+				060A8B5428AE18C50015BA4D /* TripsExportFilterView.swift */,
+				064EC28928AE2B7900EDBB06 /* TripsExportView.swift */,
 			);
 			path = "Trip Subviews";
 			sourceTree = "<group>";
@@ -439,6 +447,7 @@
 				06FBF14928900C3600222480 /* ImagePicker.swift */,
 				061949DE28918D52002D95A1 /* ProfilePictureView.swift */,
 				06A8BAC128927EBE008B77C7 /* PullToRefresh.swift */,
+				064EC28B28AE2F0F00EDBB06 /* UserInformationTextView.swift */,
 			);
 			path = "Global Components";
 			sourceTree = "<group>";
@@ -749,6 +758,7 @@
 				06158E4D28858B7500C3BE6E /* VolunteerProfileView.swift in Sources */,
 				062DC6A42892A350004C401D /* ToolbarTabItemView.swift in Sources */,
 				0690C41D28887CB900B57B92 /* VolunteerTileView.swift in Sources */,
+				060A8B5528AE18C50015BA4D /* TripsExportFilterView.swift in Sources */,
 				06955E9D2887FD1C006B502B /* TripMissionsView.swift in Sources */,
 				06158E532885902D00C3BE6E /* TripsView.swift in Sources */,
 				06158E3228855D6C00C3BE6E /* UpdateProfileView.swift in Sources */,
@@ -759,6 +769,8 @@
 				06BF7264287E1117006F0839 /* CreateAccountView.swift in Sources */,
 				06158E2A28854F4200C3BE6E /* AddressTileView.swift in Sources */,
 				06BF7249287B603A006F0839 /* AppController.swift in Sources */,
+				064EC28C28AE2F0F00EDBB06 /* UserInformationTextView.swift in Sources */,
+				064EC28A28AE2B7900EDBB06 /* TripsExportView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

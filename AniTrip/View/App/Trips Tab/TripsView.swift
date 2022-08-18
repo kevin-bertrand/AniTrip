@@ -25,14 +25,21 @@ struct TripsView: View {
             } label: {
                 Image(systemName: "plus.circle")
             }
+            NavigationLink {
+                TripsExportFilterView(userToExportId: userController.connectedUser?.id)
+            } label: {
+                Image(systemName: "square.and.arrow.up.fill")
+            }
         }
     }
 }
 
 struct TripsView_Previews: PreviewProvider {
     static var previews: some View {
-        TripsView()
-            .environmentObject(TripController(appController: AppController()))
-            .environmentObject(UserController(appController: AppController()))
+        NavigationView {
+            TripsView()
+                .environmentObject(TripController(appController: AppController()))
+                .environmentObject(UserController(appController: AppController()))
+        }
     }
 }

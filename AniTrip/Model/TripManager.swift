@@ -15,7 +15,8 @@ final class TripManager {
     var threeLatestTrips: [Trip] { threeLatestTripsList.sorted { $0.date > $1.date }}
     var tripsChartPoints: [TripChartPoint] { tripsChartPointsList.sorted { $0.date.chartPointToDate < $1.date.chartPointToDate }}
     var news: News = News(distanceThisWeek: 0.0, numberOfTripThisWeek: 0, distanceThisYear: 0.0, numberOfTripThisYear: 0, distancePercentSinceLastYear: 0.0, distancePercentSinceLastWeek: 0.0, numberTripPercentSinceLastYear: 0.0, numberTripPercentSinceLastWeek: 0.0)
-    
+    var tripToExportInformation: TripToExportInformations = .init(userLastname: "", userFirstname: "", userPhone: "", userEmail: "", startDate: "", endDate: "", totalDistance: 0.0, trips: [])
+        
     // MARK: Methods
     /// Getting trip list
     func getList(byUser user: User?, of volunteer: Volunteer? = nil) {
@@ -178,6 +179,23 @@ final class TripManager {
                     Notification.AniTrip.unknownError.sendNotification()
                 }
             } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
+    /// Download trip to export
+    func downloadTripToExport(with filters: TripFilterToExport, by user: User) {
+        networkManager.request(urlParams: NetworkConfigurations.filterTripsToExport.urlParams, method: NetworkConfigurations.filterTripsToExport.method, authorization: .authorization(bearerToken: user.token), body: filters) { [weak self] data, response, error in
+            if let self = self,
+               let statusCode = response?.statusCode,
+               statusCode == 200,
+               let data = data,
+               let informations = try? JSONDecoder().decode(TripToExportInformations.self, from: data) {
+                self.tripToExportInformation = informations
+                Notification.AniTrip.exportDataDownloaded.sendNotification()
+            } else {
+                print("error")
                 Notification.AniTrip.unknownError.sendNotification()
             }
         }

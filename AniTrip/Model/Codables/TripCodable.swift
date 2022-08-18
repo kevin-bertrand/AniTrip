@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Trip: Codable {
+struct Trip: Codable, Identifiable {
     let id: UUID
     let date: String
     let missions: [String]
@@ -65,4 +65,21 @@ enum ChartFilter: String, Equatable {
     case week = "7 days"
     case month = "1 month"
     case year = "1 year"
+}
+
+struct TripFilterToExport: Codable {
+    let userID: UUID
+    let startDate: String
+    let endDate: String
+}
+
+struct TripToExportInformations: Codable {
+    let userLastname: String
+    let userFirstname: String
+    let userPhone: String
+    let userEmail: String
+    let startDate: String
+    let endDate: String
+    let totalDistance: Double
+    let trips: [Trip]
 }

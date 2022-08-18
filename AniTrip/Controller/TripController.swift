@@ -9,6 +9,7 @@ import Foundation
 import MapKit
 import SwiftUI
 import SwiftUICharts
+import PDFKit
 
 final class TripController: ObservableObject {
     // MARK: Public
@@ -34,10 +35,8 @@ final class TripController: ObservableObject {
     @Published var newTrip: UpdateTrip = UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress) {
         willSet {
             if newValue.startingAddress != newTrip.startingAddress || newValue.endingAddress != newTrip.endingAddress {
-                print("ok")
                 newTripIsUpdated = true
             } else {
-                print("not")
                 newTripIsUpdated = false
             }
         }
@@ -55,6 +54,12 @@ final class TripController: ObservableObject {
     @Published var chartFilter: ChartFilter = .week
     @Published var news: News = News(distanceThisWeek: 0.0, numberOfTripThisWeek: 0, distanceThisYear: 0.0, numberOfTripThisYear: 0, distancePercentSinceLastYear: 0.0, distancePercentSinceLastWeek: 0.0, numberTripPercentSinceLastYear: 0.0, numberTripPercentSinceLastWeek: 0.0)
     @Published var chartPoints: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
+    
+    // Export trip
+    @Published var startFilterDate: Date = Date()
+    @Published var endFilterDate: Date = Date()
+    var tripToExport: TripToExportInformations = .init(userLastname: "", userFirstname: "", userPhone: "", userEmail: "", startDate: "", endDate: "", totalDistance: 0.0, trips: [])
+    @Published var showPDFView: Bool = false
     
     // MARK: Methods
     /// Getting trip list
@@ -99,6 +104,56 @@ final class TripController: ObservableObject {
         tripManager.downloadChartPoint(forUser: user, filter: chartFilter)
     }
     
+    /// Download data to export
+    func downloadDataToExport(byUser user: User?, for userId: UUID?) {
+        guard let user = user, let userId = userId else { return }
+        appController.setLoadingInProgress(withMessage: "Download in progress...")
+        
+        let filters = TripFilterToExport(userID: userId, startDate: startFilterDate.iso8601, endDate: endFilterDate.iso8601)
+        
+        tripManager.downloadTripToExport(with: filters, by: user)
+    }
+    
+    /// Export data to PDF
+    func exportToPDF() {
+        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let outputFileURL = documentDirectory.appendingPathComponent("SwiftUI.pdf")
+        
+        //Normal width
+        let width: CGFloat = 8.5 * 72.0
+        //Estimate the height of your view
+        let height: CGFloat = 1000
+        let charts = TripsExportView(exportData: tripToExport, tripController: self)
+        
+        let pdfVC = UIHostingController(rootView: charts)
+        pdfVC.view.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        
+        //Render the view behind all other views
+        let rootVC = UIApplication.shared.windows.first?.rootViewController
+        rootVC?.addChild(pdfVC)
+        rootVC?.view.insertSubview(pdfVC.view, at: 0)
+        
+        //Render the PDF
+        let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: 8.5 * 72.0, height: height))
+        
+        do {
+            try pdfRenderer.writePDF(to: outputFileURL, withActions: { (context) in
+                context.beginPage()
+                pdfVC.view.layer.render(in: context.cgContext)
+            })
+            
+            //            self.exportURL = outputFileURL
+            //            self.showExportSheet = true
+            
+        }catch {
+            //            self.showError = true
+            print("Could not create PDF file: \(error)")
+        }
+            //
+            //        pdfVC.removeFromParent()
+            //        pdfVC.view.removeFromSuperview()
+    }
+    
     // MARK: Initialization
     init(appController: AppController) {
         self.appController = appController
@@ -117,6 +172,9 @@ final class TripController: ObservableObject {
         // Configure home informations notifications
         configureNotification(for: Notification.AniTrip.homeInformationsDonwloaded.notificationName)
         configureNotification(for: Notification.AniTrip.homeInformationsDonwloadedError.notificationName)
+        
+        // Configure export data notifications
+        configureNotification(for: Notification.AniTrip.exportDataDownloaded.notificationName)
     }
     
     // MARK: Private
@@ -151,6 +209,9 @@ final class TripController: ObservableObject {
                 threeLatestTrips = tripManager.threeLatestTrips
                 self.news = tripManager.news
                 chartPoints = getChartData(from: tripManager.tripsChartPoints)
+            case Notification.AniTrip.exportDataDownloaded.notificationName:
+                tripToExport = tripManager.tripToExportInformation
+                showPDFView = true
             default: break
             }
         }

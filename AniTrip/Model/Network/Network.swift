@@ -23,6 +23,7 @@ enum NetworkConfigurations {
     case getNews
     case activateAccount
     case desactivateAccount
+    case filterTripsToExport
     
     var method: HTTPMethod {
         var method: HTTPMethod
@@ -30,7 +31,8 @@ enum NetworkConfigurations {
         switch self {
         case .login,
                 .createAccount,
-                .addTrip:
+                .addTrip,
+                .filterTripsToExport:
             method = .post
         case .updateUser,
                 .updatePosition,
@@ -66,6 +68,8 @@ enum NetworkConfigurations {
                 .addTrip,
                 .updateTrip:
             params = ["trip"]
+        case .filterTripsToExport:
+            params = ["trip", "toExport"]
         case .getThreeLatestTrip:
             params = ["trip", "latest"]
         case .getChartPoints:

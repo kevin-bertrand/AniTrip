@@ -46,7 +46,7 @@ struct AniTripApp: App {
                             LoginView()
                         }
                     }
-                    .disabled(appController.loadingInProgress ? true : false)
+                    .disabled(appController.loadingInProgress)
                     
                     if appController.loadingInProgress {
                         LoadingInProgressView()
@@ -63,6 +63,20 @@ struct AniTripApp: App {
             .preferredColorScheme(useDefaultScheme ? nil : (useDarkScheme ? .dark : .light))
             .onAppear {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {_,_ in}
+            }
+            .sheet(isPresented: $tripController.showPDFView) {
+                VStack {
+                    TripsExportView(exportData: tripController.tripToExport, tripController: tripController)
+                    HStack {
+                        ButtonWithIcon(action: {
+                            tripController.showPDFView = false
+                        }, title: "Cancel", color: .red, isLoading: .constant(false))
+                        Spacer()
+                        ButtonWithIcon(action: {
+                            tripController.exportToPDF()
+                        }, title: "Export", isLoading: .constant(false))
+                    }.padding()
+                }
             }
         }
     }

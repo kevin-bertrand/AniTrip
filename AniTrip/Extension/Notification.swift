@@ -57,6 +57,9 @@ extension Notification {
         // Activate account notification
         case showActivateAccount = "A new account must be activate"
         
+        // Export notification
+        case exportDataDownloaded = "All data are downloaded"
+        
         /// Getting the name of the notification
         var notificationName: Notification.Name {
             return Notification.Name(rawValue: "\(self)")
