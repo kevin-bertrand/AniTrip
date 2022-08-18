@@ -32,7 +32,7 @@ final class TripController: ObservableObject {
     // New trip properties
     @Published var showUpdateTripView: Bool = false
     @Published var newMission: String = ""
-    @Published var newTrip: UpdateTrip = UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress) {
+    @Published var newTrip: UpdateTrip = UpdateTrip(id: UUID(uuid: UUID_NULL), date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress) {
         willSet {
             if newValue.startingAddress != newTrip.startingAddress || newValue.endingAddress != newTrip.endingAddress {
                 newTripIsUpdated = true
