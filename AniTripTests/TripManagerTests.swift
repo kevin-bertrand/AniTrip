@@ -64,7 +64,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .tripList, response: .status200, status: .correctData)
         
         // When
-        tripManager.getList(byUser: getConnectedUser(), of: .init(image: nil, id: "\(UUID())", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: true))
+        tripManager.getList(byUser: getConnectedUser(), of: .init(imagePath: "", image: nil, id: "\(UUID())", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: true))
         
         // Then
         XCTAssertFalse(tripManager.volunteerTrips.isEmpty)

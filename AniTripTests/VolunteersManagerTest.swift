@@ -199,7 +199,7 @@ final class VolunteersManagerTest: XCTestCase {
     
     /// Getting default volunteer
     private func getDefaultVolunteer() -> Volunteer {
-        return Volunteer(image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: false)
+        return Volunteer(imagePath: "", image: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: false)
     }
     
     /// Donwload volunteer list
