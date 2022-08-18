@@ -172,6 +172,105 @@ final class TripManagerTests: XCTestCase {
         XCTAssertTrue(tripManager.trips.isEmpty)
     }
     
+    // MARK: Update trip list
+    /// User not connected
+    func testGivenUpdatingTrip_WhenUserNotConnected_ThenTripListIsNotUpdated() {
+        // Given
+        configureManager(correctData: nil, response: .status0, status: .error)
+        
+        // When
+        tripManager.update(trip: UpdateTrip(id: UUID(), date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: nil)
+        
+        // Then
+        XCTAssertTrue(tripManager.volunteerTrips.isEmpty)
+        XCTAssertTrue(tripManager.trips.isEmpty)
+    }
+    
+    /// Success adding
+    func testGivenUpdatingTrip_WhenIsSuccess_ThenTripListIsUpdated() {
+        // Given
+        configureManager(correctData: .tripList, response: .status200, status: .correctData)
+        
+        // When
+        tripManager.update(trip: UpdateTrip(id: UUID(), date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
+        
+        // Then
+        XCTAssertFalse(tripManager.trips.isEmpty)
+    }
+    
+    /// Not authorized
+    func testGivenUpdatingTrip_WhenUserIsNotAuthorized_ThenTripListIsUpdated() {
+        // Given
+        configureManager(correctData: .tripList, response: .status401, status: .correctData)
+        
+        // When
+        tripManager.update(trip: UpdateTrip(id: UUID(), date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
+        
+        // Then
+        XCTAssertTrue(tripManager.trips.isEmpty)
+    }
+    
+    /// Unknown status
+    func testGivenUpdatingTrip_WhenGettingUnknownStatus_ThenTripListIsUpdated() {
+        // Given
+        configureManager(correctData: .tripList, response: .status0, status: .correctData)
+        
+        // When
+        tripManager.update(trip: UpdateTrip(id: UUID(), date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
+        
+        // Then
+        XCTAssertTrue(tripManager.trips.isEmpty)
+    }
+    
+    /// Process error
+    func testGivenUpdatingTrip_WhenGettingProcessError_ThenTripListIsUpdated() {
+        // Given
+        configureManager(correctData: .tripList, response: .status0, status: .error)
+        
+        // When
+        tripManager.update(trip: UpdateTrip(id: UUID(), date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), by: getConnectedUser())
+        
+        // Then
+        XCTAssertTrue(tripManager.trips.isEmpty)
+    }
+    
+    // MARK: Download trip list to export
+    /// Success
+    func testGivenGettingTripsToExport_WhenIsSuccess_ThenTripExportShouldBeUpdated() {
+        // Given
+        configureManager(correctData: .export, response: .status200, status: .correctData)
+        
+        // When
+        tripManager.downloadTripToExport(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
+        
+        // Then
+        XCTAssertTrue(tripManager.tripToExportInformation.totalDistance != 0.0)
+    }
+    
+    /// Process error
+    func testGivenGettingTripsToExport_WhenGettingError_ThenTripExportShouldBeUpdated() {
+        // Given
+        configureManager(correctData: .export, response: .status200, status: .error)
+        
+        // When
+        tripManager.downloadTripToExport(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
+        
+        // Then
+        XCTAssertTrue(tripManager.tripToExportInformation.totalDistance == 0.0)
+    }
+    
+    /// Unknown status
+    func testGivenGettingTripsToExport_WhenIsUnknownStatus_ThenTripExportShouldBeUpdated() {
+        // Given
+        configureManager(correctData: .export, response: .status0, status: .correctData)
+        
+        // When
+        tripManager.downloadTripToExport(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
+        
+        // Then
+        XCTAssertTrue(tripManager.tripToExportInformation.totalDistance == 0.0)
+    }
+    
     // MARK: Download 3 latest trips
     /// User not connected
     func testGivenGettingLatestTrips_WhenUserNotConnected_ThenLatestTripShouldBeEmpty() {

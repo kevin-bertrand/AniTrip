@@ -184,6 +184,46 @@ final class VolunteersManagerTest: XCTestCase {
         XCTAssertEqual(volunteers[0].position, volunteersUpdated[0].position)
     }
     
+    // MARK: Download Profile picture
+    /// Success
+    func testGivenGettingVolunteerProfilePicture_WhenGettingSuccess_ThenImageShouldBeDownloaded() {
+        // Prepare expectation
+        let expectation = XCTestExpectation(description: "Getting volunteer profile picture")
+        
+        // Given
+        configureManager(correctData: .volunteerList, response: .status200, status: .correctData)
+        volunteersManager.getList(byUser: getDefaultUser())
+        
+        // When
+        volunteersManager.downlaodProfilePicture(of: volunteersManager.volunteersList.first!) { image in
+            XCTAssertNotNil(image)
+            expectation.fulfill()
+        }
+        
+        // Then
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    /// Success
+    func testGivenGettingVolunteerProfilePicture_WhenGettingError_ThenImageShouldBeDownloaded() {
+        // Prepare expectation
+        let expectation = XCTestExpectation(description: "Getting volunteer profile picture")
+        
+        // Given
+        configureManager(correctData: .volunteerList, response: .status200, status: .correctData)
+        volunteersManager.getList(byUser: getDefaultUser())
+        configureManager(correctData: .volunteerList, response: .status200, status: .error)
+        
+        // When
+        volunteersManager.downlaodProfilePicture(of: volunteersManager.volunteersList.first!) { image in
+            XCTAssertNil(image)
+            expectation.fulfill()
+        }
+        
+        // Then
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
     // MARK: Private
     /// Configure the fake network manager
     private func configureManager(correctData: FakeResponseData.DataFiles?, response: FakeResponseData.Response, status: FakeResponseData.SessionStatus) {

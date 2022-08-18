@@ -1,0 +1,40 @@
+{
+    "userLastname": "Doe",
+    "userFirstname": "Jon",
+    "userPhone": "0123456789",
+    "userEmail": "jon.doe@example.com",
+    "startDate": "01/01/2021",
+    "endDate": "31/12/2021",
+    "totalDistance": 431.02,
+    "trips": [
+        {
+            "id": "65f3e990-5a1f-479f-ac68-f3248de88341",
+            "date": "01/02/2021",
+            "missions": [],
+            "comment": "",
+            "totalDistance": 30.0,
+            "startingAddress":{
+                "latitude":1.83718369999998,
+                "zipCode":"75000",
+                "streetNumber":"1",
+                "id":"87D7BF60-7D8A-4C57-AF78-2B12792CBBAA",
+                "roadName":"Place des développeurs",
+                "city":"Paris",
+                "country":"France",
+                "longitude":1.711804599999979,
+                "complement":""
+            },
+            "endingAddress":{
+                "latitude":1.83718369999998,
+                "zipCode":"75000",
+                "streetNumber":"1",
+                "id":"87D7BF60-7D8A-4C57-AF78-2B12792CBBAA",
+                "roadName":"Place des développeurs",
+                "city":"Paris",
+                "country":"France",
+                "longitude":1.711804599999979,
+                "complement":""
+            },
+        }
+    ]
+}

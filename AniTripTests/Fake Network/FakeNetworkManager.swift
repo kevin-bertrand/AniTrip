@@ -25,7 +25,13 @@ class FakeNetworkManager: NetworkManager {
     }
     
     override func downloadProfilePicture(from path: String?, completionHandler: @escaping ((UIImage?) -> Void)) {
-        completionHandler(nil)
+        switch status {
+        case .correctData:
+            completionHandler(UIImage(systemName: "gear"))
+        case .incorrectData, .error:
+            completionHandler(nil)
+        }
+        
     }
     
     private func performRequest(completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void) {

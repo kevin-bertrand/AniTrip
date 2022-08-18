@@ -84,6 +84,7 @@ class FakeResponseData {
         case activationAccount = "activateAccount"
         case desactivateAccount = "desactivateAccount"
         case updatePosition = "updatePosition"
+        case export = "export"
     }
     
     enum SessionStatus {

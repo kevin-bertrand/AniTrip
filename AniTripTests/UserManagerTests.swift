@@ -344,6 +344,7 @@ final class UserManagerTests: XCTestCase {
     private func connectUser() {
         configureManager(correctData: .userLogin, response: .status200, status: .correctData)
         userManager.login(user: UserToLogin(email: "", password: "", deviceToken: ""))
+        userManager.connectedUser?.image = nil
     }
     
     /// Update user
