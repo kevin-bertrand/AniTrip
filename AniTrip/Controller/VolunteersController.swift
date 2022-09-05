@@ -91,6 +91,14 @@ final class VolunteersController: ObservableObject {
         }
     }
     
+    /// Disconnect user
+    func disconnect() {
+        DispatchQueue.main.async {
+            self.volunteersManager.disconnect()
+            self.volunteersList = []
+        }
+    }
+    
     // MARK: Initialization
     init(appController: AppController) {
         self.appController = appController

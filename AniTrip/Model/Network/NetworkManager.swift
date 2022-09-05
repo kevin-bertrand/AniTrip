@@ -21,9 +21,7 @@ class NetworkManager: NetworkProtocol {
         }
         
         do {
-            var headers: HTTPHeaders = [
-                .contentType("application/json; charset=utf-8")
-            ]
+            var headers: HTTPHeaders = [.contentType("application/json; charset=utf-8")]
             if let authorization = authorization {
                 headers.add(authorization)
             }

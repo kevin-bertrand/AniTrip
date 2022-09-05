@@ -14,8 +14,22 @@ final class TripManager {
     var volunteerTrips: [Trip] { volunteerTripsList.sorted {$0.date > $1.date} }
     var threeLatestTrips: [Trip] { threeLatestTripsList.sorted { $0.date > $1.date }}
     var tripsChartPoints: [TripChartPoint] { tripsChartPointsList.sorted { $0.date.chartPointToDate < $1.date.chartPointToDate }}
-    var news: News = News(distanceThisWeek: 0.0, numberOfTripThisWeek: 0, distanceThisYear: 0.0, numberOfTripThisYear: 0, distancePercentSinceLastYear: 0.0, distancePercentSinceLastWeek: 0.0, numberTripPercentSinceLastYear: 0.0, numberTripPercentSinceLastWeek: 0.0)
-    var tripToExportInformation: TripToExportInformations = .init(userLastname: "", userFirstname: "", userPhone: "", userEmail: "", startDate: "", endDate: "", totalDistance: 0.0, trips: [])
+    var news: News = News(distanceThisWeek: 0.0,
+                          numberOfTripThisWeek: 0,
+                          distanceThisYear: 0.0,
+                          numberOfTripThisYear: 0,
+                          distancePercentSinceLastYear: 0.0,
+                          distancePercentSinceLastWeek: 0.0,
+                          numberTripPercentSinceLastYear: 0.0,
+                          numberTripPercentSinceLastWeek: 0.0)
+    var tripToExportInformation: TripToExportInformations = .init(userLastname: "",
+                                                                  userFirstname: "",
+                                                                  userPhone: "",
+                                                                  userEmail: "",
+                                                                  startDate: "",
+                                                                  endDate: "",
+                                                                  totalDistance: 0.0,
+                                                                  trips: [])
         
     // MARK: Methods
     /// Getting trip list
@@ -33,7 +47,10 @@ final class TripManager {
             params.append("\(userId)")
         }
         
-        networkManager.request(urlParams: params, method: NetworkConfigurations.getTripList.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+        networkManager.request(urlParams: params,
+                               method: NetworkConfigurations.getTripList.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: nil) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode {
                 switch statusCode {
@@ -57,7 +74,10 @@ final class TripManager {
             return
         }
         
-        networkManager.request(urlParams: NetworkConfigurations.addTrip.urlParams, method: NetworkConfigurations.addTrip.method, authorization: .authorization(bearerToken: user.token), body: trip.toAddTripFormat()) { [weak self] data, response, error in
+        networkManager.request(urlParams: NetworkConfigurations.addTrip.urlParams,
+                               method: NetworkConfigurations.addTrip.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: trip.toAddTripFormat()) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode {
                 switch statusCode {
@@ -82,7 +102,10 @@ final class TripManager {
             return
         }
         
-        networkManager.request(urlParams: NetworkConfigurations.updateTrip.urlParams, method: NetworkConfigurations.updateTrip.method, authorization: .authorization(bearerToken: user.token), body: trip.toAddTripFormat()) { [weak self] data, response, error in
+        networkManager.request(urlParams: NetworkConfigurations.updateTrip.urlParams,
+                               method: NetworkConfigurations.updateTrip.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: trip.toAddTripFormat()) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode {
                 switch statusCode {
@@ -111,7 +134,10 @@ final class TripManager {
         var params = NetworkConfigurations.getThreeLatestTrip.urlParams
         params.append("\(userId)")
         
-        networkManager.request(urlParams: params, method: NetworkConfigurations.getThreeLatestTrip.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+        networkManager.request(urlParams: params,
+                               method: NetworkConfigurations.getThreeLatestTrip.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: nil) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode {
                 switch statusCode {
@@ -139,7 +165,10 @@ final class TripManager {
         params.append("\(filter.self)")
         params.append("\(userId)")
         
-        networkManager.request(urlParams: params, method: NetworkConfigurations.getChartPoints.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+        networkManager.request(urlParams: params,
+                               method: NetworkConfigurations.getChartPoints.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: nil) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode {
                 switch statusCode {
@@ -166,7 +195,10 @@ final class TripManager {
         var params = NetworkConfigurations.getNews.urlParams
         params.append("\(userId)")
         
-        networkManager.request(urlParams: params, method: NetworkConfigurations.getNews.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+        networkManager.request(urlParams: params,
+                               method: NetworkConfigurations.getNews.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: nil) { [weak self] data, response, error in
             
             if let self = self,
                let statusCode = response?.statusCode {
@@ -186,7 +218,10 @@ final class TripManager {
     
     /// Download trip to export
     func downloadTripToExport(with filters: TripFilterToExport, by user: User) {
-        networkManager.request(urlParams: NetworkConfigurations.filterTripsToExport.urlParams, method: NetworkConfigurations.filterTripsToExport.method, authorization: .authorization(bearerToken: user.token), body: filters) { [weak self] data, response, error in
+        networkManager.request(urlParams: NetworkConfigurations.filterTripsToExport.urlParams,
+                               method: NetworkConfigurations.filterTripsToExport.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: filters) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode,
                statusCode == 200,
@@ -199,6 +234,14 @@ final class TripManager {
                 Notification.AniTrip.unknownError.sendNotification()
             }
         }
+    }
+    
+    /// Disconnect user
+    func disconnect() {
+        tripList = []
+        volunteerTripsList = []
+        threeLatestTripsList = []
+        tripsChartPointsList = []
     }
     
     // MARK: Initialization

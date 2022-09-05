@@ -12,6 +12,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var userController: UserController
+    @EnvironmentObject var tripController: TripController
+    @EnvironmentObject var volunteersController: VolunteersController
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
     @State private var allowNotifications: Bool = false
@@ -62,6 +64,8 @@ struct SettingsView: View {
             
             Section {
                 Button {
+                    tripController.disconnect()
+                    volunteersController.disconnect()
                     userController.disconnectUser()
                 } label: {
                     HStack {
@@ -105,5 +109,7 @@ struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
             .environmentObject(UserController(appController: AppController()))
+            .environmentObject(VolunteersController(appController: AppController()))
+            .environmentObject(TripController(appController: AppController()))
     }
 }

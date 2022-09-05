@@ -21,14 +21,27 @@ final class VolunteersManager {
             return
         }
         
-        networkManager.request(urlParams: NetworkConfigurations.getVolunteersList.urlParams, method: NetworkConfigurations.getVolunteersList.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] (data, response, error) in
+        networkManager.request(urlParams: NetworkConfigurations.getVolunteersList.urlParams,
+                               method: NetworkConfigurations.getVolunteersList.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: nil) { [weak self] (data, response, error) in
             if let self = self,
                let status = response?.statusCode,
                status == 200,
                let data = data,
                let volunteers = try? JSONDecoder().decode([DownloadedVolunteer].self, from: data) {
                 let downloadedVolunteersList = volunteers.map({
-                    return Volunteer(imagePath: $0.imagePath, id: $0.id, firstname: $0.firstname, lastname: $0.lastname, email: $0.email, phoneNumber: $0.phoneNumber, gender: $0.gender, position: $0.position == "administrator" ? .admin : .user, missions: $0.missions, address: $0.address, isActive: $0.isActive)
+                    return Volunteer(imagePath: $0.imagePath,
+                                     id: $0.id,
+                                     firstname: $0.firstname,
+                                     lastname: $0.lastname,
+                                     email: $0.email,
+                                     phoneNumber: $0.phoneNumber,
+                                     gender: $0.gender,
+                                     position: $0.position == "administrator" ? .admin : .user,
+                                     missions: $0.missions,
+                                     address: $0.address,
+                                     isActive: $0.isActive)
                 })
 
                 if self.volunteersList != downloadedVolunteersList {
@@ -46,7 +59,10 @@ final class VolunteersManager {
         var params = NetworkConfigurations.desactivateAccount.urlParams
         params.append(account.email)
         
-        networkManager.request(urlParams: params, method: NetworkConfigurations.desactivateAccount.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+        networkManager.request(urlParams: params,
+                               method: NetworkConfigurations.desactivateAccount.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: nil) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode,
                statusCode == 200 {
@@ -63,7 +79,10 @@ final class VolunteersManager {
         var params = NetworkConfigurations.activateAccount.urlParams
         params.append(account.email)
         
-        networkManager.request(urlParams: params, method: NetworkConfigurations.activateAccount.method, authorization: .authorization(bearerToken: user.token), body: nil) { [weak self] data, response, error in
+        networkManager.request(urlParams: params,
+                               method: NetworkConfigurations.activateAccount.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: nil) { [weak self] data, response, error in
             if let self = self,
                let statusCode = response?.statusCode,
                statusCode == 200 {
@@ -105,6 +124,11 @@ final class VolunteersManager {
         networkManager.downloadProfilePicture(from: volunteer.imagePath) { image in
             completionHandler(image)
         }
+    }
+    
+    /// Disconnect user
+    func disconnect() {
+        volunteersList = []
     }
     
     // MARK: Initialization

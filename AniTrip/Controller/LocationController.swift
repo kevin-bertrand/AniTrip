@@ -35,7 +35,9 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
     
     /// Centering map
     func centerMap(with address: Address) {
-        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: address.latitude, longitude: address.longitude), latitudinalMeters: 750, longitudinalMeters: 750)
+        region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: address.latitude, longitude: address.longitude),
+                                    latitudinalMeters: 750,
+                                    longitudinalMeters: 750)
         getAddress()
     }
     
@@ -43,7 +45,9 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
         guard let location = locations.first else { return }
         
         DispatchQueue.main.async {
-            self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude), latitudinalMeters: 750, longitudinalMeters: 750)
+            self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: location.coordinate.latitude, longitude: location.coordinate.longitude),
+                                             latitudinalMeters: 750,
+                                             longitudinalMeters: 750)
             self.getAddress()
         }
     }
@@ -76,7 +80,8 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(enteredAddress) { placemarks, error in
             let placemark = placemarks?.first
-            if let lat = placemark?.location?.coordinate.latitude, let lon = placemark?.location?.coordinate.longitude {
+            if let lat = placemark?.location?.coordinate.latitude,
+               let lon = placemark?.location?.coordinate.longitude {
                 self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: lat, longitude: lon), latitudinalMeters: 750, longitudinalMeters: 750)
                 self.getAddress()
             } else {
@@ -97,7 +102,14 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
                let placemarks = location,
                placemarks.count >= 1  {
                 let pm = placemarks[0]
-                self.address = Address(roadName: "\(pm.thoroughfare ?? "")", streetNumber: "\(pm.subThoroughfare ?? "")", complement: "", zipCode: "\(pm.postalCode ?? "")", city: "\(pm.locality ?? "")", country: "\(pm.country ?? "")", latitude: self.region.center.latitude, longitude: self.region.center.longitude)
+                self.address = Address(roadName: "\(pm.thoroughfare ?? "")",
+                                       streetNumber: "\(pm.subThoroughfare ?? "")",
+                                       complement: "",
+                                       zipCode: "\(pm.postalCode ?? "")",
+                                       city: "\(pm.locality ?? "")",
+                                       country: "\(pm.country ?? "")",
+                                       latitude: self.region.center.latitude,
+                                       longitude: self.region.center.longitude)
                 self.addressLocated = "\(self.address.streetNumber), \(self.address.roadName) - \(self.address.zipCode), \(self.address.city) - \(self.address.country)"
                 if self.addressLocated == ",  - ,  - " {
                     self.addressLocated = "No address found!"

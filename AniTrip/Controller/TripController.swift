@@ -141,17 +141,21 @@ final class TripController: ObservableObject {
                 context.beginPage()
                 pdfVC.view.layer.render(in: context.cgContext)
             })
-            
-            //            self.exportURL = outputFileURL
-            //            self.showExportSheet = true
-            
-        }catch {
-            //            self.showError = true
+        } catch {
             print("Could not create PDF file: \(error)")
         }
-            //
-            //        pdfVC.removeFromParent()
-            //        pdfVC.view.removeFromSuperview()
+    }
+    
+    /// Disconnect user
+    func disconnect() {
+        DispatchQueue.main.async {
+            self.tripManager.disconnect()
+            self.trips = []
+            self.volunteerTripList = []
+            self.threeLatestTrips = []
+            self.news = News(distanceThisWeek: 0.0, numberOfTripThisWeek: 0, distanceThisYear: 0.0, numberOfTripThisYear: 0, distancePercentSinceLastYear: 0.0, distancePercentSinceLastWeek: 0.0, numberTripPercentSinceLastYear: 0.0, numberTripPercentSinceLastWeek: 0.0)
+            self.chartPoints = LineChartData(dataSets: LineDataSet(dataPoints: []))
+        }
     }
     
     // MARK: Initialization

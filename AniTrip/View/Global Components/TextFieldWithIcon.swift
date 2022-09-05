@@ -74,6 +74,6 @@ struct TextFieldWithIcon: View {
 
 struct TextFieldWithIcon_Previews: PreviewProvider {
     static var previews: some View {
-        TextFieldWithIcon(text: .constant(""), icon: "", placeholder: "")
+        TextFieldWithIcon(text: .constant("rectangle.portrait.and.arrow.forward"), icon: "", placeholder: "")
     }
 }

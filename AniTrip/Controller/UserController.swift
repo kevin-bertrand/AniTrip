@@ -132,9 +132,11 @@ final class UserController: ObservableObject {
     
     /// Disconnect the user
     func disconnectUser() {
-        loginPasswordTextField = ""
-        isConnected = false
-        userManager.disconnectUser()
+        DispatchQueue.main.async {
+            self.userManager.disconnectUser()
+            self.loginPasswordTextField = ""
+            self.isConnected = false
+        }
     }
     
     /// Update connected user
