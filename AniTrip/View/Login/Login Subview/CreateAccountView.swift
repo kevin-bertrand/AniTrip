@@ -28,9 +28,9 @@ struct CreateAccountView: View {
         
             Spacer()
             
-            ButtonWithIcon(action: {
+            ButtonWithIcon(isLoading: .constant(false), action: {
                 userController.createAccount()
-            }, icon: nil, title: "Ask new account", isLoading: .constant(false))
+            }, icon: nil, title: "Ask new account")
         }
     }
 }

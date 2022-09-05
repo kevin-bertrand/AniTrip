@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct TripsExportView: View {
+    @StateObject var tripController: TripController
+    
     let exportData: TripToExportInformations
     let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     let columnsTitle = ["Date", "Distance", "Ville départ", "Ville arrivée"]
-    @StateObject var tripController: TripController
     
     var body: some View {
         ScrollView {
@@ -90,6 +91,6 @@ struct TripsExportView: View {
 
 struct TripsExportView_Previews: PreviewProvider {
     static var previews: some View {
-        TripsExportView(exportData: TripToExportInformations(userLastname: "Jon", userFirstname: "Doe", userPhone: "01234456789", userEmail: "jon.doe@exemple.com", startDate: "", endDate: "", totalDistance: 0.0, trips: [.init(id: UUID(), date: "1", missions: [], comment: "", totalDistance: 19.0, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), .init(id: UUID(), date: "1", missions: [], comment: "", totalDistance: 19.0, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)]), tripController: TripController(appController: AppController()))
+        TripsExportView(tripController: TripController(appController: AppController()), exportData: TripToExportInformations(userLastname: "Jon", userFirstname: "Doe", userPhone: "01234456789", userEmail: "jon.doe@exemple.com", startDate: "", endDate: "", totalDistance: 0.0, trips: [.init(id: UUID(), date: "1", missions: [], comment: "", totalDistance: 19.0, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), .init(id: UUID(), date: "1", missions: [], comment: "", totalDistance: 19.0, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)]))
     }
 }

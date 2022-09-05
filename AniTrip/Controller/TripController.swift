@@ -123,7 +123,7 @@ final class TripController: ObservableObject {
         let width: CGFloat = 8.5 * 72.0
         //Estimate the height of your view
         let height: CGFloat = 1000
-        let charts = TripsExportView(exportData: tripToExport, tripController: self)
+        let charts = TripsExportView(tripController: self, exportData: tripToExport)
         
         let pdfVC = UIHostingController(rootView: charts)
         pdfVC.view.frame = CGRect(x: 0, y: 0, width: width, height: height)

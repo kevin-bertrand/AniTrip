@@ -10,6 +10,7 @@ import SwiftUI
 struct TripsExportFilterView: View {
     @EnvironmentObject var tripController: TripController
     @EnvironmentObject var userController: UserController
+    
     let userToExportId: UUID?
 
     var body: some View {
@@ -27,9 +28,10 @@ struct TripsExportFilterView: View {
                 .datePickerStyle(.wheel)
                 .labelsHidden()
                 .padding(.bottom, 25)
-            ButtonWithIcon(action: {
+            ButtonWithIcon(isLoading: .constant(false),
+                           action: {
                 tripController.downloadDataToExport(byUser: userController.connectedUser, for: userToExportId)
-            }, title: "Start export", isLoading: .constant(false))
+            }, title: "Start export")
             .padding()
         }
         .navigationTitle(Text("Export"))

@@ -66,15 +66,15 @@ struct AniTripApp: App {
             }
             .sheet(isPresented: $tripController.showPDFView) {
                 VStack {
-                    TripsExportView(exportData: tripController.tripToExport, tripController: tripController)
+                    TripsExportView(tripController: tripController, exportData: tripController.tripToExport)
                     HStack {
-                        ButtonWithIcon(action: {
+                        ButtonWithIcon(isLoading: .constant(false), action: {
                             tripController.showPDFView = false
-                        }, title: "Cancel", color: .red, isLoading: .constant(false))
+                        }, title: "Cancel", color: .red)
                         Spacer()
-                        ButtonWithIcon(action: {
+                        ButtonWithIcon(isLoading: .constant(false), action: {
                             tripController.exportToPDF()
-                        }, title: "Export", isLoading: .constant(false))
+                        }, title: "Export")
                     }.padding()
                 }
             }

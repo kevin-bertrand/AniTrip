@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ButtonWithIcon: View {
+    @Binding var isLoading: Bool
+    
     var action: () -> Void
     var icon: String?
     var title: String
     var height: CGFloat = 60
     var color: Color = Color.accentColor
-    @Binding var isLoading: Bool
     
     var body: some View {
         Button(action: action) {
@@ -51,6 +52,6 @@ struct ButtonWithIcon: View {
 
 struct ButtonWithIcon_Previews: PreviewProvider {
     static var previews: some View {
-        ButtonWithIcon(action: {}, title: "Perform action", isLoading: .constant(false))
+        ButtonWithIcon(isLoading: .constant(false), action: {}, title: "Perform action")
     }
 }

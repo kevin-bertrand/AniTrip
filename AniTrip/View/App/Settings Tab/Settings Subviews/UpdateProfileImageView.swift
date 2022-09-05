@@ -8,10 +8,11 @@
 import SwiftUI
 
 struct UpdateProfileImageView: View {
+    @EnvironmentObject var userController: UserController
+    
     @State private var selectedImage: UIImage?
     @State private var showingImagePicker = false
     @State private var inputImage: UIImage?
-    @EnvironmentObject var userController: UserController
     
     var body: some View {
         VStack {
@@ -45,13 +46,13 @@ struct UpdateProfileImageView: View {
             Spacer()
             
             HStack {
-                ButtonWithIcon(action: {
+                ButtonWithIcon(isLoading: .constant(false), action: {
                     userController.showUpdateProfileImage = false
-                }, title: "Back", color: .red, isLoading: .constant(false))
+                }, title: "Back", color: .red)
                 
-                ButtonWithIcon(action: {
+                ButtonWithIcon(isLoading: .constant(false), action: {
                     userController.updateImage(selectedImage)
-                }, title: "Confirm", isLoading: .constant(false))
+                }, title: "Confirm")
                 .disabled(selectedImage == nil ? true : false)
             }.padding()
         }

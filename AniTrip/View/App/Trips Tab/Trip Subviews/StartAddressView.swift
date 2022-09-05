@@ -9,8 +9,10 @@ import SwiftUI
 
 struct StartAddressView: View {
     @EnvironmentObject var tripController: TripController
+    
     @Binding var step: Int
     @Binding var trip: UpdateTrip
+    
     @State private var canValidateStep: Bool = false
     
     var body: some View {

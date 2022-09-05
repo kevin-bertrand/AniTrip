@@ -11,7 +11,8 @@ import SwiftUI
 struct LoginSubview: View {
     @EnvironmentObject private var userController: UserController
     @EnvironmentObject private var volunteersController: VolunteersController
-    let laContext = LAContext()
+    
+    private let laContext = LAContext()
     
     var body: some View {
         VStack {
@@ -48,10 +49,11 @@ struct LoginSubview: View {
             Spacer()
             
             HStack {
-                ButtonWithIcon(action: {
+                ButtonWithIcon(isLoading: .constant(false), action: {
                     userController.checkSaveEmail()
                     userController.performLogin()
-                }, icon: "chevron.right", title: "LOGIN", isLoading: .constant(false))
+                }, icon: "chevron.right",
+                               title: "LOGIN")
                 
                 if userController.getBiometricStatus() {
                     Button {

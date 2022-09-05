@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct MissionsUpdateTileView: View {
-    @State private var numberOfMissions: [Int] = []
     @Binding var missions: [String]
+    
+    @State private var numberOfMissions: [Int] = []
     
     var body: some View {
         Section(header: Text("Missions")) {

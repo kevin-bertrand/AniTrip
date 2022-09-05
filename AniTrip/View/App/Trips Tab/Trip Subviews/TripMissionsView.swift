@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TripMissionsView: View {
     @EnvironmentObject var tripController: TripController
+    
     @Binding var step: Int
     @Binding var trip: UpdateTrip
     

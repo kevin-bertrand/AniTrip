@@ -11,9 +11,11 @@ import MapKit
 import SwiftUI
 
 struct DetectAddressView: View {
-    @StateObject var locationManager = LocationController()
+    @StateObject private var locationManager = LocationController()
+    
     @Binding var address: Address
     @Binding var addressFound: Bool
+    
     let name: String
     private let location = CLLocationManager()
     
@@ -66,9 +68,9 @@ struct DetectAddressView: View {
                         .padding(.horizontal)
                     
                     HStack {
-                        ButtonWithIcon(action: {
+                        ButtonWithIcon(isLoading: $locationManager.searchingAddress, action: {
                             locationManager.searchAddress()
-                        }, icon: "magnifyingglass", title: "Search", height: 40, isLoading: $locationManager.searchingAddress)
+                        }, icon: "magnifyingglass", title: "Search", height: 40)
                         .padding()
                         .frame(width: 300)
                         .disabled(locationManager.searchingAddress ? true : false)

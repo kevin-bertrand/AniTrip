@@ -9,6 +9,7 @@ import SwiftUI
 
 struct VolunteerTileView: View {
     @EnvironmentObject var volunteersController: VolunteersController
+    
     @Binding var volunteer: Volunteer
     
     var body: some View {

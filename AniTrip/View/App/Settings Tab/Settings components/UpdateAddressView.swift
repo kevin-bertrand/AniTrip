@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct UpdateAddressView: View {
-    @State private var showMapView: Bool = false
     @Binding var address: Address
+    @State private var showMapView: Bool = false
     @State private var addressToModify: Address = LocationController.emptyAddress
     
     var body: some View {

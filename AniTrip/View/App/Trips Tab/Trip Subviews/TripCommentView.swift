@@ -10,6 +10,7 @@ import SwiftUI
 struct TripCommentView: View {
     @EnvironmentObject var tripController: TripController
     @EnvironmentObject var userController: UserController
+    
     @Binding var step: Int
     @Binding var trip: UpdateTrip
     @Binding var isAnUpdate: Bool

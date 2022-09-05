@@ -9,7 +9,8 @@ import SwiftUI
 
 struct UpdateTripView: View {
     @Binding var trip: UpdateTrip
-    @State var isAnUpdate: Bool = false
+    @Binding var isAnUpdate: Bool
+    
     @State private var step = 1
     @State private var previousScreen = 1
     
@@ -48,6 +49,6 @@ struct UpdateTripView: View {
 
 struct AddTripView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateTripView(trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
+        UpdateTripView(trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)), isAnUpdate: .constant(true))
     }
 }

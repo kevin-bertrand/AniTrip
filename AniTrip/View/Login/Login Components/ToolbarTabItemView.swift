@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ToolbarTabItemView: View {
     @Binding var selected: Int
+    
     let title: String
     let tabId: Int
     

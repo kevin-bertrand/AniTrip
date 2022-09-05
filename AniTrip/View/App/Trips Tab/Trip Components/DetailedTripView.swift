@@ -13,6 +13,7 @@ struct DetailedTripView: View {
     @EnvironmentObject var tripController: TripController
     
     @Binding var trip: Trip
+    
     @State private var updateTrip: UpdateTrip = UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)
     
     var body: some View {
@@ -61,7 +62,7 @@ struct DetailedTripView: View {
         .navigationTitle(Text("\(trip.startingAddress.city) → \(trip.endingAddress.city)"))
         .navigationBarTitleDisplayMode(.inline)
         .sheet(isPresented: $tripController.showUpdateTripView, content: {
-            UpdateTripView(trip: $updateTrip, isAnUpdate: true)
+            UpdateTripView(trip: $updateTrip, isAnUpdate: .constant(true))
         })
         .onAppear {
             updateTrip = trip.toUpdateTripFormat()

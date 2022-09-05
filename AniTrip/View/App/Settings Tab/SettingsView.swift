@@ -14,12 +14,15 @@ struct SettingsView: View {
     @EnvironmentObject var userController: UserController
     @EnvironmentObject var tripController: TripController
     @EnvironmentObject var volunteersController: VolunteersController
+    
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
+    
     @State private var allowNotifications: Bool = false
     @State private var showAlert: Bool = false
     @State private var allowCurrentLocation: Bool = false
-    let laContext = LAContext()
+    
+    private let laContext = LAContext()
     private let locationManager = CLLocationManager()
     
     var body: some View {

@@ -30,10 +30,10 @@ struct ActivateAccountView: View {
                 
                 Spacer()
                 
-                ButtonWithIcon(action: {
+                ButtonWithIcon(isLoading: .constant(false), action: {
                     volunteersController.resetActivationView()
-                }, title: "OK", isLoading: .constant(false))
-                .padding()
+                }, title: "OK")
+                    .padding()
             } else {
                 Text("Activate the account \(volunteersController.accountToActivateEmail) ?")
                     .font(.title2.bold())
@@ -41,15 +41,15 @@ struct ActivateAccountView: View {
                 Spacer()
                 
                 HStack {
-                    ButtonWithIcon(action: {
+                    ButtonWithIcon(isLoading: .constant(false), action: {
                         volunteersController.displayActivateAccount = false
                         volunteersController.refuseActivation()
-                    }, title: volunteersController.accountToActivateEmail.isNotEmpty ? "Refuse" : "Back", color: .red, isLoading: .constant(false))
+                    }, title: volunteersController.accountToActivateEmail.isNotEmpty ? "Refuse" : "Back", color: .red)
                     
                     if volunteersController.accountToActivateEmail.isNotEmpty {
-                        ButtonWithIcon(action: {
+                        ButtonWithIcon(isLoading: .constant(false), action: {
                             volunteersController.activateAccount(of: VolunteerToActivate(email: volunteersController.accountToActivateEmail), by: userController.connectedUser)
-                        }, title: "Accept", isLoading: .constant(false))
+                        }, title: "Accept")
                     }
                 }.padding()
             }
