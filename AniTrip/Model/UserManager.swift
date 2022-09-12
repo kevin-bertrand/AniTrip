@@ -154,22 +154,49 @@ final class UserManager {
            let userId = UUID(uuidString: user.id),
            let gender = Gender(rawValue: user.gender),
            let position = Position(rawValue: user.position) {
-            networkManager.downloadProfilePicture(from: user.imagePath) { image in
-                    completionHandler(User(image: image,
-                                           id: userId,
-                                           firstname: user.firstname,
-                                           lastname: user.lastname,
-                                           email: user.email,
-                                           phoneNumber: user.phoneNumber,
-                                           gender: gender,
-                                           position: position,
-                                           missions: user.missions,
-                                           isActive: true,
-                                           address: user.address ?? LocationController.emptyAddress,
-                                           token: user.token))
+            let decodedUser = User(image: nil,
+                            id: userId,
+                            firstname: user.firstname,
+                            lastname: user.lastname,
+                            email: user.email,
+                            phoneNumber: user.phoneNumber,
+                            gender: gender,
+                            position: position,
+                            missions: user.missions,
+                            isActive: true,
+                            address: user.address ?? LocationController.emptyAddress,
+                            token: user.token)
+            if let imagePath = user.imagePath {
+                self.getProfilePicture(of: decodedUser, with: imagePath) { user in
+                    completionHandler(user)
                 }
+            } else {
+                completionHandler(decodedUser)
+
+            }
         } else {
             completionHandler(nil)
+        }
+    }
+    
+    /// Getting profile picture
+    private func getProfilePicture(of user: User, with imagePath: String, completionHandler: @escaping ((User)->Void)) {
+        var params = NetworkConfigurations.getProfilePicture.urlParams
+        params.append(imagePath)
+        networkManager.request(urlParams: params,
+                               method: NetworkConfigurations.getProfilePicture.method,
+                               authorization: nil,
+                               body: nil) { data, response, error in
+            if let status = response?.statusCode,
+               status == 200,
+               let data = data,
+               let image = UIImage(data: data) {
+                var updatedUser = user
+                updatedUser.image = image
+                completionHandler(updatedUser)
+            } else {
+                completionHandler(user)
+            }
         }
     }
 }

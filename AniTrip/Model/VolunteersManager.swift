@@ -121,8 +121,24 @@ final class VolunteersManager {
     
     /// Download volunteer profile picture
     func downlaodProfilePicture(of volunteer: Volunteer, completionHandler: @escaping ((UIImage?)->Void)) {
-        networkManager.downloadProfilePicture(from: volunteer.imagePath) { image in
-            completionHandler(image)
+        if let imagePath = volunteer.imagePath {
+            var params = NetworkConfigurations.getProfilePicture.urlParams
+            params.append(imagePath)
+            networkManager.request(urlParams: params,
+                                   method: NetworkConfigurations.getProfilePicture.method,
+                                   authorization: nil,
+                                   body: nil) { data, response, error in
+                if let status = response?.statusCode,
+                   status == 200,
+                   let data = data,
+                   let image = UIImage(data: data) {
+                    completionHandler(image)
+                } else {
+                    completionHandler(nil)
+                }
+            }
+        } else {
+            completionHandler(nil)
         }
     }
     

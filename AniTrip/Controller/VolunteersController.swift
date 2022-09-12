@@ -33,15 +33,14 @@ final class VolunteersController: ObservableObject {
     // MARK: Methods
     /// Getting volunteers list
     func getList(byUser user: User?) {
-        volunteersManager.getList(byUser: user)
+        DispatchQueue.main.async {
+            self.volunteersManager.getList(byUser: user)
+        }
     }
     
     /// Activate account
     func activateAccount(of volunteer: VolunteerToActivate, by user: User?) {
-//        appController.setLoadingInProgress(withMessage: "Activation in progress...")
-        
         guard let user = user, user.position == .admin else {
-            appController.resetLoadingInProgress()
             appController.showAlertView(withMessage: "You are not authorized!", andTitle: "Error")
             return
         }
@@ -51,10 +50,7 @@ final class VolunteersController: ObservableObject {
     
     /// Desactivate account
     func desactivateAccount(of volunteer: Volunteer, by user: User?) {
-//        appController.setLoadingInProgress(withMessage: "Desactivation in progress...")
-        
         guard let user = user, user.position == .admin else {
-            appController.resetLoadingInProgress()
             appController.showAlertView(withMessage: "You are not authorized!", andTitle: "Error")
             return
         }
@@ -172,15 +168,15 @@ final class VolunteersController: ObservableObject {
     
     /// Filter volunteers list
     private func filterList() {
-        if searchFilter.isEmpty {
-            volunteersList = volunteersManager.volunteersList
+        if self.searchFilter.isEmpty {
+            self.volunteersList = self.volunteersManager.volunteersList
         } else {
-            volunteersList = volunteersManager.volunteersList.filter {
-                $0.firstname.localizedCaseInsensitiveContains(searchFilter) ||
-                $0.lastname.localizedCaseInsensitiveContains(searchFilter) ||
-                !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty ||
-                $0.email.localizedCaseInsensitiveContains(searchFilter) ||
-                ($0.address != nil && $0.address?.city.localizedCaseInsensitiveContains(searchFilter) == true)
+            self.volunteersList = self.volunteersManager.volunteersList.filter {
+                $0.firstname.localizedCaseInsensitiveContains(self.searchFilter) ||
+                $0.lastname.localizedCaseInsensitiveContains(self.searchFilter) ||
+                !($0.missions.filter {$0.localizedCaseInsensitiveContains(self.searchFilter)}).isEmpty ||
+                $0.email.localizedCaseInsensitiveContains(self.searchFilter) ||
+                ($0.address != nil && $0.address?.city.localizedCaseInsensitiveContains(self.searchFilter) == true)
             }
         }
     }

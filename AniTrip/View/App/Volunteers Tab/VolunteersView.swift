@@ -11,15 +11,17 @@ struct VolunteersView: View {
     @EnvironmentObject var volunteersController: VolunteersController
     @EnvironmentObject var userController: UserController
     
+    @State private var volunteersList: [Volunteer] = []
+    @State private var searchingFilter: String = ""
     var body: some View {
         VStack {
-            SearchTextFieldView(searchText: $volunteersController.searchFilter)
+            SearchTextFieldView(searchText: $searchingFilter)
                 .padding()
             
             List {
                 if userController.connectedUser?.position == .admin {
                     Section(header: Text("Active accounts")) {
-                        ForEach($volunteersController.volunteersList, id: \.id) { $volunteer in
+                        ForEach($volunteersList, id: \.id) { $volunteer in
                             if $volunteer.wrappedValue.isActive {
                                 NavigationLink {
                                     VolunteerProfileView(volunteer: $volunteer.wrappedValue)
@@ -29,9 +31,9 @@ struct VolunteersView: View {
                             }
                         }
                     }
-                    
+
                     Section(header: Text("Desactivate accounts")) {
-                        ForEach($volunteersController.volunteersList, id: \.id) { $volunteer in
+                        ForEach($volunteersList, id: \.id) { $volunteer in
                             if !$volunteer.wrappedValue.isActive {
                                 NavigationLink {
                                     VolunteerProfileView(volunteer: $volunteer.wrappedValue)
@@ -42,7 +44,7 @@ struct VolunteersView: View {
                         }
                     }
                 } else {
-                    ForEach($volunteersController.volunteersList, id: \.id) { $volunteer in
+                    ForEach($volunteersList, id: \.id) { $volunteer in
                         NavigationLink {
                             VolunteerProfileView(volunteer: $volunteer.wrappedValue)
                         } label: {
@@ -55,6 +57,12 @@ struct VolunteersView: View {
         }
         .onAppear {
             volunteersController.getList(byUser: userController.connectedUser)
+        }
+        .onReceive(volunteersController.$volunteersList) { volunteerList in
+            self.volunteersList = volunteerList
+        }
+        .onChange(of: searchingFilter) { newValue in
+            volunteersController.searchFilter = newValue
         }
     }
 }

@@ -24,6 +24,7 @@ enum NetworkConfigurations {
     case activateAccount
     case desactivateAccount
     case filterTripsToExport
+    case getProfilePicture
     
     var method: HTTPMethod {
         var method: HTTPMethod
@@ -45,7 +46,8 @@ enum NetworkConfigurations {
                 .getTripList,
                 .getThreeLatestTrip,
                 .getChartPoints,
-                .getNews:
+                .getNews,
+                .getProfilePicture:
             method = .get
         }
         
@@ -56,7 +58,7 @@ enum NetworkConfigurations {
         var params: [String]
         
         switch self {
-        case .updateUser:
+        case .updateUser, .getProfilePicture:
             params = ["user"]
         case .login:
             params = ["user", "login"]
