@@ -14,11 +14,11 @@ class FakeResponseData {
     class ResponseError: Error {}
     static let error = ResponseError()
     
-    static func getCorrectData(for dataUrl: DataFiles?, with correctResponse: Response) -> Data? {
+    static func getCorrectData(for dataUrl: DataFiles?, with correctResponse: Response, and dataExtension: DataExtension = .json) -> Data? {
         var data: Data?
         if let dataUrl = dataUrl {
             let bundle = Bundle(for: FakeResponseData.self)
-            let url = bundle.url(forResource: dataUrl.rawValue, withExtension: ".json")
+            let url = bundle.url(forResource: dataUrl.rawValue, withExtension: dataExtension.rawValue)
             data = try! Data(contentsOf: url!)
         }
         
@@ -75,6 +75,7 @@ class FakeResponseData {
     
     enum DataFiles: String {
         case userLogin = "login"
+        case userNoImage = "loginNoImage"
         case updateUser = "UpdateProfile"
         case volunteerList = "volunteerList"
         case tripList = "trips"
@@ -85,6 +86,7 @@ class FakeResponseData {
         case desactivateAccount = "desactivateAccount"
         case updatePosition = "updatePosition"
         case export = "export"
+        case image = "image"
     }
     
     enum SessionStatus {
@@ -97,5 +99,10 @@ class FakeResponseData {
         var response: HTTPURLResponse?
         var data: Data?
         var error: Error?
+    }
+    
+    enum DataExtension: String {
+        case json = ".json"
+        case image = ".jpeg"
     }
 }

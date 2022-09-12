@@ -15,6 +15,7 @@ class FakeNetworkManager: NetworkManager {
     var status: FakeResponseData.SessionStatus = .correctData
     var correctData: FakeResponseData.DataFiles?
     var response: FakeResponseData.Response = .status200
+    var correctDataExtension: FakeResponseData.DataExtension = .json
     
     override func request(urlParams: [String], method: Alamofire.HTTPMethod, authorization: Alamofire.HTTPHeader?, body: Encodable?, completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void) {
         performRequest(completionHandler: completionHandler)
@@ -41,7 +42,7 @@ class FakeNetworkManager: NetworkManager {
         case .incorrectData:
             completionHandler((FakeResponseData.incorrectData, response.response, Alamofire.AFError.responseSerializationFailed(reason: .inputFileNil) as Error))
         case .correctData:
-            completionHandler((FakeResponseData.getCorrectData(for: correctData, with: response), response.response, nil))
+            completionHandler((FakeResponseData.getCorrectData(for: correctData, with: response, and: correctDataExtension), response.response, nil))
         }
     }
 }

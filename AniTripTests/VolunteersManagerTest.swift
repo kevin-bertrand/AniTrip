@@ -191,11 +191,11 @@ final class VolunteersManagerTest: XCTestCase {
         let expectation = XCTestExpectation(description: "Getting volunteer profile picture")
         
         // Given
-        configureManager(correctData: .volunteerList, response: .status200, status: .correctData)
-        volunteersManager.getList(byUser: getDefaultUser())
+        let defaultVolunteer = Volunteer(imagePath: "/", id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .user, missions: [], address: nil, isActive: true)
         
         // When
-        volunteersManager.downlaodProfilePicture(of: volunteersManager.volunteersList.first!) { image in
+        configureManager(correctData: .image, response: .status200, status: .correctData, and: .image)
+        volunteersManager.downlaodProfilePicture(of: defaultVolunteer) { image in
             XCTAssertNotNil(image)
             expectation.fulfill()
         }
@@ -204,7 +204,7 @@ final class VolunteersManagerTest: XCTestCase {
         wait(for: [expectation], timeout: 3.0)
     }
     
-    /// Success
+    /// Error
     func testGivenGettingVolunteerProfilePicture_WhenGettingError_ThenImageShouldBeDownloaded() {
         // Prepare expectation
         let expectation = XCTestExpectation(description: "Getting volunteer profile picture")
@@ -224,12 +224,43 @@ final class VolunteersManagerTest: XCTestCase {
         wait(for: [expectation], timeout: 3.0)
     }
     
+    /// Invalid data
+    func testGivenGettingVolunteerProfilePicture_WhenGettingInvalidData_ThenImageShouldBeDownloaded() {
+        // Prepare expectation
+        let expectation = XCTestExpectation(description: "Getting volunteer profile picture")
+        
+        // Given
+        let defaultVolunteer = Volunteer(imagePath: "/", id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .user, missions: [], address: nil, isActive: true)
+        
+        // When
+        configureManager(correctData: .image, response: .status200, status: .incorrectData, and: .image)
+        volunteersManager.downlaodProfilePicture(of: defaultVolunteer) { image in
+            XCTAssertNil(image)
+            expectation.fulfill()
+        }
+        
+        // Then
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    // MARK: Disconnect
+    func testGivenDisconnectFinished_WhenDisconnectUser_ThenAllPropertiesShouldBeEmpty() {
+        // Given
+        
+        // When
+        volunteersManager.disconnect()
+        
+        // Then
+        XCTAssertEqual(volunteersManager.volunteersList.count, 0)
+    }
+    
     // MARK: Private
     /// Configure the fake network manager
-    private func configureManager(correctData: FakeResponseData.DataFiles?, response: FakeResponseData.Response, status: FakeResponseData.SessionStatus) {
+    private func configureManager(correctData: FakeResponseData.DataFiles?, response: FakeResponseData.Response, status: FakeResponseData.SessionStatus, and correctDataExtension: FakeResponseData.DataExtension = .json) {
         fakeNetworkManager.correctData = correctData
         fakeNetworkManager.status = status
         fakeNetworkManager.response = response
+        fakeNetworkManager.correctDataExtension = correctDataExtension
     }
     
     /// Getting default user

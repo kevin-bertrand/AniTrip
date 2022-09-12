@@ -138,6 +138,27 @@ final class UserManager {
         }
     }
     
+    /// Getting profile picture
+    func getProfilePicture(of user: User, with imagePath: String, completionHandler: @escaping ((User)->Void)) {
+        var params = NetworkConfigurations.getProfilePicture.urlParams
+        params.append(imagePath)
+        networkManager.request(urlParams: params,
+                               method: NetworkConfigurations.getProfilePicture.method,
+                               authorization: nil,
+                               body: nil) { data, response, error in
+            if let status = response?.statusCode,
+               status == 200,
+               let data = data,
+               let image = UIImage(data: data) {
+                var updatedUser = user
+                updatedUser.image = image
+                completionHandler(updatedUser)
+            } else {
+                completionHandler(user)
+            }
+        }
+    }
+    
     // MARK: Initialization
     init(networkManager: NetworkManager = NetworkManager()) {
         self.networkManager = networkManager
@@ -172,31 +193,9 @@ final class UserManager {
                 }
             } else {
                 completionHandler(decodedUser)
-
             }
         } else {
             completionHandler(nil)
-        }
-    }
-    
-    /// Getting profile picture
-    private func getProfilePicture(of user: User, with imagePath: String, completionHandler: @escaping ((User)->Void)) {
-        var params = NetworkConfigurations.getProfilePicture.urlParams
-        params.append(imagePath)
-        networkManager.request(urlParams: params,
-                               method: NetworkConfigurations.getProfilePicture.method,
-                               authorization: nil,
-                               body: nil) { data, response, error in
-            if let status = response?.statusCode,
-               status == 200,
-               let data = data,
-               let image = UIImage(data: data) {
-                var updatedUser = user
-                updatedUser.image = image
-                completionHandler(updatedUser)
-            } else {
-                completionHandler(user)
-            }
         }
     }
 }

@@ -30,6 +30,17 @@ final class UserManagerTests: XCTestCase {
         XCTAssertNotNil(userManager.connectedUser)
     }
     
+    /// Success login with user without image
+    func testGivenUserWillConnect_WhenConnectWithGoodCredentials_ThenGettingSuccessWithNoImage() {
+        // Given
+        
+        // When
+        connectUser(with: .userNoImage)
+        
+        // Then
+        XCTAssertNotNil(userManager.connectedUser)
+    }
+    
     /// Wrong credentials
     func testGivenUserWillConnect_WhenGettingIncorrectCredentialsStatus_ThenGettingError() {
         // Given
@@ -332,19 +343,58 @@ final class UserManagerTests: XCTestCase {
         XCTAssertNil(userManager.connectedUser?.image)
     }
     
+    // MARK: Profile picture
+    /// Success
+    func testGivenSuccess_WhenGettingUserPicture_ThenImageShouldNotBeNull() {
+        // Prepare expectation
+        let expectation = XCTestExpectation(description: "Getting user profile picture")
+        
+        // Given
+        configureManager(correctData: .image, response: .status200, status: .correctData, and: .image)
+        
+        // When
+        let user = User(id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .man, position: .user, missions: [], isActive: true, token: "")
+        userManager.getProfilePicture(of: user, with: "/") { user in
+            XCTAssertNotNil(user.image)
+            expectation.fulfill()
+        }
+        
+        // Then
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
+    /// Error
+    func testGivenError_WhenGettingUserPicture_ThenImageShouldNotBeNull() {
+        // Prepare expectation
+        let expectation = XCTestExpectation(description: "Getting user profile picture")
+        
+        // Given
+        configureManager(correctData: .image, response: .status200, status: .incorrectData, and: .image)
+        
+        // When
+        let user = User(id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .man, position: .user, missions: [], isActive: true, token: "")
+        userManager.getProfilePicture(of: user, with: "/") { user in
+            XCTAssertNil(user.image)
+            expectation.fulfill()
+        }
+        
+        // Then
+        wait(for: [expectation], timeout: 3.0)
+    }
+    
     // MARK: Private
     /// Configure the fake network manager
-    private func configureManager(correctData: FakeResponseData.DataFiles?, response: FakeResponseData.Response, status: FakeResponseData.SessionStatus) {
+    private func configureManager(correctData: FakeResponseData.DataFiles?, response: FakeResponseData.Response, status: FakeResponseData.SessionStatus, and correctDataExtension: FakeResponseData.DataExtension = .json) {
         fakeNetworkManager.correctData = correctData
         fakeNetworkManager.status = status
         fakeNetworkManager.response = response
+        fakeNetworkManager.correctDataExtension = correctDataExtension
     }
     
     /// Connect the user
-    private func connectUser() {
-        configureManager(correctData: .userLogin, response: .status200, status: .correctData)
+    private func connectUser(with data: FakeResponseData.DataFiles = .userLogin) {
+        configureManager(correctData: data, response: .status200, status: .correctData)
         userManager.login(user: UserToLogin(email: "", password: "", deviceToken: ""))
-        userManager.connectedUser?.image = nil
     }
     
     /// Update user

@@ -502,6 +502,20 @@ final class TripManagerTests: XCTestCase {
     }
     
     
+    // MARK: Disconnect user
+    func testGivenDisconnectFinished_WhenDisconnectUser_ThenAllPropertiesShouldBeEmpty() {
+        // Given
+        
+        // When
+        tripManager.disconnect()
+        
+        // Then
+        XCTAssertEqual(tripManager.trips.count, 0)
+        XCTAssertEqual(tripManager.volunteerTrips.count, 0)
+        XCTAssertEqual(tripManager.threeLatestTrips.count, 0)
+        XCTAssertEqual(tripManager.tripsChartPoints.count, 0)
+    }
+    
     // MARK: Private
     /// Configure the fake network manager
     private func configureManager(correctData: FakeResponseData.DataFiles?, response: FakeResponseData.Response, status: FakeResponseData.SessionStatus) {

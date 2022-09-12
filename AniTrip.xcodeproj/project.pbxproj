@@ -71,6 +71,8 @@
 		06955E9D2887FD1C006B502B /* TripMissionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955E9C2887FD1C006B502B /* TripMissionsView.swift */; };
 		06955E9F2887FFD4006B502B /* TripCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955E9E2887FFD4006B502B /* TripCommentView.swift */; };
 		06955EA1288816F5006B502B /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955EA0288816F5006B502B /* RouteView.swift */; };
+		069F552028CF921E0089ADB4 /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 069F551F28CF921E0089ADB4 /* image.jpeg */; };
+		069F552228CF93F10089ADB4 /* loginNoImage.json in Resources */ = {isa = PBXBuildFile; fileRef = 069F552128CF93F10089ADB4 /* loginNoImage.json */; };
 		06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */; };
 		06BF7245287B5B63006F0839 /* ButtonWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */; };
 		06BF7247287B5C6E006F0839 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7246287B5C6E006F0839 /* UserController.swift */; };
@@ -179,6 +181,8 @@
 		06955E9C2887FD1C006B502B /* TripMissionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripMissionsView.swift; sourceTree = "<group>"; };
 		06955E9E2887FFD4006B502B /* TripCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripCommentView.swift; sourceTree = "<group>"; };
 		06955EA0288816F5006B502B /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
+		069F551F28CF921E0089ADB4 /* image.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = image.jpeg; path = ../../../../../../../../../../Downloads/image.jpeg; sourceTree = "<group>"; };
+		069F552128CF93F10089ADB4 /* loginNoImage.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = loginNoImage.json; sourceTree = "<group>"; };
 		06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldWithIcon.swift; sourceTree = "<group>"; };
 		06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWithIcon.swift; sourceTree = "<group>"; };
 		06BF7246287B5C6E006F0839 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
@@ -534,6 +538,7 @@
 			isa = PBXGroup;
 			children = (
 				06FBF156289135BB00222480 /* login.json */,
+				069F552128CF93F10089ADB4 /* loginNoImage.json */,
 				06FBF15F28915D7800222480 /* volunteerList.json */,
 				06FBF15B289148FB00222480 /* UpdateProfile.json */,
 				067DF8832891651B00323F2A /* trips.json */,
@@ -544,6 +549,7 @@
 				062DC6A72893C39E004C401D /* desactivateAccount.json */,
 				062DC6A92893C721004C401D /* updatePosition.json */,
 				064EC28D28AE61DF00EDBB06 /* export.json */,
+				069F551F28CF921E0089ADB4 /* image.jpeg */,
 			);
 			path = FakeResponses;
 			sourceTree = "<group>";
@@ -687,8 +693,10 @@
 				062DC6A82893C39E004C401D /* desactivateAccount.json in Resources */,
 				067DF88628916C8600323F2A /* threeLatestsTrips.json in Resources */,
 				062DC6AA2893C721004C401D /* updatePosition.json in Resources */,
+				069F552228CF93F10089ADB4 /* loginNoImage.json in Resources */,
 				067DF88A28916FF700323F2A /* chartPoints.json in Resources */,
 				067DF8842891651B00323F2A /* trips.json in Resources */,
+				069F552028CF921E0089ADB4 /* image.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
