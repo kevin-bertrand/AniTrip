@@ -89,15 +89,16 @@ struct HomeView: View {
                     }
                 }
             }
-        }.listStyle(.grouped)
+        }
+        .listStyle(.grouped)
         .onChange(of: tripController.chartFilter, perform: { _ in
             tripController.downlaodChartPoint(byUser: userController.connectedUser)
         })
-        .onAppear {
-            tripController.homeIsLoaded(byUser: userController.connectedUser)
-        }
         .sheet(isPresented: $volunteersController.displayActivateAccount) {
             ActivateAccountView()
+        }
+        .onAppear {
+            tripController.homeIsLoaded(byUser: userController.connectedUser)
         }
     }
 }

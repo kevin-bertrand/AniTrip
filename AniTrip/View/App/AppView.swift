@@ -11,8 +11,10 @@ struct AppView: View {
     @EnvironmentObject var userController: UserController
     @EnvironmentObject var volunteersController: VolunteersController
     
+    @State private var selectedTab: Int = 1
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selectedTab) {
             Group {
                 NavigationView {
                     HomeView()
