@@ -255,7 +255,7 @@ final class UserController: ObservableObject {
             
             if let user = self.connectedUser {
                 self.userToUpdate = user.toUpdate()
-                Mixpanel.mainInstance().track(event: "Sign upp")
+                Mixpanel.mainInstance().track(event: "Sign up")
                 
 //                if user.position == .user {
 //                    self.accountToActivateEmail = ""

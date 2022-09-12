@@ -44,13 +44,12 @@ struct UpdateAddressView: View {
         .onAppear {
             addressToModify = address
         }
-        .sheet(isPresented: $showMapView, onDismiss: {
-            if addressToModify != LocationController.emptyAddress {
-                address = addressToModify
-            }
-        }, content: {
+        .sheet(isPresented: $showMapView, content: {
             SearchAddressView(address: $addressToModify, showMapSheet: $showMapView)
         })
+        .onChange(of: addressToModify) { newValue in
+            address = newValue
+        }
     }
 }
 

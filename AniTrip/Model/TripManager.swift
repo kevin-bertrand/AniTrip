@@ -230,7 +230,6 @@ final class TripManager {
                 self.tripToExportInformation = informations
                 Notification.AniTrip.exportDataDownloaded.sendNotification()
             } else {
-                print("error")
                 Notification.AniTrip.unknownError.sendNotification()
             }
         }
