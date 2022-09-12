@@ -64,20 +64,6 @@ struct AniTripApp: App {
             .onAppear {
                 UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {_,_ in}
             }
-            .sheet(isPresented: $tripController.showPDFView) {
-                VStack {
-                    TripsExportView(tripController: tripController, exportData: tripController.tripToExport)
-                    HStack {
-                        ButtonWithIcon(isLoading: .constant(false), action: {
-                            tripController.showPDFView = false
-                        }, title: "Cancel", color: .red)
-                        Spacer()
-                        ButtonWithIcon(isLoading: .constant(false), action: {
-                            tripController.exportToPDF()
-                        }, title: "Export")
-                    }.padding()
-                }
-            }
         }
     }
 }

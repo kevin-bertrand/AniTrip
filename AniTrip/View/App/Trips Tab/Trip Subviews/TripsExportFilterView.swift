@@ -28,10 +28,12 @@ struct TripsExportFilterView: View {
                 .datePickerStyle(.wheel)
                 .labelsHidden()
                 .padding(.bottom, 25)
-            ButtonWithIcon(isLoading: .constant(false),
-                           action: {
-                tripController.downloadDataToExport(byUser: userController.connectedUser, for: userToExportId)
-            }, title: "Start export")
+            
+            NavigationLink {
+                ExportView(userToExportId: userToExportId)
+            } label: {
+                Text("Start export")
+            }
             .padding()
         }
         .navigationTitle(Text("Export"))

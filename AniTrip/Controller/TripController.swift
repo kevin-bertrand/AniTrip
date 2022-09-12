@@ -59,7 +59,6 @@ final class TripController: ObservableObject {
     @Published var startFilterDate: Date = Date()
     @Published var endFilterDate: Date = Date()
     var tripToExport: TripToExportInformations = .init(userLastname: "", userFirstname: "", userPhone: "", userEmail: "", startDate: "", endDate: "", totalDistance: 0.0, trips: [])
-    @Published var showPDFView: Bool = false
     
     // MARK: Methods
     /// Getting trip list
@@ -127,6 +126,8 @@ final class TripController: ObservableObject {
         
         let pdfVC = UIHostingController(rootView: charts)
         pdfVC.view.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        pdfVC.view.backgroundColor = .white
+        pdfVC.view.tintColor = .black
         
         //Render the view behind all other views
         let rootVC = UIApplication.shared.windows.first?.rootViewController
@@ -136,14 +137,24 @@ final class TripController: ObservableObject {
         //Render the PDF
         let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: 8.5 * 72.0, height: height))
         
+        let alertMessage: String
+        let alertTitle: String
+        
         do {
             try pdfRenderer.writePDF(to: outputFileURL, withActions: { (context) in
                 context.beginPage()
                 pdfVC.view.layer.render(in: context.cgContext)
             })
+            alertMessage = "Export success"
+            alertTitle = "Success"
         } catch {
             print("Could not create PDF file: \(error)")
+            alertMessage = "Cannot procceed to the export!"
+            alertTitle = "Error"
         }
+        
+        pdfVC.view.removeFromSuperview()
+        appController.showAlertView(withMessage: alertMessage, andTitle: alertTitle)
     }
     
     /// Disconnect user
@@ -215,7 +226,6 @@ final class TripController: ObservableObject {
                 chartPoints = getChartData(from: tripManager.tripsChartPoints)
             case Notification.AniTrip.exportDataDownloaded.notificationName:
                 tripToExport = tripManager.tripToExportInformation
-                showPDFView = true
             default: break
             }
         }

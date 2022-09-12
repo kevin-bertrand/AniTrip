@@ -71,6 +71,8 @@ struct TripsExportView: View {
             .padding()
         }
         .font(.footnote)
+        .background(Color.white)
+        .foregroundColor(.black)
     }
     
     private func drawDivider() -> some View {
@@ -85,7 +87,7 @@ struct TripsExportView: View {
     private func drawLargeDivider() -> some View {
         return drawDivider()
             .frame(height: 4)
-            .overlay(Color.primary)
+            .overlay(Color.black)
     }
 }
 
