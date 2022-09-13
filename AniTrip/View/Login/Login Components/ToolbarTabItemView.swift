@@ -20,7 +20,7 @@ struct ToolbarTabItemView: View {
             Text(title)
                 .frame(width: 100, height: 25)
                 .padding(.vertical, 12)
-                .padding(.horizontal, 30)
+                .padding(.horizontal, 15)
                 .overlay(VStack{
                     if selected == tabId {
                         Divider()

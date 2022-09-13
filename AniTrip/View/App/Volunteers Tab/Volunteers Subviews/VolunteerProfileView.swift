@@ -84,6 +84,14 @@ struct VolunteerProfileView: View {
                             .onAppear {
                                 tripController.getList(byUser: userController.connectedUser, for: volunteer)
                             }
+                            .toolbar {
+                                NavigationLink {
+                                    TripsExportFilterView(userToExportId: UUID(uuidString: volunteer.id))
+                                } label: {
+                                    Image(systemName: "square.and.arrow.up.fill")
+                                }
+                            }
+                            .navigationTitle("\(volunteer.firstname) trips'")
                     } label: {
                         Text("Get trips")
                     }

@@ -12,25 +12,20 @@ struct TripsView: View {
     @EnvironmentObject private var userController: UserController
     
     var body: some View {
-        TripListView(searchFilter: $tripController.searchFilter, trips: $tripController.trips)
-        .onAppear {
-            tripController.getList(byUser: userController.connectedUser)
-        }
-        .sheet(isPresented: $tripController.showUpdateTripView, content: {
-            UpdateTripView(trip: $tripController.newTrip, isAnUpdate: .constant(false))
-        })
-        .toolbar {
-            Button {
-                tripController.showUpdateTripView = true
-            } label: {
-                Image(systemName: "plus.circle")
+        TripListView(searchFilter: $tripController.searchFilter, trips: $tripController.trips, canAddTrip: true)
+            .onAppear {
+                tripController.getList(byUser: userController.connectedUser)
             }
-            NavigationLink {
-                TripsExportFilterView(userToExportId: userController.connectedUser?.id)
-            } label: {
-                Image(systemName: "square.and.arrow.up.fill")
+            .sheet(isPresented: $tripController.showUpdateTripView, content: {
+                UpdateTripView(trip: $tripController.newTrip, isAnUpdate: .constant(false))
+            })
+            .toolbar {
+                NavigationLink {
+                    TripsExportFilterView(userToExportId: userController.connectedUser?.id)
+                } label: {
+                    Image(systemName: "square.and.arrow.up.fill")
+                }
             }
-        }
     }
 }
 
