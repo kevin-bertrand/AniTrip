@@ -58,7 +58,7 @@ extension Notification {
         case showActivateAccount = "A new account must be activate"
         
         // Export notification
-        case exportDataDownloaded = "All data are downloaded"
+        case pdfDownloaded = "All data are downloaded"
         
         /// Getting the name of the notification
         var notificationName: Notification.Name {

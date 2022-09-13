@@ -25,11 +25,11 @@ struct HomeView: View {
                         HStack(spacing: 0) {
                             Group {
                                 NewsTileView(title: "This week", icon: Image(systemName: "car"), information: "\(tripController.news.numberOfTripThisWeek) trips", percent: tripController.news.distancePercentSinceLastWeek, comparaison: "week")
-                                NewsTileView(title: "This week", icon: Image("TripIcon"), information: "\(tripController.news.distanceThisWeek) km", percent: tripController.news.numberTripPercentSinceLastWeek, comparaison: "week")
+                                NewsTileView(title: "This week", icon: Image("TripIcon"), information: "\(tripController.news.distanceThisWeek.twoDigitPrecision) km", percent: tripController.news.numberTripPercentSinceLastWeek, comparaison: "week")
                                 NewsTileView(title: "This year", icon: Image(systemName: "car"), information: "\(tripController.news.numberOfTripThisYear) trips", percent: tripController.news.distancePercentSinceLastYear, comparaison: "year")
                             }.padding(.leading, 10)
                             
-                            NewsTileView(title: "This year", icon: Image("TripIcon"), information: "\(tripController.news.distanceThisYear) km", percent: tripController.news.numberTripPercentSinceLastYear, comparaison: "year")
+                            NewsTileView(title: "This year", icon: Image("TripIcon"), information: "\(tripController.news.distanceThisYear.twoDigitPrecision) km", percent: tripController.news.numberTripPercentSinceLastYear, comparaison: "year")
                                 .padding(.horizontal, 10)
                         }
                         .padding(.vertical)

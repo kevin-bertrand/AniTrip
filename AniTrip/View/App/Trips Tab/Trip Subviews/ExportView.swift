@@ -13,23 +13,31 @@ struct ExportView: View {
     @EnvironmentObject private var tripController: TripController
     @EnvironmentObject private var userController: UserController
     
+    @State private var pdfSize: CGSize = CGSize.zero
+    
     let userToExportId: UUID?
     
     var body: some View {
         VStack {
-            TripsExportView(tripController: tripController, exportData: tripController.tripToExport)
+            GeometryReader { geometry in
+//                TripsExportView(tripController: tripController, exportData: tripController.tripToExport)
+//                    .onAppear {
+//                        pdfSize = geometry.size
+//                    }
+                Text("3Ok")
+            }
             HStack {
                 ButtonWithIcon(isLoading: .constant(false), action: {
                     self.presentation.wrappedValue.dismiss()
                 }, title: "Cancel", color: .red)
                 Spacer()
                 ButtonWithIcon(isLoading: .constant(false), action: {
-                    tripController.exportToPDF()
+                    tripController.exportToPDF(withSize: pdfSize)
                 }, title: "Export")
             }
             .padding()
             .onAppear {
-                tripController.downloadDataToExport(byUser: userController.connectedUser, for: userToExportId)
+                tripController.downloadPDF(byUser: userController.connectedUser, for: userToExportId)
             }
         }
     }

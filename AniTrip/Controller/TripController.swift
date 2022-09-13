@@ -58,7 +58,8 @@ final class TripController: ObservableObject {
     // Export trip
     @Published var startFilterDate: Date = Date()
     @Published var endFilterDate: Date = Date()
-    var tripToExport: TripToExportInformations = .init(userLastname: "", userFirstname: "", userPhone: "", userEmail: "", startDate: "", endDate: "", totalDistance: 0.0, trips: [])
+    @Published var pdfData: Data = Data()
+    @Published var showPDF: Bool = false
     
     // MARK: Methods
     /// Getting trip list
@@ -104,57 +105,13 @@ final class TripController: ObservableObject {
     }
     
     /// Download data to export
-    func downloadDataToExport(byUser user: User?, for userId: UUID?) {
+    func downloadPDF(byUser user: User?, for userId: UUID?) {
         guard let user = user, let userId = userId else { return }
         appController.setLoadingInProgress(withMessage: "Download in progress...")
-        
+
         let filters = TripFilterToExport(userID: userId, startDate: startFilterDate.iso8601, endDate: endFilterDate.iso8601)
         
-        tripManager.downloadTripToExport(with: filters, by: user)
-    }
-    
-    /// Export data to PDF
-    func exportToPDF() {
-        let documentDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-        let outputFileURL = documentDirectory.appendingPathComponent("SwiftUI.pdf")
-        
-        //Normal width
-        let width: CGFloat = 8.5 * 72.0
-        //Estimate the height of your view
-        let height: CGFloat = 1000
-        let charts = TripsExportView(tripController: self, exportData: tripToExport)
-        
-        let pdfVC = UIHostingController(rootView: charts)
-        pdfVC.view.frame = CGRect(x: 0, y: 0, width: width, height: height)
-        pdfVC.view.backgroundColor = .white
-        pdfVC.view.tintColor = .black
-        
-        //Render the view behind all other views
-        let rootVC = UIApplication.shared.windows.first?.rootViewController
-        rootVC?.addChild(pdfVC)
-        rootVC?.view.insertSubview(pdfVC.view, at: 0)
-        
-        //Render the PDF
-        let pdfRenderer = UIGraphicsPDFRenderer(bounds: CGRect(x: 0, y: 0, width: 8.5 * 72.0, height: height))
-        
-        let alertMessage: String
-        let alertTitle: String
-        
-        do {
-            try pdfRenderer.writePDF(to: outputFileURL, withActions: { (context) in
-                context.beginPage()
-                pdfVC.view.layer.render(in: context.cgContext)
-            })
-            alertMessage = "Export success"
-            alertTitle = "Success"
-        } catch {
-            print("Could not create PDF file: \(error)")
-            alertMessage = "Cannot procceed to the export!"
-            alertTitle = "Error"
-        }
-        
-        pdfVC.view.removeFromSuperview()
-        appController.showAlertView(withMessage: alertMessage, andTitle: alertTitle)
+        tripManager.downloadPDF(with: filters, by: user)
     }
     
     /// Disconnect user
@@ -189,7 +146,7 @@ final class TripController: ObservableObject {
         configureNotification(for: Notification.AniTrip.homeInformationsDonwloadedError.notificationName)
         
         // Configure export data notifications
-        configureNotification(for: Notification.AniTrip.exportDataDownloaded.notificationName)
+        configureNotification(for: Notification.AniTrip.pdfDownloaded.notificationName)
     }
     
     // MARK: Private
@@ -224,8 +181,9 @@ final class TripController: ObservableObject {
                 threeLatestTrips = tripManager.threeLatestTrips
                 self.news = tripManager.news
                 chartPoints = getChartData(from: tripManager.tripsChartPoints)
-            case Notification.AniTrip.exportDataDownloaded.notificationName:
-                tripToExport = tripManager.tripToExportInformation
+            case Notification.AniTrip.pdfDownloaded.notificationName:
+                self.showPDF = true
+                pdfData = tripManager.pdfData
             default: break
             }
         }

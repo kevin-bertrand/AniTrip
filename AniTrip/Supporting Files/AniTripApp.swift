@@ -23,9 +23,6 @@ struct AniTripApp: App {
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
     
-    // Getting the presentation mode environment variable
-    @Environment(\.presentationMode) var presentationMode
-    
     // Initialization
     init() {
         let appController = AppController()

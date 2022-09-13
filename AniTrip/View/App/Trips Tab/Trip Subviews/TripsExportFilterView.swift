@@ -12,7 +12,7 @@ struct TripsExportFilterView: View {
     @EnvironmentObject private var userController: UserController
     
     let userToExportId: UUID?
-
+    
     var body: some View {
         ScrollView {
             Text("Start filter")
@@ -21,6 +21,7 @@ struct TripsExportFilterView: View {
                 .datePickerStyle(.wheel)
                 .labelsHidden()
                 .padding(.bottom, 25)
+                .frame(width: 320, height: 216)
             Divider()
             Text("End filter")
                 .font(.title2.bold())
@@ -29,12 +30,17 @@ struct TripsExportFilterView: View {
                 .labelsHidden()
                 .padding(.bottom, 25)
             
-            NavigationLink {
-                ExportView(userToExportId: userToExportId)
+            ButtonWithIcon(isLoading: .constant(false), action: {
+                tripController.downloadPDF(byUser: userController.connectedUser, for: userToExportId)
+            }, title: "Start export")
+            .padding(.horizontal)
+            
+            NavigationLink(isActive: $tripController.showPDF) {
+                PDFUIView()
             } label: {
-                Text("Start export")
+                EmptyView()
             }
-            .padding()
+
         }
         .navigationTitle(Text("Export"))
     }

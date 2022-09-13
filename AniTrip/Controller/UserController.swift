@@ -255,6 +255,11 @@ final class UserController: ObservableObject {
             
             if let user = self.connectedUser {
                 self.userToUpdate = user.toUpdate()
+                
+                if self.canUseBiometric {
+                    self.savedPassword = self.loginPasswordTextField
+                }
+                
                 Mixpanel.mainInstance().track(event: "Sign up")
                 
 //                if user.position == .user {

@@ -21,16 +21,9 @@ final class TripManager {
                           distancePercentSinceLastYear: 0.0,
                           distancePercentSinceLastWeek: 0.0,
                           numberTripPercentSinceLastYear: 0.0,
-                          numberTripPercentSinceLastWeek: 0.0)
-    var tripToExportInformation: TripToExportInformations = .init(userLastname: "",
-                                                                  userFirstname: "",
-                                                                  userPhone: "",
-                                                                  userEmail: "",
-                                                                  startDate: "",
-                                                                  endDate: "",
-                                                                  totalDistance: 0.0,
-                                                                  trips: [])
-        
+                          numberTripPercentSinceLastWeek: 0.0)    
+    var pdfData: Data = Data()
+    
     // MARK: Methods
     /// Getting trip list
     func getList(byUser user: User?, of volunteer: Volunteer? = nil) {
@@ -217,7 +210,7 @@ final class TripManager {
     }
     
     /// Download trip to export
-    func downloadTripToExport(with filters: TripFilterToExport, by user: User) {
+    func downloadPDF(with filters: TripFilterToExport, by user: User) {
         networkManager.request(urlParams: NetworkConfigurations.filterTripsToExport.urlParams,
                                method: NetworkConfigurations.filterTripsToExport.method,
                                authorization: .authorization(bearerToken: user.token),
@@ -225,10 +218,9 @@ final class TripManager {
             if let self = self,
                let statusCode = response?.statusCode,
                statusCode == 200,
-               let data = data,
-               let informations = try? JSONDecoder().decode(TripToExportInformations.self, from: data) {
-                self.tripToExportInformation = informations
-                Notification.AniTrip.exportDataDownloaded.sendNotification()
+               let data = data {
+                self.pdfData = data
+                Notification.AniTrip.pdfDownloaded.sendNotification()
             } else {
                 Notification.AniTrip.unknownError.sendNotification()
             }

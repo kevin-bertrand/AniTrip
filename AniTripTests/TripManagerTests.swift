@@ -241,10 +241,10 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .export, response: .status200, status: .correctData)
         
         // When
-        tripManager.downloadTripToExport(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
+        tripManager.downloadPDF(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
         
         // Then
-        XCTAssertTrue(tripManager.tripToExportInformation.totalDistance != 0.0)
+        XCTAssertTrue(tripManager.pdfData != Data())
     }
     
     /// Process error
@@ -253,10 +253,10 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .export, response: .status200, status: .error)
         
         // When
-        tripManager.downloadTripToExport(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
+        tripManager.downloadPDF(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
         
         // Then
-        XCTAssertTrue(tripManager.tripToExportInformation.totalDistance == 0.0)
+        XCTAssertTrue(tripManager.pdfData == Data())
     }
     
     /// Unknown status
@@ -265,10 +265,10 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .export, response: .status0, status: .correctData)
         
         // When
-        tripManager.downloadTripToExport(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
+        tripManager.downloadPDF(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
         
         // Then
-        XCTAssertTrue(tripManager.tripToExportInformation.totalDistance == 0.0)
+        XCTAssertTrue(tripManager.pdfData == Data())
     }
     
     // MARK: Download 3 latest trips
