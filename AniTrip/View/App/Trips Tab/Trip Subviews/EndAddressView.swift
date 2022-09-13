@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct EndAddressView: View {
-    @EnvironmentObject var tripController: TripController
+    @EnvironmentObject private var tripController: TripController
     
     @Binding var step: Int
     @Binding var trip: UpdateTrip

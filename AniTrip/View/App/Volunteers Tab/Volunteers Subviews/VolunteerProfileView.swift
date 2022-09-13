@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct VolunteerProfileView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     
-    @EnvironmentObject var userController: UserController
-    @EnvironmentObject var volunteersController: VolunteersController
-    @EnvironmentObject var tripController: TripController
+    @EnvironmentObject private var userController: UserController
+    @EnvironmentObject private var volunteersController: VolunteersController
+    @EnvironmentObject private var tripController: TripController
     
     @State private var showUpdatePositionAlert: Bool = false
     @State var volunteer: Volunteer

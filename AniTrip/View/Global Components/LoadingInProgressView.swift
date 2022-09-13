@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct LoadingInProgressView: View {
+    @Environment(\.colorScheme) private var colorScheme
+    
     @EnvironmentObject private var appController: AppController
-    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {

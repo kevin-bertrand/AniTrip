@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TripCommentView: View {
-    @EnvironmentObject var tripController: TripController
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject private var tripController: TripController
+    @EnvironmentObject private var userController: UserController
     
     @Binding var step: Int
     @Binding var trip: UpdateTrip

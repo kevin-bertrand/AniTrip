@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ActivateAccountView: View {
-    @EnvironmentObject var userController: UserController
-    @EnvironmentObject var volunteersController: VolunteersController
+    @EnvironmentObject private var userController: UserController
+    @EnvironmentObject private var volunteersController: VolunteersController
     
     var body: some View {
         VStack {

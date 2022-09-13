@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UpdateProfileImageView: View {
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject private var userController: UserController
     
     @State private var selectedImage: UIImage?
     @State private var showingImagePicker = false

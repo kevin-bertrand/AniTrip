@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TripsView: View {
-    @EnvironmentObject var tripController: TripController
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject private var tripController: TripController
+    @EnvironmentObject private var userController: UserController
     
     var body: some View {
         TripListView(searchFilter: $tripController.searchFilter, trips: $tripController.trips)

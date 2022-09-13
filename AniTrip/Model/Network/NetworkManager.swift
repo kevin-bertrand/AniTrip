@@ -57,34 +57,30 @@ class NetworkManager: NetworkProtocol {
         AF.upload(multipartFormData: multiPart, to: formattedUrl, method: .patch, headers: headers)
             .response { data in
                 completionHandler((data.data, data.response, data.error))
-        }.resume()
+            }.resume()
     }
     
     /// Download profile picture
     func downloadProfilePicture(from path: String?, completionHandler: @escaping ((UIImage?)->Void)) {
-        guard let path = path?.replacingOccurrences(of: "/var/www/html", with: "") else {
-            completionHandler(nil)
-            return
-        }
-        
-        let imageUrl = url + ":\(imagePort)" + path
-        
-        guard let imageUrl = URL(string: imageUrl),
-              var request = try? URLRequest(url: imageUrl, method: .get) else {
-            completionHandler(nil)
-            return
-        }
-        
-        request.timeoutInterval = 10
-        
-        URLSession.shared.dataTask(with: request) { data, response, error in
-            if let data = data,
-               let image = UIImage(data: data) {
-                completionHandler(image)
-            } else {
-                completionHandler(nil)
+        if let imagePath = path {
+            var params = NetworkConfigurations.getProfilePicture.urlParams
+            params.append(imagePath)
+            request(urlParams: params,
+                    method: NetworkConfigurations.getProfilePicture.method,
+                    authorization: nil,
+                    body: nil) { data, response, error in
+                if let status = response?.statusCode,
+                   status == 200,
+                   let data = data,
+                   let image = UIImage(data: data) {
+                    completionHandler(image)
+                } else {
+                    completionHandler(nil)
+                }
             }
-        }.resume()
+        } else {
+            completionHandler(nil)
+        }
     }
     
     // MARK: Private

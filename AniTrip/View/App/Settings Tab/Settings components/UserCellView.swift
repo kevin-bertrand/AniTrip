@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct UserCellView: View {
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject private var userController: UserController
     
     var body: some View {
         HStack {

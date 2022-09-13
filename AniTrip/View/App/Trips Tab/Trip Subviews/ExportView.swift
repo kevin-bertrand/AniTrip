@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ExportView: View {
-    @Environment(\.presentationMode) var presentation
+    @Environment(\.presentationMode) private var presentation
     
     @EnvironmentObject private var tripController: TripController
     @EnvironmentObject private var userController: UserController

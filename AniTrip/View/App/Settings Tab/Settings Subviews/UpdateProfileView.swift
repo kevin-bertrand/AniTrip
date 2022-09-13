@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct UpdateProfileView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.presentationMode) private var presentationMode
     
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject private var userController: UserController
     
     var body: some View {
         Form {

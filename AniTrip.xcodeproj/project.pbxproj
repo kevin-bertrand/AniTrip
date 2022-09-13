@@ -385,7 +385,6 @@
 		065E477E287B573E00D32E05 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				06D632C428884CF3004193A0 /* Global Views */,
 				068FDBEA2887460700ACA72D /* Modifiers */,
 				065E4786287B57D100D32E05 /* Global Components */,
 				065E4785287B57CB00D32E05 /* App */,
@@ -442,13 +441,14 @@
 		065E4786287B57D100D32E05 /* Global Components */ = {
 			isa = PBXGroup;
 			children = (
+				06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */,
+				0690C4242889737900B57B92 /* ActivateAccountView.swift */,
 				065E4787287B581000D32E05 /* CircularSpinnerView.swift */,
 				06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */,
 				06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */,
 				06158E2928854F4200C3BE6E /* AddressTileView.swift */,
 				06158E35288560CF00C3BE6E /* TextFieldUnderlinedView.swift */,
 				06158E392885772E00C3BE6E /* MissionsUpdateTileView.swift */,
-				06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */,
 				065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */,
 				068FDB9D2886F2E000ACA72D /* DetectAddressView.swift */,
 				06FBF14928900C3600222480 /* ImagePicker.swift */,
@@ -492,20 +492,12 @@
 		06BF726C28853C9B006F0839 /* Settings components */ = {
 			isa = PBXGroup;
 			children = (
+				06158E3B28857D5800C3BE6E /* PasswordFormTileView.swift */,
 				06158E37288561C500C3BE6E /* UpdateAddressView.swift */,
 				06BF726D28853CAE006F0839 /* UserCellView.swift */,
 				06158E3328855DB100C3BE6E /* EditUserInfoTileView.swift */,
 			);
 			path = "Settings components";
-			sourceTree = "<group>";
-		};
-		06D632C428884CF3004193A0 /* Global Views */ = {
-			isa = PBXGroup;
-			children = (
-				06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */,
-				0690C4242889737900B57B92 /* ActivateAccountView.swift */,
-			);
-			path = "Global Views";
 			sourceTree = "<group>";
 		};
 		06E3494D28898DE40056470E /* Settings Subviews */ = {

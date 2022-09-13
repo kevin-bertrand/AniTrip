@@ -9,7 +9,7 @@ import MessageUI
 import SwiftUI
 
 struct UserProfileView: View {
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject private var userController: UserController
     @State private var showMapSheet: Bool = false
     
     var body: some View {

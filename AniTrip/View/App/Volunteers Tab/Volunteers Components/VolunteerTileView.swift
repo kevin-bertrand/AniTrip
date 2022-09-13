@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct VolunteerTileView: View {
-    @EnvironmentObject var volunteersController: VolunteersController
+    @EnvironmentObject private var volunteersController: VolunteersController
     
     @Binding var volunteer: Volunteer
     

@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct AppView: View {
-    @EnvironmentObject var userController: UserController
-    @EnvironmentObject var volunteersController: VolunteersController
+    @EnvironmentObject private var userController: UserController
+    @EnvironmentObject private var volunteersController: VolunteersController
     
     @State private var selectedTab: Int = 1
     
@@ -23,6 +23,7 @@ struct AppView: View {
                 .tabItem {
                     Label("Home", systemImage: "house.fill")
                 }
+                .tag(1)
                 
                 NavigationView {
                     TripsView()
@@ -31,6 +32,7 @@ struct AppView: View {
                 .tabItem {
                     Label("Trips", systemImage: "map.fill")
                 }
+                .tag(2)
                 
                 NavigationView {
                     VolunteersView()
@@ -39,6 +41,7 @@ struct AppView: View {
                 .tabItem {
                     Label("Volunteers", systemImage: "person.3.fill")
                 }
+                .tag(3)
                 
                 NavigationView {
                     SettingsView()
@@ -47,6 +50,7 @@ struct AppView: View {
                 .tabItem {
                     Label("Settings", systemImage: "gear")
                 }
+                .tag(4)
             }
             .alert(isPresented: $userController.loginShowBiometricAlert) {
                 Alert(title: Text("Would you like to use FaceId for further login?"),

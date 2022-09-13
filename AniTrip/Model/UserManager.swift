@@ -175,7 +175,7 @@ final class UserManager {
            let userId = UUID(uuidString: user.id),
            let gender = Gender(rawValue: user.gender),
            let position = Position(rawValue: user.position) {
-            let decodedUser = User(image: nil,
+            var decodedUser = User(image: nil,
                             id: userId,
                             firstname: user.firstname,
                             lastname: user.lastname,
@@ -187,11 +187,8 @@ final class UserManager {
                             isActive: true,
                             address: user.address ?? LocationController.emptyAddress,
                             token: user.token)
-            if let imagePath = user.imagePath {
-                self.getProfilePicture(of: decodedUser, with: imagePath) { user in
-                    completionHandler(user)
-                }
-            } else {
+            networkManager.downloadProfilePicture(from: user.imagePath) { image in
+                decodedUser.image = image
                 completionHandler(decodedUser)
             }
         } else {

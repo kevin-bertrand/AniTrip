@@ -10,9 +10,9 @@ import SwiftUI
 import SwiftUICharts
 
 struct HomeView: View {
-    @EnvironmentObject var tripController: TripController
-    @EnvironmentObject var userController: UserController
-    @EnvironmentObject var volunteersController: VolunteersController
+    @EnvironmentObject private var tripController: TripController
+    @EnvironmentObject private var userController: UserController
+    @EnvironmentObject private var volunteersController: VolunteersController
     
     var body: some View {
         List {

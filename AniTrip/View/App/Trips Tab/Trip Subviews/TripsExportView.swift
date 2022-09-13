@@ -11,8 +11,8 @@ struct TripsExportView: View {
     @StateObject var tripController: TripController
     
     let exportData: TripToExportInformations
-    let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
-    let columnsTitle = ["Date", "Distance", "Ville départ", "Ville arrivée"]
+    private let columns = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    private let columnsTitle = ["Date", "Distance", "Ville départ", "Ville arrivée"]
     
     var body: some View {
         ScrollView {

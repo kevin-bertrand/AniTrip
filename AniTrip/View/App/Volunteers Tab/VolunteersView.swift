@@ -8,11 +8,12 @@
 import SwiftUI
 
 struct VolunteersView: View {
-    @EnvironmentObject var volunteersController: VolunteersController
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject private var volunteersController: VolunteersController
+    @EnvironmentObject private var userController: UserController
     
     @State private var volunteersList: [Volunteer] = []
     @State private var searchingFilter: String = ""
+    
     var body: some View {
         VStack {
             SearchTextFieldView(searchText: $searchingFilter)

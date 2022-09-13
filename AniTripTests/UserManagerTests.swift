@@ -334,6 +334,7 @@ final class UserManagerTests: XCTestCase {
     func testGivenUserUpdatePicture_WhenGettingError_ThenGettingNoPicture() {
         // Given
         connectUser()
+        userManager.connectedUser?.image = nil
         configureManager(correctData: nil, response: .status0, status: .error)
         
         // When

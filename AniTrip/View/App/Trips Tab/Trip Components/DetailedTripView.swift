@@ -10,7 +10,7 @@ import SwiftUI
 import UIKit
 
 struct DetailedTripView: View {
-    @EnvironmentObject var tripController: TripController
+    @EnvironmentObject private var tripController: TripController
     
     @Binding var trip: Trip
     

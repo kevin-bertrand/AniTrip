@@ -11,9 +11,9 @@ import os
 import SwiftUI
 
 struct SettingsView: View {
-    @EnvironmentObject var userController: UserController
-    @EnvironmentObject var tripController: TripController
-    @EnvironmentObject var volunteersController: VolunteersController
+    @EnvironmentObject private var userController: UserController
+    @EnvironmentObject private var tripController: TripController
+    @EnvironmentObject private var volunteersController: VolunteersController
     
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false

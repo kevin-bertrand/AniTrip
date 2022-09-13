@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct ProfilePictureView: View {
-    @EnvironmentObject var volunteersController: VolunteersController
-    
     @Binding var image: UIImage?
     
     var size: CGFloat = 150

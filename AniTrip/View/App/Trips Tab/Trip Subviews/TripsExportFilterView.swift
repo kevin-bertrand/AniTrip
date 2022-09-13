@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct TripsExportFilterView: View {
-    @EnvironmentObject var tripController: TripController
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject private var tripController: TripController
+    @EnvironmentObject private var userController: UserController
     
     let userToExportId: UUID?
 
