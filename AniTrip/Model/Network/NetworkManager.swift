@@ -30,7 +30,8 @@ class NetworkManager: NetworkProtocol {
                 request.httpBody = try JSONEncoder().encode(body)
             }
             request.headers = headers
-            AF.request(request).responseData(completionHandler: { data in
+
+            session.request(request).responseData(completionHandler: { data in
                 completionHandler((data.data, data.response, data.error))
             })
         } catch let error {
@@ -54,7 +55,8 @@ class NetworkManager: NetworkProtocol {
         if let filename = "userPicture.jpeg".data(using: .utf8) {
             multiPart.append(filename, withName: "filename")
         }
-        AF.upload(multipartFormData: multiPart, to: formattedUrl, method: .patch, headers: headers)
+    
+        session.upload(multipartFormData: multiPart, to: formattedUrl, method: .patch, headers: headers)
             .response { data in
                 completionHandler((data.data, data.response, data.error))
             }.resume()
@@ -85,9 +87,9 @@ class NetworkManager: NetworkProtocol {
     
     // MARK: Private
     // MARK: Properties
-    private let url = "http://anitrip.desyntic.com"
+    private let url = "https://anitrip.desyntic.com"
     private let apiPort = 2564
-    private let imagePort = 80
+    private let session = Session(serverTrustManager: ServerTrustManager(evaluators: ["anitrip.desyntic.com": DisabledTrustEvaluator()]))
 }
 
 protocol NetworkProtocol {
