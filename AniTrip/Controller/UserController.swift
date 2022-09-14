@@ -101,7 +101,7 @@ final class UserController: ObservableObject {
                         self.loginPasswordTextField = self.savedPassword
                         self.performLogin()
                     } else {
-                        print(error?.localizedDescription ?? "error")
+                        Mixpanel.mainInstance().track(event: "Unable to access biometrics")
                     }
                 }
             }
@@ -204,6 +204,7 @@ final class UserController: ObservableObject {
                 case Notification.AniTrip.loginSuccess.notificationName:
                     self.actionWhenLoginSuccess()
                 case Notification.AniTrip.accountCreationSuccess.notificationName:
+                    Mixpanel.mainInstance().track(event: "New account creation")
                     self.createAccountEmailTextField = ""
                     self.createAccountPasswordTextField = ""
                     self.createAccountPasswordVerificationTextField = ""
@@ -239,7 +240,7 @@ final class UserController: ObservableObject {
                         self.savedPassword = self.loginPasswordTextField
                         self.appController.showAlertView(withMessage: "Biometrics is now active!", andTitle: "Success")
                     } else {
-                        print(error?.localizedDescription ?? "error")
+                        Mixpanel.mainInstance().track(event: "Unable to access biometrics")
                     }
                 }
             }
@@ -261,11 +262,6 @@ final class UserController: ObservableObject {
                 }
                 
                 Mixpanel.mainInstance().track(event: "Sign up")
-                
-//                if user.position == .user {
-//                    self.accountToActivateEmail = ""
-//                    self.displayActivateAccount = false
-//                }
             }
             
             self.isConnected = true

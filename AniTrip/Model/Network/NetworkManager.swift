@@ -7,6 +7,7 @@
 
 import Alamofire
 import Foundation
+import Mixpanel
 import SwiftUI
 
 class NetworkManager: NetworkProtocol {
@@ -34,8 +35,8 @@ class NetworkManager: NetworkProtocol {
             session.request(request).responseData(completionHandler: { data in
                 completionHandler((data.data, data.response, data.error))
             })
-        } catch let error {
-            print(error.localizedDescription)
+        } catch _ {
+            Mixpanel.mainInstance().track(event: "Unable to perform HTTPS requests")
             completionHandler((nil, nil, nil))
         }
     }

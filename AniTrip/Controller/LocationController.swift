@@ -8,6 +8,7 @@
 import CoreLocation
 import CoreLocationUI
 import MapKit
+import Mixpanel
 
 final class LocationController: NSObject, ObservableObject, CLLocationManagerDelegate {
     // MARK: Public
@@ -53,7 +54,7 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
     }
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error.localizedDescription)
+        Mixpanel.mainInstance().track(event: "Unable to access user location")
     }
     
     /// Requesting location
