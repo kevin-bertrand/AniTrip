@@ -439,10 +439,9 @@
 		065E4786287B57D100D32E05 /* Global Components */ = {
 			isa = PBXGroup;
 			children = (
+				06E0893D28D1C02E0092410C /* Loading */,
 				06E0893828D0E6E10092410C /* PDF */,
-				06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */,
 				0690C4242889737900B57B92 /* ActivateAccountView.swift */,
-				065E4787287B581000D32E05 /* CircularSpinnerView.swift */,
 				06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */,
 				06BF7244287B5B63006F0839 /* ButtonWithIcon.swift */,
 				06158E2928854F4200C3BE6E /* AddressTileView.swift */,
@@ -506,6 +505,15 @@
 				06E0893B28D0E7090092410C /* PDFUIView.swift */,
 			);
 			path = PDF;
+			sourceTree = "<group>";
+		};
+		06E0893D28D1C02E0092410C /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				06BF724A287B66D3006F0839 /* LoadingInProgressView.swift */,
+				065E4787287B581000D32E05 /* CircularSpinnerView.swift */,
+			);
+			path = Loading;
 			sourceTree = "<group>";
 		};
 		06E3494D28898DE40056470E /* Settings Subviews */ = {

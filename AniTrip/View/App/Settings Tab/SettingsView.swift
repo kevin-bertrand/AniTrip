@@ -41,6 +41,16 @@ struct SettingsView: View {
                 .listRowBackground(Color.clear)
             }
             
+            Section {
+                NavigationLink {
+                    TripsExportFilterView(userToExportId: userController.connectedUser?.id)
+                } label: {
+                    Label("Export trips", systemImage: "square.and.arrow.up.fill")
+                }
+            } header: {
+                Text("Trips")
+            }
+
             Section(header: Text("App Settings")) {
                 Toggle("Use default iPhone scheme", isOn: $useDefaultScheme)
                 

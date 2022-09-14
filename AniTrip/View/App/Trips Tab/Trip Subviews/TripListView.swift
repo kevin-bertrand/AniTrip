@@ -8,26 +8,15 @@
 import SwiftUI
 
 struct TripListView: View {
-    @EnvironmentObject private var tripController: TripController
+    @EnvironmentObject var tripController: TripController
     
     @Binding var searchFilter: String
     @Binding var trips: [Trip]
-    var canAddTrip = false
     
     var body: some View {
         Form {
             Section {
-                HStack {
-                    SearchTextFieldView(searchText: $searchFilter)
-                    if canAddTrip {
-                        Button {
-                            tripController.showUpdateTripView = true
-                        } label: {
-                            Label("Add", systemImage: "plus.circle")
-                        }
-                        .padding(.horizontal)
-                    }
-                }
+                SearchTextFieldView(searchText: $searchFilter)
             }.listRowBackground(Color.clear)
             
             Section {
@@ -42,6 +31,10 @@ struct TripListView: View {
                 }
             }
         }
+        .sheet(isPresented: $tripController.showUpdateTripView, content: {
+            UpdateTripView(trip: $tripController.newTrip, isAnUpdate: .constant(false))
+        })
+        
     }
 }
 

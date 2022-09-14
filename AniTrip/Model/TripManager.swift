@@ -21,12 +21,13 @@ final class TripManager {
                           distancePercentSinceLastYear: 0.0,
                           distancePercentSinceLastWeek: 0.0,
                           numberTripPercentSinceLastYear: 0.0,
-                          numberTripPercentSinceLastWeek: 0.0)    
+                          numberTripPercentSinceLastWeek: 0.0)
     var pdfData: Data = Data()
     
     // MARK: Methods
     /// Getting trip list
     func getList(byUser user: User?, of volunteer: Volunteer? = nil) {
+        print("\n\n\n\n\n\n\n\n\n\n\nok")
         guard let user = user, let userId = user.id else {
             Notification.AniTrip.unknownError.sendNotification()
             return
@@ -37,6 +38,7 @@ final class TripManager {
         if let volunteer = volunteer {
             params.append("\(volunteer.id)")
         } else {
+            print("user")
             params.append("\(userId)")
         }
         
@@ -48,6 +50,7 @@ final class TripManager {
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
+                    print("ok 200")
                     self.decodeTripList(data: data, ofVolunteer: ((volunteer == nil) ? false : true))
                 case 404:
                     Notification.AniTrip.gettingTripListError.sendNotification()
@@ -268,6 +271,7 @@ final class TripManager {
                 volunteerTripsList = trips
                 Notification.AniTrip.gettingVolunteerTripListSucess.sendNotification()
             } else {
+                print("trips")
                 tripList = trips
                 Notification.AniTrip.gettingTripListSucess.sendNotification()
             }

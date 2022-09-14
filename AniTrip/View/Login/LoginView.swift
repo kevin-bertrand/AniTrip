@@ -17,7 +17,8 @@ struct LoginView: View {
         VStack {
             Image("Logo")
                 .resizable()
-                .frame(width: 150, height: 150)
+                .frame(minWidth: 75, maxWidth: 150, minHeight: 75, maxHeight: 150)
+                .aspectRatio(1, contentMode: .fit)
             
             HStack {
                 LoginToolbar(selected: $selectedPage)

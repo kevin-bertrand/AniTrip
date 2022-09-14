@@ -9,7 +9,7 @@ import SwiftUI
 import PDFKit
 
 struct PDFUIView: View {
-    @EnvironmentObject private var tripController: TripController
+    @EnvironmentObject var tripController: TripController
     
     var body: some View {
         PDFKitRepresentedView(tripController.pdfData)

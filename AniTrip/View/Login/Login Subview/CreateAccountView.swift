@@ -11,7 +11,7 @@ struct CreateAccountView: View {
     @EnvironmentObject private var userController: UserController
     
     var body: some View {
-        VStack {
+        ScrollView(showsIndicators: false) {
             Spacer()
             
             Group {
@@ -26,7 +26,7 @@ struct CreateAccountView: View {
                     .foregroundColor(.red)
             }.padding(.vertical)
         
-            Spacer()
+            Spacer(minLength: 10)
             
             ButtonWithIcon(isLoading: .constant(false), action: {
                 userController.createAccount()

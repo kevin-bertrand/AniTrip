@@ -81,15 +81,15 @@ struct VolunteerProfileView: View {
                 Section(header: Text("Administration")) {
                     NavigationLink {
                         TripListView(searchFilter: $tripController.volunteerSearchFilter, trips: $tripController.volunteerTripList)
-                            .onAppear {
-                                tripController.getList(byUser: userController.connectedUser, for: volunteer)
-                            }
                             .toolbar {
                                 NavigationLink {
                                     TripsExportFilterView(userToExportId: UUID(uuidString: volunteer.id))
                                 } label: {
                                     Image(systemName: "square.and.arrow.up.fill")
                                 }
+                            }
+                            .onAppear {
+                                tripController.getList(byUser: userController.connectedUser, for: volunteer)
                             }
                             .navigationTitle("\(volunteer.firstname) trips'")
                     } label: {

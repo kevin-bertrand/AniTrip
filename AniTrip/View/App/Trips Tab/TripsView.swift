@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct TripsView: View {
-    @EnvironmentObject private var tripController: TripController
-    @EnvironmentObject private var userController: UserController
+    @EnvironmentObject var tripController: TripController
+    @EnvironmentObject var userController: UserController
     
     var body: some View {
-        TripListView(searchFilter: $tripController.searchFilter, trips: $tripController.trips, canAddTrip: true)
+        TripListView(searchFilter: $tripController.searchFilter, trips: $tripController.trips)
             .onAppear {
                 tripController.getList(byUser: userController.connectedUser)
             }
@@ -20,10 +20,10 @@ struct TripsView: View {
                 UpdateTripView(trip: $tripController.newTrip, isAnUpdate: .constant(false))
             })
             .toolbar {
-                NavigationLink {
-                    TripsExportFilterView(userToExportId: userController.connectedUser?.id)
+                Button {
+                    tripController.showUpdateTripView = true
                 } label: {
-                    Image(systemName: "square.and.arrow.up.fill")
+                    Label("Add", systemImage: "plus.circle")
                 }
             }
     }
