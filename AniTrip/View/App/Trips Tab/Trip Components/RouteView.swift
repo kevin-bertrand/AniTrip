@@ -36,7 +36,7 @@ struct MapView: UIViewRepresentable {
     
     let startPoint: CLLocationCoordinate2D
     let endPoint: CLLocationCoordinate2D
-        
+    
     func makeCoordinator() -> MapViewCoordinator {
         return MapViewCoordinator()
     }
@@ -49,9 +49,7 @@ struct MapView: UIViewRepresentable {
         mapView.setRegion(region, animated: true)
         
         let mark1 = MKPlacemark(coordinate: startPoint)
-        
         let mark2 = MKPlacemark(coordinate: endPoint)
-        
         let request = MKDirections.Request()
         request.source = MKMapItem(placemark: mark1)
         request.destination = MKMapItem(placemark: mark2)
@@ -60,7 +58,10 @@ struct MapView: UIViewRepresentable {
         let directions = MKDirections(request: request)
         directions.calculate { response, _ in
             guard let route = response?.routes.first else { return }
-            mapView.addAnnotations([mark1, mark2])
+            mapView.addAnnotations([getMarker(marker: mark1,
+                                              title: "Start"),
+                                    getMarker(marker: mark2,
+                                              title: "End")])
             mapView.addOverlay(route.polyline)
             mapView.setVisibleMapRect(
                 route.polyline.boundingMapRect,
@@ -80,5 +81,12 @@ struct MapView: UIViewRepresentable {
             renderer.lineWidth = 5
             return renderer
         }
+    }
+    
+    private func getMarker(marker: MKPlacemark, title: String) -> MKAnnotation {
+        let point = MKPointAnnotation()
+        point.title = title
+        point.coordinate = marker.coordinate
+        return point
     }
 }
