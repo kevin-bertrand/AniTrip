@@ -278,7 +278,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: nil, response: .status0, status: .error)
         
         // When
-        tripManager.threeLatestTrips(byUser: nil, filter: .month)
+        tripManager.threeLatestTrips(byUser: getConnectedUser(), filter: .month)
         
         // Then
         XCTAssertTrue(tripManager.threeLatestTrips.isEmpty)
