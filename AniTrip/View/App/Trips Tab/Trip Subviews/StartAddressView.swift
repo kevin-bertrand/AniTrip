@@ -51,7 +51,12 @@ struct StartAddressView: View {
 struct AddingStartAddressView_Previews: PreviewProvider {
     static var previews: some View {
         StartAddressView(step: .constant(1),
-                         trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
+                         trip: .constant(UpdateTrip(date: Date(),
+                                                    missions: [],
+                                                    comment: "",
+                                                    totalDistance: "",
+                                                    startingAddress: LocationController.emptyAddress,
+                                                    endingAddress: LocationController.emptyAddress)))
             .environmentObject(TripController(appController: AppController()))
     }
 }

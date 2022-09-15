@@ -59,7 +59,8 @@ struct SettingsView: View {
                 }
                 
                 if userController.appController.isBiometricAvailable {
-                    Toggle("Use \(laContext.biometryType == .faceID ? "Face ID" : "Touch ID" )", isOn: $userController.canUseBiometric)
+                    Toggle("Use \(laContext.biometryType == .faceID ? "Face ID" : "Touch ID" )",
+                           isOn: $userController.canUseBiometric)
                 }
                 
                 Toggle("Allow notifications", isOn: $allowNotifications)
@@ -111,7 +112,11 @@ struct SettingsView: View {
             }
         }
         .alert(isPresented: $showAlert) {
-            Alert(title: Text("Settings"), message: Text("Go to the iPhone settings' to change notifications and location authorization!"), primaryButton: .default(Text("Cancel")), secondaryButton: .default(Text("Go to settings"), action: {
+            Alert(title: Text("Settings"),
+                  message: Text("Go to the iPhone settings' to change notifications and location authorization!"),
+                  primaryButton: .default(Text("Cancel")),
+                  secondaryButton: .default(Text("Go to settings"),
+                                            action: {
                 UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
             }))
         }

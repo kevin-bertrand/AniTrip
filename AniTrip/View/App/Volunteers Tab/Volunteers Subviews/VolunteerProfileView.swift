@@ -57,7 +57,8 @@ struct VolunteerProfileView: View {
                     Text("Position")
                     Spacer()
                     
-                    if userController.connectedUser?.position == .admin && volunteer.email != userController.connectedUser?.email {
+                    if userController.connectedUser?.position == .admin
+                        && volunteer.email != userController.connectedUser?.email {
                         Picker("Position", selection: $volunteer.position) {
                             Text("User").tag(Position.user)
                             Text("Administrator").tag(Position.admin)
@@ -80,7 +81,8 @@ struct VolunteerProfileView: View {
             if userController.connectedUser?.position == .admin {
                 Section(header: Text("Administration")) {
                     NavigationLink {
-                        TripListView(searchFilter: $tripController.volunteerSearchFilter, trips: $tripController.volunteerTripList)
+                        TripListView(searchFilter: $tripController.volunteerSearchFilter,
+                                     trips: $tripController.volunteerTripList)
                             .toolbar {
                                 NavigationLink {
                                     TripsExportFilterView(userToExportId: UUID(uuidString: volunteer.id))
@@ -101,7 +103,8 @@ struct VolunteerProfileView: View {
                             if volunteer.isActive {
                                 volunteersController.desactivateAccount(of: volunteer, by: userController.connectedUser)
                             } else {
-                                volunteersController.activateAccount(of: .init(email: volunteer.email), by: userController.connectedUser)
+                                volunteersController.activateAccount(of: .init(email: volunteer.email),
+                                                                     by: userController.connectedUser)
                             }
                         } label: {
                             if volunteer.isActive {
@@ -117,15 +120,22 @@ struct VolunteerProfileView: View {
             }
         }
         .alert(isPresented: $volunteersController.changeActivationStatusAlert) {
-            Alert(title: Text(volunteersController.changeActivationStatusTitle), message: Text(volunteersController.changeActivationStatusMessage), dismissButton: .default(Text("OK"), action: {
+            Alert(title: Text(volunteersController.changeActivationStatusTitle),
+                  message: Text(volunteersController.changeActivationStatusMessage),
+                  dismissButton: .default(Text("OK"),
+                                          action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
         }
-        .onChange(of: volunteer.position) { newValue in
+        .onChange(of: volunteer.position) { _ in
             showUpdatePositionAlert = true
         }
         .actionSheet(isPresented: $showUpdatePositionAlert) {
-            ActionSheet(title: Text("Confirm status change"), message: Text("Do you confirm the change of status of \(volunteer.email) to \(volunteer.position.name)?"), buttons: [.default(Text("Yes"), action: {
+            let message = "Do you confirm the change of status of \(volunteer.email) to \(volunteer.position.name)?"
+            return ActionSheet(title: Text("Confirm status change"),
+                        message: Text(message),
+                        buttons: [.default(Text("Yes"),
+                                           action: {
                 volunteersController.changePosition(of: volunteer, by: userController.connectedUser)
             }), .default(Text("No"), action: {
                 showUpdatePositionAlert = false
@@ -142,7 +152,17 @@ struct VolunteerProfileView: View {
 
 struct VolunteerProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerProfileView(volunteer: Volunteer(imagePath: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: LocationController.emptyAddress, isActive: true))
+        VolunteerProfileView(volunteer: Volunteer(imagePath: nil,
+                                                  id: "",
+                                                  firstname: "",
+                                                  lastname: "",
+                                                  email: "",
+                                                  phoneNumber: "",
+                                                  gender: "",
+                                                  position: .admin,
+                                                  missions: [],
+                                                  address: LocationController.emptyAddress,
+                                                  isActive: true))
             .environmentObject(UserController(appController: AppController()))
             .environmentObject(VolunteersController(appController: AppController()))
     }

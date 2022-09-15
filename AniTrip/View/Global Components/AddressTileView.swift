@@ -13,7 +13,7 @@ struct AddressTileView: View {
     @State private var places: [MapPlace] = []
     
     let address: Address?
-    var title: String? = nil
+    var title: String?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -31,8 +31,8 @@ struct AddressTileView: View {
                     .frame(width: 100, height: 100)
                     
                     VStack(alignment: .leading) {
-                        if let url = URL(string: "maps://?.saddr=&daddr=\(region.center.latitude),\(region.center.longitude)") {
-                            
+                        let link = "maps://?.saddr=&daddr=\(region.center.latitude),\(region.center.longitude)"
+                        if let url = URL(string: link) {
                             Link(formatAddress(givenAddress: address), destination: url)
                         }
                     }
@@ -49,7 +49,10 @@ struct AddressTileView: View {
         .onAppear {
             if let address = address {
                 self.places.append(MapPlace(lat: address.latitude, lon: address.longitude))
-                self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: address.latitude, longitude: address.longitude), latitudinalMeters: 750, longitudinalMeters: 750)
+                self.region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: address.latitude,
+                                                                                longitude: address.longitude),
+                                                 latitudinalMeters: 750,
+                                                 longitudinalMeters: 750)
             }
         }
     }
@@ -70,6 +73,13 @@ struct AddressTileView: View {
 
 struct AddressTileView_Previews: PreviewProvider {
     static var previews: some View {
-        AddressTileView(address: Address(roadName: "Des developpers", streetNumber: "7a", complement: "3rd floor", zipCode: "7500", city: "Paris", country: "France", latitude: 0.0, longitude: 0.0))
+        AddressTileView(address: Address(roadName: "Des developpers",
+                                         streetNumber: "7a",
+                                         complement: "3rd floor",
+                                         zipCode: "7500",
+                                         city: "Paris",
+                                         country: "France",
+                                         latitude: 0.0,
+                                         longitude: 0.0))
     }
 }

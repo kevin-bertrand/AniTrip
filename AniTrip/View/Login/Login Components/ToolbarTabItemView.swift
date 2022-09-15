@@ -14,14 +14,13 @@ struct ToolbarTabItemView: View {
     let tabId: Int
     
     var body: some View {
-        Button(action: {
-            selected = tabId
-        }) {
+        Button(action: { selected = tabId },
+               label: {
             Text(title)
                 .frame(width: 100, height: 25)
                 .padding(.vertical, 12)
                 .padding(.horizontal, 15)
-                .overlay(VStack{
+                .overlay(VStack {
                     if selected == tabId {
                         Divider()
                             .frame(height: 2)
@@ -34,7 +33,7 @@ struct ToolbarTabItemView: View {
                     .padding(.top, 40)
                     .padding(.horizontal, 10)
                 )
-        }
+        })
         .foregroundColor(selected == tabId ? .accentColor : .gray)
     }
 }

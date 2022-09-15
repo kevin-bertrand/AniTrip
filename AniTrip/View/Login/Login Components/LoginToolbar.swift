@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct LoginToolbar: View {
-    @Binding var selected : Int
+    @Binding var selected: Int
     
-    var body : some View{
-        HStack{
+    var body: some View {
+        HStack {
             ToolbarTabItemView(selected: $selected, title: "LOGIN", tabId: 0)
             
             ToolbarTabItemView(selected: $selected, title: "REGISTER", tabId: 1)

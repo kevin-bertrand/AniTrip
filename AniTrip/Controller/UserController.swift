@@ -40,11 +40,20 @@ final class UserController: ObservableObject {
     // Create a new account
     @Published var createAccountEmailTextField: String = ""
     @Published var createAccountPasswordTextField: String = ""
-    @Published var createAccountPasswordVerificationTextField: String = ""
+    @Published var createAccountPasswordVerification: String = ""
     @Published var createAccountErrorMessage: String = ""
     
     // Update user
-    @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "", lastname: "", email: "", phoneNumber: "", gender: .notDeterminded, position: .user, missions: [], address: LocationController.emptyAddress, password: "", passwordVerification: "")
+    @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "",
+                                                             lastname: "",
+                                                             email: "",
+                                                             phoneNumber: "",
+                                                             gender: .notDeterminded,
+                                                             position: .user,
+                                                             missions: [],
+                                                             address: LocationController.emptyAddress,
+                                                             password: "",
+                                                             passwordVerification: "")
     @Published var successUpdate: Bool = false
     @Published var showUpdateProfileImage: Bool = false
         
@@ -84,7 +93,9 @@ final class UserController: ObservableObject {
             return
         }
         
-        userManager.login(user: UserToLogin(email: loginEmailTextField, password: loginPasswordTextField, deviceToken: deviceToken))
+        userManager.login(user: UserToLogin(email: loginEmailTextField,
+                                            password: loginPasswordTextField,
+                                            deviceToken: deviceToken))
     }
     
     /// Login with biometrics
@@ -93,9 +104,11 @@ final class UserController: ObservableObject {
         let laContext = LAContext()
         
         if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Need access to \(laContext.biometryType == .faceID ? "FaceId" : "TouchId") to authenticate to the app."
+            let biometrics = laContext.biometryType == .faceID ? "FaceId" : "TouchId"
+            let reason = "Need access to \(biometrics) to authenticate to the app."
             
-            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
+            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
+                                     localizedReason: reason) { success, _ in
                 DispatchQueue.main.async {
                     if success {
                         self.loginPasswordTextField = self.savedPassword
@@ -113,7 +126,9 @@ final class UserController: ObservableObject {
         appController.setLoadingInProgress(withMessage: "Account creation in progress...")
         loginErrorMessage = ""
         
-        guard createAccountEmailTextField.isNotEmpty && createAccountPasswordTextField.isNotEmpty && createAccountPasswordVerificationTextField.isNotEmpty else {
+        guard createAccountEmailTextField.isNotEmpty
+                && createAccountPasswordTextField.isNotEmpty
+                && createAccountPasswordVerification.isNotEmpty else {
             createAccountErrorMessage = "An email and a password are required!"
             appController.resetLoadingInProgress()
             return
@@ -127,7 +142,7 @@ final class UserController: ObservableObject {
         
         userManager.createAccount(for: UserToCreate(email: createAccountEmailTextField,
                                                     password: createAccountPasswordTextField,
-                                                    passwordVerification: createAccountPasswordVerificationTextField))
+                                                    passwordVerification: createAccountPasswordVerification))
     }
     
     /// Disconnect the user
@@ -145,13 +160,15 @@ final class UserController: ObservableObject {
         
         guard userToUpdate.password == userToUpdate.passwordVerification else {
             appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: "Both new password must match!", andTitle: "Password error!")
+            appController.showAlertView(withMessage: "Both new password must match!",
+                                        andTitle: "Password error!")
             return
         }
         
         if userToUpdate.phoneNumber.isNotEmpty && !userToUpdate.phoneNumber.isPhone {
             appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: "You must enter a valid phone number!", andTitle: "Phone number error")
+            appController.showAlertView(withMessage: "You must enter a valid phone number!",
+                                        andTitle: "Phone number error")
             return
         }
         
@@ -207,7 +224,7 @@ final class UserController: ObservableObject {
                     Mixpanel.mainInstance().track(event: "New account creation")
                     self.createAccountEmailTextField = ""
                     self.createAccountPasswordTextField = ""
-                    self.createAccountPasswordVerificationTextField = ""
+                    self.createAccountPasswordVerification = ""
                     self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Success!")
                 case Notification.AniTrip.updateProfileSuccess.notificationName:
                     self.userToUpdate.password = ""
@@ -231,9 +248,11 @@ final class UserController: ObservableObject {
         let laContext = LAContext()
         
         if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let reason = "Need access to \(laContext.biometryType == .faceID ? "FaceId" : "TouchId") to authenticate to the app."
+            let biometrics = laContext.biometryType == .faceID ? "FaceId" : "TouchId"
+            let reason = "Need access to \(biometrics) to authenticate to the app."
             
-            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, error in
+            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
+                                     localizedReason: reason) { success, _ in
                 DispatchQueue.main.async {
                     if success {
                         self.savedEmail = self.loginEmailTextField

@@ -24,7 +24,7 @@ struct MissionsUpdateTileView: View {
                     .font(.body.bold())
             }
             List {
-                ForEach(numberOfMissions, id:\.self) { index in
+                ForEach(numberOfMissions, id: \.self) { index in
                     TextField("Missions", text: Binding(
                         get: { return missions[index] },
                         set: { (newValue) in return self.missions[index] = newValue}

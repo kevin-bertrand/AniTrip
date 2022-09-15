@@ -55,11 +55,15 @@ struct AniTripApp: App {
             .environmentObject(volunteerController)
             .environmentObject(tripController)
             .alert(isPresented: $appController.showAlertView) {
-                Alert(title: Text(appController.alertViewTitle), message: Text(appController.alertViewMessage), dismissButton: .default(Text("OK")))
+                Alert(title: Text(appController.alertViewTitle),
+                      message: Text(appController.alertViewMessage),
+                      dismissButton: .default(Text("OK")))
             }
             .preferredColorScheme(useDefaultScheme ? nil : (useDarkScheme ? .dark : .light))
             .onAppear {
-                UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) {_,_ in}
+                UNUserNotificationCenter
+                    .current()
+                    .requestAuthorization(options: [.alert, .sound, .badge]) {_, _ in}
             }
         }
     }

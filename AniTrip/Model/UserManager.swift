@@ -22,7 +22,7 @@ final class UserManager {
         networkManager.request(urlParams: NetworkConfigurations.login.urlParams,
                                method: NetworkConfigurations.login.method,
                                authorization: .authorization(username: user.email, password: user.password),
-                               body: deviceId) { [weak self] data, response, error in
+                               body: deviceId) { [weak self] data, response, _ in
             if let self = self,
                let statusCode = response?.statusCode,
                let data = data {
@@ -54,7 +54,7 @@ final class UserManager {
         networkManager.request(urlParams: NetworkConfigurations.createAccount.urlParams,
                                method: NetworkConfigurations.createAccount.method,
                                authorization: nil,
-                               body: user) { data, response, error in
+                               body: user) { _, response, _ in
             if let statusCode = response?.statusCode {
                 switch statusCode {
                 case 201:
@@ -87,7 +87,7 @@ final class UserManager {
         networkManager.request(urlParams: NetworkConfigurations.updateUser.urlParams,
                                method: NetworkConfigurations.updateUser.method,
                                authorization: .authorization(bearerToken: connectedUser.token),
-                               body: userToUpdate) { [weak self] data, response, error in
+                               body: userToUpdate) { [weak self] data, response, _ in
             if let self = self,
                let data = data,
                let statusCode = response?.statusCode {
@@ -126,7 +126,7 @@ final class UserManager {
         networkManager.uploadFiles(urlParams: NetworkConfigurations.updatePicture.urlParams,
                                    method: NetworkConfigurations.updatePicture.method,
                                    user: connectedUser,
-                                   file: imageData) { [weak self] data, response, error in
+                                   file: imageData) { [weak self] _, response, _ in
             if let self = self,
                let statusCode = response?.statusCode,
                statusCode == 202 {
@@ -139,13 +139,13 @@ final class UserManager {
     }
     
     /// Getting profile picture
-    func getProfilePicture(of user: User, with imagePath: String, completionHandler: @escaping ((User)->Void)) {
+    func getProfilePicture(of user: User, with imagePath: String, completionHandler: @escaping ((User) -> Void)) {
         var params = NetworkConfigurations.getProfilePicture.urlParams
         params.append(imagePath)
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.getProfilePicture.method,
                                authorization: nil,
-                               body: nil) { data, response, error in
+                               body: nil) { data, response, _ in
             if let status = response?.statusCode,
                status == 200,
                let data = data,
@@ -170,7 +170,7 @@ final class UserManager {
     
     // MARK: Methods
     /// Decode user informations
-    private func decodeUserInformations(data: Data, completionHandler: @escaping ((User?)->Void)) {
+    private func decodeUserInformations(data: Data, completionHandler: @escaping ((User?) -> Void)) {
         if let user = try? JSONDecoder().decode(ConnectedUser.self, from: data),
            let userId = UUID(uuidString: user.id),
            let gender = Gender(rawValue: user.gender),

@@ -14,7 +14,10 @@ class NetworkManager: NetworkProtocol {
     // MARK: Public
     // MARK: Method
     /// Perform Alamofire request
-    func request(urlParams: [String], method: HTTPMethod, authorization: HTTPHeader?, body: Encodable?, completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void) {
+    func request(urlParams: [String], method: HTTPMethod,
+                 authorization: HTTPHeader?,
+                 body: Encodable?,
+                 completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void) {
         
         guard let formattedUrl = URL(string: "\(url):\(apiPort)/\(urlParams.joined(separator: "/"))") else {
             completionHandler((nil, nil, nil))
@@ -42,14 +45,16 @@ class NetworkManager: NetworkProtocol {
     }
     
     /// Upload File
-    func uploadFiles(urlParams: [String], method: HTTPMethod, user: User, file: Data, completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void) {
+    func uploadFiles(urlParams: [String],
+                     method: HTTPMethod,
+                     user: User, file: Data,
+                     completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void) {
         guard let formattedUrl = URL(string: "\(url):\(apiPort)/\(urlParams.joined(separator: "/"))") else {
             completionHandler((nil, nil, nil))
             return
         }
         var headers: HTTPHeaders?
-        headers = ["Authorization" : "Bearer \(user.token)"]
-        
+        headers = ["Authorization": "Bearer \(user.token)"]
         
         let multiPart: MultipartFormData = MultipartFormData()
         multiPart.append(file, withName: "data", fileName: "filename", mimeType: "image/jpeg" )
@@ -64,14 +69,14 @@ class NetworkManager: NetworkProtocol {
     }
     
     /// Download profile picture
-    func downloadProfilePicture(from path: String?, completionHandler: @escaping ((UIImage?)->Void)) {
+    func downloadProfilePicture(from path: String?, completionHandler: @escaping ((UIImage?) -> Void)) {
         if let imagePath = path {
             var params = NetworkConfigurations.getProfilePicture.urlParams
             params.append(imagePath)
             request(urlParams: params,
                     method: NetworkConfigurations.getProfilePicture.method,
                     authorization: nil,
-                    body: nil) { data, response, error in
+                    body: nil) { data, response, _ in
                 if let status = response?.statusCode,
                    status == 200,
                    let data = data,
@@ -94,9 +99,18 @@ class NetworkManager: NetworkProtocol {
 }
 
 protocol NetworkProtocol {
-    func request(urlParams: [String], method: HTTPMethod, authorization: HTTPHeader?, body: Encodable?, completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void)
+    func request(urlParams: [String],
+                 method: HTTPMethod,
+                 authorization: HTTPHeader?,
+                 body: Encodable?,
+                 completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void)
     
-    func uploadFiles(urlParams: [String], method: HTTPMethod, user: User, file: Data, completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void)
+    func uploadFiles(urlParams: [String],
+                     method: HTTPMethod,
+                     user: User,
+                     file: Data,
+                     completionHandler: @escaping ((Data?, HTTPURLResponse?, Error?)) -> Void)
     
-    func downloadProfilePicture(from path: String?, completionHandler: @escaping ((UIImage?)->Void))
+    func downloadProfilePicture(from path: String?,
+                                completionHandler: @escaping ((UIImage?) -> Void))
 }

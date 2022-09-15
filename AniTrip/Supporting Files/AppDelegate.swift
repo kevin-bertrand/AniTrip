@@ -13,7 +13,8 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
     // Getting device token variable store in memory
     @AppStorage("aniTripDeviceToken") var deviceToken: String = ""
     
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
+    func application(_ application: UIApplication,
+                     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? = nil) -> Bool {
         Mixpanel.initialize(token: "8cc183fc131e7d26ee53f2858454f307")
         UNUserNotificationCenter.current().delegate = self
         UIApplication.shared.registerForRemoteNotifications()
@@ -30,13 +31,20 @@ class AppDelegate: NSObject, UIApplicationDelegate, UNUserNotificationCenterDele
         Mixpanel.mainInstance().track(event: "Unable to register for notifications")
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         completionHandler([.banner, .sound, .badge])
     }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
         let notificationName = Notification.AniTrip.showActivateAccount.notificationName
-        NotificationCenter.default.post(Notification(name: notificationName, object: self, userInfo: ["name": notificationName, "message": response.notification.request.content.subtitle]))
+        NotificationCenter.default.post(Notification(name: notificationName,
+                                                     object: self,
+                                                     userInfo: ["name": notificationName,
+                                                                "message": response.notification.request.content.subtitle]))
         completionHandler()
     }
     

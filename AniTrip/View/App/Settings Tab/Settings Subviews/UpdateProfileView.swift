@@ -50,7 +50,9 @@ struct UpdateProfileView: View {
                             .foregroundColor(.gray)
                     }
                     
-                    EditUserInfoTileView(text: $userController.userToUpdate.phoneNumber, keyboardType: .phonePad, title: "Phone")
+                    EditUserInfoTileView(text: $userController.userToUpdate.phoneNumber,
+                                         keyboardType: .phonePad,
+                                         title: "Phone")
                 }
             }
             .autocorrectionDisabled(true)
@@ -67,8 +69,10 @@ struct UpdateProfileView: View {
             MissionsUpdateTileView(missions: $userController.userToUpdate.missions)
             
             Section(header: Text("Security")) {
-                PasswordFormTileView(text: $userController.userToUpdate.password, placeholder: "Password")
-                PasswordFormTileView(text: $userController.userToUpdate.passwordVerification, placeholder: "Password verification")
+                PasswordFormTileView(text: $userController.userToUpdate.password,
+                                     placeholder: "Password")
+                PasswordFormTileView(text: $userController.userToUpdate.passwordVerification,
+                                     placeholder: "Password verification")
             }
         }
         .toolbar {
@@ -79,7 +83,10 @@ struct UpdateProfileView: View {
             }
         }
         .alert(isPresented: $userController.successUpdate) {
-            Alert(title: Text("Success"), message: Text(Notification.AniTrip.updateProfileSuccess.notificationMessage), dismissButton: .default(Text("OK"), action: {
+            Alert(title: Text("Success"),
+                  message: Text(Notification.AniTrip.updateProfileSuccess.notificationMessage),
+                  dismissButton: .default(Text("OK"),
+                                          action: {
                 self.presentationMode.wrappedValue.dismiss()
             }))
         }

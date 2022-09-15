@@ -15,11 +15,20 @@ struct CreateAccountView: View {
             Spacer()
             
             Group {
-                TextFieldWithIcon(text: $userController.createAccountEmailTextField,  icon: "person.fill", placeholder: "example@mail.com", keyboardType: .emailAddress)
+                TextFieldWithIcon(text: $userController.createAccountEmailTextField,
+                                  icon: "person.fill",
+                                  placeholder: "example@mail.com",
+                                  keyboardType: .emailAddress)
                 
-                TextFieldWithIcon(text: $userController.createAccountPasswordTextField,  icon: "lock", placeholder: "Password", isSecure: true)
+                TextFieldWithIcon(text: $userController.createAccountPasswordTextField,
+                                  icon: "lock",
+                                  placeholder: "Password",
+                                  isSecure: true)
 
-                TextFieldWithIcon(text: $userController.createAccountPasswordVerificationTextField,  icon: "lock", placeholder: "Password verification", isSecure: true)
+                TextFieldWithIcon(text: $userController.createAccountPasswordVerification,
+                                  icon: "lock",
+                                  placeholder: "Password verification",
+                                  isSecure: true)
                 
                 Text(userController.createAccountErrorMessage)
                     .bold()

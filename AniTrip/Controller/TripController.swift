@@ -17,7 +17,7 @@ final class TripController: ObservableObject {
     @Published var trips: [Trip] = []
     @Published var searchFilter: String = "" {
         didSet {
-            filterList()
+            filterUserList()
         }
     }
     
@@ -32,7 +32,13 @@ final class TripController: ObservableObject {
     // New trip properties
     @Published var showUpdateTripView: Bool = false
     @Published var newMission: String = ""
-    @Published var newTrip: UpdateTrip = UpdateTrip(id: UUID(uuid: UUID_NULL), date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress) {
+    @Published var newTrip: UpdateTrip = .init(id: UUID(uuid: UUID_NULL),
+                                               date: Date(),
+                                               missions: [],
+                                               comment: "",
+                                               totalDistance: "",
+                                               startingAddress: LocationController.emptyAddress,
+                                               endingAddress: LocationController.emptyAddress) {
         willSet {
             if newValue.startingAddress != newTrip.startingAddress || newValue.endingAddress != newTrip.endingAddress {
                 newTripIsUpdated = true
@@ -52,7 +58,14 @@ final class TripController: ObservableObject {
     // Home informations
     @Published var threeLatestTrips: [Trip] = []
     @Published var chartFilter: ChartFilter = .week
-    @Published var news: News = News(distanceThisWeek: 0.0, numberOfTripThisWeek: 0, distanceThisYear: 0.0, numberOfTripThisYear: 0, distancePercentSinceLastYear: 0.0, distancePercentSinceLastWeek: 0.0, numberTripPercentSinceLastYear: 0.0, numberTripPercentSinceLastWeek: 0.0)
+    @Published var news: News = News(distanceThisWeek: 0.0,
+                                     numberOfTripThisWeek: 0,
+                                     distanceThisYear: 0.0,
+                                     numberOfTripThisYear: 0,
+                                     distancePercentSinceLastYear: 0.0,
+                                     distancePercentSinceLastWeek: 0.0,
+                                     numberTripPercentSinceLastYear: 0.0,
+                                     numberTripPercentSinceLastWeek: 0.0)
     @Published var chartPoints: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
     
     // Export trip
@@ -108,9 +121,9 @@ final class TripController: ObservableObject {
     func downloadPDF(byUser user: User?, for userId: UUID?) {
         guard let user = user, let userId = userId else { return }
         appController.setLoadingInProgress(withMessage: "Download in progress...")
-
-        let filters = TripFilterToExport(userID: userId, startDate: startFilterDate.iso8601, endDate: endFilterDate.iso8601)
-        
+        let filters = TripFilterToExport(userID: userId,
+                                         startDate: startFilterDate.iso8601,
+                                         endDate: endFilterDate.iso8601)
         tripManager.downloadPDF(with: filters, by: user)
     }
     
@@ -121,7 +134,14 @@ final class TripController: ObservableObject {
             self.trips = []
             self.volunteerTripList = []
             self.threeLatestTrips = []
-            self.news = News(distanceThisWeek: 0.0, numberOfTripThisWeek: 0, distanceThisYear: 0.0, numberOfTripThisYear: 0, distancePercentSinceLastYear: 0.0, distancePercentSinceLastWeek: 0.0, numberTripPercentSinceLastYear: 0.0, numberTripPercentSinceLastWeek: 0.0)
+            self.news = News(distanceThisWeek: 0.0,
+                             numberOfTripThisWeek: 0,
+                             distanceThisYear: 0.0,
+                             numberOfTripThisYear: 0,
+                             distancePercentSinceLastYear: 0.0,
+                             distancePercentSinceLastWeek: 0.0,
+                             numberTripPercentSinceLastYear: 0.0,
+                             numberTripPercentSinceLastWeek: 0.0)
             self.chartPoints = LineChartData(dataSets: LineDataSet(dataPoints: []))
         }
     }
@@ -190,29 +210,47 @@ final class TripController: ObservableObject {
     }
     
     /// Filter trip list
-    private func filterList() {
+    private func filterUserList() {
         if searchFilter.isEmpty {
             trips = tripManager.trips
         } else {
-            trips = tripManager.trips.filter { !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty || $0.comment?.localizedCaseInsensitiveContains(searchFilter) ?? false || $0.startingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.startingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) }
+            trips = filterList(tripList: tripManager.trips)
         }
     }
     
     /// Filter vounteer trip list
     private func filterVolunteerList() {
         if volunteerSearchFilter.isEmpty {
-            volunteerTripList = tripManager.trips
+            volunteerTripList = tripManager.volunteerTrips
         } else {
-            volunteerTripList = tripManager.trips.filter { !($0.missions.filter {$0.localizedCaseInsensitiveContains(searchFilter)}).isEmpty || $0.comment?.localizedCaseInsensitiveContains(searchFilter) ?? false || $0.startingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.startingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.city.localizedCaseInsensitiveContains(searchFilter) || $0.endingAddress.roadName.localizedCaseInsensitiveContains(searchFilter) }
+            volunteerTripList = filterList(tripList: tripManager.volunteerTrips)
         }
+    }
+    
+    /// Filter list
+    private func filterList(tripList: [Trip]) -> [Trip] {
+        return tripList
+            .filter {
+                !($0.missions.filter {
+                    $0.localizedCaseInsensitiveContains(searchFilter)
+                })
+                .isEmpty
+                || $0.comment?.localizedCaseInsensitiveContains(searchFilter) ?? false
+                || $0.startingAddress.city.localizedCaseInsensitiveContains(searchFilter)
+                || $0.startingAddress.roadName.localizedCaseInsensitiveContains(searchFilter)
+                || $0.endingAddress.city.localizedCaseInsensitiveContains(searchFilter)
+                || $0.endingAddress.roadName.localizedCaseInsensitiveContains(searchFilter)
+            }
     }
     
     /// Calculate the distance between 2 points
     private func calculteDrivingDistance() {
         loadingDistance = true
         let request = MKDirections.Request()
-        let source = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.startingAddress.latitude, longitude: newTrip.startingAddress.longitude))
-        let destination = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.endingAddress.latitude, longitude: newTrip.endingAddress.longitude))
+        let source = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.startingAddress.latitude,
+                                                                    longitude: newTrip.startingAddress.longitude))
+        let destination = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.endingAddress.latitude,
+                                                                         longitude: newTrip.endingAddress.longitude))
         
         request.source = MKMapItem(placemark: source)
         request.destination = MKMapItem(placemark: destination)
@@ -220,7 +258,7 @@ final class TripController: ObservableObject {
         request.requestsAlternateRoutes = true
         let directions = MKDirections(request: request)
         
-        directions.calculate { response, error in
+        directions.calculate { response, _ in
             DispatchQueue.main.async {
                 self.loadingDistance = false
             }
@@ -245,27 +283,27 @@ final class TripController: ObservableObject {
                                style: LineStyle(lineColour: ColourStyle(colour: .accentColor), lineType: .curvedLine))
         let metadata   = ChartMetadata(title: "Distance", subtitle: "For last 7 days")
         let gridStyle  = GridStyle(numberOfLines: 7,
-                                   lineColour   : Color(.lightGray).opacity(0.5),
-                                   lineWidth    : 1,
-                                   dash         : [8],
-                                   dashPhase    : 0)
-        let chartStyle = LineChartStyle(infoBoxPlacement    : .floating,
-                                        infoBoxBorderColour : Color.primary,
-                                        infoBoxBorderStyle  : StrokeStyle(lineWidth: 1),
-                                        markerType          : .vertical(attachment: .line(dot: .style(DotStyle()))),
-                                        xAxisGridStyle      : gridStyle,
-                                        xAxisLabelPosition  : .bottom,
-                                        xAxisLabelColour    : Color.primary,
-                                        xAxisLabelsFrom     : .chartData(),
-                                        yAxisGridStyle      : gridStyle,
-                                        yAxisLabelPosition  : .leading,
-                                        yAxisLabelColour    : Color.primary,
-                                        yAxisNumberOfLabels : 7,
-                                        baseline            : .minimumWithMaximum(of: 0),
-                                        globalAnimation     : .easeOut(duration: 1))
+                                   lineColour: Color(.lightGray).opacity(0.5),
+                                   lineWidth: 1,
+                                   dash: [8],
+                                   dashPhase: 0)
+        let chartStyle = LineChartStyle(infoBoxPlacement: .floating,
+                                        infoBoxBorderColour: Color.primary,
+                                        infoBoxBorderStyle: StrokeStyle(lineWidth: 1),
+                                        markerType: .vertical(attachment: .line(dot: .style(DotStyle()))),
+                                        xAxisGridStyle: gridStyle,
+                                        xAxisLabelPosition: .bottom,
+                                        xAxisLabelColour: Color.primary,
+                                        xAxisLabelsFrom: .chartData(),
+                                        yAxisGridStyle: gridStyle,
+                                        yAxisLabelPosition: .leading,
+                                        yAxisLabelColour: Color.primary,
+                                        yAxisNumberOfLabels: 7,
+                                        baseline: .minimumWithMaximum(of: 0),
+                                        globalAnimation: .easeOut(duration: 1))
         
-        return LineChartData(dataSets       : data,
-                             metadata       : metadata,
-                             chartStyle     : chartStyle)
+        return LineChartData(dataSets: data,
+                             metadata: metadata,
+                             chartStyle: chartStyle)
     }
 }

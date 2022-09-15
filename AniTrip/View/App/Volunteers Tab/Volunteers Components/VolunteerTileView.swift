@@ -35,7 +35,17 @@ struct VolunteerTileView: View {
 
 struct VolunteerTileView_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerTileView(volunteer: .constant(Volunteer(imagePath: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: nil, isActive: false)))
+        VolunteerTileView(volunteer: .constant(Volunteer(imagePath: nil,
+                                                         id: "",
+                                                         firstname: "",
+                                                         lastname: "",
+                                                         email: "",
+                                                         phoneNumber: "",
+                                                         gender: "",
+                                                         position: .admin,
+                                                         missions: [],
+                                                         address: nil,
+                                                         isActive: false)))
             .environmentObject(VolunteersController(appController: AppController()))
     }
 }

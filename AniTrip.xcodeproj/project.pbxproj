@@ -91,6 +91,7 @@
 		06D632D328885B73004193A0 /* SwiftUICharts in Frameworks */ = {isa = PBXBuildFile; productRef = 06D632D228885B73004193A0 /* SwiftUICharts */; };
 		06E0893A28D0E6F40092410C /* PDFKitRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E0893928D0E6F40092410C /* PDFKitRepresentedView.swift */; };
 		06E0893C28D0E7090092410C /* PDFUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E0893B28D0E7090092410C /* PDFUIView.swift */; };
+		06E0894028D31C180092410C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 06E0893F28D31C180092410C /* .swiftlint.yml */; };
 		06FBF141288EF67500222480 /* LoginToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF140288EF67500222480 /* LoginToolbar.swift */; };
 		06FBF144288EF78200222480 /* LoginSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF143288EF78200222480 /* LoginSubview.swift */; };
 		06FBF148289009F900222480 /* UpdateProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF147289009F900222480 /* UpdateProfileImageView.swift */; };
@@ -201,6 +202,7 @@
 		06BF726D28853CAE006F0839 /* UserCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserCellView.swift; sourceTree = "<group>"; };
 		06E0893928D0E6F40092410C /* PDFKitRepresentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFKitRepresentedView.swift; sourceTree = "<group>"; };
 		06E0893B28D0E7090092410C /* PDFUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFUIView.swift; sourceTree = "<group>"; };
+		06E0893F28D31C180092410C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		06FBF140288EF67500222480 /* LoginToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToolbar.swift; sourceTree = "<group>"; };
 		06FBF143288EF78200222480 /* LoginSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSubview.swift; sourceTree = "<group>"; };
 		06FBF147289009F900222480 /* UpdateProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileImageView.swift; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 		065E4747287B573600D32E05 = {
 			isa = PBXGroup;
 			children = (
+				06E0893F28D31C180092410C /* .swiftlint.yml */,
 				065E4752287B573600D32E05 /* AniTrip */,
 				065E4763287B573700D32E05 /* AniTripTests */,
 				065E4751287B573600D32E05 /* Products */,
@@ -605,6 +608,7 @@
 				065E474C287B573600D32E05 /* Sources */,
 				065E474D287B573600D32E05 /* Frameworks */,
 				065E474E287B573600D32E05 /* Resources */,
+				06E0893E28D31A3E0092410C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -686,6 +690,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E0894028D31C180092410C /* .swiftlint.yml in Resources */,
 				065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */,
 				065E4758287B573700D32E05 /* Assets.xcassets in Resources */,
 			);
@@ -712,6 +717,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		06E0893E28D31A3E0092410C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/SwiftLint",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export PATH=\"$PATH:/opt/homebrew/bin\"\nif which swiftlint > /dev/null; then\n  swiftlint --config \"$SRCROOT/.swiftlint.yml\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		065E474C287B573600D32E05 /* Sources */ = {

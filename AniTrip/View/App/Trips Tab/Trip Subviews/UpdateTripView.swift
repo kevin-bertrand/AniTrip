@@ -20,22 +20,28 @@ struct UpdateTripView: View {
                 switch step {
                 case 1:
                     StartAddressView(step: $step, trip: $trip)
-                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing),
+                                                                                 removal: .move(edge: .leading)))
                 case 2:
                     EndAddressView(step: $step, trip: $trip)
-                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing),
+                                                                                 removal: .move(edge: .leading)))
                 case 3:
                     TripDistanceView(step: $step, trip: $trip)
-                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing),
+                                                                                 removal: .move(edge: .leading)))
                 case 4:
                     TripDateView(step: $step, trip: $trip)
-                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing),
+                                                                                 removal: .move(edge: .leading)))
                 case 5:
                     TripMissionsView(step: $step, trip: $trip)
-                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing),
+                                                                                 removal: .move(edge: .leading)))
                 case 6:
                     TripCommentView(step: $step, trip: $trip, isAnUpdate: $isAnUpdate)
-                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing), removal: .move(edge: .leading)))
+                        .transition(previousScreen > step ? .slide : .asymmetric(insertion: .move(edge: .trailing),
+                                                                                 removal: .move(edge: .leading)))
                 default:
                     Text("Error")
                 }
@@ -49,6 +55,12 @@ struct UpdateTripView: View {
 
 struct AddTripView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateTripView(trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)), isAnUpdate: .constant(true))
+        UpdateTripView(trip: .constant(UpdateTrip(date: Date(),
+                                                  missions: [],
+                                                  comment: "",
+                                                  totalDistance: "",
+                                                  startingAddress: LocationController.emptyAddress,
+                                                  endingAddress: LocationController.emptyAddress)),
+                       isAnUpdate: .constant(true))
     }
 }

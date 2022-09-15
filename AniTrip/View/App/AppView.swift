@@ -14,7 +14,7 @@ struct AppView: View {
 //    @State private var selectedTab: Int = 1
     
     var body: some View {
-        TabView() {
+        TabView {
             Group {
                 NavigationView {
                     HomeView()

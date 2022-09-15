@@ -54,6 +54,10 @@ struct NewsTileView: View {
 
 struct NewsTileView_Previews: PreviewProvider {
     static var previews: some View {
-        NewsTileView(title: "Test", icon: Image(systemName: "car"), information: "12345 km", percent: 0.5, comparaison: "year")
+        NewsTileView(title: "Test",
+                     icon: Image(systemName: "car"),
+                     information: "12345 km",
+                     percent: 0.5,
+                     comparaison: "year")
     }
 }

@@ -23,7 +23,10 @@ struct RouteView: View {
 
 struct RouteView_Previews: PreviewProvider {
     static var previews: some View {
-        RouteView(startPoint: CLLocationCoordinate2D(latitude: 40.71, longitude: -74), endPoint: CLLocationCoordinate2D(latitude: 42.36, longitude: -71.05))
+        RouteView(startPoint: CLLocationCoordinate2D(latitude: 40.71,
+                                                     longitude: -74),
+                  endPoint: CLLocationCoordinate2D(latitude: 42.36,
+                                                   longitude: -71.05))
     }
 }
 
@@ -45,20 +48,19 @@ struct MapView: UIViewRepresentable {
         let region = LocationController.defaultMapPoint
         mapView.setRegion(region, animated: true)
         
-        let p1 = MKPlacemark(coordinate: startPoint)
+        let mark1 = MKPlacemark(coordinate: startPoint)
         
-        // Boston
-        let p2 = MKPlacemark(coordinate: endPoint)
+        let mark2 = MKPlacemark(coordinate: endPoint)
         
         let request = MKDirections.Request()
-        request.source = MKMapItem(placemark: p1)
-        request.destination = MKMapItem(placemark: p2)
+        request.source = MKMapItem(placemark: mark1)
+        request.destination = MKMapItem(placemark: mark2)
         request.transportType = .automobile
         
         let directions = MKDirections(request: request)
-        directions.calculate { response, error in
+        directions.calculate { response, _ in
             guard let route = response?.routes.first else { return }
-            mapView.addAnnotations([p1, p2])
+            mapView.addAnnotations([mark1, mark2])
             mapView.addOverlay(route.polyline)
             mapView.setVisibleMapRect(
                 route.polyline.boundingMapRect,

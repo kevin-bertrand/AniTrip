@@ -96,7 +96,8 @@ struct DetectAddressView: View {
 
 struct DetectAddressView_Previews: PreviewProvider {
     static var previews: some View {
-        DetectAddressView(address: .constant(LocationController.emptyAddress), addressFound: .constant(false), name: "Starting address")
+        DetectAddressView(address: .constant(LocationController.emptyAddress),
+                          addressFound: .constant(false),
+                          name: "Starting address")
     }
 }
-

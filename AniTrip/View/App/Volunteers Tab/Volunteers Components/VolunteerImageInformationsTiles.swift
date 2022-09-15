@@ -37,6 +37,16 @@ struct VolunteerImageInformationsTiles: View {
 
 struct VolunteerImageInformationsTiles_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerImageInformationsTiles(volunteer: .constant(Volunteer(imagePath: nil, id: "", firstname: "", lastname: "", email: "", phoneNumber: "", gender: "", position: .admin, missions: [], address: LocationController.emptyAddress, isActive: true)))
+        VolunteerImageInformationsTiles(volunteer: .constant(Volunteer(imagePath: nil,
+                                                                       id: "",
+                                                                       firstname: "",
+                                                                       lastname: "",
+                                                                       email: "",
+                                                                       phoneNumber: "",
+                                                                       gender: "",
+                                                                       position: .admin,
+                                                                       missions: [],
+                                                                       address: LocationController.emptyAddress,
+                                                                       isActive: true)))
     }
 }

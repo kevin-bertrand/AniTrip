@@ -35,9 +35,9 @@ struct CircularSpinnerView: View {
             
         }
         .frame(width: 175, height: 175)
-        .onAppear() {
+        .onAppear {
             self.animateSpinner()
-            Timer.scheduledTimer(withTimeInterval: animationTime, repeats: true) { (mainTimer) in
+            Timer.scheduledTimer(withTimeInterval: animationTime, repeats: true) { _ in
                 self.animateSpinner()
             }
         }

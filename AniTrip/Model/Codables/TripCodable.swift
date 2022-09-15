@@ -17,7 +17,13 @@ struct Trip: Codable, Identifiable {
     let endingAddress: Address
     
     func toUpdateTripFormat() -> UpdateTrip {
-        UpdateTrip(id: self.id, date: self.date.toDate ?? Date(), missions: self.missions, comment: self.comment ?? "", totalDistance: "\(self.totalDistance)", startingAddress: self.startingAddress, endingAddress: self.endingAddress)
+        UpdateTrip(id: self.id,
+                   date: self.date.toDate ?? Date(),
+                   missions: self.missions,
+                   comment: self.comment ?? "",
+                   totalDistance: "\(self.totalDistance)",
+                   startingAddress: self.startingAddress,
+                   endingAddress: self.endingAddress)
     }
 }
 
@@ -31,7 +37,13 @@ struct UpdateTrip: Codable {
     var endingAddress: Address
     
     func toAddTripFormat() -> AddingTrip {
-        AddingTrip(id: self.id, date: self.date.iso8601, missions: self.missions, comment: self.comment, totalDistance: Double(self.totalDistance) ?? 0.0, startingAddress: self.startingAddress, endingAddress: self.endingAddress)
+        AddingTrip(id: self.id,
+                   date: self.date.iso8601,
+                   missions: self.missions,
+                   comment: self.comment,
+                   totalDistance: Double(self.totalDistance) ?? 0.0,
+                   startingAddress: self.startingAddress,
+                   endingAddress: self.endingAddress)
     }
 }
 

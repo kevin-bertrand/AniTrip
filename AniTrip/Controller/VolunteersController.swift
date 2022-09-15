@@ -77,11 +77,13 @@ final class VolunteersController: ObservableObject {
     
     /// Change volunteer position
     func changePosition(of volunteer: Volunteer, by user: User?) {
-        volunteersManager.changePosition(of: VolunteerToUpdatePosition(email: volunteer.email, position: volunteer.position), by: user)
+        volunteersManager.changePosition(of: VolunteerToUpdatePosition(email: volunteer.email,
+                                                                       position: volunteer.position),
+                                         by: user)
     }
     
     /// Download volunteer profile image
-    func downloadProfileImage(of volunteer: Volunteer, completionHandler: @escaping ((UIImage?)->Void)) {
+    func downloadProfileImage(of volunteer: Volunteer, completionHandler: @escaping ((UIImage?) -> Void)) {
         volunteersManager.downlaodProfilePicture(of: volunteer) { image in
             completionHandler(image)
         }

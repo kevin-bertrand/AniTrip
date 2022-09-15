@@ -158,7 +158,28 @@ struct TripsExportView: View {
 
 struct TripsExportView_Previews: PreviewProvider {
     static var previews: some View {
-        TripsExportView(tripController: TripController(appController: AppController()), exportData: TripToExportInformations(userLastname: "Jon", userFirstname: "Doe", userPhone: "01234456789", userEmail: "jon.doe@exemple.com", startDate: "", endDate: "", totalDistance: 0.0, trips: [.init(id: UUID(), date: "1", missions: [], comment: "", totalDistance: 19.0, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress), .init(id: UUID(), date: "1", missions: [], comment: "", totalDistance: 19.0, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)]))
+        let emptyAddress = LocationController.emptyAddress
+        TripsExportView(tripController: TripController(appController: AppController()),
+                        exportData: TripToExportInformations(userLastname: "Jon",
+                                                             userFirstname: "Doe",
+                                                             userPhone: "01234456789",
+                                                             userEmail: "jon.doe@exemple.com",
+                                                             startDate: "", endDate: "",
+                                                             totalDistance: 0.0,
+                                                             trips: [.init(id: UUID(),
+                                                                           date: "1",
+                                                                           missions: [],
+                                                                           comment: "",
+                                                                           totalDistance: 19.0,
+                                                                           startingAddress: emptyAddress,
+                                                                           endingAddress: emptyAddress),
+                                                                .init(id: UUID(),
+                                                                      date: "1",
+                                                                      missions: [],
+                                                                      comment: "",
+                                                                      totalDistance: 19.0,
+                                                                      startingAddress: LocationController.emptyAddress,
+                                                                      endingAddress: LocationController.emptyAddress)]))
     }
 }
 

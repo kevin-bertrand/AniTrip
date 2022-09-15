@@ -14,14 +14,21 @@ struct DetailedTripView: View {
     
     @Binding var trip: Trip
     
-    @State private var updateTrip: UpdateTrip = UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)
+    @State private var updateTrip: UpdateTrip = UpdateTrip(date: Date(),
+                                                           missions: [],
+                                                           comment: "",
+                                                           totalDistance: "",
+                                                           startingAddress: LocationController.emptyAddress,
+                                                           endingAddress: LocationController.emptyAddress)
     
     var body: some View {
         Form {
             Section(header: Text("Trip")) {
                 ZStack(alignment: .bottomTrailing) {
-                    RouteView(startPoint: CLLocationCoordinate2D(latitude: trip.startingAddress.latitude, longitude: trip.startingAddress.longitude),
-                              endPoint: CLLocationCoordinate2D(latitude: trip.endingAddress.latitude, longitude: trip.endingAddress.longitude))
+                    RouteView(startPoint: CLLocationCoordinate2D(latitude: trip.startingAddress.latitude,
+                                                                 longitude: trip.startingAddress.longitude),
+                              endPoint: CLLocationCoordinate2D(latitude: trip.endingAddress.latitude,
+                                                               longitude: trip.endingAddress.longitude))
                     
                     HStack {
                         Text("\(trip.totalDistance.twoDigitPrecision) km")
@@ -79,7 +86,13 @@ struct DetailedTripView: View {
 
 struct DetailedTripView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedTripView(trip: .constant(Trip(id: UUID(), date: Date().iso8601, missions: ["1", "2", "3"], comment: "Test comment", totalDistance: 25, startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
+        DetailedTripView(trip: .constant(Trip(id: UUID(),
+                                              date: Date().iso8601,
+                                              missions: ["1", "2", "3"],
+                                              comment: "Test comment",
+                                              totalDistance: 25,
+                                              startingAddress: LocationController.emptyAddress,
+                                              endingAddress: LocationController.emptyAddress)))
             .environmentObject(TripController(appController: AppController()))
     }
 }

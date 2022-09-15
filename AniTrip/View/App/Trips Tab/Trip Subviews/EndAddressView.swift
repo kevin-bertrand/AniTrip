@@ -54,7 +54,12 @@ struct EndAddressView: View {
 struct AddingEndAddressView_Previews: PreviewProvider {
     static var previews: some View {
         EndAddressView(step: .constant(2),
-                       trip: .constant(UpdateTrip(date: Date(), missions: [], comment: "", totalDistance: "", startingAddress: LocationController.emptyAddress, endingAddress: LocationController.emptyAddress)))
+                       trip: .constant(UpdateTrip(date: Date(),
+                                                  missions: [],
+                                                  comment: "",
+                                                  totalDistance: "",
+                                                  startingAddress: LocationController.emptyAddress,
+                                                  endingAddress: LocationController.emptyAddress)))
             .environmentObject(TripController(appController: AppController()))
     }
 }

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ConnectionView: View {
-    @State private var authPath: Int? = nil
+    @State private var authPath: Int?
     
     var body: some View {
         VStack {

@@ -24,7 +24,7 @@ struct DownloadedVolunteer: Codable {
 
 struct Volunteer: Equatable {
     let imagePath: String?
-    var image: UIImage? = nil
+    var image: UIImage?
     let id: String
     let firstname: String
     let lastname: String

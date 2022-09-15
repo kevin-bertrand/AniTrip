@@ -23,7 +23,8 @@ struct PDFUIView: View {
     }
     
     func shareButton() {
-        let activityController = UIActivityViewController(activityItems: [tripController.pdfData], applicationActivities: nil)
+        let activityController = UIActivityViewController(activityItems: [tripController.pdfData],
+                                                          applicationActivities: nil)
         
         let window = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive})
             .compactMap({$0 as? UIWindowScene})

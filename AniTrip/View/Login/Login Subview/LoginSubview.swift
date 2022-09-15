@@ -18,7 +18,10 @@ struct LoginSubview: View {
         VStack {
             Spacer()
             Group {
-                TextFieldWithIcon(text: $userController.loginEmailTextField, icon: "person.fill", placeholder: "example@mail.com", keyboardType: .emailAddress)
+                TextFieldWithIcon(text: $userController.loginEmailTextField,
+                                  icon: "person.fill",
+                                  placeholder: "example@mail.com",
+                                  keyboardType: .emailAddress)
                 
                 HStack {
                     Spacer()
@@ -31,7 +34,10 @@ struct LoginSubview: View {
                 }
                 .padding(.bottom, 25)
                 
-                TextFieldWithIcon(text: $userController.loginPasswordTextField, icon: "lock.fill", placeholder: "Password", isSecure: true)
+                TextFieldWithIcon(text: $userController.loginPasswordTextField,
+                                  icon: "lock.fill",
+                                  placeholder: "Password",
+                                  isSecure: true)
                 
                 Text(userController.loginErrorMessage)
                     .font(.title3)

@@ -72,7 +72,10 @@ extension Notification {
         
         /// Send the notification throw the NotificationCenter
         func sendNotification() {
-            let notificationBuilder = Notification(name: notificationName, object: self, userInfo: ["name": self.notificationName, "message": self.notificationMessage])
+            let notificationBuilder = Notification(name: notificationName,
+                                                   object: self,
+                                                   userInfo: ["name": self.notificationName,
+                                                              "message": self.notificationMessage])
             NotificationCenter.default.post(notificationBuilder)
         }
     }

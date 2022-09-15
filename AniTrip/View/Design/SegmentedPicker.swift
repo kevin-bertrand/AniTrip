@@ -63,7 +63,7 @@ struct SegmentedPicker: View {
                 .lineLimit(1)
                 .padding(.vertical, SegmentedPicker.SegmentYPadding)
                 .padding(.horizontal, SegmentedPicker.SegmentXPadding)
-                .frame(minWidth: 0, maxWidth: .infinity) // This allows the segments to take up all the available view space
+                .frame(minWidth: 0, maxWidth: .infinity)
                 .onTapGesture { self.onItemTap(index: index) }
                 .eraseToAnyView()
     }

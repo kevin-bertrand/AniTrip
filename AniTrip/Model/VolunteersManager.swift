@@ -24,7 +24,7 @@ final class VolunteersManager {
         networkManager.request(urlParams: NetworkConfigurations.getVolunteersList.urlParams,
                                method: NetworkConfigurations.getVolunteersList.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] (data, response, error) in
+                               body: nil) { [weak self] (data, response, _) in
             if let self = self,
                let status = response?.statusCode,
                status == 200,
@@ -62,7 +62,7 @@ final class VolunteersManager {
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.desactivateAccount.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] data, response, error in
+                               body: nil) { [weak self] _, response, _ in
             if let self = self,
                let statusCode = response?.statusCode,
                statusCode == 200 {
@@ -82,7 +82,7 @@ final class VolunteersManager {
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.activateAccount.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] data, response, error in
+                               body: nil) { [weak self] _, response, _ in
             if let self = self,
                let statusCode = response?.statusCode,
                statusCode == 200 {
@@ -101,7 +101,10 @@ final class VolunteersManager {
             return
         }
         
-        networkManager.request(urlParams: NetworkConfigurations.updatePosition.urlParams, method: NetworkConfigurations.updatePosition.method, authorization: .authorization(bearerToken: user.token), body: volunteer) { [weak self] data, response, error in
+        networkManager.request(urlParams: NetworkConfigurations.updatePosition.urlParams,
+                               method: NetworkConfigurations.updatePosition.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: volunteer) { [weak self] _, response, _ in
             if let self = self,
                let statusCode = response?.statusCode {
                 switch statusCode {
@@ -120,7 +123,8 @@ final class VolunteersManager {
     }
     
     /// Download volunteer profile picture
-    func downlaodProfilePicture(of volunteer: Volunteer, completionHandler: @escaping ((UIImage?)->Void)) {
+    func downlaodProfilePicture(of volunteer: Volunteer,
+                                completionHandler: @escaping ((UIImage?) -> Void)) {
         networkManager.downloadProfilePicture(from: volunteer.imagePath) { image in
             completionHandler(image)
         }
