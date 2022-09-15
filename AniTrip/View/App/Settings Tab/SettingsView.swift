@@ -11,6 +11,7 @@ import os
 import SwiftUI
 
 struct SettingsView: View {
+    @EnvironmentObject private var appController: AppController
     @EnvironmentObject private var userController: UserController
     @EnvironmentObject private var tripController: TripController
     @EnvironmentObject private var volunteersController: VolunteersController
@@ -80,7 +81,8 @@ struct SettingsView: View {
                 Button {
                     tripController.disconnect()
                     volunteersController.disconnect()
-                    userController.disconnectUser()
+                    userController.disconnect()
+                    appController.disconnect()
                 } label: {
                     HStack {
                         Spacer()
@@ -126,6 +128,7 @@ struct SettingsView: View {
 struct SettingsView_Previews: PreviewProvider {
     static var previews: some View {
         SettingsView()
+            .environmentObject(AppController())
             .environmentObject(UserController(appController: AppController()))
             .environmentObject(VolunteersController(appController: AppController()))
             .environmentObject(TripController(appController: AppController()))

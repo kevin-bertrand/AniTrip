@@ -119,9 +119,8 @@ final class TripManager {
     }
     
     /// Downloading informations when home view is loaded
-    func threeLatestTrips(byUser user: User?, filter: ChartFilter) {
-        guard let user = user,
-              let userId = user.id else {
+    func threeLatestTrips(byUser user: User, filter: ChartFilter) {
+        guard let userId = user.id else {
             Notification.AniTrip.unknownError.sendNotification()
             return
         }

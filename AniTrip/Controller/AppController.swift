@@ -52,6 +52,11 @@ final class AppController: ObservableObject {
         alertViewTitle = ""
     }
     
+    /// Disconnect user
+    func disconnect() {
+        NetworkManager.stopAllRequests
+    }
+    
     // MARK: Initialization
     init() {
         // Configure general notifications

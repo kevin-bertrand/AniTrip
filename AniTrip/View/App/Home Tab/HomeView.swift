@@ -120,7 +120,9 @@ struct HomeView: View {
             ActivateAccountView()
         }
         .onAppear {
-            tripController.homeIsLoaded(byUser: userController.connectedUser)
+            if let connectedUser = userController.connectedUser {
+                tripController.homeIsLoaded(byUser: connectedUser)
+            }
         }
     }
 }

@@ -113,7 +113,7 @@ final class TripController: ObservableObject {
     }
     
     /// Download informations when home view is loaded
-    func homeIsLoaded(byUser user: User?) {
+    func homeIsLoaded(byUser user: User) {
         tripManager.threeLatestTrips(byUser: user, filter: chartFilter)
     }
     

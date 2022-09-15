@@ -11,6 +11,11 @@ import Mixpanel
 import SwiftUI
 
 class NetworkManager: NetworkProtocol {
+    // MARK: Static
+    static var stopAllRequests: Void {
+        return AF.cancelAllRequests()
+    }
+    
     // MARK: Public
     // MARK: Method
     /// Perform Alamofire request
