@@ -56,9 +56,9 @@ final class TripController: ObservableObject {
     // New trip properties
     @Published var showUpdateTripView: Bool = false
     @Published var newMission: String = ""
-    @Published var newTrip: UpdateTrip = TripController.emptyUpdateTrip {
+    @Published var updateTrip: UpdateTrip = TripController.emptyUpdateTrip {
         willSet {
-            if newValue.startingAddress != newTrip.startingAddress || newValue.endingAddress != newTrip.endingAddress {
+            if newValue.startingAddress != updateTrip.startingAddress || newValue.endingAddress != updateTrip.endingAddress {
                 newTripIsUpdated = true
             } else {
                 newTripIsUpdated = false
@@ -101,7 +101,7 @@ final class TripController: ObservableObject {
         showUpdateTripView = false
         appController.setLoadingInProgress(withMessage: "Adding trip in progress...")
         
-        tripManager.add(trip: newTrip, by: user)
+        tripManager.add(trip: updateTrip, by: user)
     }
     
     /// Update a trip
@@ -119,7 +119,8 @@ final class TripController: ObservableObject {
     
     /// Adding a mission to a new trip
     func addMission() {
-        newTrip.missions.append(newMission)
+        updateTrip.missions.append(newMission)
+        newMission = ""
     }
     
     /// Downlaod chart point
@@ -200,6 +201,7 @@ final class TripController: ObservableObject {
                 self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Error")
             case Notification.AniTrip.addTripSuccess.notificationName,
                 Notification.AniTrip.updateTripSuccess.notificationName:
+                self.updateTrip = TripController.emptyUpdateTrip
                 self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Success")
             case Notification.AniTrip.homeInformationsDonwloaded.notificationName:
                 threeLatestTrips = tripManager.threeLatestTrips
@@ -251,10 +253,10 @@ final class TripController: ObservableObject {
     private func calculteDrivingDistance() {
         loadingDistance = true
         let request = MKDirections.Request()
-        let source = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.startingAddress.latitude,
-                                                                    longitude: newTrip.startingAddress.longitude))
-        let destination = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: newTrip.endingAddress.latitude,
-                                                                         longitude: newTrip.endingAddress.longitude))
+        let source = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: updateTrip.startingAddress.latitude,
+                                                                    longitude: updateTrip.startingAddress.longitude))
+        let destination = MKPlacemark(coordinate: CLLocationCoordinate2D(latitude: updateTrip.endingAddress.latitude,
+                                                                         longitude: updateTrip.endingAddress.longitude))
         
         request.source = MKMapItem(placemark: source)
         request.destination = MKMapItem(placemark: destination)
@@ -268,7 +270,7 @@ final class TripController: ObservableObject {
             }
             if let response = response,
                let route = response.routes.first {
-                self.newTrip.totalDistance = "\((route.distance/1000.0).twoDigitPrecision)"
+                self.updateTrip.totalDistance = "\((route.distance/1000.0).twoDigitPrecision)"
             }
         }
     }

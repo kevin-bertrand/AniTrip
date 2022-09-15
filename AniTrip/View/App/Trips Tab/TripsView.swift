@@ -17,7 +17,7 @@ struct TripsView: View {
                 tripController.getList(byUser: userController.connectedUser)
             }
             .sheet(isPresented: $tripController.showUpdateTripView, content: {
-                UpdateTripView(trip: $tripController.newTrip, isAnUpdate: .constant(false))
+                UpdateTripView(trip: $tripController.updateTrip, isAnUpdate: .constant(false))
             })
             .toolbar {
                 Button {

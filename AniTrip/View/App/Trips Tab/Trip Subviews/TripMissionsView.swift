@@ -62,7 +62,6 @@ struct TripMissionsView: View {
                 .onDelete { index in
                     trip.missions.remove(atOffsets: index)
                 }
-
             }
             
             Spacer()
