@@ -17,19 +17,22 @@ struct TripsExportFilterView: View {
         ScrollView {
             Text("Start filter")
                 .font(.title2.bold())
-            DatePicker("", selection: $tripController.startFilterDate, displayedComponents: .date)
+            DatePicker("", selection: $tripController.startFilterDate,
+                       in: Date().getDatePickerRange,
+                       displayedComponents: .date)
                 .datePickerStyle(.wheel)
                 .labelsHidden()
-                .padding(.bottom, 25)
-                .frame(width: 320, height: 216)
+                .padding()
             Divider()
             Text("End filter")
                 .font(.title2.bold())
-            DatePicker("", selection: $tripController.endFilterDate, displayedComponents: .date)
+            DatePicker("", selection: $tripController.endFilterDate,
+                       in: Date().getDatePickerRange,
+                       displayedComponents: .date)
                 .datePickerStyle(.wheel)
                 .labelsHidden()
-                .padding(.bottom, 25)
-            
+                .padding()
+                        
             ButtonWithIcon(isLoading: .constant(false), action: {
                 tripController.downloadPDF(byUser: userController.connectedUser,
                                            for: userToExportId)

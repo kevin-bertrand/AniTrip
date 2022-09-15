@@ -20,6 +20,8 @@ struct PDFUIView: View {
                     Image(systemName: "square.and.arrow.up.fill")
                 }
             }
+            .navigationTitle("Export")
+            .navigationBarTitleDisplayMode(.automatic)
     }
     
     func shareButton() {

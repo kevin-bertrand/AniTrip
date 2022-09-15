@@ -28,4 +28,9 @@ extension Date {
         dateFormatter.dateFormat = "EEEE"
         return String(dateFormatter.string(from: self).prefix(3))
     }
+    
+    var getDatePickerRange: ClosedRange<Date> {
+        let minValue = Calendar.current.date(byAdding: .year, value: -100, to: self) ?? Date()
+        return minValue...self
+    }
 }

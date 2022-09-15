@@ -48,9 +48,12 @@ struct TripDateView: View {
             Text("Which day was the trip?")
                 .multilineTextAlignment(.center)
                 .font(.largeTitle.bold())
-            DatePicker("", selection: $trip.date, displayedComponents: .date)
+            DatePicker("",
+                       selection: $trip.date,
+                       in: Date().getDatePickerRange,
+                       displayedComponents: [.date])
                 .datePickerStyle(.wheel)
-                .padding()
+                .labelsHidden()
             Spacer()
         }
     }
