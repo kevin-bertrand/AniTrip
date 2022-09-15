@@ -11,6 +11,18 @@ import Mixpanel
 import SwiftUI
 
 final class UserController: ObservableObject {
+    // MARK: Static
+    static let emptyUpdateUser = UserToUpdate(firstname: "",
+                                              lastname: "",
+                                              email: "",
+                                              phoneNumber: "",
+                                              gender: .notDeterminded,
+                                              position: .user,
+                                              missions: [],
+                                              address: LocationController.emptyAddress,
+                                              password: "",
+                                              passwordVerification: "")
+    
     // MARK: Public
     // MARK: Properties
     // General properties
@@ -44,16 +56,7 @@ final class UserController: ObservableObject {
     @Published var createAccountErrorMessage: String = ""
     
     // Update user
-    @Published var userToUpdate: UserToUpdate = UserToUpdate(firstname: "",
-                                                             lastname: "",
-                                                             email: "",
-                                                             phoneNumber: "",
-                                                             gender: .notDeterminded,
-                                                             position: .user,
-                                                             missions: [],
-                                                             address: LocationController.emptyAddress,
-                                                             password: "",
-                                                             passwordVerification: "")
+    @Published var userToUpdate: UserToUpdate = UserController.emptyUpdateUser
     @Published var successUpdate: Bool = false
     @Published var showUpdateProfileImage: Bool = false
         

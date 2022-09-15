@@ -29,12 +29,6 @@ struct TripTileView: View {
 
 struct TripTileView_Previews: PreviewProvider {
     static var previews: some View {
-        TripTileView(trip: Trip(id: UUID(),
-                                date: "",
-                                missions: [],
-                                comment: "",
-                                totalDistance: 0.0,
-                                startingAddress: LocationController.emptyAddress,
-                                endingAddress: LocationController.emptyAddress))
+        TripTileView(trip: TripController.emptyTrip)
     }
 }

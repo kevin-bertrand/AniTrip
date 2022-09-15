@@ -31,7 +31,8 @@ struct TripsExportFilterView: View {
                 .padding(.bottom, 25)
             
             ButtonWithIcon(isLoading: .constant(false), action: {
-                tripController.downloadPDF(byUser: userController.connectedUser, for: userToExportId)
+                tripController.downloadPDF(byUser: userController.connectedUser,
+                                           for: userToExportId)
             }, title: "Start export")
             .padding(.horizontal)
             

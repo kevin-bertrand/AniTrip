@@ -14,12 +14,7 @@ struct DetailedTripView: View {
     
     @Binding var trip: Trip
     
-    @State private var updateTrip: UpdateTrip = UpdateTrip(date: Date(),
-                                                           missions: [],
-                                                           comment: "",
-                                                           totalDistance: "",
-                                                           startingAddress: LocationController.emptyAddress,
-                                                           endingAddress: LocationController.emptyAddress)
+    @State private var updateTrip: UpdateTrip = TripController.emptyUpdateTrip
     
     var body: some View {
         Form {
@@ -86,13 +81,7 @@ struct DetailedTripView: View {
 
 struct DetailedTripView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailedTripView(trip: .constant(Trip(id: UUID(),
-                                              date: Date().iso8601,
-                                              missions: ["1", "2", "3"],
-                                              comment: "Test comment",
-                                              totalDistance: 25,
-                                              startingAddress: LocationController.emptyAddress,
-                                              endingAddress: LocationController.emptyAddress)))
+        DetailedTripView(trip: .constant(TripController.emptyTrip))
             .environmentObject(TripController(appController: AppController()))
     }
 }

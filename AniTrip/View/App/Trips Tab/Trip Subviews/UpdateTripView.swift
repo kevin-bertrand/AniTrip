@@ -55,12 +55,7 @@ struct UpdateTripView: View {
 
 struct AddTripView_Previews: PreviewProvider {
     static var previews: some View {
-        UpdateTripView(trip: .constant(UpdateTrip(date: Date(),
-                                                  missions: [],
-                                                  comment: "",
-                                                  totalDistance: "",
-                                                  startingAddress: LocationController.emptyAddress,
-                                                  endingAddress: LocationController.emptyAddress)),
+        UpdateTripView(trip: .constant(TripController.emptyUpdateTrip),
                        isAnUpdate: .constant(true))
     }
 }

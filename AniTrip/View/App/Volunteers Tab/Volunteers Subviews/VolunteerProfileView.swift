@@ -152,17 +152,7 @@ struct VolunteerProfileView: View {
 
 struct VolunteerProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        VolunteerProfileView(volunteer: Volunteer(imagePath: nil,
-                                                  id: "",
-                                                  firstname: "",
-                                                  lastname: "",
-                                                  email: "",
-                                                  phoneNumber: "",
-                                                  gender: "",
-                                                  position: .admin,
-                                                  missions: [],
-                                                  address: LocationController.emptyAddress,
-                                                  isActive: true))
+        VolunteerProfileView(volunteer: VolunteersController.emptyVolunteer)
             .environmentObject(UserController(appController: AppController()))
             .environmentObject(VolunteersController(appController: AppController()))
     }

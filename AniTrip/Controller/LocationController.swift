@@ -11,8 +11,7 @@ import MapKit
 import Mixpanel
 
 final class LocationController: NSObject, ObservableObject, CLLocationManagerDelegate {
-    // MARK: Public
-    // MARK: Properties
+    // MARK: Static
     static let defaultMapPoint: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 0,
                                                                                                        longitude: 0),
                                                                         latitudinalMeters: 0,
@@ -25,7 +24,8 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
                                                country: "",
                                                latitude: 0.0,
                                                longitude: 0.0)
-    
+    // MARK: Public
+    // MARK: Properties
     @Published var region: MKCoordinateRegion = LocationController.defaultMapPoint
     @Published var addressLocated: String = ""
     @Published var address: Address = emptyAddress

@@ -59,12 +59,7 @@ struct TripDateView: View {
 struct NewTripDateView_Previews: PreviewProvider {
     static var previews: some View {
         TripDateView(step: .constant(4),
-                     trip: .constant(UpdateTrip(date: Date(),
-                                                missions: [],
-                                                comment: "",
-                                                totalDistance: "",
-                                                startingAddress: LocationController.emptyAddress,
-                                                endingAddress: LocationController.emptyAddress)))
+                     trip: .constant(TripController.emptyUpdateTrip))
             .environmentObject(TripController(appController: AppController()))
     }
 }

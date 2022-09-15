@@ -12,6 +12,30 @@ import SwiftUICharts
 import PDFKit
 
 final class TripController: ObservableObject {
+    // MARK: Static
+    static let emptyTrip = Trip(id: UUID(),
+                                date: "",
+                                missions: [],
+                                comment: "",
+                                totalDistance: 0.0,
+                                startingAddress: LocationController.emptyAddress,
+                                endingAddress: LocationController.emptyAddress)
+    static let emptyUpdateTrip = UpdateTrip(id: UUID(uuid: UUID_NULL),
+                                            date: Date(),
+                                            missions: [],
+                                            comment: "",
+                                            totalDistance: "",
+                                            startingAddress: LocationController.emptyAddress,
+                                            endingAddress: LocationController.emptyAddress)
+    static let emptyNews = News(distanceThisWeek: 0.0,
+                                numberOfTripThisWeek: 0,
+                                distanceThisYear: 0.0,
+                                numberOfTripThisYear: 0,
+                                distancePercentSinceLastYear: 0.0,
+                                distancePercentSinceLastWeek: 0.0,
+                                numberTripPercentSinceLastYear: 0.0,
+                                numberTripPercentSinceLastWeek: 0.0)
+    
     // MARK: Public
     // MARK: Properties
     @Published var trips: [Trip] = []
@@ -32,13 +56,7 @@ final class TripController: ObservableObject {
     // New trip properties
     @Published var showUpdateTripView: Bool = false
     @Published var newMission: String = ""
-    @Published var newTrip: UpdateTrip = .init(id: UUID(uuid: UUID_NULL),
-                                               date: Date(),
-                                               missions: [],
-                                               comment: "",
-                                               totalDistance: "",
-                                               startingAddress: LocationController.emptyAddress,
-                                               endingAddress: LocationController.emptyAddress) {
+    @Published var newTrip: UpdateTrip = TripController.emptyUpdateTrip {
         willSet {
             if newValue.startingAddress != newTrip.startingAddress || newValue.endingAddress != newTrip.endingAddress {
                 newTripIsUpdated = true
@@ -58,14 +76,7 @@ final class TripController: ObservableObject {
     // Home informations
     @Published var threeLatestTrips: [Trip] = []
     @Published var chartFilter: ChartFilter = .week
-    @Published var news: News = News(distanceThisWeek: 0.0,
-                                     numberOfTripThisWeek: 0,
-                                     distanceThisYear: 0.0,
-                                     numberOfTripThisYear: 0,
-                                     distancePercentSinceLastYear: 0.0,
-                                     distancePercentSinceLastWeek: 0.0,
-                                     numberTripPercentSinceLastYear: 0.0,
-                                     numberTripPercentSinceLastWeek: 0.0)
+    @Published var news: News = TripController.emptyNews
     @Published var chartPoints: LineChartData = LineChartData(dataSets: LineDataSet(dataPoints: []))
     
     // Export trip
@@ -134,14 +145,7 @@ final class TripController: ObservableObject {
             self.trips = []
             self.volunteerTripList = []
             self.threeLatestTrips = []
-            self.news = News(distanceThisWeek: 0.0,
-                             numberOfTripThisWeek: 0,
-                             distanceThisYear: 0.0,
-                             numberOfTripThisYear: 0,
-                             distancePercentSinceLastYear: 0.0,
-                             distancePercentSinceLastWeek: 0.0,
-                             numberTripPercentSinceLastYear: 0.0,
-                             numberTripPercentSinceLastWeek: 0.0)
+            self.news = TripController.emptyNews
             self.chartPoints = LineChartData(dataSets: LineDataSet(dataPoints: []))
         }
     }

@@ -73,13 +73,6 @@ struct AddressTileView: View {
 
 struct AddressTileView_Previews: PreviewProvider {
     static var previews: some View {
-        AddressTileView(address: Address(roadName: "Des developpers",
-                                         streetNumber: "7a",
-                                         complement: "3rd floor",
-                                         zipCode: "7500",
-                                         city: "Paris",
-                                         country: "France",
-                                         latitude: 0.0,
-                                         longitude: 0.0))
+        AddressTileView(address: LocationController.emptyAddress)
     }
 }

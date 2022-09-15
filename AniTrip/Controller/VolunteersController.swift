@@ -9,6 +9,19 @@ import Foundation
 import UIKit
 
 final class VolunteersController: ObservableObject {
+    // MARK: Static
+    static let emptyVolunteer = Volunteer(imagePath: nil,
+                                          id: "",
+                                          firstname: "",
+                                          lastname: "",
+                                          email: "",
+                                          phoneNumber: "",
+                                          gender: "",
+                                          position: .admin,
+                                          missions: [],
+                                          address: LocationController.emptyAddress,
+                                          isActive: true)
+    
     // MARK: Public
     // MARK: Properties
     @Published var volunteersList: [Volunteer] = []
