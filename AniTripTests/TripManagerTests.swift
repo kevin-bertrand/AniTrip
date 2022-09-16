@@ -241,7 +241,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .export, response: .status200, status: .correctData)
         
         // When
-        tripManager.downloadPDF(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
+        tripManager.downloadPDF(with: TripFilterToExport(userID: UUID(), language: "", startDate: "", endDate: ""), by: getConnectedUser())
         
         // Then
         XCTAssertTrue(tripManager.pdfData != Data())
@@ -253,7 +253,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .export, response: .status200, status: .error)
         
         // When
-        tripManager.downloadPDF(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
+        tripManager.downloadPDF(with: TripFilterToExport(userID: UUID(), language: "", startDate: "", endDate: ""), by: getConnectedUser())
         
         // Then
         XCTAssertTrue(tripManager.pdfData == Data())
@@ -265,7 +265,7 @@ final class TripManagerTests: XCTestCase {
         configureManager(correctData: .export, response: .status0, status: .correctData)
         
         // When
-        tripManager.downloadPDF(with: TripFilterToExport(userID: UUID(), startDate: "", endDate: ""), by: getConnectedUser())
+        tripManager.downloadPDF(with: TripFilterToExport(userID: UUID(), language: "", startDate: "", endDate: ""), by: getConnectedUser())
         
         // Then
         XCTAssertTrue(tripManager.pdfData == Data())
