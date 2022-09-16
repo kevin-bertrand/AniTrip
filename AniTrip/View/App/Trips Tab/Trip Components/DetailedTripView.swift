@@ -35,8 +35,10 @@ struct DetailedTripView: View {
             }
             
             Section(header: Text("Addresses")) {
-                AddressTileView(address: trip.startingAddress, title: "Starting address")
-                AddressTileView(address: trip.endingAddress, title: "Ending address")
+                AddressTileView(address: trip.startingAddress,
+                                title: NSLocalizedString("Starting address", comment: ""))
+                AddressTileView(address: trip.endingAddress,
+                                title: NSLocalizedString("Ending address", comment: ""))
             }
             
             Section(header: Text("Informations")) {

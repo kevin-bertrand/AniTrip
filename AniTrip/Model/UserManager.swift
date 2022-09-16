@@ -23,9 +23,10 @@ final class UserManager {
                                method: NetworkConfigurations.login.method,
                                authorization: .authorization(username: user.email, password: user.password),
                                body: deviceId) { [weak self] data, response, error in
-            if let self = self,
-               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
-               let statusCode = response?.statusCode,
+            guard let self = self,
+                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
+            
+            if let statusCode = response?.statusCode,
                let data = data {
                 switch statusCode {
                 case 200:
@@ -56,9 +57,10 @@ final class UserManager {
                                method: NetworkConfigurations.createAccount.method,
                                authorization: nil,
                                body: user) { [weak self]_, response, error in
-            if let self = self,
-               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
-               let statusCode = response?.statusCode {
+            guard let self = self,
+                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
+            
+            if let statusCode = response?.statusCode {
                 switch statusCode {
                 case 201:
                     Notification.AniTrip.accountCreationSuccess.sendNotification()
@@ -91,9 +93,10 @@ final class UserManager {
                                method: NetworkConfigurations.updateUser.method,
                                authorization: .authorization(bearerToken: connectedUser.token),
                                body: userToUpdate) { [weak self] data, response, error in
-            if let self = self,
-               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
-               let data = data,
+            guard let self = self,
+                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
+            
+            if let data = data,
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 202:
@@ -131,9 +134,10 @@ final class UserManager {
                                    method: NetworkConfigurations.updatePicture.method,
                                    user: connectedUser,
                                    file: imageData) { [weak self] _, response, error in
-            if let self = self,
-               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
-               let statusCode = response?.statusCode,
+            guard let self = self,
+                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
+            
+            if let statusCode = response?.statusCode,
                statusCode == 202 {
                 self.connectedUser?.image = image
                 Notification.AniTrip.updatePictureSuccess.sendNotification()
@@ -151,9 +155,10 @@ final class UserManager {
                                method: NetworkConfigurations.getProfilePicture.method,
                                authorization: nil,
                                body: nil) { [weak self] data, response, error in
-            if let self = self,
-               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
-               let status = response?.statusCode,
+            guard let self = self,
+                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
+            
+            if let status = response?.statusCode,
                status == 200,
                let data = data,
                let image = UIImage(data: data) {

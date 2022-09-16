@@ -26,26 +26,26 @@ struct HomeView: View {
                             Group {
                                 NewsTileView(title: NSLocalizedString("This week", comment: ""),
                                              icon: Image(systemName: "car"),
-                                             information: "\(tripController.news.numberOfTripThisWeek) trips",
+                                             information: "\(tripController.news.numberOfTripThisWeek) \(NSLocalizedString("trips", comment: ""))",
                                              percent: tripController.news.distancePercentSinceLastWeek,
-                                             comparaison: "week")
+                                             comparaison: NSLocalizedString("week", comment: ""))
                                 NewsTileView(title: NSLocalizedString("This week", comment: ""),
                                              icon: Image("TripIcon"),
                                              information: "\(tripController.news.distanceThisWeek.twoDigitPrecision) km",
                                              percent: tripController.news.numberTripPercentSinceLastWeek,
-                                             comparaison: "week")
+                                             comparaison: NSLocalizedString("week", comment: ""))
                                 NewsTileView(title: NSLocalizedString("This year", comment: ""),
                                              icon: Image(systemName: "car"),
-                                             information: "\(tripController.news.numberOfTripThisYear) trips",
+                                             information: "\(tripController.news.numberOfTripThisYear) \(NSLocalizedString("trips", comment: ""))",
                                              percent: tripController.news.distancePercentSinceLastYear,
-                                             comparaison: "year")
+                                             comparaison: NSLocalizedString("year", comment: ""))
                             }.padding(.leading, 10)
                             
                             NewsTileView(title: NSLocalizedString("This year", comment: ""),
                                          icon: Image("TripIcon"),
                                          information: "\(tripController.news.distanceThisYear.twoDigitPrecision) km",
                                          percent: tripController.news.numberTripPercentSinceLastYear,
-                                         comparaison: "year")
+                                         comparaison: NSLocalizedString("year", comment: ""))
                                 .padding(.horizontal, 10)
                         }
                         .padding(.vertical)
@@ -66,9 +66,9 @@ struct HomeView: View {
                         }
                         Spacer()
                         Picker("", selection: $tripController.chartFilter) {
-                            Text(ChartFilter.week.rawValue).tag(ChartFilter.week)
-                            Text(ChartFilter.month.rawValue).tag(ChartFilter.month)
-                            Text(ChartFilter.year.rawValue).tag(ChartFilter.year)
+                            Text(ChartFilter.week.localized).tag(ChartFilter.week)
+                            Text(ChartFilter.month.localized).tag(ChartFilter.month)
+                            Text(ChartFilter.year.localized).tag(ChartFilter.year)
                         }.pickerStyle(.menu)
                     }
                     

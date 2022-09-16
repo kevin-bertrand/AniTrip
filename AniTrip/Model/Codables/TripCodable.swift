@@ -77,6 +77,10 @@ enum ChartFilter: String, Equatable {
     case week = "7 days"
     case month = "1 month"
     case year = "1 year"
+    
+    var localized: String {
+        return NSLocalizedString(self.rawValue, comment: "")
+    }
 }
 
 struct TripFilterToExport: Codable {

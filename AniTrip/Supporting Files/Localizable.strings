@@ -5,3 +5,81 @@
   Created by Kevin Bertrand on 16/09/2022.
   
 */
+
+/* No comment provided by engineer. */
+"An unknown error occurs... Try laters!" = "Une erreur est survenue... Réessayez plus tard!"
+
+/* No comment provided by engineer. */
+"Your account is not activate yet!" = "Votre compte n'est pas encore activé!"
+
+/* No comment provided by engineer. */
+"You are not authorized to perform this action!" = "Vous n'êtes pas autorisé à effectuer cette action!"
+
+/* No comment provided by engineer. */
+"An error occurs during the request! Try again!" = "Une erreur est survenue pendant la requête! Veuillez réessayer!"
+
+/* No comment provided by engineer. */
+"Your are not connected to Internet!" = "Vous n'êtes pas connecté à Internet!"
+
+/* No comment provided by engineer. */
+"Successfull login!" = "Connexion réussie"
+
+/* No comment provided by engineer. */
+"Your credentials are not correct!" = "Vos identifiants ne sont pas correct!"
+
+/* No comment provided by engineer. */
+"Your account is created!" = "Votre compte est créé!"
+
+/* No comment provided by engineer. */
+"Your passwords don't match!" = "Vos mots de passes ne correspondent pas!"
+
+/* No comment provided by engineer. */
+"Your account cannot be created! Verify your informations!" = "Votre compte ne peut pas être créé! Vérifiez vos informations"
+
+/* No comment provided by engineer. */
+"Your profile is updated!" = "Votre profil est mis à jour!"
+
+/* No comment provided by engineer. */
+"Your picture is updated!" = "Votre photo de profil est mis à jour!"
+
+/* No comment provided by engineer. */
+"The position is updated!" = "La position a été mise à jour!"
+
+/* No comment provided by engineer. */
+"The position could not be updated!" = "La position n'a pas pu être mise à jour!"
+
+/* No comment provided by engineer. */
+"Volunteers list downloaded!" = "La liste des volontaires a été téléchargée!"
+
+/* No comment provided by engineer. */
+"The account is activate" = "Le compte est activé!"
+
+/* No comment provided by engineer. */
+"The account is desactivate" = "Le compte est désactivé!"
+
+/* No comment provided by engineer. */
+"Trips list downloaded!" = "La liste des trajets a été téléchargée!"
+
+/* No comment provided by engineer. */
+"Volunteer trip list downloaded!" = "La liste des volontaires a été téléchargée!"
+
+/* No comment provided by engineer. */
+"No trip list found!" = "Aucune liste de trajet n'a été trouvée!"
+
+/* No comment provided by engineer. */
+"Trip added with success!" = "Le trajet a été créé!"
+
+/* No comment provided by engineer. */
+"Trip update succeeded!" = "Le trajet a été mis à jour!"
+
+/* No comment provided by engineer. */
+"All informations are downloaded" = "Toutes les informations ont été téléchargées"
+
+/* No comment provided by engineer. */
+"An error occurs during the download of home informations!" = "Une erreur est survenue pendant le téléchargement des informations de l'accueil"
+
+/* No comment provided by engineer. */
+"A new account must be activate" = "Un nouveau compte doit être activé"
+
+/* No comment provided by engineer. */
+"All data are downloaded" = "Toutes les données ont été téléchargées"

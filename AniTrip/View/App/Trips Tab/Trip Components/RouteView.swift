@@ -59,9 +59,9 @@ struct MapView: UIViewRepresentable {
         directions.calculate { response, _ in
             guard let route = response?.routes.first else { return }
             mapView.addAnnotations([getMarker(marker: mark1,
-                                              title: "Start"),
+                                              title: NSLocalizedString("Start", comment: "")),
                                     getMarker(marker: mark2,
-                                              title: "End")])
+                                              title: NSLocalizedString("End", comment: ""))])
             mapView.addOverlay(route.polyline)
             mapView.setVisibleMapRect(
                 route.polyline.boundingMapRect,

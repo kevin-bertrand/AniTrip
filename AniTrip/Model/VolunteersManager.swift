@@ -25,9 +25,10 @@ final class VolunteersManager {
                                method: NetworkConfigurations.getVolunteersList.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: nil) { [weak self] (data, response, error) in
-            if let self = self,
-               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
-               let status = response?.statusCode,
+            guard let self = self,
+                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
+            
+            if let status = response?.statusCode,
                status == 200,
                let data = data,
                let volunteers = try? JSONDecoder().decode([DownloadedVolunteer].self, from: data) {
@@ -64,9 +65,10 @@ final class VolunteersManager {
                                method: NetworkConfigurations.desactivateAccount.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: nil) { [weak self] _, response, error in
-            if let self = self,
-               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
-               let statusCode = response?.statusCode,
+            guard let self = self,
+                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
+            
+            if let statusCode = response?.statusCode,
                statusCode == 200 {
                 self.getList(byUser: user)
                 Notification.AniTrip.desactivationSuccess.sendNotification()
@@ -85,9 +87,10 @@ final class VolunteersManager {
                                method: NetworkConfigurations.activateAccount.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: nil) { [weak self] _, response, error in
-            if let self = self,
-               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
-               let statusCode = response?.statusCode,
+            guard let self = self,
+                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
+            
+            if let statusCode = response?.statusCode,
                statusCode == 200 {
                 self.getList(byUser: user)
                 Notification.AniTrip.activationSuccess.sendNotification()
@@ -108,9 +111,10 @@ final class VolunteersManager {
                                method: NetworkConfigurations.updatePosition.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: volunteer) { [weak self] _, response, error in
-            if let self = self,
-               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
-               let statusCode = response?.statusCode {
+            guard let self = self,
+                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
+            
+            if let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
                     self.getList(byUser: user)

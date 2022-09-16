@@ -11,7 +11,7 @@ extension Notification {
     enum AniTrip: String {
         // General notification
         case unknownError = "An unknown error occurs... Try laters!"
-        case accountNotYetActivate = "Your account is not activate ye!!"
+        case accountNotYetActivate = "Your account is not activate yet!"
         case notAuthorized = "You are not authorized to perform this action!"
         case accountNotFound = "An error occurs during the request! Try again!"
         case noInternetConnection = "Your are not connected to Internet!"
@@ -22,7 +22,7 @@ extension Notification {
         
         // Account create notifications
         case accountCreationSuccess = "Your account is created!"
-        case accountCreationPasswordError = "Your password don't match!"
+        case accountCreationPasswordError = "Your passwords don't match!"
         case accountCreationInformationsError = "Your account cannot be created! Verify your informations!"
         
         // Update profile notifications
@@ -68,7 +68,7 @@ extension Notification {
         
         /// Getting the message of the notification
         var notificationMessage: String {
-            return self.rawValue
+            return NSLocalizedString(self.rawValue, comment: "")
         }
         
         /// Send the notification throw the NotificationCenter

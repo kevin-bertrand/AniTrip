@@ -59,7 +59,7 @@ final class UserController: ObservableObject {
     @Published var userToUpdate: UserToUpdate = UserController.emptyUpdateUser
     @Published var successUpdate: Bool = false
     @Published var showUpdateProfileImage: Bool = false
-        
+    
     // MARK: Methods
     /// Check if the email must be saved
     func checkSaveEmail() {
@@ -242,8 +242,9 @@ final class UserController: ObservableObject {
                     self.createAccountEmailTextField = ""
                     self.createAccountPasswordTextField = ""
                     self.createAccountPasswordVerification = ""
-                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: NSLocalizedString("Success!",
-                                                                                                                   comment: ""))
+                    self.appController.showAlertView(withMessage: notificationMessage,
+                                                     andTitle: NSLocalizedString("Success!",
+                                                                                 comment: ""))
                 case Notification.AniTrip.updateProfileSuccess.notificationName:
                     self.userToUpdate.password = ""
                     self.userToUpdate.passwordVerification = ""
@@ -251,8 +252,9 @@ final class UserController: ObservableObject {
                 case Notification.AniTrip.loginWrongCredentials.notificationName,
                     Notification.AniTrip.accountCreationPasswordError.notificationName,
                     Notification.AniTrip.accountCreationInformationsError.notificationName:
-                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: NSLocalizedString("Error",
-                                                                                                                   comment: ""))
+                    self.appController.showAlertView(withMessage: notificationMessage,
+                                                     andTitle: NSLocalizedString("Error",
+                                                                                 comment: ""))
                 case Notification.AniTrip.updatePictureSuccess.notificationName:
                     self.showUpdateProfileImage = false
                 default: break
