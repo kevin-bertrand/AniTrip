@@ -50,7 +50,6 @@ struct HomeView: View {
                         }
                         .padding(.vertical)
                     }
-                    
                 }
             }
             .listRowBackground(Color.clear)

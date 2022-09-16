@@ -80,6 +80,9 @@
 "Ask new account" = "Créer le compte";
 
 /* No comment provided by engineer. */
+"Biometrics is now active!" = "L'authentification est maintenant activée!";
+
+/* No comment provided by engineer. */
 "Both new password must match!" = "Les 2 nouveaux mots de passe doivent être identiques";
 
 /* No comment provided by engineer. */
@@ -125,10 +128,13 @@
 "Download in progress..." = "Téléchargement en cours...";
 
 /* No comment provided by engineer. */
+"End" = "Fin";
+
+/* No comment provided by engineer. */
 "End filter" = "Fin";
 
 /* No comment provided by engineer. */
-"Ending address" = "Destination";
+"Ending address" = "Adresse de destination";
 
 /* No comment provided by engineer. */
 "Enter an address bellow or drag on the map." = "Entrez une adresse ci-dessous ou glisser la carte";
@@ -243,10 +249,13 @@
 "Settings" = "Paramètres";
 
 /* No comment provided by engineer. */
+"Start" = "Début";
+
+/* No comment provided by engineer. */
 "Start filter" = "Début";
 
 /* No comment provided by engineer. */
-"Starting address" = "Départ";
+"Starting address" = "Adresse de départ";
 
 /* No comment provided by engineer. */
 "Street name" = "Nom de la rue";
@@ -285,7 +294,13 @@
 "Trip distance:" = "Distance:";
 
 /* No comment provided by engineer. */
+"trips" = "trajets";
+
+/* No comment provided by engineer. */
 "Trips" = "Trajets";
+
+/* No comment provided by engineer. */
+"Unable to access biometrics" = "Impossible d'activer l'authentification biométrique";
 
 /* No comment provided by engineer. */
 "Unknown user" = "Utilisateur inconnu";
@@ -321,10 +336,16 @@
 "Volunteers" = "Volontaires";
 
 /* No comment provided by engineer. */
+"week" = "semaine";
+
+/* No comment provided by engineer. */
 "Which day was the trip?" = "Quel jour était le trajets ?";
 
 /* No comment provided by engineer. */
 "Would you like to use FaceId for further login?" = "Voulez-vous utiliser FaceID pour vos futur connexion?";
+
+/* No comment provided by engineer. */
+"year" = "année";
 
 /* No comment provided by engineer. */
 "Yes" = "Oui";
@@ -451,3 +472,15 @@
 
 /* No comment provided by engineer. */
 "1 year" = "1 année";
+
+/* No comment provided by engineer. */
+"Administrator" = "Administrateur";
+
+/* No comment provided by engineer. */
+"User" = "Utilisateur";
+
+/* No comment provided by engineer. */
+"Do you confirm the change of status of" = "Confirmez-vous le changement de status de";
+
+/* No comment provided by engineer. */
+"to" = "à";

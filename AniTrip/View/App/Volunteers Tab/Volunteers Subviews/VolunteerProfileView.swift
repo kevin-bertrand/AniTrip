@@ -131,7 +131,8 @@ struct VolunteerProfileView: View {
             showUpdatePositionAlert = true
         }
         .actionSheet(isPresented: $showUpdatePositionAlert) {
-            let message = "Do you confirm the change of status of \(volunteer.email) to \(volunteer.position.name)?"
+            let doYouConfirmMessage = NSLocalizedString("Do you confirm the change of status of", comment: "")
+            let message = "\(doYouConfirmMessage) \(volunteer.email) \(NSLocalizedString("to", comment: "")) \(volunteer.position.name)?"
             return ActionSheet(title: Text("Confirm status change"),
                         message: Text(message),
                         buttons: [.default(Text("Yes"),

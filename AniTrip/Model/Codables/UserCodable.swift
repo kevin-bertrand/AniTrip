@@ -89,5 +89,7 @@ enum Position: String, Codable, CaseIterable {
     case admin = "administrator"
     case user = "user"
     
-    var name: String { rawValue }
+    var name: String {
+        return NSLocalizedString(self.rawValue.capitalized, comment: "")
+    }
 }

@@ -106,25 +106,14 @@ final class UserController: ObservableObject {
     
     /// Login with biometrics
     func loginWithBiometrics() {
-        var error: NSError?
-        let laContext = LAContext()
-        
-        if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
-            let biometrics = laContext.biometryType == .faceID ? "FaceId" : "TouchId"
-            let needAccess = NSLocalizedString("Need access to", comment: "")
-            let toAuthenticate = NSLocalizedString("to authenticate to the app.", comment: "")
-            let reason = "\(needAccess) \(biometrics) \(toAuthenticate)"
-            
-            laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
-                                     localizedReason: reason) { success, _ in
-                DispatchQueue.main.async {
-                    if success {
-                        self.loginPasswordTextField = self.savedPassword
-                        self.performLogin()
-                    } else {
-                        Mixpanel.mainInstance().track(event: NSLocalizedString("Unable to access biometrics",
-                                                                               comment: ""))
-                    }
+        getBiometrics { success in
+            DispatchQueue.main.async {
+                if success {
+                    self.loginPasswordTextField = self.savedPassword
+                    self.performLogin()
+                } else {
+                    Mixpanel.mainInstance().track(event: NSLocalizedString("Unable to access biometrics",
+                                                                           comment: ""))
                 }
             }
         }
@@ -265,6 +254,25 @@ final class UserController: ObservableObject {
     
     /// Getting biometric authentication to active it
     private func activateBiometric() {
+        getBiometrics { success in
+            DispatchQueue.main.async {
+                if success {
+                    self.savedEmail = self.loginEmailTextField
+                    self.savedPassword = self.loginPasswordTextField
+                    self.appController.showAlertView(withMessage: NSLocalizedString("Biometrics is now active!",
+                                                                                    comment: ""),
+                                                     andTitle: NSLocalizedString("Success",
+                                                                                 comment: ""))
+                } else {
+                    Mixpanel.mainInstance().track(event: NSLocalizedString("Unable to access biometrics",
+                                                                           comment: ""))
+                }
+            }
+        }
+    }
+    
+    /// Get biometrics
+    private func getBiometrics(completionHandler: @escaping ((Bool)->Void)) {
         var error: NSError?
         let laContext = LAContext()
         
@@ -277,20 +285,11 @@ final class UserController: ObservableObject {
             laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
                                      localizedReason: reason) { success, _ in
                 DispatchQueue.main.async {
-                    if success {
-                        self.savedEmail = self.loginEmailTextField
-                        self.savedPassword = self.loginPasswordTextField
-                        self.appController.showAlertView(withMessage: NSLocalizedString("Biometrics is now active!",
-                                                                                        comment: ""),
-                                                         andTitle: NSLocalizedString("Success",
-                                                                                     comment: ""))
-                    } else {
-                        Mixpanel.mainInstance().track(event: NSLocalizedString("Unable to access biometrics",
-                                                                               comment: ""))
-                    }
+                    completionHandler(success)
                 }
             }
         }
+        completionHandler(false)
     }
     
     /// Perfom action when login success
