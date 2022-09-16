@@ -21,14 +21,17 @@ struct LoginView: View {
                 .aspectRatio(1, contentMode: .fit)
             
             HStack {
+                Spacer()
                 LoginToolbar(selected: $selectedPage)
                 Spacer()
             }
             
             if selectedPage == 1 {
                 CreateAccountView()
+                    .transition(.opacity)
             } else {
                 LoginSubview()
+                    .transition(.opacity)
             }
         }
         .padding()

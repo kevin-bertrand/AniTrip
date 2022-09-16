@@ -46,7 +46,9 @@ struct EndAddressView: View {
             }
             .padding()
             
-            DetectAddressView(address: $trip.endingAddress, addressFound: $canValidateStep, name: "Ending address")
+            DetectAddressView(address: $trip.endingAddress,
+                              addressFound: $canValidateStep,
+                              name: NSLocalizedString("Ending address", comment: ""))
         }
     }
 }

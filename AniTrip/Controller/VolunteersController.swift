@@ -54,7 +54,10 @@ final class VolunteersController: ObservableObject {
     /// Activate account
     func activateAccount(of volunteer: VolunteerToActivate, by user: User?) {
         guard let user = user, user.position == .admin else {
-            appController.showAlertView(withMessage: "You are not authorized!", andTitle: "Error")
+            appController.showAlertView(withMessage: NSLocalizedString("You are not authorized!",
+                                                                       comment: ""),
+                                        andTitle: NSLocalizedString("Error",
+                                                                    comment: ""))
             return
         }
         
@@ -64,7 +67,10 @@ final class VolunteersController: ObservableObject {
     /// Desactivate account
     func desactivateAccount(of volunteer: Volunteer, by user: User?) {
         guard let user = user, user.position == .admin else {
-            appController.showAlertView(withMessage: "You are not authorized!", andTitle: "Error")
+            appController.showAlertView(withMessage: NSLocalizedString("You are not authorized!",
+                                                                       comment: ""),
+                                        andTitle: NSLocalizedString("Error",
+                                                                    comment: ""))
             return
         }
         
@@ -74,16 +80,16 @@ final class VolunteersController: ObservableObject {
     /// Refuse the activation
     func refuseActivation() {
         accountToActivateEmail = ""
-        activationMessage = "Account not activate"
-        activationTitle = "You refused the activation"
+        activationMessage = NSLocalizedString("Account not activate", comment: "")
+        activationTitle = NSLocalizedString("You refused the activation", comment: "")
         showActivationAlert = true
     }
     
     /// Reset the activation view
     func resetActivationView() {
         accountToActivateEmail = ""
-        activationMessage = "Account not activate"
-        activationTitle = "You refused the activation"
+        activationMessage = NSLocalizedString("Account not activate", comment: "")
+        activationTitle = NSLocalizedString("You refused the activation", comment: "")
         displayActivateAccount = false
         showActivationAlert = false
     }
@@ -152,27 +158,27 @@ final class VolunteersController: ObservableObject {
                 case Notification.AniTrip.activationSuccess.notificationName:
                     if self.displayActivateAccount {
                         self.accountToActivateEmail = ""
-                        self.activationMessage = "Activation success"
-                        self.activationTitle = "You accept the activation!"
+                        self.activationMessage = NSLocalizedString("Activation success", comment: "")
+                        self.activationTitle = NSLocalizedString("You accept the activation!", comment: "")
                         self.showActivationAlert = true
                     } else {
-                        self.changeActivationStatusTitle = "Activation success!"
-                        self.changeActivationStatusMessage = "The account is now active!"
+                        self.changeActivationStatusTitle = NSLocalizedString("Activation success!", comment: "")
+                        self.changeActivationStatusMessage = NSLocalizedString("The account is now active!", comment: "")
                         self.changeActivationStatusAlert = true
                     }
                 case Notification.AniTrip.desactivationSuccess.notificationName:
-                    self.changeActivationStatusTitle = "Desctivation success!"
-                    self.changeActivationStatusMessage = "The account is no longer active!"
+                    self.changeActivationStatusTitle = NSLocalizedString("Desctivation success!", comment: "")
+                    self.changeActivationStatusMessage = NSLocalizedString("The account is no longer active!", comment: "")
                     self.changeActivationStatusAlert = true
                 case Notification.AniTrip.showActivateAccount.notificationName:
                     self.accountToActivateEmail = notificationMessage
                     self.displayActivateAccount = true
                 case Notification.AniTrip.positionUpdated.notificationName:
-                    self.changeActivationStatusTitle = "Success!"
+                    self.changeActivationStatusTitle = NSLocalizedString("Success!", comment: "")
                     self.changeActivationStatusMessage = notificationMessage
                     self.changeActivationStatusAlert = true
                 case Notification.AniTrip.positionNotUpdated.notificationName:
-                    self.changeActivationStatusTitle = "Error!"
+                    self.changeActivationStatusTitle = NSLocalizedString("Error!", comment: "")
                     self.changeActivationStatusMessage = notificationMessage
                     self.changeActivationStatusAlert = true
                 default: break

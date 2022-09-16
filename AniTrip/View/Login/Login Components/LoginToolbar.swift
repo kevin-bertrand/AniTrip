@@ -12,9 +12,9 @@ struct LoginToolbar: View {
     
     var body: some View {
         HStack {
-            ToolbarTabItemView(selected: $selected, title: "LOGIN", tabId: 0)
+            ToolbarTabItemView(selected: $selected, title: NSLocalizedString("LOGIN", comment: "Login tab"), tabId: 0)
             
-            ToolbarTabItemView(selected: $selected, title: "REGISTER", tabId: 1)
+            ToolbarTabItemView(selected: $selected, title:  NSLocalizedString("REGISTER", comment: "Register tab"), tabId: 1)
         }
         .padding(8)
         .animation(.default)

@@ -81,17 +81,20 @@ final class UserController: ObservableObject {
     
     /// Perfom login
     func performLogin() {
-        appController.setLoadingInProgress(withMessage: "Log in... Please wait!")
+        appController.setLoadingInProgress(withMessage: NSLocalizedString("Log in... Please wait!",
+                                                                          comment: ""))
         loginErrorMessage = ""
         
         guard loginEmailTextField.isNotEmpty && loginPasswordTextField.isNotEmpty else {
-            loginErrorMessage = "A password and an email are needed!"
+            loginErrorMessage = NSLocalizedString("A password and an email are needed!",
+                                                  comment: "")
             appController.resetLoadingInProgress()
             return
         }
         
         guard loginEmailTextField.isEmail else {
-            loginErrorMessage = "A valid email address is required!"
+            loginErrorMessage = NSLocalizedString("A valid email address is required!",
+                                                  comment: "")
             appController.resetLoadingInProgress()
             return
         }
@@ -108,7 +111,9 @@ final class UserController: ObservableObject {
         
         if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let biometrics = laContext.biometryType == .faceID ? "FaceId" : "TouchId"
-            let reason = "Need access to \(biometrics) to authenticate to the app."
+            let needAccess = NSLocalizedString("Need access to", comment: "")
+            let toAuthenticate = NSLocalizedString("to authenticate to the app.", comment: "")
+            let reason = "\(needAccess) \(biometrics) \(toAuthenticate)"
             
             laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
                                      localizedReason: reason) { success, _ in
@@ -117,7 +122,8 @@ final class UserController: ObservableObject {
                         self.loginPasswordTextField = self.savedPassword
                         self.performLogin()
                     } else {
-                        Mixpanel.mainInstance().track(event: "Unable to access biometrics")
+                        Mixpanel.mainInstance().track(event: NSLocalizedString("Unable to access biometrics",
+                                                                               comment: ""))
                     }
                 }
             }
@@ -126,19 +132,22 @@ final class UserController: ObservableObject {
     
     /// Create an account
     func createAccount() {
-        appController.setLoadingInProgress(withMessage: "Account creation in progress...")
+        appController.setLoadingInProgress(withMessage: NSLocalizedString("Account creation in progress...",
+                                                                          comment: ""))
         loginErrorMessage = ""
         
         guard createAccountEmailTextField.isNotEmpty
                 && createAccountPasswordTextField.isNotEmpty
                 && createAccountPasswordVerification.isNotEmpty else {
-            createAccountErrorMessage = "An email and a password are required!"
+            createAccountErrorMessage = NSLocalizedString("An email and a password are required!",
+                                                          comment: "")
             appController.resetLoadingInProgress()
             return
         }
         
         guard createAccountEmailTextField.isEmail else {
-            createAccountErrorMessage = "An valid email is required!"
+            createAccountErrorMessage = NSLocalizedString("An valid email is required!",
+                                                          comment: "")
             appController.resetLoadingInProgress()
             return
         }
@@ -159,19 +168,24 @@ final class UserController: ObservableObject {
     
     /// Update connected user
     func updateUser() {
-        appController.setLoadingInProgress(withMessage: "Updating in progress...")
+        appController.setLoadingInProgress(withMessage: NSLocalizedString("Updating in progress...",
+                                                                          comment: ""))
         
         guard userToUpdate.password == userToUpdate.passwordVerification else {
             appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: "Both new password must match!",
-                                        andTitle: "Password error!")
+            appController.showAlertView(withMessage: NSLocalizedString("Both new password must match!",
+                                                                       comment: ""),
+                                        andTitle: NSLocalizedString("Password error!",
+                                                                    comment: ""))
             return
         }
         
         if userToUpdate.phoneNumber.isNotEmpty && !userToUpdate.phoneNumber.isPhone {
             appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: "You must enter a valid phone number!",
-                                        andTitle: "Phone number error")
+            appController.showAlertView(withMessage: NSLocalizedString("You must enter a valid phone number!",
+                                                                       comment: ""),
+                                        andTitle: NSLocalizedString("Phone number error",
+                                                                    comment: ""))
             return
         }
         
@@ -228,7 +242,8 @@ final class UserController: ObservableObject {
                     self.createAccountEmailTextField = ""
                     self.createAccountPasswordTextField = ""
                     self.createAccountPasswordVerification = ""
-                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Success!")
+                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: NSLocalizedString("Success!",
+                                                                                                                   comment: ""))
                 case Notification.AniTrip.updateProfileSuccess.notificationName:
                     self.userToUpdate.password = ""
                     self.userToUpdate.passwordVerification = ""
@@ -236,7 +251,8 @@ final class UserController: ObservableObject {
                 case Notification.AniTrip.loginWrongCredentials.notificationName,
                     Notification.AniTrip.accountCreationPasswordError.notificationName,
                     Notification.AniTrip.accountCreationInformationsError.notificationName:
-                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Error")
+                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: NSLocalizedString("Error",
+                                                                                                                   comment: ""))
                 case Notification.AniTrip.updatePictureSuccess.notificationName:
                     self.showUpdateProfileImage = false
                 default: break
@@ -252,7 +268,9 @@ final class UserController: ObservableObject {
         
         if laContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
             let biometrics = laContext.biometryType == .faceID ? "FaceId" : "TouchId"
-            let reason = "Need access to \(biometrics) to authenticate to the app."
+            let needAccess = NSLocalizedString("Need access to", comment: "")
+            let toAuthenticate = NSLocalizedString("to authenticate to the app.", comment: "")
+            let reason = "\(needAccess) \(biometrics) \(toAuthenticate)"
             
             laContext.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics,
                                      localizedReason: reason) { success, _ in
@@ -260,9 +278,13 @@ final class UserController: ObservableObject {
                     if success {
                         self.savedEmail = self.loginEmailTextField
                         self.savedPassword = self.loginPasswordTextField
-                        self.appController.showAlertView(withMessage: "Biometrics is now active!", andTitle: "Success")
+                        self.appController.showAlertView(withMessage: NSLocalizedString("Biometrics is now active!",
+                                                                                        comment: ""),
+                                                         andTitle: NSLocalizedString("Success",
+                                                                                     comment: ""))
                     } else {
-                        Mixpanel.mainInstance().track(event: "Unable to access biometrics")
+                        Mixpanel.mainInstance().track(event: NSLocalizedString("Unable to access biometrics",
+                                                                               comment: ""))
                     }
                 }
             }

@@ -24,24 +24,24 @@ struct HomeView: View {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 0) {
                             Group {
-                                NewsTileView(title: "This week",
+                                NewsTileView(title: NSLocalizedString("This week", comment: ""),
                                              icon: Image(systemName: "car"),
                                              information: "\(tripController.news.numberOfTripThisWeek) trips",
                                              percent: tripController.news.distancePercentSinceLastWeek,
                                              comparaison: "week")
-                                NewsTileView(title: "This week",
+                                NewsTileView(title: NSLocalizedString("This week", comment: ""),
                                              icon: Image("TripIcon"),
                                              information: "\(tripController.news.distanceThisWeek.twoDigitPrecision) km",
                                              percent: tripController.news.numberTripPercentSinceLastWeek,
                                              comparaison: "week")
-                                NewsTileView(title: "This year",
+                                NewsTileView(title: NSLocalizedString("This year", comment: ""),
                                              icon: Image(systemName: "car"),
                                              information: "\(tripController.news.numberOfTripThisYear) trips",
                                              percent: tripController.news.distancePercentSinceLastYear,
                                              comparaison: "year")
                             }.padding(.leading, 10)
                             
-                            NewsTileView(title: "This year",
+                            NewsTileView(title: NSLocalizedString("This year", comment: ""),
                                          icon: Image("TripIcon"),
                                          information: "\(tripController.news.distanceThisYear.twoDigitPrecision) km",
                                          percent: tripController.news.numberTripPercentSinceLastYear,
@@ -62,7 +62,7 @@ struct HomeView: View {
                         VStack(alignment: .leading) {
                             Text("Distance")
                                 .font(.title2.bold())
-                            Text("For last \((tripController.chartFilter == .week) ? "7 days" : tripController.chartFilter == .month ? "1 month" : "1 year")")
+                            Text((tripController.chartFilter == .week) ? NSLocalizedString("For last 7 days", comment: "") : tripController.chartFilter == .month ? NSLocalizedString("For last 1 month", comment: "") : NSLocalizedString("For last 1 year", comment: ""))
                         }
                         Spacer()
                         Picker("", selection: $tripController.chartFilter) {

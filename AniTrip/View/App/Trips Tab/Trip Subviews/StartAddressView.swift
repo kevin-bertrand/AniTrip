@@ -43,7 +43,9 @@ struct StartAddressView: View {
             }
             .padding()
             
-            DetectAddressView(address: $trip.startingAddress, addressFound: $canValidateStep, name: "Starting address")
+            DetectAddressView(address: $trip.startingAddress,
+                              addressFound: $canValidateStep,
+                              name: NSLocalizedString("Starting address", comment: ""))
         }
     }
 }

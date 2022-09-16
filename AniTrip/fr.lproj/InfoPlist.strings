@@ -1,0 +1,6 @@
+/* Privacy - Face ID Usage Description */
+"NSFaceIDUsageDescription" = "Authentification pour l'application";
+
+/* Privacy - Location When In Use Usage Description */
+"NSLocationWhenInUseUsageDescription" = "Cette application utilise votre localisation pour augmenter votre expérience";
+

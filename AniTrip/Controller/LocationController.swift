@@ -102,7 +102,7 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
                 self.getAddress()
             } else {
                 self.searchingAddress = false
-                self.addressLocated = "No address found!"
+                self.addressLocated = NSLocalizedString("No address found!", comment: "") 
             }
         }
     }
@@ -130,11 +130,11 @@ final class LocationController: NSObject, ObservableObject, CLLocationManagerDel
                 let addressLine2 = "\(self.address.zipCode), \(self.address.city)"
                 self.addressLocated = "\(addressLine1) - \(addressLine2) - \(self.address.country)"
                 if self.addressLocated == ",  - ,  - " {
-                    self.addressLocated = "No address found!"
+                    self.addressLocated = NSLocalizedString("No address found!", comment: "")
                 }
                 self.enteredAddress = ""
             } else {
-                self.addressLocated = "No address found!"
+                self.addressLocated = NSLocalizedString("No address found!", comment: "")
             }
         }
     }

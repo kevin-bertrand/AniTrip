@@ -26,18 +26,30 @@ struct UpdateAddressView: View {
             }
             Group {
                 HStack {
-                    TextFieldUnderlinedView(text: $address.streetNumber, title: "Number")
+                    TextFieldUnderlinedView(text: $address.streetNumber,
+                                            title: NSLocalizedString("Number",
+                                                                     comment: ""))
                         .frame(width: 75)
-                    TextFieldUnderlinedView(text: $address.roadName, title: "Street name")
+                    TextFieldUnderlinedView(text: $address.roadName,
+                                            title: NSLocalizedString("Street name",
+                                                                     comment: ""))
                 }
                 
-                TextFieldUnderlinedView(text: $address.complement, title: "Complement")
+                TextFieldUnderlinedView(text: $address.complement,
+                                        title: NSLocalizedString("Complement",
+                                                                 comment: ""))
                 HStack {
-                    TextFieldUnderlinedView(text: $address.zipCode, title: "Zip code")
+                    TextFieldUnderlinedView(text: $address.zipCode,
+                                            title: NSLocalizedString("Zip code",
+                                                                     comment: ""))
                         .frame(width: 100)
-                    TextFieldUnderlinedView(text: $address.city, title: "City")
+                    TextFieldUnderlinedView(text: $address.city,
+                                            title: NSLocalizedString("City",
+                                                                     comment: ""))
                 }
-                TextFieldUnderlinedView(text: $address.country, title: "Country")
+                TextFieldUnderlinedView(text: $address.country,
+                                        title: NSLocalizedString("Country",
+                                                                 comment: ""))
             }
             .autocorrectionDisabled(true)
         }
@@ -45,7 +57,8 @@ struct UpdateAddressView: View {
             addressToModify = address
         }
         .sheet(isPresented: $showMapView, content: {
-            SearchAddressView(address: $addressToModify, showMapSheet: $showMapView)
+            SearchAddressView(address: $addressToModify,
+                              showMapSheet: $showMapView)
         })
         .onChange(of: addressToModify) { newValue in
             address = newValue

@@ -34,7 +34,9 @@ struct SearchAddressView: View {
                 .disabled(!canValidateAddress)
             }.padding()
             
-            DetectAddressView(address: $address, addressFound: $canValidateAddress, name: "Address")
+            DetectAddressView(address: $address,
+                              addressFound: $canValidateAddress,
+                              name: NSLocalizedString("Address", comment: ""))
         }
     }
 }

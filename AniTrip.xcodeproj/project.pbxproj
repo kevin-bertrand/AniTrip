@@ -92,6 +92,8 @@
 		06E0893A28D0E6F40092410C /* PDFKitRepresentedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E0893928D0E6F40092410C /* PDFKitRepresentedView.swift */; };
 		06E0893C28D0E7090092410C /* PDFUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06E0893B28D0E7090092410C /* PDFUIView.swift */; };
 		06E0894028D31C180092410C /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 06E0893F28D31C180092410C /* .swiftlint.yml */; };
+		06E0894528D45F9E0092410C /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06E0894328D45F9E0092410C /* InfoPlist.strings */; };
+		06E0894828D45F9E0092410C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 06E0894628D45F9E0092410C /* Localizable.strings */; };
 		06FBF141288EF67500222480 /* LoginToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF140288EF67500222480 /* LoginToolbar.swift */; };
 		06FBF144288EF78200222480 /* LoginSubview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF143288EF78200222480 /* LoginSubview.swift */; };
 		06FBF148289009F900222480 /* UpdateProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06FBF147289009F900222480 /* UpdateProfileImageView.swift */; };
@@ -203,6 +205,8 @@
 		06E0893928D0E6F40092410C /* PDFKitRepresentedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFKitRepresentedView.swift; sourceTree = "<group>"; };
 		06E0893B28D0E7090092410C /* PDFUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFUIView.swift; sourceTree = "<group>"; };
 		06E0893F28D31C180092410C /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		06E0894428D45F9E0092410C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		06E0894728D45F9E0092410C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		06FBF140288EF67500222480 /* LoginToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginToolbar.swift; sourceTree = "<group>"; };
 		06FBF143288EF78200222480 /* LoginSubview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSubview.swift; sourceTree = "<group>"; };
 		06FBF147289009F900222480 /* UpdateProfileImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateProfileImageView.swift; sourceTree = "<group>"; };
@@ -341,6 +345,8 @@
 			isa = PBXGroup;
 			children = (
 				0690C4212888CDC900B57B92 /* Info.plist */,
+				06E0894628D45F9E0092410C /* Localizable.strings */,
+				06E0894328D45F9E0092410C /* InfoPlist.strings */,
 				0690C4202888CDB900B57B92 /* AniTrip.entitlements */,
 				06BF724E287B6C69006F0839 /* Extension */,
 				065E4780287B574700D32E05 /* Supporting Files */,
@@ -668,6 +674,7 @@
 			knownRegions = (
 				en,
 				Base,
+				fr,
 			);
 			mainGroup = 065E4747287B573600D32E05;
 			packageReferences = (
@@ -690,7 +697,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				06E0894828D45F9E0092410C /* Localizable.strings in Resources */,
 				06E0894028D31C180092410C /* .swiftlint.yml in Resources */,
+				06E0894528D45F9E0092410C /* InfoPlist.strings in Resources */,
 				065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */,
 				065E4758287B573700D32E05 /* Assets.xcassets in Resources */,
 			);
@@ -841,6 +850,25 @@
 			targetProxy = 065E4761287B573700D32E05 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		06E0894328D45F9E0092410C /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06E0894428D45F9E0092410C /* fr */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		06E0894628D45F9E0092410C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				06E0894728D45F9E0092410C /* fr */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		065E4772287B573700D32E05 /* Debug */ = {

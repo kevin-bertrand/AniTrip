@@ -1,0 +1,346 @@
+/* No comment provided by engineer. */
+"%lld %% since last %@" = "%lld %% depuis la dernière %@";
+
+/* No comment provided by engineer. */
+"⚙️ Settings" = "⚙️ Paramètres";
+
+/* No comment provided by engineer. */
+"🏠 Home" = "🏠 Accueil";
+
+/* No comment provided by engineer. */
+"👥 Volunteers" = "👥 Volontaires";
+
+/* No comment provided by engineer. */
+"📍 Trips" = "📍 Trajets";
+
+/* No comment provided by engineer. */
+"A password and an email are needed!" = "Un mot de passe et un email sont nécessaire!";
+
+/* No comment provided by engineer. */
+"A valid email address is required!" = "Un email valide est nécessaire!";
+
+/* No comment provided by engineer. */
+"Account creation in progress..." = "Création du compte en cours...";
+
+/* No comment provided by engineer. */
+"Account not activate" = "Votre compte n'est pas activé!";
+
+/* No comment provided by engineer. */
+"Activate account" = "Activer le compte";
+
+/* No comment provided by engineer. */
+"Activate the account %@ ?" = "Activer le compte %@ ?";
+
+/* No comment provided by engineer. */
+"Activation success" = "Activation réussie";
+
+/* No comment provided by engineer. */
+"Activation success!" = "Activation réussie!";
+
+/* No comment provided by engineer. */
+"Active accounts" = "Comptes activés";
+
+/* No comment provided by engineer. */
+"Add" = "Ajouter";
+
+/* No comment provided by engineer. */
+"Add comment" = "Ajouter un commentaire";
+
+/* No comment provided by engineer. */
+"Add comment..." = "Ajouter un commentaire...";
+
+/* No comment provided by engineer. */
+"Adding a mission" = "Ajouter une mission";
+
+/* No comment provided by engineer. */
+"Adding trip in progress..." = "Ajout du trajet en cours...";
+
+/* No comment provided by engineer. */
+"Address" = "Adresse";
+
+/* No comment provided by engineer. */
+"Addresses" = "Adresses";
+
+/* No comment provided by engineer. */
+"Allow get current location" = "Autoriser la localisation";
+
+/* No comment provided by engineer. */
+"Allow notifications" = "Autoriser les notifications";
+
+/* No comment provided by engineer. */
+"An email and a password are required!" = "Un mot de passe et un email sont nécessaire!";
+
+/* No comment provided by engineer. */
+"An valid email is required!" = "Un email valide est nécessaire!";
+
+/* No comment provided by engineer. */
+"App Settings" = "Réglagles de l'application";
+
+/* No comment provided by engineer. */
+"Ask new account" = "Créer le compte";
+
+/* No comment provided by engineer. */
+"Both new password must match!" = "Les 2 nouveaux mots de passe doivent être identiques";
+
+/* No comment provided by engineer. */
+"Calculating trip distance" = "Calculation de la distance";
+
+/* No comment provided by engineer. */
+"Cancel" = "Annuler";
+
+/* No comment provided by engineer. */
+"City" = "Ville";
+
+/* No comment provided by engineer. */
+"Comments" = "Commantaires";
+
+/* No comment provided by engineer. */
+"Complement" = "Complément";
+
+/* No comment provided by engineer. */
+"Confirm status change" = "Confirmer le changement de status";
+
+/* No comment provided by engineer. */
+"Connect to activate the new account of %@" = "Connectez-vous pour activer le compte de %@";
+
+/* No comment provided by engineer. */
+"Contact informations" = "Informations de contact";
+
+/* No comment provided by engineer. */
+"Country" = "Pays";
+
+/* No comment provided by engineer. */
+"Desactivate account" = "Désactiver le compte";
+
+/* No comment provided by engineer. */
+"Desactivate accounts" = "Comptes désactivés";
+
+/* No comment provided by engineer. */
+"Desctivation success!" = "Désactivation réussie!";
+
+/* No comment provided by engineer. */
+"Disconnect" = "Déconnexion";
+
+/* No comment provided by engineer. */
+"Download in progress..." = "Téléchargement en cours...";
+
+/* No comment provided by engineer. */
+"End filter" = "Fin";
+
+/* No comment provided by engineer. */
+"Ending address" = "Destination";
+
+/* No comment provided by engineer. */
+"Enter an address bellow or drag on the map." = "Entrez une adresse ci-dessous ou glisser la carte";
+
+/* No comment provided by engineer. */
+"Error" = "Erreur";
+
+/* No comment provided by engineer. */
+"Error!" = "Erreur!";
+
+/* Example email */
+"example@mail.com" = "exemple@email.com";
+
+/* No comment provided by engineer. */
+"Export" = "";
+
+/* No comment provided by engineer. */
+"Export trips" = "Exporter les trajets";
+
+/* No comment provided by engineer. */
+"For last 1 month" = "Pour la dernière semaine";
+
+/* No comment provided by engineer. */
+"For last 1 year" = "Pour la dernière année";
+
+/* No comment provided by engineer. */
+"For last 7 days" = "Pour les 7 derniers jours";
+
+/* No comment provided by engineer. */
+"Get trips" = "Obtenir les trajets";
+
+/* No comment provided by engineer. */
+"Go to settings" = "Aller aux paramètres";
+
+/* No comment provided by engineer. */
+"Go to the iPhone settings' to change notifications and location authorization!" = "Aller dans les paramètres de votre iPhone pour changer les paramètres de notification et de localisation!";
+
+/* No comment provided by engineer. */
+"Home" = "Accueil";
+
+/* No comment provided by engineer. */
+"Log in... Please wait!" = "Connexion... Veuillez patienter!";
+
+/* Login button
+   Login tab */
+"LOGIN" = "CONNEXION";
+
+/* No comment provided by engineer. */
+"Need access to" = "Besoin d'un accès à";
+
+/* No comment provided by engineer. */
+"New mission" = "Nouvelle mission";
+
+/* No comment provided by engineer. */
+"News" = "Actualités";
+
+/* No comment provided by engineer. */
+"Next" = "Suivant";
+
+/* No comment provided by engineer. */
+"No" = "Non";
+
+/* No comment provided by engineer. */
+"No address" = "Aucune adresse";
+
+/* No comment provided by engineer. */
+"No address found!" = "Pas d'adresse trouvée!";
+
+/* No comment provided by engineer. */
+"No data. Add a new trip to see this chart!" = "Pas de données. Ajouter un nouveau trajet pour voir ce graphique!";
+
+/* No comment provided by engineer. */
+"Number" = "Numéro";
+
+/* Password placeholder */
+"Password" = "Mot de passe";
+
+/* No comment provided by engineer. */
+"Password error!" = "Erreur de mot de passe!";
+
+/* Password verification placeholder */
+"Password verification" = "Vérification du mot de passe";
+
+/* No comment provided by engineer. */
+"Phone" = "Téléphone";
+
+/* No comment provided by engineer. */
+"Phone number error" = "Erreur avec le numéro de téléphone";
+
+/* No comment provided by engineer. */
+"Previous" = "Précédent";
+
+/* Register tab */
+"REGISTER" = "CREATION";
+
+/* No comment provided by engineer. */
+"Save email? " = "Enregistrer l'email?";
+
+/* No comment provided by engineer. */
+"Search" = "Recherche";
+
+/* No comment provided by engineer. */
+"Search .." = "Recherche ...";
+
+/* No comment provided by engineer. */
+"Security" = "Sécurité";
+
+/* No comment provided by engineer. */
+"Select on map" = "Sélectionnez sur la carte";
+
+/* No comment provided by engineer. */
+"Settings" = "Paramètres";
+
+/* No comment provided by engineer. */
+"Start filter" = "Début";
+
+/* No comment provided by engineer. */
+"Starting address" = "Départ";
+
+/* No comment provided by engineer. */
+"Street name" = "Nom de la rue";
+
+/* No comment provided by engineer. */
+"Success" = "Succès";
+
+/* No comment provided by engineer. */
+"Success!" = "Succès!";
+
+/* No comment provided by engineer. */
+"Tap to select a picture" = "Appuyez pour sélectionner une photo";
+
+/* No comment provided by engineer. */
+"The account is no longer active!" = "Le compte n'est plus activé!";
+
+/* No comment provided by engineer. */
+"The account is now active!" = "Le compte est maintenant activé!";
+
+/* No comment provided by engineer. */
+"This week" = "Cette semaine";
+
+/* No comment provided by engineer. */
+"This year" = "Cet année";
+
+/* No comment provided by engineer. */
+"Three latest trips" = "Trois derniers trajets";
+
+/* No comment provided by engineer. */
+"to authenticate to the app." = "pour s'authentifier sur l'app.";
+
+/* No comment provided by engineer. */
+"Trip" = "Trajet";
+
+/* No comment provided by engineer. */
+"Trip distance:" = "Distance:";
+
+/* No comment provided by engineer. */
+"Trips" = "Trajets";
+
+/* No comment provided by engineer. */
+"Unknown user" = "Utilisateur inconnu";
+
+/* No comment provided by engineer. */
+"Update image" = "Mise à jour de la photo";
+
+/* No comment provided by engineer. */
+"Updating in progress..." = "Modification en cours...";
+
+/* No comment provided by engineer. */
+"Updating trip in progress..." = "Modification du trajet en cours...";
+
+/* No comment provided by engineer. */
+"Use %@" = "Utiliser %@";
+
+/* No comment provided by engineer. */
+"Use dark mode" = "Utiliser le Dark Mode";
+
+/* No comment provided by engineer. */
+"Use default iPhone scheme" = "Utiliser le thème de l'iPhone";
+
+/* No comment provided by engineer. */
+"User" = "Utilisateur";
+
+/* No comment provided by engineer. */
+"User Informations" = "Informations de l'utilisateur";
+
+/* No comment provided by engineer. */
+"Validate" = "Valider";
+
+/* No comment provided by engineer. */
+"Volunteers" = "Volontaires";
+
+/* No comment provided by engineer. */
+"Which day was the trip?" = "Quel jour était le trajets ?";
+
+/* No comment provided by engineer. */
+"Would you like to use FaceId for further login?" = "Voulez-vous utiliser FaceID pour vos futur connexion?";
+
+/* No comment provided by engineer. */
+"Yes" = "Oui";
+
+/* No comment provided by engineer. */
+"You accept the activation!" = "Vous avez accepté l'activation!";
+
+/* No comment provided by engineer. */
+"You are not authorized!" = "Vous n'êtes pas autorisé!";
+
+/* No comment provided by engineer. */
+"You must enter a valid phone number!" = "Vous devez entrer un numéro de téléphone valide!";
+
+/* No comment provided by engineer. */
+"You refused the activation" = "Vous avez refusé l'activation!";
+
+/* No comment provided by engineer. */
+"Zip code" = "Code postal";
+

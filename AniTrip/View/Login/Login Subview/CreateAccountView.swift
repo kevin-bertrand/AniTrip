@@ -17,17 +17,20 @@ struct CreateAccountView: View {
             Group {
                 TextFieldWithIcon(text: $userController.createAccountEmailTextField,
                                   icon: "person.fill",
-                                  placeholder: "example@mail.com",
+                                  placeholder: NSLocalizedString("example@mail.com",
+                                                                 comment: "Example email"),
                                   keyboardType: .emailAddress)
                 
                 TextFieldWithIcon(text: $userController.createAccountPasswordTextField,
                                   icon: "lock",
-                                  placeholder: "Password",
+                                  placeholder: NSLocalizedString("Password",
+                                                                 comment: "Password placeholder"),
                                   isSecure: true)
 
                 TextFieldWithIcon(text: $userController.createAccountPasswordVerification,
                                   icon: "lock",
-                                  placeholder: "Password verification",
+                                  placeholder: NSLocalizedString("Password verification",
+                                                                 comment: "Password verification placeholder"),
                                   isSecure: true)
                 
                 Text(userController.createAccountErrorMessage)
@@ -39,7 +42,7 @@ struct CreateAccountView: View {
             
             ButtonWithIcon(isLoading: .constant(false), action: {
                 userController.createAccount()
-            }, icon: nil, title: "Ask new account")
+            }, icon: nil, title: NSLocalizedString("Ask new account", comment: ""))
         }
     }
 }

@@ -99,7 +99,8 @@ final class TripController: ObservableObject {
     /// Adding a new trip
     func add(byUser user: User?) {
         showUpdateTripView = false
-        appController.setLoadingInProgress(withMessage: "Adding trip in progress...")
+        appController.setLoadingInProgress(withMessage: NSLocalizedString("Adding trip in progress...",
+                                                                          comment: ""))
         
         tripManager.add(trip: updateTrip, by: user)
     }
@@ -107,7 +108,8 @@ final class TripController: ObservableObject {
     /// Update a trip
     func update(trip: UpdateTrip, byUser user: User?) {
         showUpdateTripView = false
-        appController.setLoadingInProgress(withMessage: "Updating trip in progress...")
+        appController.setLoadingInProgress(withMessage: NSLocalizedString("Updating trip in progress...",
+                                                                          comment: ""))
         
         tripManager.update(trip: trip, by: user)
     }
@@ -132,7 +134,8 @@ final class TripController: ObservableObject {
     /// Download data to export
     func downloadPDF(byUser user: User?, for userId: UUID?) {
         guard let user = user, let userId = userId else { return }
-        appController.setLoadingInProgress(withMessage: "Download in progress...")
+        appController.setLoadingInProgress(withMessage: NSLocalizedString("Download in progress...",
+                                                                          comment: ""))
         let filters = TripFilterToExport(userID: userId,
                                          startDate: startFilterDate.iso8601,
                                          endDate: endFilterDate.iso8601)

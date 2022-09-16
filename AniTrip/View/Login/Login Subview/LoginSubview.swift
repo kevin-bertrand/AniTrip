@@ -20,7 +20,8 @@ struct LoginSubview: View {
             Group {
                 TextFieldWithIcon(text: $userController.loginEmailTextField,
                                   icon: "person.fill",
-                                  placeholder: "example@mail.com",
+                                  placeholder: NSLocalizedString("example@mail.com",
+                                                                 comment: "Example email"),
                                   keyboardType: .emailAddress)
                 
                 HStack {
@@ -36,7 +37,8 @@ struct LoginSubview: View {
                 
                 TextFieldWithIcon(text: $userController.loginPasswordTextField,
                                   icon: "lock.fill",
-                                  placeholder: "Password",
+                                  placeholder: NSLocalizedString("Password",
+                                                                 comment: "Password placeholder"),
                                   isSecure: true)
                 
                 Text(userController.loginErrorMessage)
@@ -59,7 +61,7 @@ struct LoginSubview: View {
                     userController.checkSaveEmail()
                     userController.performLogin()
                 }, icon: "chevron.right",
-                               title: "LOGIN")
+                               title: NSLocalizedString("LOGIN", comment: "Login button"))
                 
                 if userController.getBiometricStatus() {
                     Button {

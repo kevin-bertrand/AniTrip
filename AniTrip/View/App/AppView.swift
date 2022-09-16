@@ -10,7 +10,7 @@ import SwiftUI
 struct AppView: View {
     @EnvironmentObject private var userController: UserController
     @EnvironmentObject private var volunteersController: VolunteersController
-        
+
     var body: some View {
         TabView {
             Group {

@@ -14,8 +14,11 @@ struct ToolbarTabItemView: View {
     let tabId: Int
     
     var body: some View {
-        Button(action: { selected = tabId },
-               label: {
+        Button(action: {
+            withAnimation {
+                selected = tabId
+            }
+        }, label: {
             Text(title)
                 .frame(width: 100, height: 25)
                 .padding(.vertical, 12)
