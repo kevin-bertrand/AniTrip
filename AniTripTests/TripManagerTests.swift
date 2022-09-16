@@ -284,6 +284,18 @@ final class TripManagerTests: XCTestCase {
         XCTAssertTrue(tripManager.threeLatestTrips.isEmpty)
     }
     
+    /// User with no id
+    func testGivenGettingLatestTrips_WhenUserUserHasNoId_ThenLatestTripShouldBeEmpty() {
+        // Given
+        configureManager(correctData: nil, response: .status0, status: .error)
+        
+        // When
+        tripManager.threeLatestTrips(byUser: User(id: nil, firstname: "", lastname: "", email: "", phoneNumber: "", gender: .man, position: .admin, missions: [], isActive: true, token: ""), filter: .month)
+        
+        // Then
+        XCTAssertTrue(tripManager.threeLatestTrips.isEmpty)
+    }
+    
     /// Success
     func testGivenGettingLatestTrips_WhenGettingSuccess_ThenLatestTripShouldBeFilled() {
         // Given

@@ -34,12 +34,13 @@ class NetworkManager: NetworkProtocol {
             if let authorization = authorization {
                 headers.add(authorization)
             }
+            
             var request = try URLRequest(url: formattedUrl, method: method)
             if let body = body {
                 request.httpBody = try JSONEncoder().encode(body)
             }
             request.headers = headers
-
+            
             session.request(request).responseData(completionHandler: { data in
                 completionHandler((data.data, data.response, data.error))
             })
@@ -66,7 +67,7 @@ class NetworkManager: NetworkProtocol {
         if let filename = "userPicture.jpeg".data(using: .utf8) {
             multiPart.append(filename, withName: "filename")
         }
-    
+        
         session.upload(multipartFormData: multiPart, to: formattedUrl, method: .patch, headers: headers)
             .response { data in
                 completionHandler((data.data, data.response, data.error))
@@ -93,6 +94,16 @@ class NetworkManager: NetworkProtocol {
             }
         } else {
             completionHandler(nil)
+        }
+    }
+    
+    /// Check if the device is connected to internet
+    func checkIfDeviceIsConnectedToInternet(with error: Error?) -> Bool {
+        if let error = error as? NSError, error.code == 13 {
+            Notification.AniTrip.noInternetConnection.sendNotification()
+            return false
+        } else {
+            return true
         }
     }
     

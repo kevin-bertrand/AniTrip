@@ -35,18 +35,14 @@ final class TripManager {
         }
         
         var params = NetworkConfigurations.getTripList.urlParams
-        
-        if let volunteer = volunteer {
-            params.append("\(volunteer.id)")
-        } else {
-            params.append("\(userId)")
-        }
+        params.append(volunteer == nil ? "\(userId)" : "\(volunteer!.id)")
         
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.getTripList.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] data, response, _ in
+                               body: nil) { [weak self] data, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
@@ -72,8 +68,9 @@ final class TripManager {
         networkManager.request(urlParams: NetworkConfigurations.addTrip.urlParams,
                                method: NetworkConfigurations.addTrip.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: trip.toAddTripFormat()) { [weak self] _, response, _ in
+                               body: trip.toAddTripFormat()) { [weak self] _, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
@@ -100,8 +97,9 @@ final class TripManager {
         networkManager.request(urlParams: NetworkConfigurations.updateTrip.urlParams,
                                method: NetworkConfigurations.updateTrip.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: trip.toAddTripFormat()) { [weak self] _, response, _ in
+                               body: trip.toAddTripFormat()) { [weak self] _, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
@@ -131,8 +129,9 @@ final class TripManager {
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.getThreeLatestTrip.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] data, response, _ in
+                               body: nil) { [weak self] data, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
@@ -162,8 +161,9 @@ final class TripManager {
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.getChartPoints.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] data, response, _ in
+                               body: nil) { [weak self] data, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
@@ -192,9 +192,10 @@ final class TripManager {
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.getNews.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] data, response, _ in
+                               body: nil) { [weak self] data, response, error in
             
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:
@@ -215,8 +216,9 @@ final class TripManager {
         networkManager.request(urlParams: NetworkConfigurations.filterTripsToExport.urlParams,
                                method: NetworkConfigurations.filterTripsToExport.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: filters) { [weak self] data, response, _ in
+                               body: filters) { [weak self] data, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode,
                statusCode == 200,
                let data = data {

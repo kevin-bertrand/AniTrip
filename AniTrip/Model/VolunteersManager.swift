@@ -24,8 +24,9 @@ final class VolunteersManager {
         networkManager.request(urlParams: NetworkConfigurations.getVolunteersList.urlParams,
                                method: NetworkConfigurations.getVolunteersList.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] (data, response, _) in
+                               body: nil) { [weak self] (data, response, error) in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let status = response?.statusCode,
                status == 200,
                let data = data,
@@ -62,8 +63,9 @@ final class VolunteersManager {
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.desactivateAccount.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] _, response, _ in
+                               body: nil) { [weak self] _, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode,
                statusCode == 200 {
                 self.getList(byUser: user)
@@ -82,8 +84,9 @@ final class VolunteersManager {
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.activateAccount.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: nil) { [weak self] _, response, _ in
+                               body: nil) { [weak self] _, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode,
                statusCode == 200 {
                 self.getList(byUser: user)
@@ -104,8 +107,9 @@ final class VolunteersManager {
         networkManager.request(urlParams: NetworkConfigurations.updatePosition.urlParams,
                                method: NetworkConfigurations.updatePosition.method,
                                authorization: .authorization(bearerToken: user.token),
-                               body: volunteer) { [weak self] _, response, _ in
+                               body: volunteer) { [weak self] _, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode {
                 switch statusCode {
                 case 200:

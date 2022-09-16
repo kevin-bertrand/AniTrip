@@ -64,6 +64,7 @@ final class AppController: ObservableObject {
         configureNotification(for: Notification.AniTrip.accountNotYetActivate.notificationName)
         configureNotification(for: Notification.AniTrip.notAuthorized.notificationName)
         configureNotification(for: Notification.AniTrip.accountNotFound.notificationName)
+        configureNotification(for: Notification.AniTrip.noInternetConnection.notificationName)
     }
     
     // MARK: Private
@@ -83,8 +84,9 @@ final class AppController: ObservableObject {
             case Notification.AniTrip.unknownError.notificationName,
                 Notification.AniTrip.accountNotYetActivate.notificationName,
                 Notification.AniTrip.notAuthorized.notificationName,
-                Notification.AniTrip.accountNotFound.notificationName:
-                self.showAlertView(withMessage: notificationMessage, andTitle: "Error")
+                Notification.AniTrip.accountNotFound.notificationName,
+                Notification.AniTrip.noInternetConnection.notificationName:
+                self.showAlertView(withMessage: notificationMessage, andTitle: NSLocalizedString("Error", comment: ""))
             default: break
             }
         }

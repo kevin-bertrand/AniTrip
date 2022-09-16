@@ -22,8 +22,9 @@ final class UserManager {
         networkManager.request(urlParams: NetworkConfigurations.login.urlParams,
                                method: NetworkConfigurations.login.method,
                                authorization: .authorization(username: user.email, password: user.password),
-                               body: deviceId) { [weak self] data, response, _ in
+                               body: deviceId) { [weak self] data, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode,
                let data = data {
                 switch statusCode {
@@ -54,8 +55,10 @@ final class UserManager {
         networkManager.request(urlParams: NetworkConfigurations.createAccount.urlParams,
                                method: NetworkConfigurations.createAccount.method,
                                authorization: nil,
-                               body: user) { _, response, _ in
-            if let statusCode = response?.statusCode {
+                               body: user) { [weak self]_, response, error in
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
+               let statusCode = response?.statusCode {
                 switch statusCode {
                 case 201:
                     Notification.AniTrip.accountCreationSuccess.sendNotification()
@@ -87,8 +90,9 @@ final class UserManager {
         networkManager.request(urlParams: NetworkConfigurations.updateUser.urlParams,
                                method: NetworkConfigurations.updateUser.method,
                                authorization: .authorization(bearerToken: connectedUser.token),
-                               body: userToUpdate) { [weak self] data, response, _ in
+                               body: userToUpdate) { [weak self] data, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let data = data,
                let statusCode = response?.statusCode {
                 switch statusCode {
@@ -122,12 +126,13 @@ final class UserManager {
             Notification.AniTrip.unknownError.sendNotification()
             return
         }
-
+        
         networkManager.uploadFiles(urlParams: NetworkConfigurations.updatePicture.urlParams,
                                    method: NetworkConfigurations.updatePicture.method,
                                    user: connectedUser,
-                                   file: imageData) { [weak self] _, response, _ in
+                                   file: imageData) { [weak self] _, response, error in
             if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
                let statusCode = response?.statusCode,
                statusCode == 202 {
                 self.connectedUser?.image = image
@@ -145,8 +150,10 @@ final class UserManager {
         networkManager.request(urlParams: params,
                                method: NetworkConfigurations.getProfilePicture.method,
                                authorization: nil,
-                               body: nil) { data, response, _ in
-            if let status = response?.statusCode,
+                               body: nil) { [weak self] data, response, error in
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
+               let status = response?.statusCode,
                status == 200,
                let data = data,
                let image = UIImage(data: data) {
@@ -176,17 +183,17 @@ final class UserManager {
            let gender = Gender(rawValue: user.gender),
            let position = Position(rawValue: user.position) {
             var decodedUser = User(image: nil,
-                            id: userId,
-                            firstname: user.firstname,
-                            lastname: user.lastname,
-                            email: user.email,
-                            phoneNumber: user.phoneNumber,
-                            gender: gender,
-                            position: position,
-                            missions: user.missions,
-                            isActive: true,
-                            address: user.address ?? LocationController.emptyAddress,
-                            token: user.token)
+                                   id: userId,
+                                   firstname: user.firstname,
+                                   lastname: user.lastname,
+                                   email: user.email,
+                                   phoneNumber: user.phoneNumber,
+                                   gender: gender,
+                                   position: position,
+                                   missions: user.missions,
+                                   isActive: true,
+                                   address: user.address ?? LocationController.emptyAddress,
+                                   token: user.token)
             networkManager.downloadProfilePicture(from: user.imagePath) { image in
                 decodedUser.image = image
                 completionHandler(decodedUser)

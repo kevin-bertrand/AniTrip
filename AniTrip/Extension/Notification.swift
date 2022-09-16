@@ -14,6 +14,7 @@ extension Notification {
         case accountNotYetActivate = "Your account is not activate ye!!"
         case notAuthorized = "You are not authorized to perform this action!"
         case accountNotFound = "An error occurs during the request! Try again!"
+        case noInternetConnection = "Your are not connected to Internet!"
         
         // Login notifications
         case loginSuccess = "Successfull login!"
