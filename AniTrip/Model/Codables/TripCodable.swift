@@ -81,6 +81,7 @@ enum ChartFilter: String, Equatable {
 
 struct TripFilterToExport: Codable {
     let userID: UUID
+    let language: String
     let startDate: String
     let endDate: String
 }

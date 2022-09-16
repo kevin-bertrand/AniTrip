@@ -137,6 +137,7 @@ final class TripController: ObservableObject {
         appController.setLoadingInProgress(withMessage: NSLocalizedString("Download in progress...",
                                                                           comment: ""))
         let filters = TripFilterToExport(userID: userId,
+                                         language: Locale.current.languageCode ?? "en",
                                          startDate: startFilterDate.iso8601,
                                          endDate: endFilterDate.iso8601)
         tripManager.downloadPDF(with: filters, by: user)

@@ -62,7 +62,7 @@ struct HomeView: View {
                         VStack(alignment: .leading) {
                             Text("Distance")
                                 .font(.title2.bold())
-                            Text((tripController.chartFilter == .week) ? NSLocalizedString("For last 7 days", comment: "") : tripController.chartFilter == .month ? NSLocalizedString("For last 1 month", comment: "") : NSLocalizedString("For last 1 year", comment: ""))
+                            Text(getChartSubtitle())
                         }
                         Spacer()
                         Picker("", selection: $tripController.chartFilter) {
@@ -123,6 +123,17 @@ struct HomeView: View {
             if let connectedUser = userController.connectedUser {
                 tripController.homeIsLoaded(byUser: connectedUser)
             }
+        }
+    }
+    
+    private func getChartSubtitle() -> String {
+        switch tripController.chartFilter {
+        case .year:
+            return NSLocalizedString("For last 1 year", comment: "")
+        case .month:
+            return NSLocalizedString("For last 1 month", comment: "")
+        case .week:
+            return NSLocalizedString("For last 7 days", comment: "")
         }
     }
 }
