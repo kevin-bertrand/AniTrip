@@ -272,7 +272,7 @@ final class UserController: ObservableObject {
     }
     
     /// Get biometrics
-    private func getBiometrics(completionHandler: @escaping ((Bool)->Void)) {
+    private func getBiometrics(completionHandler: @escaping ((Bool) -> Void)) {
         var error: NSError?
         let laContext = LAContext()
         
