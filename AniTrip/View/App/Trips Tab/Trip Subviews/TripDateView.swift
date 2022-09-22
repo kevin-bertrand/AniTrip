@@ -7,9 +7,7 @@
 
 import SwiftUI
 
-struct TripDateView: View {
-    @EnvironmentObject private var tripController: TripController
-    
+struct TripDateView: View {    
     @Binding var step: Int
     @Binding var trip: UpdateTrip
     

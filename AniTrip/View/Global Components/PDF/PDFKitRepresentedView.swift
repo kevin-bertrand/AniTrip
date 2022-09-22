@@ -18,7 +18,6 @@ struct PDFKitRepresentedView: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<PDFKitRepresentedView>) -> PDFKitRepresentedView.UIViewType {
         let pdfView = PDFView()
         pdfView.document = PDFDocument(data: pdf)
-        pdfView.autoScales = true
         return pdfView
     }
 

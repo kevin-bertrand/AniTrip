@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct EndAddressView: View {
-    @EnvironmentObject private var tripController: TripController
-    
     @Binding var step: Int
     @Binding var trip: UpdateTrip
     
@@ -57,6 +55,5 @@ struct AddingEndAddressView_Previews: PreviewProvider {
     static var previews: some View {
         EndAddressView(step: .constant(2),
                        trip: .constant(TripController.emptyUpdateTrip))
-            .environmentObject(TripController(appController: AppController()))
     }
 }

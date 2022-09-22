@@ -14,6 +14,9 @@ struct HomeView: View {
     @EnvironmentObject private var userController: UserController
     @EnvironmentObject private var volunteersController: VolunteersController
     
+    @State private var threeLatestTrips: [Trip] = []
+    @State private var chartFilter: ChartFilter = .week
+    
     var body: some View {
         List {
             Section {
@@ -64,7 +67,7 @@ struct HomeView: View {
                             Text(getChartSubtitle())
                         }
                         Spacer()
-                        Picker("", selection: $tripController.chartFilter) {
+                        Picker("", selection: $chartFilter) {
                             Text(ChartFilter.week.localized).tag(ChartFilter.week)
                             Text(ChartFilter.month.localized).tag(ChartFilter.month)
                             Text(ChartFilter.year.localized).tag(ChartFilter.year)
@@ -102,7 +105,7 @@ struct HomeView: View {
                     Spacer()
                 }
                 
-                ForEach($tripController.threeLatestTrips, id: \.id) { $trip in
+                ForEach($threeLatestTrips, id: \.id) { $trip in
                     NavigationLink {
                         DetailedTripView(trip: $trip)
                     } label: {
@@ -115,6 +118,8 @@ struct HomeView: View {
         .onChange(of: tripController.chartFilter, perform: { _ in
             tripController.downlaodChartPoint(byUser: userController.connectedUser)
         })
+        .syncChartFilter($chartFilter, with: $tripController.chartFilter)
+        .onReceive(tripController.$threeLatestTrips, perform: { threeLatestTrips = $0 })
         .sheet(isPresented: $volunteersController.displayActivateAccount) {
             ActivateAccountView()
         }

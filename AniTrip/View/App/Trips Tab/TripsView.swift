@@ -11,13 +11,18 @@ struct TripsView: View {
     @EnvironmentObject var tripController: TripController
     @EnvironmentObject var userController: UserController
     
+    @State private var showUpdateTripView: Bool = false
+    @State private var selectedTrip: UpdateTrip = TripController.emptyUpdateTrip
+    @State private var searchFilter: String = ""
+    @State private var trips: [Trip] = []
+    
     var body: some View {
-        TripListView(searchFilter: $tripController.searchFilter, trips: $tripController.trips)
+        TripListView(searchFilter: $searchFilter, trips: $trips)
             .onAppear {
                 tripController.getList(byUser: userController.connectedUser)
             }
-            .sheet(isPresented: $tripController.showUpdateTripView, content: {
-                UpdateTripView(trip: $tripController.updateTrip, isAnUpdate: .constant(false))
+            .sheet(isPresented: $showUpdateTripView, content: {
+                UpdateTripView(trip: $selectedTrip, isAnUpdate: .constant(false))
             })
             .toolbar {
                 Button {
@@ -25,6 +30,13 @@ struct TripsView: View {
                 } label: {
                     Label("Add", systemImage: "plus.circle")
                 }
+            }
+            .syncBool($showUpdateTripView, with: $tripController.showUpdateTripView)
+            .syncUpdateTrip($selectedTrip, with: $tripController.updateTrip)
+            .syncText($searchFilter, with: $tripController.searchFilter)
+            .onReceive(tripController.$trips, perform: { trips = $0 })
+            .onAppear {
+                selectedTrip = TripController.emptyUpdateTrip
             }
     }
 }

@@ -13,6 +13,9 @@ struct TripListView: View {
     @Binding var searchFilter: String
     @Binding var trips: [Trip]
     
+    @State private var showUpdateTripView: Bool = false
+    @State private var selectedTrip: UpdateTrip = TripController.emptyUpdateTrip
+    
     var body: some View {
         Form {
             Section {
@@ -31,10 +34,14 @@ struct TripListView: View {
                 }
             }
         }
-        .sheet(isPresented: $tripController.showUpdateTripView, content: {
-            UpdateTripView(trip: $tripController.updateTrip, isAnUpdate: .constant(false))
-        })
-        
+//        .sheet(isPresented: $showUpdateTripView, content: {
+//            UpdateTripView(trip: $selectedTrip, isAnUpdate: .constant(false))
+//        })
+        .syncBool($showUpdateTripView, with: $tripController.showUpdateTripView)
+        .syncUpdateTrip($selectedTrip, with: $tripController.updateTrip)
+        .onAppear {
+            selectedTrip = TripController.emptyUpdateTrip
+        }
     }
 }
 

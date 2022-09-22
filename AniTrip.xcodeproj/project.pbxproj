@@ -50,6 +50,7 @@
 		065E478A287B58C600D32E05 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4789287B58C600D32E05 /* LoginView.swift */; };
 		065FF5742886D9B7001BF623 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FF5732886D9B7001BF623 /* Date.swift */; };
 		065FF5762886DC4E001BF623 /* SearchTextFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */; };
+		066EC9CB28DC9E5000F1F985 /* SyncData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 066EC9CA28DC9E5000F1F985 /* SyncData.swift */; };
 		067DF8822891641200323F2A /* TripManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 067DF8812891641200323F2A /* TripManagerTests.swift */; };
 		067DF8842891651B00323F2A /* trips.json in Resources */ = {isa = PBXBuildFile; fileRef = 067DF8832891651B00323F2A /* trips.json */; };
 		067DF88628916C8600323F2A /* threeLatestsTrips.json in Resources */ = {isa = PBXBuildFile; fileRef = 067DF88528916C8600323F2A /* threeLatestsTrips.json */; };
@@ -162,6 +163,7 @@
 		065E4789287B58C600D32E05 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		065FF5732886D9B7001BF623 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		065FF5752886DC4E001BF623 /* SearchTextFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextFieldView.swift; sourceTree = "<group>"; };
+		066EC9CA28DC9E5000F1F985 /* SyncData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SyncData.swift; sourceTree = "<group>"; };
 		067DF8812891641200323F2A /* TripManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripManagerTests.swift; sourceTree = "<group>"; };
 		067DF8832891651B00323F2A /* trips.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = trips.json; sourceTree = "<group>"; };
 		067DF88528916C8600323F2A /* threeLatestsTrips.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = threeLatestsTrips.json; sourceTree = "<group>"; };
@@ -469,6 +471,7 @@
 			isa = PBXGroup;
 			children = (
 				068FDBEB2887461700ACA72D /* RoundedCorner.swift */,
+				066EC9CA28DC9E5000F1F985 /* SyncData.swift */,
 			);
 			path = Modifiers;
 			sourceTree = "<group>";
@@ -817,6 +820,7 @@
 				060A8B5528AE18C50015BA4D /* TripsExportFilterView.swift in Sources */,
 				06955E9D2887FD1C006B502B /* TripMissionsView.swift in Sources */,
 				06158E532885902D00C3BE6E /* TripsView.swift in Sources */,
+				066EC9CB28DC9E5000F1F985 /* SyncData.swift in Sources */,
 				06158E3228855D6C00C3BE6E /* UpdateProfileView.swift in Sources */,
 				06158E2C2885500100C3BE6E /* MapPlace.swift in Sources */,
 				06BF7266287E1484006F0839 /* AppView.swift in Sources */,

@@ -19,6 +19,11 @@ struct AniTripApp: App {
     @StateObject private var volunteerController: VolunteersController
     @StateObject private var tripController: TripController
     
+    // Declaration of state variables
+    @State private var showAlert: Bool = false
+    @State private var showLoading: Bool = false
+    @State private var isConnected: Bool = false
+    
     // Getting color scheme settings store in memory
     @AppStorage("anitripUseDefaultScheme") var useDefaultScheme: Bool = true
     @AppStorage("anitripUseDarkScheme") var useDarkScheme: Bool = false
@@ -37,7 +42,7 @@ struct AniTripApp: App {
             Group {
                 ZStack {
                     Group {
-                        if userController.isConnected {
+                        if isConnected {
                             AppView()
                         } else {
                             LoginView()
@@ -45,7 +50,7 @@ struct AniTripApp: App {
                     }
                     .disabled(appController.loadingInProgress)
                     
-                    if appController.loadingInProgress {
+                    if showLoading {
                         LoadingInProgressView()
                     }
                 }
@@ -54,7 +59,7 @@ struct AniTripApp: App {
             .environmentObject(appController)
             .environmentObject(volunteerController)
             .environmentObject(tripController)
-            .alert(isPresented: $appController.showAlertView) {
+            .alert(isPresented: $showAlert) {
                 Alert(title: Text(appController.alertViewTitle),
                       message: Text(appController.alertViewMessage),
                       dismissButton: .default(Text("OK")))
@@ -65,6 +70,9 @@ struct AniTripApp: App {
                     .current()
                     .requestAuthorization(options: [.alert, .sound, .badge]) {_, _ in}
             }
+            .syncBool($appController.showAlertView, with: $showAlert)
+            .syncBool($appController.loadingInProgress, with: $showLoading)
+            .onReceive(userController.$isConnected, perform: { isConnected = $0 })
         }
     }
 }

@@ -13,11 +13,14 @@ struct TripsExportFilterView: View {
     
     let userToExportId: UUID?
     
+    @State private var startFilter: Date = Date()
+    @State private var endFilter: Date = Date()
+    
     var body: some View {
         ScrollView {
             Text("Start filter")
                 .font(.title2.bold())
-            DatePicker("", selection: $tripController.startFilterDate,
+            DatePicker("", selection: $startFilter,
                        in: Date().getDatePickerRange,
                        displayedComponents: .date)
                 .datePickerStyle(.wheel)
@@ -26,7 +29,7 @@ struct TripsExportFilterView: View {
             Divider()
             Text("End filter")
                 .font(.title2.bold())
-            DatePicker("", selection: $tripController.endFilterDate,
+            DatePicker("", selection: $endFilter,
                        in: Date().getDatePickerRange,
                        displayedComponents: .date)
                 .datePickerStyle(.wheel)
@@ -46,6 +49,8 @@ struct TripsExportFilterView: View {
             }
         }
         .navigationTitle(Text("Export"))
+        .syncDate($startFilter, with: $tripController.startFilterDate)
+        .syncDate($endFilter, with: $tripController.endFilterDate)
     }
 }
 

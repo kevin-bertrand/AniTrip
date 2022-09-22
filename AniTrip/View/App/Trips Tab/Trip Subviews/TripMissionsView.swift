@@ -13,6 +13,8 @@ struct TripMissionsView: View {
     @Binding var step: Int
     @Binding var trip: UpdateTrip
     
+    @State private var newMission: String = ""
+    
     var body: some View {
         VStack {
             HStack {
@@ -44,7 +46,7 @@ struct TripMissionsView: View {
             .padding()
             
             HStack {
-                TextField("New mission", text: $tripController.newMission)
+                TextField("New mission", text: $newMission)
                     .padding()
                     .textFieldStyle(.roundedBorder)
                 Button {
@@ -66,6 +68,7 @@ struct TripMissionsView: View {
             
             Spacer()
         }
+        .syncText($newMission, with: $tripController.newMission)
     }
 }
 

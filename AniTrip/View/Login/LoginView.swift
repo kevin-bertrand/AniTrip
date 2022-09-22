@@ -9,8 +9,6 @@ import LocalAuthentication
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject private var userController: UserController
-    
     @State private var selectedPage: Int = 0
     
     var body: some View {
@@ -41,6 +39,5 @@ struct LoginView: View {
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         LoginView()
-            .environmentObject(UserController(appController: AppController()))
     }
 }

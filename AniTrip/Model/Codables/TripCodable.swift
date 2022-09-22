@@ -27,7 +27,7 @@ struct Trip: Codable, Identifiable {
     }
 }
 
-struct UpdateTrip: Codable {
+struct UpdateTrip: Codable, Equatable {
     var id: UUID?
     var date: Date
     var missions: [String]

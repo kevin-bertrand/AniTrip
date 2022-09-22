@@ -35,8 +35,10 @@ final class AppController: ObservableObject {
     
     /// Reset loading in progress
     func resetLoadingInProgress() {
-        loadingMessage = ""
-        loadingInProgress = false
+        DispatchQueue.main.async {
+            self.loadingMessage = ""
+            self.loadingInProgress = false
+        }
     }
     
     /// Show an alert view
@@ -55,6 +57,8 @@ final class AppController: ObservableObject {
     /// Disconnect user
     func disconnect() {
         NetworkManager.stopAllRequests
+        resetLoadingInProgress()
+        resetAlertView()
     }
     
     // MARK: Initialization

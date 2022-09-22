@@ -12,13 +12,16 @@ struct LoginSubview: View {
     @EnvironmentObject private var userController: UserController
     @EnvironmentObject private var volunteersController: VolunteersController
     
+    @State private var email: String = ""
+    @State private var password: String = ""
+    
     private let laContext = LAContext()
     
     var body: some View {
         VStack {
             Spacer()
             Group {
-                TextFieldWithIcon(text: $userController.loginEmailTextField,
+                TextFieldWithIcon(text: $email,
                                   icon: "person.fill",
                                   placeholder: NSLocalizedString("example@mail.com",
                                                                  comment: "Example email"),
@@ -35,7 +38,7 @@ struct LoginSubview: View {
                 }
                 .padding(.bottom, 25)
                 
-                TextFieldWithIcon(text: $userController.loginPasswordTextField,
+                TextFieldWithIcon(text: $password,
                                   icon: "lock.fill",
                                   placeholder: NSLocalizedString("Password",
                                                                  comment: "Password placeholder"),
@@ -81,6 +84,11 @@ struct LoginSubview: View {
             if userController.savedEmail.isNotEmpty {
                 userController.loginSaveEmail = true
             }
+        }
+        .syncText($email, with: $userController.loginEmailTextField)
+        .syncText($password, with: $userController.loginPasswordTextField)
+        .onAppear {
+            email = userController.loginEmailTextField
         }
     }
 }

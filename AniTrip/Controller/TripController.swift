@@ -145,8 +145,8 @@ final class TripController: ObservableObject {
     
     /// Disconnect user
     func disconnect() {
+        self.tripManager.disconnect()
         DispatchQueue.main.async {
-            self.tripManager.disconnect()
             self.trips = []
             self.volunteerTripList = []
             self.threeLatestTrips = []

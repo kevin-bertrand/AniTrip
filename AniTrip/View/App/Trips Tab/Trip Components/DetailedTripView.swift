@@ -13,6 +13,9 @@ struct DetailedTripView: View {
     @EnvironmentObject private var tripController: TripController
     
     @Binding var trip: Trip
+    
+    @State private var showUpdateTripView: Bool = false
+    @State private var selectedTrip: UpdateTrip = TripController.emptyUpdateTrip
         
     var body: some View {
         Form {
@@ -63,9 +66,11 @@ struct DetailedTripView: View {
         }
         .navigationTitle(Text("\(trip.startingAddress.city) → \(trip.endingAddress.city)"))
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $tripController.showUpdateTripView, content: {
-            UpdateTripView(trip: $tripController.updateTrip, isAnUpdate: .constant(true))
+        .sheet(isPresented: $showUpdateTripView, content: {
+            UpdateTripView(trip: $selectedTrip, isAnUpdate: .constant(true))
         })
+        .syncBool($showUpdateTripView, with: $tripController.showUpdateTripView)
+        .syncUpdateTrip($selectedTrip, with: $tripController.updateTrip)
         .onAppear {
             tripController.updateTrip = trip.toUpdateTripFormat()
         }

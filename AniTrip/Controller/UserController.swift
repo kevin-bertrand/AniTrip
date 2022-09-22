@@ -71,7 +71,7 @@ final class UserController: ObservableObject {
     }
     
     /// Getting biometrics status to know if it is active
-    func getBiometricStatus() -> Bool {        
+    func getBiometricStatus() -> Bool {
         if savedEmail == loginEmailTextField && savedPassword.isNotEmpty && appController.isBiometricAvailable {
             return true
         }
@@ -148,8 +148,8 @@ final class UserController: ObservableObject {
     
     /// Disconnect the user
     func disconnect() {
+        self.userManager.disconnectUser()
         DispatchQueue.main.async {
-            self.userManager.disconnectUser()
             self.loginPasswordTextField = ""
             self.isConnected = false
         }

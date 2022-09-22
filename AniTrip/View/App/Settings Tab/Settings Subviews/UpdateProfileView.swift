@@ -12,6 +12,15 @@ struct UpdateProfileView: View {
     
     @EnvironmentObject private var userController: UserController
     
+    @State private var firstname: String = ""
+    @State private var lastname: String = ""
+    @State private var address: Address = LocationController.emptyAddress
+    @State private var phoneNumber: String = ""
+    @State private var password: String = ""
+    @State private var passwordVerification: String = ""
+    @State private var showSuccessAlert: Bool = false
+    @State private var missions: [String] = []
+    
     var body: some View {
         Form {
             Section {
@@ -33,13 +42,13 @@ struct UpdateProfileView: View {
             }
             
             Section(header: Text("User Informations")) {
-                EditUserInfoTileView(text: $userController.userToUpdate.firstname, title: "Firstname")
-                EditUserInfoTileView(text: $userController.userToUpdate.lastname, title: "Lastname")
+                EditUserInfoTileView(text: $firstname, title: "Firstname")
+                EditUserInfoTileView(text: $lastname, title: "Lastname")
             }
             
             Group {
                 Section(header: Text("Address")) {
-                    UpdateAddressView(address: $userController.userToUpdate.address)
+                    UpdateAddressView(address: $address)
                 }
                 
                 Section(header: Text("Contact")) {
@@ -50,7 +59,7 @@ struct UpdateProfileView: View {
                             .foregroundColor(.gray)
                     }
                     
-                    EditUserInfoTileView(text: $userController.userToUpdate.phoneNumber,
+                    EditUserInfoTileView(text: $phoneNumber,
                                          keyboardType: .phonePad,
                                          title: "Phone")
                 }
@@ -66,12 +75,12 @@ struct UpdateProfileView: View {
                 }
             }
             
-            MissionsUpdateTileView(missions: $userController.userToUpdate.missions)
+            MissionsUpdateTileView(missions: $missions)
             
             Section(header: Text("Security")) {
-                PasswordFormTileView(text: $userController.userToUpdate.password,
+                PasswordFormTileView(text: $password,
                                      placeholder: "Password")
-                PasswordFormTileView(text: $userController.userToUpdate.passwordVerification,
+                PasswordFormTileView(text: $passwordVerification,
                                      placeholder: "Password verification")
             }
         }
@@ -82,7 +91,7 @@ struct UpdateProfileView: View {
                 Image(systemName: "v.circle")
             }
         }
-        .alert(isPresented: $userController.successUpdate) {
+        .alert(isPresented: $showSuccessAlert) {
             Alert(title: Text("Success"),
                   message: Text(Notification.AniTrip.updateProfileSuccess.notificationMessage),
                   dismissButton: .default(Text("OK"),
@@ -93,6 +102,14 @@ struct UpdateProfileView: View {
         .sheet(isPresented: $userController.showUpdateProfileImage) {
             UpdateProfileImageView()
         }
+        .syncText($firstname, with: $userController.userToUpdate.firstname)
+        .syncText($lastname, with:  $userController.userToUpdate.lastname)
+        .syncText($phoneNumber, with:  $userController.userToUpdate.phoneNumber)
+        .syncAddress($address, with: $userController.userToUpdate.address)
+        .syncText($password, with: $userController.userToUpdate.password)
+        .syncText($passwordVerification, with: $userController.userToUpdate.passwordVerification)
+        .syncBool($showSuccessAlert, with: $userController.successUpdate)
+        .syncTextArray($missions, with: $userController.userToUpdate.missions)
     }
 }
 

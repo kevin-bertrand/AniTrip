@@ -105,11 +105,9 @@ struct SettingsView: View {
             }
             
             switch locationManager.authorizationStatus {
-            case .denied, .notDetermined, .restricted:
-                allowCurrentLocation = false
             case .authorized, .authorizedAlways, .authorizedWhenInUse:
                 allowCurrentLocation = true
-            @unknown default:
+            default:
                 allowCurrentLocation = false
             }
         }

@@ -15,6 +15,9 @@ struct VolunteerProfileView: View {
     @EnvironmentObject private var tripController: TripController
     
     @State private var showUpdatePositionAlert: Bool = false
+    @State private var searchFilter: String = ""
+    @State private var changeActivationStatusAlert: Bool = false
+    @State private var trips: [Trip] = []
     @State var volunteer: Volunteer
     
     var body: some View {
@@ -81,8 +84,8 @@ struct VolunteerProfileView: View {
             if userController.connectedUser?.position == .admin {
                 Section(header: Text("Administration")) {
                     NavigationLink {
-                        TripListView(searchFilter: $tripController.volunteerSearchFilter,
-                                     trips: $tripController.volunteerTripList)
+                        TripListView(searchFilter: $searchFilter,
+                                     trips: $trips)
                             .toolbar {
                                 NavigationLink {
                                     TripsExportFilterView(userToExportId: UUID(uuidString: volunteer.id))
@@ -119,7 +122,7 @@ struct VolunteerProfileView: View {
                 }
             }
         }
-        .alert(isPresented: $volunteersController.changeActivationStatusAlert) {
+        .alert(isPresented: $changeActivationStatusAlert) {
             Alert(title: Text(volunteersController.changeActivationStatusTitle),
                   message: Text(volunteersController.changeActivationStatusMessage),
                   dismissButton: .default(Text("OK"),
@@ -148,6 +151,9 @@ struct VolunteerProfileView: View {
                 }
             })])
         }
+        .onReceive(tripController.$volunteerTripList, perform: { trips = $0})
+        .syncText($searchFilter, with: $tripController.volunteerSearchFilter)
+        .syncBool($changeActivationStatusAlert, with: $volunteersController.changeActivationStatusAlert)
     }
 }
 

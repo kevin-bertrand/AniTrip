@@ -11,6 +11,9 @@ struct AppView: View {
     @EnvironmentObject private var userController: UserController
     @EnvironmentObject private var volunteersController: VolunteersController
 
+    @State private var showBiometricsActivation: Bool = false
+    @State private var displayActivateAccount: Bool = false
+    
     var body: some View {
         TabView {
             Group {
@@ -46,7 +49,7 @@ struct AppView: View {
                     Label("Settings", systemImage: "gear")
                 }
             }
-            .alert(isPresented: $userController.loginShowBiometricAlert) {
+            .alert(isPresented: $showBiometricsActivation) {
                 Alert(title: Text("Would you like to use FaceId for further login?"),
                       primaryButton: .default(Text("Yes"), action: {
                     userController.canUseBiometric = true
@@ -55,9 +58,11 @@ struct AppView: View {
                     userController.canUseBiometric = false
                 }))
             }
-            .sheet(isPresented: $volunteersController.displayActivateAccount) {
+            .sheet(isPresented: $displayActivateAccount) {
                 ActivateAccountView()
             }
+            .syncBool($showBiometricsActivation, with: $userController.loginShowBiometricAlert)
+            .syncBool($displayActivateAccount, with: $volunteersController.displayActivateAccount)
         }
     }
 }

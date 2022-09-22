@@ -10,24 +10,28 @@ import SwiftUI
 struct CreateAccountView: View {
     @EnvironmentObject private var userController: UserController
     
+    @State private var email: String = ""
+    @State private var password: String = ""
+    @State private var passwordVerification: String = ""
+    
     var body: some View {
         ScrollView(showsIndicators: false) {
             Spacer()
             
             Group {
-                TextFieldWithIcon(text: $userController.createAccountEmailTextField,
+                TextFieldWithIcon(text: $email,
                                   icon: "person.fill",
                                   placeholder: NSLocalizedString("example@mail.com",
                                                                  comment: "Example email"),
                                   keyboardType: .emailAddress)
                 
-                TextFieldWithIcon(text: $userController.createAccountPasswordTextField,
+                TextFieldWithIcon(text: $password,
                                   icon: "lock",
                                   placeholder: NSLocalizedString("Password",
                                                                  comment: "Password placeholder"),
                                   isSecure: true)
 
-                TextFieldWithIcon(text: $userController.createAccountPasswordVerification,
+                TextFieldWithIcon(text: $passwordVerification,
                                   icon: "lock",
                                   placeholder: NSLocalizedString("Password verification",
                                                                  comment: "Password verification placeholder"),
@@ -44,6 +48,9 @@ struct CreateAccountView: View {
                 userController.createAccount()
             }, icon: nil, title: NSLocalizedString("Ask new account", comment: ""))
         }
+        .syncText($email, with: $userController.createAccountEmailTextField)
+        .syncText($password, with: $userController.createAccountPasswordTextField)
+        .syncText($passwordVerification, with: $userController.createAccountPasswordVerification)
     }
 }
 
