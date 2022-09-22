@@ -103,8 +103,8 @@ struct UpdateProfileView: View {
             UpdateProfileImageView()
         }
         .syncText($firstname, with: $userController.userToUpdate.firstname)
-        .syncText($lastname, with:  $userController.userToUpdate.lastname)
-        .syncText($phoneNumber, with:  $userController.userToUpdate.phoneNumber)
+        .syncText($lastname, with: $userController.userToUpdate.lastname)
+        .syncText($phoneNumber, with: $userController.userToUpdate.phoneNumber)
         .syncAddress($address, with: $userController.userToUpdate.address)
         .syncText($password, with: $userController.userToUpdate.password)
         .syncText($passwordVerification, with: $userController.userToUpdate.passwordVerification)
