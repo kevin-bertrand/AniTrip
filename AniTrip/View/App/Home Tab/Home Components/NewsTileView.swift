@@ -19,6 +19,7 @@ struct NewsTileView: View {
             Text(title)
                 .font(.title2)
                 .bold()
+                .padding(.top)
             
             HStack(spacing: 20) {
                 if let icon = icon {
@@ -39,11 +40,11 @@ struct NewsTileView: View {
                         .font(.caption)
                 }
                 .foregroundColor(percent > 0.0 ? .green : percent < 0.0 ? .red : .gray)
-                .padding(.top)
+                .padding()
+                .multilineTextAlignment(.center)
             }
         }
-        
-        .frame(width: 200, height: 150)
+        .frame(width: 200, height: 170)
         .background(RoundedRectangle(cornerRadius: 10).fill(Color("TilesBackground")))
         .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
             .stroke(Color.white, lineWidth: 1)
