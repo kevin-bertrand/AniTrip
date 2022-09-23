@@ -102,9 +102,9 @@ struct UpdateProfileView: View {
         .sheet(isPresented: $userController.showUpdateProfileImage) {
             UpdateProfileImageView()
         }
-        .syncText($firstname, with: $userController.userToUpdate.firstname)
         .syncText($lastname, with: $userController.userToUpdate.lastname)
         .syncText($phoneNumber, with: $userController.userToUpdate.phoneNumber)
+        .syncText($firstname, with: $userController.userToUpdate.firstname)
         .syncAddress($address, with: $userController.userToUpdate.address)
         .syncText($password, with: $userController.userToUpdate.password)
         .syncText($passwordVerification, with: $userController.userToUpdate.passwordVerification)

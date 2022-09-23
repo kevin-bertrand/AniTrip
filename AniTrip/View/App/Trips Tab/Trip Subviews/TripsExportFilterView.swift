@@ -8,30 +8,23 @@
 import SwiftUI
 
 struct TripsExportFilterView: View {
-    @EnvironmentObject var tripController: TripController
-    @EnvironmentObject var userController: UserController
+    @EnvironmentObject private var tripController: TripController
+    @EnvironmentObject private var userController: UserController
     
     let userToExportId: UUID?
-    
-    @State private var startFilter: Date = Date()
-    @State private var endFilter: Date = Date()
     
     var body: some View {
         ScrollView {
             Text("Start filter")
                 .font(.title2.bold())
-            DatePicker("", selection: $startFilter,
-                       in: Date().getDatePickerRange,
-                       displayedComponents: .date)
+            DatePicker("", selection: $tripController.startFilterDate, displayedComponents: .date)
                 .datePickerStyle(.wheel)
                 .labelsHidden()
                 .padding()
             Divider()
             Text("End filter")
                 .font(.title2.bold())
-            DatePicker("", selection: $endFilter,
-                       in: Date().getDatePickerRange,
-                       displayedComponents: .date)
+            DatePicker("", selection: $tripController.endFilterDate, displayedComponents: .date)
                 .datePickerStyle(.wheel)
                 .labelsHidden()
                 .padding()
@@ -47,10 +40,9 @@ struct TripsExportFilterView: View {
             } label: {
                 EmptyView()
             }
+            
         }
         .navigationTitle(Text("Export"))
-        .syncDate($startFilter, with: $tripController.startFilterDate)
-        .syncDate($endFilter, with: $tripController.endFilterDate)
     }
 }
 
