@@ -34,6 +34,8 @@
 		06158E662885A57100C3BE6E /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E652885A57100C3BE6E /* HomeView.swift */; };
 		06158E692885A5FE00C3BE6E /* NewsTileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06158E682885A5FE00C3BE6E /* NewsTileView.swift */; };
 		061949DF28918D52002D95A1 /* ProfilePictureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 061949DE28918D52002D95A1 /* ProfilePictureView.swift */; };
+		061ADD1728E1A801008D7D76 /* Notifications.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 061ADD1528E1A7FF008D7D76 /* Notifications.jpeg */; };
+		061ADD1828E1A801008D7D76 /* Mail.PNG in Resources */ = {isa = PBXBuildFile; fileRef = 061ADD1628E1A800008D7D76 /* Mail.PNG */; };
 		062DC6A42892A350004C401D /* ToolbarTabItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DC6A32892A350004C401D /* ToolbarTabItemView.swift */; };
 		062DC6A62893C37F004C401D /* activateAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 062DC6A52893C37F004C401D /* activateAccount.json */; };
 		062DC6A82893C39E004C401D /* desactivateAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = 062DC6A72893C39E004C401D /* desactivateAccount.json */; };
@@ -153,6 +155,8 @@
 		06158E652885A57100C3BE6E /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		06158E682885A5FE00C3BE6E /* NewsTileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTileView.swift; sourceTree = "<group>"; };
 		061949DE28918D52002D95A1 /* ProfilePictureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePictureView.swift; sourceTree = "<group>"; };
+		061ADD1528E1A7FF008D7D76 /* Notifications.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = Notifications.jpeg; sourceTree = "<group>"; };
+		061ADD1628E1A800008D7D76 /* Mail.PNG */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Mail.PNG; sourceTree = "<group>"; };
 		062DC6A32892A350004C401D /* ToolbarTabItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolbarTabItemView.swift; sourceTree = "<group>"; };
 		062DC6A52893C37F004C401D /* activateAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = activateAccount.json; sourceTree = "<group>"; };
 		062DC6A72893C39E004C401D /* desactivateAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = desactivateAccount.json; sourceTree = "<group>"; };
@@ -339,6 +343,8 @@
 		063C1D2328E18D45001D37FB /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
+				061ADD1628E1A800008D7D76 /* Mail.PNG */,
+				061ADD1528E1A7FF008D7D76 /* Notifications.jpeg */,
 				063C1D2C28E18F2C001D37FB /* Export.png */,
 				063C1D2428E18E2E001D37FB /* English.png */,
 				063C1D2A28E18EC5001D37FB /* Trip.png */,
@@ -727,6 +733,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				063C1D2B28E18EC5001D37FB /* Trip.png in Resources */,
+				061ADD1728E1A801008D7D76 /* Notifications.jpeg in Resources */,
+				061ADD1828E1A801008D7D76 /* Mail.PNG in Resources */,
 				063C1D2728E18E2E001D37FB /* English.png in Resources */,
 				06E0894828D45F9E0092410C /* Localizable.strings in Resources */,
 				06E0894028D31C180092410C /* .swiftlint.yml in Resources */,
