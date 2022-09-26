@@ -18,7 +18,7 @@ AniTrip is an iOS app used to register trips made by volunteers of an associatio
 |:--:|:--:| 
 | *Trip details* | *Export to PDF* |
 
-| <img src="/Screenshots/Notifications.jpeg" width="350"> | <img src="/Screenshots/Mail.png" width="350"> |
+| <img src="/Screenshots/Notifications.jpeg" width="350"> | <img src="/Screenshots/Mail.PNG" width="350"> |
 |:--:|:--:| 
 | *Notifications* | *Mails* |
 
