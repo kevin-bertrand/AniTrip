@@ -50,8 +50,11 @@ final class AppController: ObservableObject {
     
     /// Reset alert view
     func resetAlertView() {
-        alertViewMessage = ""
-        alertViewTitle = ""
+        DispatchQueue.main.async {
+            self.alertViewMessage = ""
+            self.alertViewTitle = ""
+            self.showAlertView = false
+        }
     }
     
     /// Disconnect user
