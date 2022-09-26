@@ -44,6 +44,7 @@
 		063C1D2828E18E2E001D37FB /* French.png in Resources */ = {isa = PBXBuildFile; fileRef = 063C1D2528E18E2E001D37FB /* French.png */; };
 		063C1D2928E18E2E001D37FB /* iPhoneSE2.png in Resources */ = {isa = PBXBuildFile; fileRef = 063C1D2628E18E2E001D37FB /* iPhoneSE2.png */; };
 		063C1D2B28E18EC5001D37FB /* Trip.png in Resources */ = {isa = PBXBuildFile; fileRef = 063C1D2A28E18EC5001D37FB /* Trip.png */; };
+		063C1D2D28E18F2C001D37FB /* Export.png in Resources */ = {isa = PBXBuildFile; fileRef = 063C1D2C28E18F2C001D37FB /* Export.png */; };
 		064EC28C28AE2F0F00EDBB06 /* UserInformationTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EC28B28AE2F0F00EDBB06 /* UserInformationTextView.swift */; };
 		064EC28E28AE61DF00EDBB06 /* export.json in Resources */ = {isa = PBXBuildFile; fileRef = 064EC28D28AE61DF00EDBB06 /* export.json */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
@@ -160,6 +161,7 @@
 		063C1D2528E18E2E001D37FB /* French.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = French.png; sourceTree = "<group>"; };
 		063C1D2628E18E2E001D37FB /* iPhoneSE2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhoneSE2.png; sourceTree = "<group>"; };
 		063C1D2A28E18EC5001D37FB /* Trip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Trip.png; sourceTree = "<group>"; };
+		063C1D2C28E18F2C001D37FB /* Export.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Export.png; sourceTree = "<group>"; };
 		064EC28B28AE2F0F00EDBB06 /* UserInformationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationTextView.swift; sourceTree = "<group>"; };
 		064EC28D28AE61DF00EDBB06 /* export.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = export.json; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,6 +337,7 @@
 		063C1D2328E18D45001D37FB /* Screenshots */ = {
 			isa = PBXGroup;
 			children = (
+				063C1D2C28E18F2C001D37FB /* Export.png */,
 				063C1D2428E18E2E001D37FB /* English.png */,
 				063C1D2A28E18EC5001D37FB /* Trip.png */,
 				063C1D2528E18E2E001D37FB /* French.png */,
@@ -725,6 +728,7 @@
 				06E0894828D45F9E0092410C /* Localizable.strings in Resources */,
 				06E0894028D31C180092410C /* .swiftlint.yml in Resources */,
 				06E0894528D45F9E0092410C /* InfoPlist.strings in Resources */,
+				063C1D2D28E18F2C001D37FB /* Export.png in Resources */,
 				065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */,
 				063C1D2928E18E2E001D37FB /* iPhoneSE2.png in Resources */,
 				065E4758287B573700D32E05 /* Assets.xcassets in Resources */,
