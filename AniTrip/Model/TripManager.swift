@@ -41,20 +41,20 @@ final class TripManager {
                                method: NetworkConfigurations.getTripList.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: nil) { [weak self] data, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode {
-                switch statusCode {
-                case 200:
-                    self.decodeTripList(data: data, ofVolunteer: ((volunteer == nil) ? false : true))
-                case 404:
-                    Notification.AniTrip.gettingTripListError.sendNotification()
-                default:
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode {
+                    switch statusCode {
+                    case 200:
+                        self.decodeTripList(data: data, ofVolunteer: ((volunteer == nil) ? false : true))
+                    case 404:
+                        Notification.AniTrip.gettingTripListError.sendNotification()
+                    default:
+                        Notification.AniTrip.unknownError.sendNotification()
+                    }
+                } else {
                     Notification.AniTrip.unknownError.sendNotification()
                 }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
             }
         }
     }
@@ -70,21 +70,21 @@ final class TripManager {
                                method: NetworkConfigurations.addTrip.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: trip.toAddTripFormat()) { [weak self] _, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode {
-                switch statusCode {
-                case 200:
-                    self.getList(byUser: user)
-                    Notification.AniTrip.addTripSuccess.sendNotification()
-                case 401:
-                    Notification.AniTrip.notAuthorized.sendNotification()
-                default:
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode {
+                    switch statusCode {
+                    case 200:
+                        self.getList(byUser: user)
+                        Notification.AniTrip.addTripSuccess.sendNotification()
+                    case 401:
+                        Notification.AniTrip.notAuthorized.sendNotification()
+                    default:
+                        Notification.AniTrip.unknownError.sendNotification()
+                    }
+                } else {
                     Notification.AniTrip.unknownError.sendNotification()
                 }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
             }
         }
     }
@@ -100,21 +100,21 @@ final class TripManager {
                                method: NetworkConfigurations.updateTrip.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: trip.toAddTripFormat()) { [weak self] _, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode {
-                switch statusCode {
-                case 200:
-                    self.getList(byUser: user)
-                    Notification.AniTrip.updateTripSuccess.sendNotification()
-                case 401:
-                    Notification.AniTrip.notAuthorized.sendNotification()
-                default:
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode {
+                    switch statusCode {
+                    case 200:
+                        self.getList(byUser: user)
+                        Notification.AniTrip.updateTripSuccess.sendNotification()
+                    case 401:
+                        Notification.AniTrip.notAuthorized.sendNotification()
+                    default:
+                        Notification.AniTrip.unknownError.sendNotification()
+                    }
+                } else {
                     Notification.AniTrip.unknownError.sendNotification()
                 }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
             }
         }
     }
@@ -133,20 +133,20 @@ final class TripManager {
                                method: NetworkConfigurations.getThreeLatestTrip.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: nil) { [weak self] data, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode {
-                switch statusCode {
-                case 200:
-                    self.decodeThreeLatestTrips(data: data, for: user, filter: filter)
-                case 404:
-                    Notification.AniTrip.gettingTripListError.sendNotification()
-                default:
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode {
+                    switch statusCode {
+                    case 200:
+                        self.decodeThreeLatestTrips(data: data, for: user, filter: filter)
+                    case 404:
+                        Notification.AniTrip.gettingTripListError.sendNotification()
+                    default:
+                        Notification.AniTrip.unknownError.sendNotification()
+                    }
+                } else {
                     Notification.AniTrip.unknownError.sendNotification()
                 }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
             }
         }
     }

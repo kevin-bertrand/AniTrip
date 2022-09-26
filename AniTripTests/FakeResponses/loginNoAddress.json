@@ -1,0 +1,13 @@
+{
+    "lastname":"Lastname",
+    "isActive":true,
+    "imagePath":"\/var\/www\/html\/AniTrip\/Public\/48694F7F-66F4-4048-8312-BECDA525FA45.jpeg",
+    "firstname":"Firstname",
+    "phoneNumber":"",
+    "gender":"not_determined",
+    "missions":[],
+    "id":"48694F7F-66F4-4048-8312-BECDA525FA45",
+    "position":"user",
+    "email":"email@example.com",
+    "token":"B6K3DnOPbcdJnjhEjwOGsQ=="
+}

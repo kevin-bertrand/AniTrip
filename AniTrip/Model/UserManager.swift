@@ -23,30 +23,30 @@ final class UserManager {
                                method: NetworkConfigurations.login.method,
                                authorization: .authorization(username: user.email, password: user.password),
                                body: deviceId) { [weak self] data, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode,
-               let data = data {
-                switch statusCode {
-                case 200:
-                    self.decodeUserInformations(data: data) { user in
-                        self.connectedUser = user
-                        if user == nil {
-                            Notification.AniTrip.unknownError.sendNotification()
-                        } else {
-                            Notification.AniTrip.loginSuccess.sendNotification()
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode,
+                   let data = data {
+                    switch statusCode {
+                    case 200:
+                        self.decodeUserInformations(data: data) { user in
+                            self.connectedUser = user
+                            if user == nil {
+                                Notification.AniTrip.unknownError.sendNotification()
+                            } else {
+                                Notification.AniTrip.loginSuccess.sendNotification()
+                            }
                         }
+                    case 401:
+                        Notification.AniTrip.loginWrongCredentials.sendNotification()
+                    case 460:
+                        Notification.AniTrip.accountNotYetActivate.sendNotification()
+                    default:
+                        Notification.AniTrip.unknownError.sendNotification()
                     }
-                case 401:
-                    Notification.AniTrip.loginWrongCredentials.sendNotification()
-                case 460:
-                    Notification.AniTrip.accountNotYetActivate.sendNotification()
-                default:
+                } else {
                     Notification.AniTrip.unknownError.sendNotification()
                 }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
             }
         }
     }
@@ -57,22 +57,22 @@ final class UserManager {
                                method: NetworkConfigurations.createAccount.method,
                                authorization: nil,
                                body: user) { [weak self]_, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode {
-                switch statusCode {
-                case 201:
-                    Notification.AniTrip.accountCreationSuccess.sendNotification()
-                case 406:
-                    Notification.AniTrip.accountCreationPasswordError.sendNotification()
-                case 500:
-                    Notification.AniTrip.accountCreationInformationsError.sendNotification()
-                default:
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode {
+                    switch statusCode {
+                    case 201:
+                        Notification.AniTrip.accountCreationSuccess.sendNotification()
+                    case 406:
+                        Notification.AniTrip.accountCreationPasswordError.sendNotification()
+                    case 500:
+                        Notification.AniTrip.accountCreationInformationsError.sendNotification()
+                    default:
+                        Notification.AniTrip.unknownError.sendNotification()
+                    }
+                } else {
                     Notification.AniTrip.unknownError.sendNotification()
                 }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
             }
         }
     }
@@ -93,32 +93,32 @@ final class UserManager {
                                method: NetworkConfigurations.updateUser.method,
                                authorization: .authorization(bearerToken: connectedUser.token),
                                body: userToUpdate) { [weak self] data, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let data = data,
-               let statusCode = response?.statusCode {
-                switch statusCode {
-                case 202:
-                    self.decodeUserInformations(data: data) { user in
-                        if user == nil {
-                            Notification.AniTrip.unknownError.sendNotification()
-                        } else {
-                            self.connectedUser = user
-                            Notification.AniTrip.updateProfileSuccess.sendNotification()
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let data = data,
+                   let statusCode = response?.statusCode {
+                    switch statusCode {
+                    case 202:
+                        self.decodeUserInformations(data: data) { user in
+                            if user == nil {
+                                Notification.AniTrip.unknownError.sendNotification()
+                            } else {
+                                self.connectedUser = user
+                                Notification.AniTrip.updateProfileSuccess.sendNotification()
+                            }
                         }
+                    case 401:
+                        Notification.AniTrip.notAuthorized.sendNotification()
+                    case 406:
+                        Notification.AniTrip.accountNotFound.sendNotification()
+                    case 460:
+                        Notification.AniTrip.accountNotYetActivate.sendNotification()
+                    default:
+                        Notification.AniTrip.unknownError.sendNotification()
                     }
-                case 401:
-                    Notification.AniTrip.notAuthorized.sendNotification()
-                case 406:
-                    Notification.AniTrip.accountNotFound.sendNotification()
-                case 460:
-                    Notification.AniTrip.accountNotYetActivate.sendNotification()
-                default:
+                } else {
                     Notification.AniTrip.unknownError.sendNotification()
                 }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
             }
         }
     }
@@ -134,15 +134,15 @@ final class UserManager {
                                    method: NetworkConfigurations.updatePicture.method,
                                    user: connectedUser,
                                    file: imageData) { [weak self] _, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode,
-               statusCode == 202 {
-                self.connectedUser?.image = image
-                Notification.AniTrip.updatePictureSuccess.sendNotification()
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode,
+                   statusCode == 202 {
+                    self.connectedUser?.image = image
+                    Notification.AniTrip.updatePictureSuccess.sendNotification()
+                } else {
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
             }
         }
     }
@@ -155,18 +155,18 @@ final class UserManager {
                                method: NetworkConfigurations.getProfilePicture.method,
                                authorization: nil,
                                body: nil) { [weak self] data, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let status = response?.statusCode,
-               status == 200,
-               let data = data,
-               let image = UIImage(data: data) {
-                var updatedUser = user
-                updatedUser.image = image
-                completionHandler(updatedUser)
-            } else {
-                completionHandler(user)
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let status = response?.statusCode,
+                   status == 200,
+                   let data = data,
+                   let image = UIImage(data: data) {
+                    var updatedUser = user
+                    updatedUser.image = image
+                    completionHandler(updatedUser)
+                } else {
+                    completionHandler(user)
+                }
             }
         }
     }

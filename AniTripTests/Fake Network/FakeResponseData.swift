@@ -76,6 +76,7 @@ class FakeResponseData {
     enum DataFiles: String {
         case userLogin = "login"
         case userNoImage = "loginNoImage"
+        case userNoAddress = "loginNoAddress"
         case updateUser = "UpdateProfile"
         case volunteerList = "volunteerList"
         case tripList = "trips"

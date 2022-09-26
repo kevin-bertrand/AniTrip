@@ -25,33 +25,33 @@ final class VolunteersManager {
                                method: NetworkConfigurations.getVolunteersList.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: nil) { [weak self] (data, response, error) in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let status = response?.statusCode,
-               status == 200,
-               let data = data,
-               let volunteers = try? JSONDecoder().decode([DownloadedVolunteer].self, from: data) {
-                let downloadedVolunteersList = volunteers.map({
-                    return Volunteer(imagePath: $0.imagePath,
-                                     id: $0.id,
-                                     firstname: $0.firstname,
-                                     lastname: $0.lastname,
-                                     email: $0.email,
-                                     phoneNumber: $0.phoneNumber,
-                                     gender: $0.gender,
-                                     position: $0.position == "administrator" ? .admin : .user,
-                                     missions: $0.missions,
-                                     address: $0.address,
-                                     isActive: $0.isActive)
-                })
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let status = response?.statusCode,
+                   status == 200,
+                   let data = data,
+                   let volunteers = try? JSONDecoder().decode([DownloadedVolunteer].self, from: data) {
+                    let downloadedVolunteersList = volunteers.map({
+                        return Volunteer(imagePath: $0.imagePath,
+                                         id: $0.id,
+                                         firstname: $0.firstname,
+                                         lastname: $0.lastname,
+                                         email: $0.email,
+                                         phoneNumber: $0.phoneNumber,
+                                         gender: $0.gender,
+                                         position: $0.position == "administrator" ? .admin : .user,
+                                         missions: $0.missions,
+                                         address: $0.address,
+                                         isActive: $0.isActive)
+                    })
 
-                if self.volunteersList != downloadedVolunteersList {
-                    self.volunteersList = downloadedVolunteersList
-                    Notification.AniTrip.gettingVolunteersListSuccess.sendNotification()
+                    if self.volunteersList != downloadedVolunteersList {
+                        self.volunteersList = downloadedVolunteersList
+                        Notification.AniTrip.gettingVolunteersListSuccess.sendNotification()
+                    }
+                } else {
+                    Notification.AniTrip.unknownError.sendNotification()
                 }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
             }
         }
     }
@@ -65,15 +65,15 @@ final class VolunteersManager {
                                method: NetworkConfigurations.desactivateAccount.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: nil) { [weak self] _, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode,
-               statusCode == 200 {
-                self.getList(byUser: user)
-                Notification.AniTrip.desactivationSuccess.sendNotification()
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode,
+                   statusCode == 200 {
+                    self.getList(byUser: user)
+                    Notification.AniTrip.desactivationSuccess.sendNotification()
+                } else {
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
             }
         }
     }
@@ -87,15 +87,15 @@ final class VolunteersManager {
                                method: NetworkConfigurations.activateAccount.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: nil) { [weak self] _, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode,
-               statusCode == 200 {
-                self.getList(byUser: user)
-                Notification.AniTrip.activationSuccess.sendNotification()
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode,
+                   statusCode == 200 {
+                    self.getList(byUser: user)
+                    Notification.AniTrip.activationSuccess.sendNotification()
+                } else {
+                    Notification.AniTrip.unknownError.sendNotification()
+                }
             }
         }
     }
@@ -111,21 +111,21 @@ final class VolunteersManager {
                                method: NetworkConfigurations.updatePosition.method,
                                authorization: .authorization(bearerToken: user.token),
                                body: volunteer) { [weak self] _, response, error in
-            guard let self = self,
-                    self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) else {return}
-            
-            if let statusCode = response?.statusCode {
-                switch statusCode {
-                case 200:
-                    self.getList(byUser: user)
-                    Notification.AniTrip.positionUpdated.sendNotification()
-                case 404:
-                    Notification.AniTrip.positionNotUpdated.sendNotification()
-                default:
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error) {
+                if let statusCode = response?.statusCode {
+                    switch statusCode {
+                    case 200:
+                        self.getList(byUser: user)
+                        Notification.AniTrip.positionUpdated.sendNotification()
+                    case 404:
+                        Notification.AniTrip.positionNotUpdated.sendNotification()
+                    default:
+                        Notification.AniTrip.unknownError.sendNotification()
+                    }
+                } else {
                     Notification.AniTrip.unknownError.sendNotification()
                 }
-            } else {
-                Notification.AniTrip.unknownError.sendNotification()
             }
         }
     }

@@ -30,6 +30,17 @@ final class UserManagerTests: XCTestCase {
         XCTAssertNotNil(userManager.connectedUser)
     }
     
+    /// Success login with user without address
+    func testGivenUserWillConnect_WhenConnectWithGoodCredentials_ThenGettingSuccessWithNoAddress() {
+        // Given
+        
+        // When
+        connectUser(with: .userNoAddress)
+        
+        // Then
+        XCTAssertNotNil(userManager.connectedUser)
+    }
+    
     /// Success login with user without image
     func testGivenUserWillConnect_WhenConnectWithGoodCredentials_ThenGettingSuccessWithNoImage() {
         // Given
