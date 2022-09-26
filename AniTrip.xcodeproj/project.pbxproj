@@ -40,6 +40,10 @@
 		062DC6AA2893C721004C401D /* updatePosition.json in Resources */ = {isa = PBXBuildFile; fileRef = 062DC6A92893C721004C401D /* updatePosition.json */; };
 		062DC6AD2893E990004C401D /* Mixpanel in Frameworks */ = {isa = PBXBuildFile; productRef = 062DC6AC2893E990004C401D /* Mixpanel */; };
 		062DC6AF2893F24E004C401D /* SearchAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 062DC6AE2893F24E004C401D /* SearchAddressView.swift */; };
+		063C1D2728E18E2E001D37FB /* English.png in Resources */ = {isa = PBXBuildFile; fileRef = 063C1D2428E18E2E001D37FB /* English.png */; };
+		063C1D2828E18E2E001D37FB /* French.png in Resources */ = {isa = PBXBuildFile; fileRef = 063C1D2528E18E2E001D37FB /* French.png */; };
+		063C1D2928E18E2E001D37FB /* iPhoneSE2.png in Resources */ = {isa = PBXBuildFile; fileRef = 063C1D2628E18E2E001D37FB /* iPhoneSE2.png */; };
+		063C1D2B28E18EC5001D37FB /* Trip.png in Resources */ = {isa = PBXBuildFile; fileRef = 063C1D2A28E18EC5001D37FB /* Trip.png */; };
 		064EC28C28AE2F0F00EDBB06 /* UserInformationTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 064EC28B28AE2F0F00EDBB06 /* UserInformationTextView.swift */; };
 		064EC28E28AE61DF00EDBB06 /* export.json in Resources */ = {isa = PBXBuildFile; fileRef = 064EC28D28AE61DF00EDBB06 /* export.json */; };
 		065E4754287B573600D32E05 /* AniTripApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 065E4753287B573600D32E05 /* AniTripApp.swift */; };
@@ -152,6 +156,10 @@
 		062DC6A72893C39E004C401D /* desactivateAccount.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = desactivateAccount.json; sourceTree = "<group>"; };
 		062DC6A92893C721004C401D /* updatePosition.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = updatePosition.json; sourceTree = "<group>"; };
 		062DC6AE2893F24E004C401D /* SearchAddressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAddressView.swift; sourceTree = "<group>"; };
+		063C1D2428E18E2E001D37FB /* English.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = English.png; sourceTree = "<group>"; };
+		063C1D2528E18E2E001D37FB /* French.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = French.png; sourceTree = "<group>"; };
+		063C1D2628E18E2E001D37FB /* iPhoneSE2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iPhoneSE2.png; sourceTree = "<group>"; };
+		063C1D2A28E18EC5001D37FB /* Trip.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Trip.png; sourceTree = "<group>"; };
 		064EC28B28AE2F0F00EDBB06 /* UserInformationTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInformationTextView.swift; sourceTree = "<group>"; };
 		064EC28D28AE61DF00EDBB06 /* export.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = export.json; sourceTree = "<group>"; };
 		065E4750287B573600D32E05 /* AniTrip.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AniTrip.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -324,9 +332,21 @@
 			path = "Home Components";
 			sourceTree = "<group>";
 		};
+		063C1D2328E18D45001D37FB /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				063C1D2428E18E2E001D37FB /* English.png */,
+				063C1D2A28E18EC5001D37FB /* Trip.png */,
+				063C1D2528E18E2E001D37FB /* French.png */,
+				063C1D2628E18E2E001D37FB /* iPhoneSE2.png */,
+			);
+			path = Screenshots;
+			sourceTree = "<group>";
+		};
 		065E4747287B573600D32E05 = {
 			isa = PBXGroup;
 			children = (
+				063C1D2328E18D45001D37FB /* Screenshots */,
 				06E0893F28D31C180092410C /* .swiftlint.yml */,
 				065E4752287B573600D32E05 /* AniTrip */,
 				065E4763287B573700D32E05 /* AniTripTests */,
@@ -700,11 +720,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				063C1D2B28E18EC5001D37FB /* Trip.png in Resources */,
+				063C1D2728E18E2E001D37FB /* English.png in Resources */,
 				06E0894828D45F9E0092410C /* Localizable.strings in Resources */,
 				06E0894028D31C180092410C /* .swiftlint.yml in Resources */,
 				06E0894528D45F9E0092410C /* InfoPlist.strings in Resources */,
 				065E475B287B573700D32E05 /* Preview Assets.xcassets in Resources */,
+				063C1D2928E18E2E001D37FB /* iPhoneSE2.png in Resources */,
 				065E4758287B573700D32E05 /* Assets.xcassets in Resources */,
+				063C1D2828E18E2E001D37FB /* French.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
