@@ -44,7 +44,7 @@ struct NewsTileView: View {
                 .multilineTextAlignment(.center)
             }
         }
-        .frame(width: 200, height: 170)
+        .frame(width: 200, height: 190)
         .background(RoundedRectangle(cornerRadius: 10).fill(Color("TilesBackground")))
         .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
             .stroke(Color.white, lineWidth: 1)

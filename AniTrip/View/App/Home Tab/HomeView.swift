@@ -71,7 +71,8 @@ struct HomeView: View {
                             Text(ChartFilter.week.localized).tag(ChartFilter.week)
                             Text(ChartFilter.month.localized).tag(ChartFilter.month)
                             Text(ChartFilter.year.localized).tag(ChartFilter.year)
-                        }.pickerStyle(.menu)
+                        }
+                        .foregroundColor(.accentColor)
                     }
                     
                     if tripController.chartPoints.dataSets.dataPoints.isEmpty
