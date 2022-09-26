@@ -243,7 +243,7 @@ final class TripManager {
     }
     
     // MARK: Initialization
-    init(networkManager: NetworkManager = NetworkManager()) {
+    init(networkManager: NetworkManager = NetworkManager.shared) {
         self.networkManager = networkManager
     }
     

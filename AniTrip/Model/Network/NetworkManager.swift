@@ -12,9 +12,7 @@ import SwiftUI
 
 class NetworkManager: NetworkProtocol {
     // MARK: Static
-    static var stopAllRequests: Void {
-        return AF.cancelAllRequests()
-    }
+    static let shared = NetworkManager()
     
     // MARK: Public
     // MARK: Method
@@ -105,6 +103,11 @@ class NetworkManager: NetworkProtocol {
         } else {
             return true
         }
+    }
+    
+    /// Stop all requests
+    func stopAllRequests() {
+        AF.cancelAllRequests()
     }
     
     // MARK: Private

@@ -56,7 +56,7 @@ final class AppController: ObservableObject {
     
     /// Disconnect user
     func disconnect() {
-        NetworkManager.stopAllRequests
+        NetworkManager.shared.stopAllRequests()
         resetLoadingInProgress()
         resetAlertView()
     }
