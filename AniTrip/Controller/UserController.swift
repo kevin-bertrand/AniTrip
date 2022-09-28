@@ -99,7 +99,7 @@ final class UserController: ObservableObject {
             return
         }
         
-        userManager.login(user: UserToLogin(email: loginEmailTextField,
+        userManager.login(user: UserToLogin(email: loginEmailTextField.trimmingCharacters(in: .whitespacesAndNewlines),
                                             password: loginPasswordTextField,
                                             deviceToken: deviceToken))
     }
@@ -141,7 +141,7 @@ final class UserController: ObservableObject {
             return
         }
         
-        userManager.createAccount(for: UserToCreate(email: createAccountEmailTextField,
+        userManager.createAccount(for: UserToCreate(email: createAccountEmailTextField.trimmingCharacters(in: .whitespacesAndNewlines),
                                                     password: createAccountPasswordTextField,
                                                     passwordVerification: createAccountPasswordVerification))
     }
