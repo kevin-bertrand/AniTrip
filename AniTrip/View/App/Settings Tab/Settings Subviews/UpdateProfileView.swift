@@ -102,6 +102,18 @@ struct UpdateProfileView: View {
         .sheet(isPresented: $userController.showUpdateProfileImage) {
             UpdateProfileImageView()
         }
+        .onAppear {
+            if let user = userController.connectedUser {
+                lastname = user.lastname
+                firstname = user.firstname
+                missions = user.missions
+                phoneNumber = user.phoneNumber
+                
+                if let address = user.address {
+                    self.address = address
+                }
+            }
+        }
         .syncText($lastname, with: $userController.userToUpdate.lastname)
         .syncText($phoneNumber, with: $userController.userToUpdate.phoneNumber)
         .syncText($firstname, with: $userController.userToUpdate.firstname)
