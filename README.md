@@ -3,7 +3,7 @@
 AniTrip is an iOS app used to register trips made by volunteers of an association with their personal car.
 Then, they or the administrators can download a PDF with all trips made during a range of dates.
 
-Web service github: [link]: https://github.com/kevin-bertrand/api-anitrip
+Web service github: https://github.com/kevin-bertrand/api-anitrip
 
 ## App screenshots
 ### Languages support
