@@ -18,14 +18,16 @@ struct TripsExportFilterView: View {
         ScrollView {
             Text("Start filter")
                 .font(.title2.bold())
-            DatePicker("", selection: $tripController.startFilterDate, displayedComponents: .date)
+            DatePicker("", selection: $tripController.startFilterDate, in: ...Date(), displayedComponents: .date)
                 .datePickerStyle(.wheel)
                 .labelsHidden()
                 .padding()
+            
             Divider()
             Text("End filter")
                 .font(.title2.bold())
-            DatePicker("", selection: $tripController.endFilterDate, displayedComponents: .date)
+            
+            DatePicker("", selection: $tripController.endFilterDate, in: ...Date(), displayedComponents: .date)
                 .datePickerStyle(.wheel)
                 .labelsHidden()
                 .padding()
