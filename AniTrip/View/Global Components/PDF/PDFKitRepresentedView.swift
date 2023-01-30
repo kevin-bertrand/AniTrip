@@ -5,8 +5,8 @@
 //  Created by Kevin Bertrand on 13/09/2022.
 //
 
-import SwiftUI
 import PDFKit
+import SwiftUI
 
 struct PDFKitRepresentedView: UIViewRepresentable {
     let pdf: Data
@@ -18,7 +18,7 @@ struct PDFKitRepresentedView: UIViewRepresentable {
     func makeUIView(context: UIViewRepresentableContext<PDFKitRepresentedView>) -> PDFKitRepresentedView.UIViewType {
         let pdfView = PDFView()
         pdfView.document = PDFDocument(data: pdf)
-//        pdfView.autoScales = true
+        pdfView.autoScales = true
         return pdfView
     }
 

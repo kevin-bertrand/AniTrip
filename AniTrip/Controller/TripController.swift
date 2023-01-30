@@ -212,8 +212,11 @@ final class TripController: ObservableObject {
                 self.news = tripManager.news
                 chartPoints = getChartData(from: tripManager.tripsChartPoints)
             case Notification.AniTrip.pdfDownloaded.notificationName:
+                print(tripManager.pdfData)
                 pdfData = tripManager.pdfData
-                self.showPDF = true
+                DispatchQueue.main.async {
+                    self.showPDF = true
+                }
             default: break
             }
         }

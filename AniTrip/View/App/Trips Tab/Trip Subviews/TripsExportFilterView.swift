@@ -40,6 +40,23 @@ struct TripsExportFilterView: View {
         }
         .navigationTitle(Text("Export"))
         .navigationLinkPresentation(destination: AnyView(PDFUIView()), isPresented: $tripController.showPDF)
+        .onChange(of: tripController.endFilterDate) { newValue in
+            if newValue <= tripController.startFilterDate {
+                tripController.startFilterDate = Date(timeInterval: (-60 * 60 * 24), since: newValue)
+            }
+        }
+        .onChange(of: tripController.startFilterDate) { newValue in
+            if newValue >= tripController.endFilterDate {
+                let newDate = Date(timeInterval: (60 * 60 * 24), since: newValue)
+
+                if newDate > Date() {
+                    tripController.endFilterDate = Date()
+                    tripController.startFilterDate = Date(timeInterval: (-60 * 60 * 24), since: newValue)
+                } else {
+                    tripController.endFilterDate = newDate
+                }
+            }
+        }
     }
 }
 
