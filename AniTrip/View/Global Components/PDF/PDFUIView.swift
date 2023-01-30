@@ -22,6 +22,9 @@ struct PDFUIView: View {
             }
             .navigationTitle("Export")
             .navigationBarTitleDisplayMode(.automatic)
+            .onDisappear {
+                tripController.showPDF = false
+            }
     }
     
     func shareButton() {

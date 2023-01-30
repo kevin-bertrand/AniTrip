@@ -79,6 +79,7 @@
 		06955E9F2887FFD4006B502B /* TripCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955E9E2887FFD4006B502B /* TripCommentView.swift */; };
 		06955EA1288816F5006B502B /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06955EA0288816F5006B502B /* RouteView.swift */; };
 		069A56B128E199B700809A22 /* loginNoAddress.json in Resources */ = {isa = PBXBuildFile; fileRef = 069A56B028E199B700809A22 /* loginNoAddress.json */; };
+		069AD5D4298868BD0075379E /* DesynticLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = 069AD5D3298868BD0075379E /* DesynticLibrary */; };
 		069F552228CF93F10089ADB4 /* loginNoImage.json in Resources */ = {isa = PBXBuildFile; fileRef = 069F552128CF93F10089ADB4 /* loginNoImage.json */; };
 		069F552428CF985C0089ADB4 /* image.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 069F552328CF985C0089ADB4 /* image.jpeg */; };
 		06BF7243287B5A22006F0839 /* TextFieldWithIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06BF7242287B5A22006F0839 /* TextFieldWithIcon.swift */; };
@@ -247,6 +248,7 @@
 				062DC6AD2893E990004C401D /* Mixpanel in Frameworks */,
 				065E4783287B579000D32E05 /* Alamofire in Frameworks */,
 				06D632D328885B73004193A0 /* SwiftUICharts in Frameworks */,
+				069AD5D4298868BD0075379E /* DesynticLibrary in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -660,6 +662,7 @@
 				065E4782287B579000D32E05 /* Alamofire */,
 				06D632D228885B73004193A0 /* SwiftUICharts */,
 				062DC6AC2893E990004C401D /* Mixpanel */,
+				069AD5D3298868BD0075379E /* DesynticLibrary */,
 			);
 			productName = AniTrip;
 			productReference = 065E4750287B573600D32E05 /* AniTrip.app */;
@@ -716,6 +719,7 @@
 				065E4781287B579000D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				06D632D128885B73004193A0 /* XCRemoteSwiftPackageReference "SwiftUICharts" */,
 				062DC6AB2893E990004C401D /* XCRemoteSwiftPackageReference "mixpanel-swift" */,
+				069AD5D2298868BD0075379E /* XCRemoteSwiftPackageReference "DesynticLibrary" */,
 			);
 			productRefGroup = 065E4751287B573600D32E05 /* Products */;
 			projectDirPath = "";
@@ -1202,6 +1206,14 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		069AD5D2298868BD0075379E /* XCRemoteSwiftPackageReference "DesynticLibrary" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kevin-bertrand/DesynticLibrary.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
 		06D632D128885B73004193A0 /* XCRemoteSwiftPackageReference "SwiftUICharts" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/willdale/SwiftUICharts.git";
@@ -1222,6 +1234,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 065E4781287B579000D32E05 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		069AD5D3298868BD0075379E /* DesynticLibrary */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 069AD5D2298868BD0075379E /* XCRemoteSwiftPackageReference "DesynticLibrary" */;
+			productName = DesynticLibrary;
 		};
 		06D632D228885B73004193A0 /* SwiftUICharts */ = {
 			isa = XCSwiftPackageProductDependency;

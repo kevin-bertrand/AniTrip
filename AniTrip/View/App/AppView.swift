@@ -5,6 +5,7 @@
 //  Created by Kevin Bertrand on 12/07/2022.
 //
 
+import DesynticLibrary
 import SwiftUI
 
 struct AppView: View {
@@ -16,37 +17,33 @@ struct AppView: View {
     
     var body: some View {
         TabView {
-            NavigationView {
-                HomeView()
-                    .navigationTitle(Text("🏠 Home"))
-            }
-            .tabItem {
-                Label("Home", systemImage: "house.fill")
-            }
+            HomeView()
+                .navigationTitle(Text("🏠 Home"))
+                .asNavigationView()
+                .tabItem {
+                    Label("Home", systemImage: "house.fill")
+                }
             
-            NavigationView {
-                TripsView()
-                    .navigationTitle(Text("📍 Trips"))
-            }
-            .tabItem {
-                Label("Trips", systemImage: "map.fill")
-            }
+            TripsView()
+                .navigationTitle(Text("📍 Trips"))
+                .asNavigationView()
+                .tabItem {
+                    Label("Trips", systemImage: "map.fill")
+                }
             
-            NavigationView {
-                VolunteersView()
-                    .navigationTitle(Text("👥 Volunteers"))
-            }
-            .tabItem {
-                Label("Volunteers", systemImage: "person.3.fill")
-            }
+            VolunteersView()
+                .navigationTitle(Text("👥 Volunteers"))
+                .asNavigationView()
+                .tabItem {
+                    Label("Volunteers", systemImage: "person.3.fill")
+                }
             
-            NavigationView {
-                SettingsView()
-                    .navigationTitle("⚙️ Settings")
-            }
-            .tabItem {
-                Label("Settings", systemImage: "gear")
-            }
+            SettingsView()
+                .navigationTitle("⚙️ Settings")
+                .asNavigationView()
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
         }
         .alert(isPresented: $showBiometricsActivation) {
             Alert(title: Text("Would you like to use FaceId for further login?"),
@@ -62,6 +59,7 @@ struct AppView: View {
         }
         .syncBool($showBiometricsActivation, with: $userController.loginShowBiometricAlert)
         .syncBool($displayActivateAccount, with: $volunteersController.displayActivateAccount)
+        .checkAppVersion(mustUpdateMessage: "Your app is not up to date. Please, update it to get the latest features", mustUpdateTitle: "Update", mustUpdateButton: "Update", cancelButton: "Cancel")
     }
 }
 

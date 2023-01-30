@@ -10,6 +10,15 @@
       }
     },
     {
+      "identity" : "desynticlibrary",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kevin-bertrand/DesynticLibrary.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "ae2c91e1dec3a7f9245f43d49759ee26a96cd85a"
+      }
+    },
+    {
       "identity" : "mixpanel-swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/mixpanel/mixpanel-swift.git",

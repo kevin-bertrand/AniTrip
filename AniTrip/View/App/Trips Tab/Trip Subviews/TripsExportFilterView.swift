@@ -5,6 +5,7 @@
 //  Created by Kevin Bertrand on 18/08/2022.
 //
 
+import DesynticLibrary
 import SwiftUI
 
 struct TripsExportFilterView: View {
@@ -28,30 +29,23 @@ struct TripsExportFilterView: View {
                 .datePickerStyle(.wheel)
                 .labelsHidden()
                 .padding()
-                        
+            
             ButtonWithIcon(isLoading: .constant(false), action: {
                 tripController.downloadPDF(byUser: userController.connectedUser,
                                            for: userToExportId)
             }, title: "Start export")
             .padding(.horizontal)
-            
-            NavigationLink(isActive: $tripController.showPDF) {
-                PDFUIView()
-            } label: {
-                EmptyView()
-            }
-            
         }
         .navigationTitle(Text("Export"))
+        .navigationLinkPresentation(destination: AnyView(PDFUIView()), isPresented: $tripController.showPDF)
     }
 }
 
 struct TripsExportFilter_Previews: PreviewProvider {
     static var previews: some View {
-        NavigationView {
-            TripsExportFilterView(userToExportId: UUID())
-                .environmentObject(TripController(appController: AppController()))
-                .environmentObject(UserController(appController: AppController()))
-        }
+        TripsExportFilterView(userToExportId: UUID())
+            .environmentObject(TripController(appController: AppController()))
+            .environmentObject(UserController(appController: AppController()))
+            .asNavigationView()
     }
 }
