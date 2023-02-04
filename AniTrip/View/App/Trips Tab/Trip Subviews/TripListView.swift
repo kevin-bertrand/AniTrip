@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TripListView: View {
     @EnvironmentObject var tripController: TripController
+    @EnvironmentObject var userController: UserController
     
     @Binding var searchFilter: String
     @Binding var trips: [Trip]
@@ -31,12 +32,14 @@ struct TripListView: View {
                             TripTileView(trip: $trip.wrappedValue)
                         }
                     }
+                    .onDelete { indexSet in
+                        if let index = indexSet.first {
+                            tripController.delete(tripId: trips[index].id, byUser: userController.connectedUser)
+                        }
+                    }
                 }
             }
         }
-//        .sheet(isPresented: $showUpdateTripView, content: {
-//            UpdateTripView(trip: $selectedTrip, isAnUpdate: .constant(false))
-//        })
         .syncBool($showUpdateTripView, with: $tripController.showUpdateTripView)
         .syncUpdateTrip($selectedTrip, with: $tripController.updateTrip)
         .onAppear {

@@ -120,6 +120,13 @@ final class TripController: ObservableObject {
         tripManager.update(trip: trip, by: user)
     }
     
+    /// Deleting trip
+    func delete(tripId: UUID, byUser user: User?) {
+        appController.setLoadingInProgress(withMessage: NSLocalizedString("Deleting trip in progress", comment: ""))
+        
+        tripManager.delete(id: tripId, by: user)
+    }
+    
     /// Download informations when home view is loaded
     func homeIsLoaded(byUser user: User) {
         tripManager.threeLatestTrips(byUser: user, filter: chartFilter)
@@ -218,7 +225,6 @@ final class TripController: ObservableObject {
                 self.news = tripManager.news
                 chartPoints = getChartData(from: tripManager.tripsChartPoints)
             case Notification.AniTrip.pdfDownloaded.notificationName:
-                print(tripManager.pdfData)
                 pdfData = tripManager.pdfData
                 DispatchQueue.main.async {
                     self.showPDF = true

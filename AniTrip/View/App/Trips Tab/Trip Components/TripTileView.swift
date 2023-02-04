@@ -22,6 +22,13 @@ struct TripTileView: View {
                     .font(.title2)
                 Text(trip.date.toDate?.dateOnly ?? "No date")
                 Text("\(trip.totalDistance.twoDigitPrecision) km")
+                if trip.isRoundTrip {
+                    HStack {
+                        Image(systemName: "arrow.triangle.2.circlepath")
+                        Text("Is round trip")
+                    }
+                    .font(.body.bold())
+                }
             }
         }
     }

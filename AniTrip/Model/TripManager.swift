@@ -234,6 +234,31 @@ final class TripManager {
         }
     }
     
+    /// Deleting trip
+    func delete(id: UUID, by user: User?) {
+        guard let user = user else {
+            Notification.AniTrip.unknownError.sendNotification()
+            return
+        }
+        
+        var params = NetworkConfigurations.deleteTrip.urlParams
+        params.append("\(id)")
+        
+        networkManager.request(urlParams: params,
+                               method: NetworkConfigurations.deleteTrip.method,
+                               authorization: .authorization(bearerToken: user.token),
+                               body: nil) { [weak self] _, response, error in
+            if let self = self,
+               self.networkManager.checkIfDeviceIsConnectedToInternet(with: error),
+               let statusCode = response?.statusCode,
+               statusCode == 200 {
+                self.getList(byUser: user)
+            } else {
+                Notification.AniTrip.unknownError.sendNotification()
+            }
+        }
+    }
+    
     /// Disconnect user
     func disconnect() {
         tripList = []
