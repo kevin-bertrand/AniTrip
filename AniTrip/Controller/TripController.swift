@@ -18,12 +18,14 @@ final class TripController: ObservableObject {
                                 missions: [],
                                 comment: "",
                                 totalDistance: 0.0,
+                                isRoundTrip: false,
                                 startingAddress: LocationController.emptyAddress,
                                 endingAddress: LocationController.emptyAddress)
     static let emptyUpdateTrip = UpdateTrip(id: UUID(uuid: UUID_NULL),
                                             date: Date(),
                                             missions: [],
                                             comment: "",
+                                            isRoundTrip: false,
                                             totalDistance: "",
                                             startingAddress: LocationController.emptyAddress,
                                             endingAddress: LocationController.emptyAddress)
@@ -62,6 +64,10 @@ final class TripController: ObservableObject {
                 newTripIsUpdated = true
             } else {
                 newTripIsUpdated = false
+            }
+            
+            if newValue.isRoundTrip != updateTrip.isRoundTrip {
+                newTripIsUpdated = true
             }
         }
         didSet {
@@ -277,7 +283,13 @@ final class TripController: ObservableObject {
             }
             if let response = response,
                let route = response.routes.first {
-                self.updateTrip.totalDistance = "\((route.distance/1000.0).twoDigitPrecision)"
+                var distance = (route.distance / 1000.0)
+                
+                if self.updateTrip.isRoundTrip {
+                    distance = distance * 2
+                }
+                
+                self.updateTrip.totalDistance = "\(distance.twoDigitPrecision)"
             }
         }
     }

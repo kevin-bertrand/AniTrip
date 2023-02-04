@@ -58,14 +58,22 @@ struct TripDistanceView: View {
                         .font(.title3)
                 }
             } else {
-                HStack {
-                    TextField("0.0", text: $trip.totalDistance)
-                        .multilineTextAlignment(.trailing)
-                        .keyboardType(.decimalPad)
-                    Text("km")
+                VStack {
+                    HStack {
+                        TextField("0.0", text: $trip.totalDistance)
+                            .multilineTextAlignment(.trailing)
+                            .keyboardType(.decimalPad)
+                        Text("km")
+                    }
+                    .frame(width: 150)
+                    .font(.title)
+                    
+                    Toggle(isOn: $trip.isRoundTrip) {
+                        Label("Is round trip?", systemImage: "arrow.triangle.2.circlepath")
+                    }
+                    .frame(width: 300)
+                    .font(.title2.bold())
                 }
-                .frame(width: 150)
-                .font(.title)
             }
 
             Spacer()

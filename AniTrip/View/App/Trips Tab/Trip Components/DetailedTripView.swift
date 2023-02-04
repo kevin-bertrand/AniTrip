@@ -50,6 +50,12 @@ struct DetailedTripView: View {
                     Spacer()
                     Text("\(trip.date.toDate?.dateOnly ?? "")")
                 }
+                
+                HStack {
+                    Text("Is round trip?")
+                    Spacer()
+                    Text("\(trip.isRoundTrip ? NSLocalizedString("Yes", comment: "") : NSLocalizedString("No", comment: ""))")
+                }
             }
             
             Section(header: Text("Missions")) {

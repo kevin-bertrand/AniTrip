@@ -13,6 +13,7 @@ struct Trip: Codable, Identifiable {
     let missions: [String]
     let comment: String?
     let totalDistance: Double
+    let isRoundTrip: Bool
     let startingAddress: Address
     let endingAddress: Address
     
@@ -21,6 +22,7 @@ struct Trip: Codable, Identifiable {
                    date: self.date.toDate ?? Date(),
                    missions: self.missions,
                    comment: self.comment ?? "",
+                   isRoundTrip: self.isRoundTrip,
                    totalDistance: "\(self.totalDistance)",
                    startingAddress: self.startingAddress,
                    endingAddress: self.endingAddress)
@@ -32,6 +34,7 @@ struct UpdateTrip: Codable, Equatable {
     var date: Date
     var missions: [String]
     var comment: String
+    var isRoundTrip: Bool
     var totalDistance: String
     var startingAddress: Address
     var endingAddress: Address
@@ -42,6 +45,7 @@ struct UpdateTrip: Codable, Equatable {
                    missions: self.missions,
                    comment: self.comment,
                    totalDistance: Double(self.totalDistance) ?? 0.0,
+                   isRoundTrip: self.isRoundTrip,
                    startingAddress: self.startingAddress,
                    endingAddress: self.endingAddress)
     }
@@ -53,6 +57,7 @@ struct AddingTrip: Codable {
     let missions: [String]
     let comment: String
     let totalDistance: Double
+    let isRoundTrip: Bool
     let startingAddress: Address
     let endingAddress: Address
 }
