@@ -50,7 +50,7 @@ struct AniTripApp: App {
                     }
                     .disabled(appController.loadingInProgress)
                     
-                    if showLoading {
+                    if appController.loadingInProgress {
                         LoadingInProgressView()
                     }
                 }

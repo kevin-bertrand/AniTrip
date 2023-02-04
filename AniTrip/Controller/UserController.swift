@@ -88,14 +88,16 @@ final class UserController: ObservableObject {
         guard loginEmailTextField.isNotEmpty && loginPasswordTextField.isNotEmpty else {
             loginErrorMessage = NSLocalizedString("A password and an email are needed!",
                                                   comment: "")
-            appController.resetLoadingInProgress()
+            let group = DispatchGroup()
+            appController.resetLoadingInProgress(group: group)
             return
         }
         
         guard loginEmailTextField.isEmail else {
             loginErrorMessage = NSLocalizedString("A valid email address is required!",
                                                   comment: "")
-            appController.resetLoadingInProgress()
+            let group = DispatchGroup()
+            appController.resetLoadingInProgress(group: group)
             return
         }
         
@@ -130,14 +132,16 @@ final class UserController: ObservableObject {
                 && createAccountPasswordVerification.isNotEmpty else {
             createAccountErrorMessage = NSLocalizedString("An email and a password are required!",
                                                           comment: "")
-            appController.resetLoadingInProgress()
+            let group = DispatchGroup()
+            appController.resetLoadingInProgress(group: group)
             return
         }
         
         guard createAccountEmailTextField.isEmail else {
             createAccountErrorMessage = NSLocalizedString("An valid email is required!",
                                                           comment: "")
-            appController.resetLoadingInProgress()
+            let group = DispatchGroup()
+            appController.resetLoadingInProgress(group: group)
             return
         }
         
@@ -161,20 +165,29 @@ final class UserController: ObservableObject {
                                                                           comment: ""))
         
         guard userToUpdate.password == userToUpdate.passwordVerification else {
-            appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: NSLocalizedString("Both new password must match!",
-                                                                       comment: ""),
-                                        andTitle: NSLocalizedString("Password error!",
-                                                                    comment: ""))
+            let group = DispatchGroup()
+            appController.resetLoadingInProgress(group: group)
+            
+            group.notify(queue: .main) {
+                self.appController.showAlertView(withMessage: NSLocalizedString("Both new password must match!",
+                                                                           comment: ""),
+                                            andTitle: NSLocalizedString("Password error!",
+                                                                        comment: ""))
+            }
+            
             return
         }
         
         if userToUpdate.phoneNumber.isNotEmpty && !userToUpdate.phoneNumber.isPhone {
-            appController.resetLoadingInProgress()
-            appController.showAlertView(withMessage: NSLocalizedString("You must enter a valid phone number!",
-                                                                       comment: ""),
-                                        andTitle: NSLocalizedString("Phone number error",
-                                                                    comment: ""))
+            let group = DispatchGroup()
+            appController.resetLoadingInProgress(group: group)
+            
+            group.notify(queue: .main) {
+                self.appController.showAlertView(withMessage: NSLocalizedString("You must enter a valid phone number!",
+                                                                           comment: ""),
+                                            andTitle: NSLocalizedString("Phone number error",
+                                                                        comment: ""))
+            }
             return
         }
         
@@ -221,32 +234,35 @@ final class UserController: ObservableObject {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name,
            let notificationMessage = notification.userInfo?["message"] as? String {
             DispatchQueue.main.async {
-                self.appController.resetLoadingInProgress()
+                let group = DispatchGroup()
+                self.appController.resetLoadingInProgress(group: group)
                 
-                switch notificationName {
-                case Notification.AniTrip.loginSuccess.notificationName:
-                    self.actionWhenLoginSuccess()
-                case Notification.AniTrip.accountCreationSuccess.notificationName:
-                    Mixpanel.mainInstance().track(event: "New account creation")
-                    self.createAccountEmailTextField = ""
-                    self.createAccountPasswordTextField = ""
-                    self.createAccountPasswordVerification = ""
-                    self.appController.showAlertView(withMessage: notificationMessage,
-                                                     andTitle: NSLocalizedString("Success!",
-                                                                                 comment: ""))
-                case Notification.AniTrip.updateProfileSuccess.notificationName:
-                    self.userToUpdate.password = ""
-                    self.userToUpdate.passwordVerification = ""
-                    self.successUpdate = true
-                case Notification.AniTrip.loginWrongCredentials.notificationName,
-                    Notification.AniTrip.accountCreationPasswordError.notificationName,
-                    Notification.AniTrip.accountCreationInformationsError.notificationName:
-                    self.appController.showAlertView(withMessage: notificationMessage,
-                                                     andTitle: NSLocalizedString("Error",
-                                                                                 comment: ""))
-                case Notification.AniTrip.updatePictureSuccess.notificationName:
-                    self.showUpdateProfileImage = false
-                default: break
+                group.notify(queue: .main) {
+                    switch notificationName {
+                    case Notification.AniTrip.loginSuccess.notificationName:
+                        self.actionWhenLoginSuccess()
+                    case Notification.AniTrip.accountCreationSuccess.notificationName:
+                        Mixpanel.mainInstance().track(event: "New account creation")
+                        self.createAccountEmailTextField = ""
+                        self.createAccountPasswordTextField = ""
+                        self.createAccountPasswordVerification = ""
+                        self.appController.showAlertView(withMessage: notificationMessage,
+                                                         andTitle: NSLocalizedString("Success!",
+                                                                                     comment: ""))
+                    case Notification.AniTrip.updateProfileSuccess.notificationName:
+                        self.userToUpdate.password = ""
+                        self.userToUpdate.passwordVerification = ""
+                        self.successUpdate = true
+                    case Notification.AniTrip.loginWrongCredentials.notificationName,
+                        Notification.AniTrip.accountCreationPasswordError.notificationName,
+                        Notification.AniTrip.accountCreationInformationsError.notificationName:
+                        self.appController.showAlertView(withMessage: notificationMessage,
+                                                         andTitle: NSLocalizedString("Error",
+                                                                                     comment: ""))
+                    case Notification.AniTrip.updatePictureSuccess.notificationName:
+                        self.showUpdateProfileImage = false
+                    default: break
+                    }
                 }
             }
         }

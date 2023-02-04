@@ -28,8 +28,12 @@ struct DetailedTripView: View {
                     
                     HStack {
                         Text("\(trip.totalDistance.twoDigitPrecision) km")
-                            .padding()
+                        
+                        if trip.isRoundTrip {
+                            Image(systemName: "arrow.triangle.2.circlepath")
+                        }
                     }
+                    .padding()
                     .background(Color("SearchTextFieldBackground"))
                     .cornerRadius(25)
                     .padding()

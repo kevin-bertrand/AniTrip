@@ -34,10 +34,13 @@ final class AppController: ObservableObject {
     }
     
     /// Reset loading in progress
-    func resetLoadingInProgress() {
+    func resetLoadingInProgress(group: DispatchGroup) {
+        group.enter()
         DispatchQueue.main.async {
             self.loadingMessage = ""
             self.loadingInProgress = false
+            self.objectWillChange.send()
+            group.leave()
         }
     }
     
@@ -60,8 +63,12 @@ final class AppController: ObservableObject {
     /// Disconnect user
     func disconnect() {
         NetworkManager.shared.stopAllRequests()
-        resetLoadingInProgress()
-        resetAlertView()
+        let group = DispatchGroup()
+        self.resetLoadingInProgress(group: group)
+        
+        group.notify(queue: .main) {
+            self.resetAlertView()
+        }
     }
     
     // MARK: Initialization
@@ -85,16 +92,19 @@ final class AppController: ObservableObject {
     @objc private func processNotification(_ notification: Notification) {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name,
            let notificationMessage = notification.userInfo?["message"] as? String {
-            self.resetLoadingInProgress()
+            let group = DispatchGroup()
+            self.resetLoadingInProgress(group: group)
             
-            switch notificationName {
-            case Notification.AniTrip.unknownError.notificationName,
-                Notification.AniTrip.accountNotYetActivate.notificationName,
-                Notification.AniTrip.notAuthorized.notificationName,
-                Notification.AniTrip.accountNotFound.notificationName,
-                Notification.AniTrip.noInternetConnection.notificationName:
-                self.showAlertView(withMessage: notificationMessage, andTitle: NSLocalizedString("Error", comment: ""))
-            default: break
+            group.notify(queue: .main) {
+                switch notificationName {
+                case Notification.AniTrip.unknownError.notificationName,
+                    Notification.AniTrip.accountNotYetActivate.notificationName,
+                    Notification.AniTrip.notAuthorized.notificationName,
+                    Notification.AniTrip.accountNotFound.notificationName,
+                    Notification.AniTrip.noInternetConnection.notificationName:
+                    self.showAlertView(withMessage: notificationMessage, andTitle: NSLocalizedString("Error", comment: ""))
+                default: break
+                }
             }
         }
     }

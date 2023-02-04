@@ -149,39 +149,42 @@ final class VolunteersController: ObservableObject {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name,
            let notificationMessage = notification.userInfo?["message"] as? String {
             DispatchQueue.main.async {
-                self.appController.resetLoadingInProgress()
+                let group = DispatchGroup()
+                self.appController.resetLoadingInProgress(group: group)
                 
-                switch notificationName {
-                case Notification.AniTrip.gettingVolunteersListSuccess.notificationName:
-                    self.volunteersList = self.volunteersManager.volunteersList
-                    self.downloadAsyncProfileView()
-                case Notification.AniTrip.activationSuccess.notificationName:
-                    if self.displayActivateAccount {
-                        self.accountToActivateEmail = ""
-                        self.activationMessage = NSLocalizedString("Activation success", comment: "")
-                        self.activationTitle = NSLocalizedString("You accept the activation!", comment: "")
-                        self.showActivationAlert = true
-                    } else {
-                        self.changeActivationStatusTitle = NSLocalizedString("Activation success!", comment: "")
-                        self.changeActivationStatusMessage = NSLocalizedString("The account is now active!", comment: "")
+                group.notify(queue: .main) {
+                    switch notificationName {
+                    case Notification.AniTrip.gettingVolunteersListSuccess.notificationName:
+                        self.volunteersList = self.volunteersManager.volunteersList
+                        self.downloadAsyncProfileView()
+                    case Notification.AniTrip.activationSuccess.notificationName:
+                        if self.displayActivateAccount {
+                            self.accountToActivateEmail = ""
+                            self.activationMessage = NSLocalizedString("Activation success", comment: "")
+                            self.activationTitle = NSLocalizedString("You accept the activation!", comment: "")
+                            self.showActivationAlert = true
+                        } else {
+                            self.changeActivationStatusTitle = NSLocalizedString("Activation success!", comment: "")
+                            self.changeActivationStatusMessage = NSLocalizedString("The account is now active!", comment: "")
+                            self.changeActivationStatusAlert = true
+                        }
+                    case Notification.AniTrip.desactivationSuccess.notificationName:
+                        self.changeActivationStatusTitle = NSLocalizedString("Desctivation success!", comment: "")
+                        self.changeActivationStatusMessage = NSLocalizedString("The account is no longer active!", comment: "")
                         self.changeActivationStatusAlert = true
+                    case Notification.AniTrip.showActivateAccount.notificationName:
+                        self.accountToActivateEmail = notificationMessage
+                        self.displayActivateAccount = true
+                    case Notification.AniTrip.positionUpdated.notificationName:
+                        self.changeActivationStatusTitle = NSLocalizedString("Success!", comment: "")
+                        self.changeActivationStatusMessage = notificationMessage
+                        self.changeActivationStatusAlert = true
+                    case Notification.AniTrip.positionNotUpdated.notificationName:
+                        self.changeActivationStatusTitle = NSLocalizedString("Error!", comment: "")
+                        self.changeActivationStatusMessage = notificationMessage
+                        self.changeActivationStatusAlert = true
+                    default: break
                     }
-                case Notification.AniTrip.desactivationSuccess.notificationName:
-                    self.changeActivationStatusTitle = NSLocalizedString("Desctivation success!", comment: "")
-                    self.changeActivationStatusMessage = NSLocalizedString("The account is no longer active!", comment: "")
-                    self.changeActivationStatusAlert = true
-                case Notification.AniTrip.showActivateAccount.notificationName:
-                    self.accountToActivateEmail = notificationMessage
-                    self.displayActivateAccount = true
-                case Notification.AniTrip.positionUpdated.notificationName:
-                    self.changeActivationStatusTitle = NSLocalizedString("Success!", comment: "")
-                    self.changeActivationStatusMessage = notificationMessage
-                    self.changeActivationStatusAlert = true
-                case Notification.AniTrip.positionNotUpdated.notificationName:
-                    self.changeActivationStatusTitle = NSLocalizedString("Error!", comment: "")
-                    self.changeActivationStatusMessage = notificationMessage
-                    self.changeActivationStatusAlert = true
-                default: break
                 }
             }
         }

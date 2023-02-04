@@ -206,30 +206,33 @@ final class TripController: ObservableObject {
     @objc private func processNotification(_ notification: Notification) {
         if let notificationName = notification.userInfo?["name"] as? Notification.Name,
            let notificationMessage = notification.userInfo?["message"] as? String {
-            appController.resetLoadingInProgress()
+            let group = DispatchGroup()
+            appController.resetLoadingInProgress(group: group)
             
-            switch notificationName {
-            case Notification.AniTrip.gettingTripListSucess.notificationName:
-                self.trips = self.tripManager.trips
-            case Notification.AniTrip.gettingVolunteerTripListSucess.notificationName:
-                self.volunteerTripList = self.tripManager.volunteerTrips
-            case Notification.AniTrip.gettingTripListError.notificationName,
-                Notification.AniTrip.homeInformationsDonwloadedError.notificationName:
-                self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Error")
-            case Notification.AniTrip.addTripSuccess.notificationName,
-                Notification.AniTrip.updateTripSuccess.notificationName:
-                self.updateTrip = TripController.emptyUpdateTrip
-                self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Success")
-            case Notification.AniTrip.homeInformationsDonwloaded.notificationName:
-                threeLatestTrips = tripManager.threeLatestTrips
-                self.news = tripManager.news
-                chartPoints = getChartData(from: tripManager.tripsChartPoints)
-            case Notification.AniTrip.pdfDownloaded.notificationName:
-                pdfData = tripManager.pdfData
-                DispatchQueue.main.async {
-                    self.showPDF = true
+            group.notify(queue: .main) {
+                switch notificationName {
+                case Notification.AniTrip.gettingTripListSucess.notificationName:
+                    self.trips = self.tripManager.trips
+                case Notification.AniTrip.gettingVolunteerTripListSucess.notificationName:
+                    self.volunteerTripList = self.tripManager.volunteerTrips
+                case Notification.AniTrip.gettingTripListError.notificationName,
+                    Notification.AniTrip.homeInformationsDonwloadedError.notificationName:
+                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Error")
+                case Notification.AniTrip.addTripSuccess.notificationName,
+                    Notification.AniTrip.updateTripSuccess.notificationName:
+                    self.updateTrip = TripController.emptyUpdateTrip
+                    self.appController.showAlertView(withMessage: notificationMessage, andTitle: "Success")
+                case Notification.AniTrip.homeInformationsDonwloaded.notificationName:
+                    self.threeLatestTrips = self.tripManager.threeLatestTrips
+                    self.news = self.tripManager.news
+                    self.chartPoints = self.getChartData(from: self.tripManager.tripsChartPoints)
+                case Notification.AniTrip.pdfDownloaded.notificationName:
+                    self.pdfData = self.tripManager.pdfData
+                    DispatchQueue.main.async {
+                        self.showPDF = true
+                    }
+                default: break
                 }
-            default: break
             }
         }
     }
@@ -292,7 +295,7 @@ final class TripController: ObservableObject {
                 var distance = (route.distance / 1000.0)
                 
                 if self.updateTrip.isRoundTrip {
-                    distance = distance * 2
+                    distance *= 2
                 }
                 
                 self.updateTrip.totalDistance = "\(distance.twoDigitPrecision)"
